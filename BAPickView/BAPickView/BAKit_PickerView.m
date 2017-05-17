@@ -261,7 +261,7 @@
     min_h = kBAKit_PickerViewToolBar_H;
     self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
-    min_x = BAKit_SCREEN_WIDTH - 40 - 20;
+    min_x = CGRectGetWidth(self.frame) - 40 - 20;
     self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
 }
 
