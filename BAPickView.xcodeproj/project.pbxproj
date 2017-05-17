@@ -34,7 +34,7 @@
 		C4E7BEAE1ECAB054003F6AF1 /* BAKit_PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAKit_PickerView.h; sourceTree = "<group>"; };
 		C4E7BEAF1ECAB054003F6AF1 /* BAKit_PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAKit_PickerView.m; sourceTree = "<group>"; };
 		C4E7BEB11ECAB075003F6AF1 /* BAPickView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BAPickView.bundle; sourceTree = "<group>"; };
-		C4E7BEB31ECAC85D003F6AF1 /* BAPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAPickView.h; sourceTree = "<group>"; };
+		C4E7BEB31ECAC85D003F6AF1 /* BAPickView_OC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAPickView_OC.h; sourceTree = "<group>"; };
 		C4E7BEB41ECAC891003F6AF1 /* BAPickView_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAPickView_Config.h; sourceTree = "<group>"; };
 		C4E7BEB51ECACC07003F6AF1 /* NSDate+BAKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+BAKit.h"; sourceTree = "<group>"; };
 		C4E7BEB61ECACC07003F6AF1 /* NSDate+BAKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BAKit.m"; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		C4E7BEAD1ECAB04D003F6AF1 /* BAPickView */ = {
 			isa = PBXGroup;
 			children = (
-				C4E7BEB31ECAC85D003F6AF1 /* BAPickView.h */,
+				C4E7BEB31ECAC85D003F6AF1 /* BAPickView_OC.h */,
 				C4E7BEB41ECAC891003F6AF1 /* BAPickView_Config.h */,
 				C4E7BEAE1ECAB054003F6AF1 /* BAKit_PickerView.h */,
 				C4E7BEAF1ECAB054003F6AF1 /* BAKit_PickerView.m */,

@@ -535,6 +535,7 @@
     
     self.areaArray = citys[0][@"areas"];
     
+    // 设置城市选择器的默认值
     self.province = [self cutLocalString:self.provinceArray[0]];
     self.city = [self cutLocalString:self.cityArray[0]];
     self.area = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[0]];
@@ -580,6 +581,16 @@
     
     [self.pickView selectRow:(index_year - 1900) inComponent:0 animated:YES];
     [self.pickView selectRow:(index_mounth - 1) inComponent:1 animated:YES];
+    
+    // 设置年月选择器的默认值
+    self.resultString = [NSString stringWithFormat:@"%@-%@", self.defaultYearString, self.defaultMounthString];
+    if (self.customDateFormatter)
+    {
+        self.resultString = [self.resultString stringByAppendingString:@"-10"];
+        NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
+        NSDate *date = [formatter dateFromString:self.resultString];
+        self.resultString = [self.customDateFormatter stringFromDate:date];
+    }
 }
 
 #pragma mark 日期选择器数据更新
@@ -685,7 +696,7 @@
         [_datePicker setTimeZone:[NSTimeZone defaultTimeZone]];
         
         /*! 4、设置DatePicker的日期。 */
-        [_datePicker setDate:[NSDate date]];
+        [_datePicker setDate:BAKit_Current_Date];
         
         /*! 5、设置DatePicker的允许的最小日期。 */
         //        NSDate *minDate = [[NSDate alloc]initWithTimeIntervalSince1970:NSTimeIntervalSince1970];
@@ -706,8 +717,8 @@
         comps.year = -30;
         
         NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-        _datePicker.minimumDate = [minDate ba_dateWithYM];
-        _datePicker.maximumDate = [maxDate ba_dateWithYM];
+        _datePicker.minimumDate = [minDate ba_dateWithYMD];
+        _datePicker.maximumDate = [maxDate ba_dateWithYMD];
         
 //        /*! 7、显示年月日，名称根据本地设置，显示小时，分钟和AM/PM,这个的名称是根据本地设置的 */
 //        [_datePicker setDatePickerMode:UIDatePickerModeDate];
@@ -717,7 +728,6 @@
         
         /*! 9、用 runtime 和 KVC 改变字体颜色 */
 //        [self setTextColor];
-        
     }
     return _datePicker;
 }
@@ -844,6 +854,7 @@
 - (void)setDataArray:(NSArray *)dataArray
 {
     _dataArray = dataArray;
+    self.resultString = dataArray[0];
 }
 
 - (void)setBackgroundColor_toolBar:(UIColor *)backgroundColor_toolBar
@@ -925,33 +936,40 @@
     
     if (self.customDateFormatter)
     {
-        return;
+        self.resultString = [self.resultString stringByAppendingString:@"-10"];
+        NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
+        NSDate *date = [formatter dateFromString:self.resultString];
+        self.resultString = [self.customDateFormatter stringFromDate:date];
     }
-    switch (self.dateType) {
-        case BAKit_PickerViewDateTypeYY:
-            self.formatter = [NSDateFormatter ba_setupDateFormatterWithYY];
-            break;
-        case BAKit_PickerViewDateTypeYM:
-            self.formatter = [NSDateFormatter ba_setupDateFormatterWithYM];
-            break;
-        case BAKit_PickerViewDateTypeYMD:
-            self.formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
-            break;
-        case BAKit_PickerViewDateTypeYMDHMS:
-            self.formatter = [NSDateFormatter ba_setupDateFormatterWithYMDHMS];
-            break;
-        case BAKit_PickerViewDateTypeYMDEHMS:
-            self.formatter = [NSDateFormatter ba_setupDateFormatterWithYMDEHMS];
-            break;
-        case BAKit_PickerViewDateTypeHM:
-            self.formatter = [NSDateFormatter ba_setupDateFormatterWithHM];
-            break;
-        case BAKit_PickerViewDateTypeHMS:
-            self.formatter = [NSDateFormatter ba_setupDateFormatterWithHMS];
-            break;
-            
-        default:
-            break;
+    else
+    {
+        switch (self.dateType) {
+            case BAKit_PickerViewDateTypeYY:
+                self.formatter = [NSDateFormatter ba_setupDateFormatterWithYY];
+                break;
+            case BAKit_PickerViewDateTypeYM:
+                self.formatter = [NSDateFormatter ba_setupDateFormatterWithYM];
+                break;
+            case BAKit_PickerViewDateTypeYMD:
+                self.formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
+                break;
+            case BAKit_PickerViewDateTypeYMDHMS:
+                self.formatter = [NSDateFormatter ba_setupDateFormatterWithYMDHMS];
+                break;
+            case BAKit_PickerViewDateTypeYMDEHMS:
+                self.formatter = [NSDateFormatter ba_setupDateFormatterWithYMDEHMS];
+                break;
+            case BAKit_PickerViewDateTypeHM:
+                self.formatter = [NSDateFormatter ba_setupDateFormatterWithHM];
+                break;
+            case BAKit_PickerViewDateTypeHMS:
+                self.formatter = [NSDateFormatter ba_setupDateFormatterWithHMS];
+                break;
+                
+            default:
+                break;
+        }
+        self.resultString = [self.formatter stringFromDate:BAKit_Current_Date];
     }
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "BAPickView.h"
+#import "BAPickView_OC.h"
 
 
 /*! VC 用 BAKit_ShowAlertWithMsg */
@@ -147,6 +147,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         self.pickView = tempView;
     } block:^(BAKit_CityModel *model) {
         BAKit_StrongSelf
+        // 返回 BAKit_CityModel，包含省市县 和 详细的经纬度
         NSString *msg = [NSString stringWithFormat:@"%@%@%@\n纬度：%f\n经度：%f", model.province, model.city, model.area, model.coordie.latitude, model.coordie.longitude];
         NSLog(@"%@", msg);
         BAKit_ShowAlertWithMsg_ios8(msg);
@@ -160,7 +161,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCustomPickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
-        
+        // 可以自由定制 toolBar 和 pickView 的背景颜色
         tempView.backgroundColor_toolBar = [UIColor cyanColor];
         tempView.backgroundColor_pickView = [UIColor greenColor];
         self.pickView = tempView;
@@ -176,10 +177,12 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDate configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
         
+        // 可以自由定制 NSDateFormatter
 //        tempView.dateType = BAKit_PickerViewDateTypeYMDEHMS;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy年MM月dd日";
         tempView.customDateFormatter = formatter;
+        // 可以自由定制按钮颜色
         tempView.buttonTitleColor_sure = [UIColor redColor];
         tempView.buttonTitleColor_cancle = [UIColor greenColor];
         self.pickView = tempView;

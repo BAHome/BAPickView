@@ -76,11 +76,11 @@
 
 */
 
-#ifndef BAPickView_h
-#define BAPickView_h
+#ifndef BAPickView_OC_h
+#define BAPickView_OC_h
 
 #import "BAKit_PickerView.h"
 #import "BAPickView_Config.h"
 
 
-#endif /* BAPickView_h */
+#endif /* BAPickView_OC_h */
