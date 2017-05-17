@@ -31,7 +31,7 @@
 
 ## 1、图片示例：
 
-<!--![BAAlert.gif](https://github.com/BAHome/BAAlert/blob/master/BAAlert.gif)-->
+![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/BAPickView.gif)
 
 ---
 
