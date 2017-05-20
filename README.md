@@ -1,490 +1,503 @@
-# BAAlert
+# BAPickView
 [![BAHome Team Name](https://img.shields.io/badge/Team-BAHome-brightgreen.svg?style=flat)](https://github.com/BAHome "BAHome Team")
 ![](https://img.shields.io/badge/platform-iOS-red.svg) ![](https://img.shields.io/badge/language-Objective--C-orange.svg) 
 ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg) 
-![](https://img.shields.io/cocoapods/v/BAAlert.svg?style=flat) ![](https://img.shields.io/cocoapods/dt/BAAlert.svg
+![](https://img.shields.io/cocoapods/v/BAPickView.svg?style=flat) ![](https://img.shields.io/cocoapods/dt/BAPickView.svg
 )  [![](https://img.shields.io/badge/微博-博爱1616-red.svg)](http://weibo.com/538298123)
 
 ## 1、功能及简介
-* 1、手势触摸隐藏开关，可随时开关 <br>
-* 2、可以自定义背景图片、背景颜色、按钮颜色
-* 3、可以添加文字和图片，且可以滑动查看！
-* 4、横竖屏适配完美，注意：自定义 alert 不支持横屏
-* 5、有各种炫酷动画展示你的 alert
-* 6、可以自定义每个按钮颜色
+* 1、城市选择器，三级联动，可返回省市县和精确的经纬度 <br>
+* 2、可以自定义 array 显示，性别选择等【目前只支持单行数据】
+* 3、日期选择器：年月日，可以完全自定义 NSDateFormatter
+* 4、日期选择器：年月，可以完全自定义 NSDateFormatter
+* 5、横竖屏适配完美
+* 6、可以自定义按钮颜色、背景颜色等
 
 ## 2、图片示例
-![BAAlert1.gif](https://github.com/BAHome/BAAlert/blob/master/Images/BAAlert1.gif)
-![BAAlert2.gif](https://github.com/BAHome/BAAlert/blob/master/Images/BAAlert2.gif)
+![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
 
 ## 3、安装、导入示例和源码地址
-* 1、pod 导入【最新版本：version 1.1.9】： <br>
- `pod 'BAAlert'` ` pod 'BAAlert-Swift'`  <br>
-如果发现 `pod search BAAlert` 搜索出来的不是最新版本，需要在终端执行 cd 转换文件路径命令退回到 desktop，然后执行 `pod setup` 命令更新本地spec缓存（可能需要几分钟），然后再搜索就可以了。<br>
+* 1、pod 导入【最新版本：version 1.0.0】： <br>
+ `pod 'BAPickView'`  <br>
+如果发现 `pod search BAPickView` 搜索出来的不是最新版本，需要在终端执行 cd 转换文件路径命令退回到 desktop，然后执行 `pod setup` 命令更新本地spec缓存（可能需要几分钟），然后再搜索就可以了。<br>
 具体步骤：
   - pod setup : 初始化
   - pod repo update : 更新仓库
-  - pod search BAAlert
-* 2、文件夹拖入：下载demo，把 BAAlert 文件夹拖入项目即可，<br>
+  - pod search BAPickView
+* 2、文件夹拖入：下载demo，把 BAPickView 文件夹拖入项目即可，<br>
 * 3、导入头文件：<br>
-`  #import "BAAlert_OC.h" `<br>
+`  #import "BAPickView_OC.h" `<br>
 * 4、项目源码地址：<br>
- OC 版 ：[https://github.com/BAHome/BAAlert](https://github.com/BAHome/BAAlert)<br>
- swift 版 ：[https://github.com/BAHome/BAAlert-Swift](https://github.com/BAHome/BAAlert-Swift)<br>
+ OC 版 ：[https://github.com/BAHome/BAPickView](https://github.com/BAHome/BAPickView)<br>
 
-## 4、BAAlert 的类结构及 demo 示例
-![BAAlert3.png](https://github.com/BAHome/BAAlert/blob/master/Images/BAAlert3.png)
+## 4、BAPickView 的类结构及 demo 示例
+![BAPickView1.png](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView1.png)
 
-### BAAlert_OC.h
+### BAPickView_OC.h
 ```
-#ifndef BAAlert_OC_h
-#define BAAlert_OC_h
+#ifndef BAPickView_OC_h
+#define BAPickView_OC_h
 
-#import "BAAlert.h"
-#import "BAActionSheet.h"
+#import "BAKit_PickerView.h"
+#import "BAPickView_Config.h"
 
 /*!
  *********************************************************************************
  ************************************ 更新说明 ************************************
  *********************************************************************************
  
- 最新更新时间：2017-05-20 【倒叙】 <br>
- 最新Version：【Version：1.1.9】 <br>
+ 最新更新时间：2017-05-16 【倒叙】 <br>
+ 最新Version：【Version：1.0.0】 <br>
  更新内容： <br>
- 1.1.9.1、修复动画过度白屏问题  <br>
+ 1.0.0.1、城市选择器，三级联动，可返回省市县和精确的经纬度  <br>
+ 1.0.0.2、可以自定义 array 显示，性别选择等【目前只支持单行数据】  <br>
+ 1.0.0.3、日期选择器：年月日，可以完全自定义 NSDateFormatter  <br>
+ 1.0.0.4、日期选择器：年月，可以完全自定义 NSDateFormatter  <br>
+ 1.0.0.5、横竖屏适配完美  <br>
+ 1.0.0.6、可以自定义按钮颜色、背景颜色等  <br>
+ 1.0.0.7、理论完全兼容现有所有 iOS 系统版本  <br>
 
- 
- 最新更新时间：2017-05-15 【倒叙】 <br>
- 最新Version：【Version：1.1.8】 <br>
- 更新内容： <br>
- 1.1.8.1、精简代码结构，删除多余或者重复代码  <br>
- 1.1.8.2、规范代码属性和方法命名，原有方法名和属性名有较大改动，忘见谅  <br>
- 1.1.8.3、重构 actionSheet，新增多种样式  <br>
-
- 
- 最新更新时间：2017-05-13 【倒叙】 <br>
- 最新Version：【Version：1.1.7】 <br>
- 更新内容： <br>
- 1.1.7.1、精简代码结构，删除多余或者重复代码  <br>
- 1.1.7.2、规范代码属性和方法命名，原有方法名和属性名有较大改动，忘见谅  <br>
- 1.1.7.3、优化部分动画  <br>
- 1.1.7.4、subView 布局优化  <br>
- 1.1.7.5、actionSheet 新增自定义文字颜色、title 字体颜色  <br>
-
- 
- 最新更新时间：2017-05-10 【倒叙】 <br>
- 最新Version：【Version：1.1.5】 <br>
- 更新内容： <br>
- 1.1.5.1、删除原有封装内部按钮点击事件中 ba_dismissAlertView 方法，此方法可在外部自由调用  <br>
- 
- 
- 最新更新时间：2017-05-09 【倒叙】 <br>
- 最新Version：【Version：1.1.4】 <br>
- 更新内容： <br>
- 1.1.4.1、pod 更新xib 文件 <br>
- 
- 
- 最新更新时间：2017-05-08 【倒叙】
- 最新Version：【Version：1.1.0】
- 更新内容：
- 1.1.0.1、优化方法名命名规范
- 1.1.0.2、新增键盘内部处理
- 1.1.0.3、用原生 autoLayout 重构，自定义 alert 的布局再也不是问题了
- 1.1.0.4、优化代码结构，修复内在隐藏内存泄漏
- 1.1.0.5、新增 BAAlert_OC.h 文件，只需导入 BAAlert_OC.h 一个文件就可以使用 alert 和 actionSheet 了
- 1.1.0.6、删除了部分代码和属性，具体见源码 和 demo
- 
- */
+*/
 
 
-#endif /* BAAlert_OC_h */
+#endif /* BAPickView_OC_h */
 ```
 
-### BAAlert.h
+### BAKit_PickerView.h
 ```
 #import <UIKit/UIKit.h>
-#import "BAAlert_Config.h"
+#import <CoreLocation/CLLocation.h>
 
-@class BAAlert;
+@class BAKit_CityModel;
 
-typedef void(^BAAlert_ConfigBlock)(BAAlert *tempView);
+/**
+ 选择器样式，默认为：BAKit_PickerViewTypeCity
 
-@interface BAAlert : UIView
+ - BAKit_PickerViewTypeCity: 城市选择器
+ - BAKit_PickerViewTypeArray: 普通数组自定义数据
+ - BAKit_PickerViewTypeDate: 日期选择器：年月日，可以完全自定义 NSDateFormatter
+ - BAKit_PickerViewTypeDateYM: 日期选择器：年月，可以完全自定义 NSDateFormatter
 
-/*! 背景颜色 默认：半透明*/
-@property (nonatomic, strong) UIColor *bgColor;
+ */
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewType) {
+    BAKit_PickerViewTypeCity = 0,
+    BAKit_PickerViewTypeArray,
+    BAKit_PickerViewTypeDate,
+    BAKit_PickerViewTypeDateYM
+};
 
-/*! 是否开启边缘触摸隐藏 alert 默认：NO */
+/**
+ 日期选择器样式下返回的数据格式，默认为：BAKit_PickerViewDateTypeYMD
+
+ - BAKit_PickerViewDateTypeYY: 如：2017
+ - BAKit_PickerViewDateTypeYM: 如：2017-03
+ - BAKit_PickerViewDateTypeYMD: 如：20172017-03-01
+ - BAKit_PickerViewDateTypeYMDHMS: 如：2017-03-01 18:20:12
+ - BAKit_PickerViewDateTypeYMDEHMS: 如：2017-03-01，周二, 18:20:12
+ - BAKit_PickerViewDateTypeHM: 如：18:20
+ - BAKit_PickerViewDateTypeHMS: 如：18:20:12
+ */
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewDateType) {
+    BAKit_PickerViewDateTypeYY = 0,
+    BAKit_PickerViewDateTypeYM,
+    BAKit_PickerViewDateTypeYMD,
+    BAKit_PickerViewDateTypeYMDHMS,
+    BAKit_PickerViewDateTypeYMDEHMS,
+    BAKit_PickerViewDateTypeHM,
+    BAKit_PickerViewDateTypeHMS
+};
+
+/**
+ 设置日期选择器的样式，具体的显示顺序取决于设备的本地化设置。默认为：BAKit_PickerViewDateModeDate
+
+ - BAKit_PickerViewDateModeTime: 显示时、分、AM／PM标志(可选)
+ - BAKit_PickerViewDateModeDate: 显示年、月、日
+ - BAKit_PickerViewDateModeDateAndTime: 显示日期的月、日、星期，时间的时、分、AM／PM标志(可选)
+ - BAKit_PickerViewDateModeCountDownTimer: 显示时、分。应用程序必须实现一个计数器（NSTimer对象），让倒计时中的时间不断减少。
+ */
+typedef NS_ENUM(NSInteger, BAKit_PickerViewDateMode) {
+    BAKit_PickerViewDateModeTime,
+    /*! 选择此样式后，dateType 默认为：BAKit_PickerViewDateTypeYMD */
+    BAKit_PickerViewDateModeDate,
+    /*! 选择此样式后，dateType 默认为：ba_setupDateFormatterWithYMDEHMS */
+    BAKit_PickerViewDateModeDateAndTime,
+    BAKit_PickerViewDateModeCountDownTimer
+};
+
+/**
+ 城市选择器的返回值
+
+ @param model BAKit_CityModel
+ */
+typedef void (^BAKit_PickerViewBlock)(BAKit_CityModel *model);
+
+/**
+ 普通数组自定义数据返回，日期选择器返回值
+
+ @param resultString resultString
+ */
+typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
+
+@interface BAKit_PickerView : UIView
+
+#pragma mark - 自定义样式
+@property (nonatomic, copy) BAKit_PickerViewBlock block;
+@property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
+
+/*! 是否开启边缘触摸隐藏 默认：NO */
 @property (nonatomic, assign) BOOL isTouchEdgeHide;
 
-/*! 背景图片名字 默认：没有图片*/
-@property (nonatomic, strong) NSString *bgImageName;
-
-/*! 是否开启进出场动画 默认：NO，如果 YES ，并且同步设置进出场动画枚举为默认值：1 */
-@property (nonatomic, assign, getter=isShowAnimate) BOOL showAnimate;
-
-/*! 进出场动画枚举 默认：1 ，并且默认开启动画开关 */
-@property (nonatomic, assign) BAAlertAnimatingStyle animatingStyle;
-
-/*! 背景高斯模糊枚举 默认：没有模糊效果 */
-@property (nonatomic, assign) BAAlertBlurEffectStyle blurEffectStyle;
-
-/*!
- *  创建一个完全自定义的 alertView，注意：【自定义 alert 只适用于竖屏状态！】
- *
- *  @param customView    自定义 View
- *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...
+/**
+ 选择器样式，默认为城市选择器
  */
-+ (void)ba_alertShowCustomView:(UIView *)customView
-                 configuration:(BAAlert_ConfigBlock) configuration;
+@property(nonatomic, assign) BAKit_PickerViewType pickerViewType;
+@property(nonatomic, assign) BAKit_PickerViewDateType dateType;
+@property(nonatomic, assign) BAKit_PickerViewDateMode dateMode;
 
-/*!
- *  创建一个类似于系统的alert
- *
- *  @param title         标题：可空
- *  @param message       消息内容：可空
- *  @param image         图片：可空
- *  @param buttonTitleArray  按钮标题：不可空
- *  @param buttonTitleColorArray  按钮标题颜色：可空，默认蓝色
- *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...
- *  @param actionBlock        按钮的点击事件处理
+/**
+ 自定义 NSDateFormatter，返回的日期格式，注意：如果同时设置 BAKit_PickerViewDateType 和 customDateFormatter，以 customDateFormatter 为主
  */
-+ (void)ba_alertShowWithTitle:(NSString *)title
-                      message:(NSString *)message
-                        image:(UIImage *)image
-             buttonTitleArray:(NSArray <NSString *>*)buttonTitleArray
-        buttonTitleColorArray:(NSArray <UIColor *>*)buttonTitleColorArray
-                configuration:(BAAlert_ConfigBlock)configuration
-                  actionBlock:(BAAlert_ButtonActionBlock)actionBlock;
+@property(nonatomic, strong) NSDateFormatter *customDateFormatter;
 
-/*!
- *  视图消失
+/**
+ 自定义数据的数组，如：@[@"男", @"女"]
  */
-- (void)ba_alertHidden;
+@property(nonatomic, strong) NSArray *dataArray;
+
+/**
+ toolBar 背景颜色，默认：白色
+ */
+@property(nonatomic, strong) UIColor *backgroundColor_toolBar;
+
+/**
+ pickView 背景颜色，默认：白色
+ */
+@property(nonatomic, strong) UIColor *backgroundColor_pickView;
+
+/**
+ cancleButton title颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *buttonTitleColor_cancle;
+
+/**
+ sureButton title颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *buttonTitleColor_sure;
+
+
+#pragma mark - custom method
+
+/**
+ 快速创建一个 pickerView
+ 
+ @param pickerViewType type 类型
+ @param configuration 可以设置 BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatPickerViewWithType:(BAKit_PickerViewType)pickerViewType
+                     configuration:(void (^)(BAKit_PickerView *tempView))configuration
+                             block:(BAKit_PickerViewResultBlock)block;
+
+/**
+ 快速创建一个 城市选择器
+
+ @param configuration 可以设置BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatCityPickerViewWithConfiguration:(void (^)(BAKit_PickerView *tempView)) configuration
+                                          block:(BAKit_PickerViewBlock)block;
+
+/**
+ 快速创建一个 自定义单列 pickerView
+
+ @param dataArray 数组
+ @param configuration 可以设置BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatCustomPickerViewWithDataArray:(NSArray *)dataArray
+                                configuration:(void (^)(BAKit_PickerView *tempView)) configuration
+                                        block:(BAKit_PickerViewResultBlock)block;
+/**
+ 显示 pick
+ */
+- (void)ba_pickViewShow;
+
+/**
+ 隐藏 pick
+ */
+- (void)ba_pickViewHidden;
+
+@end
+
+@interface BAKit_CityModel : NSObject
+
+/**
+ 省
+ */
+@property (nonatomic, copy) NSString *province;
+
+/**
+ 市
+ */
+@property (nonatomic, copy) NSString *city;
+
+/**
+ 区
+ */
+@property (nonatomic, copy) NSString *area;
+
+/**
+ 经纬度
+ */
+@property (nonatomic, assign) CLLocationCoordinate2D coordie;
 
 @end
 ```
 
-### BAActionSheet.h
+### NSDate+BAKit.h
 ```
-#import <UIKit/UIKit.h>
-#import "BAAlert_Config.h"
-
-@class BAActionSheet, BAActionSheetModel;
-
-typedef void(^BAActionSheet_ConfigBlock)(BAActionSheet *tempView);
-typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetModel *model);
+#import <Foundation/Foundation.h>
 
 
-@interface BAActionSheet : UIView
+#define BAKit_Current_Calendar [NSCalendar currentCalendar]
+#define BAKit_Current_Date     [NSDate date]
 
-/*! 是否开启边缘触摸隐藏 alert 默认：YES */
-@property (nonatomic, assign) BOOL isTouchEdgeHide;
+@interface NSDate (BAKit)
 
-/*! 是否开启进出场动画 默认：NO，如果 YES ，并且同步设置进出场动画枚举为默认值：1 */
-@property (nonatomic, assign, getter=isShowAnimate) BOOL showAnimate;
+@property (nonatomic, readonly) NSInteger year;
+@property (nonatomic, readonly) NSInteger month;
+@property (nonatomic, readonly) NSInteger day;
+@property (nonatomic, readonly) NSInteger nearestHour;
+@property (nonatomic, readonly) NSInteger hour;
+@property (nonatomic, readonly) NSInteger minute;
+@property (nonatomic, readonly) NSInteger second;
+@property (nonatomic, readonly) NSInteger nanosecond;
+@property (nonatomic, readonly) NSInteger weekday;
+@property (nonatomic, readonly) NSInteger weekdayOrdinal;
+@property (nonatomic, readonly) NSInteger weekOfMonth;
+@property (nonatomic, readonly) NSInteger weekOfYear;
+@property (nonatomic, readonly) NSInteger yearForWeekOfYear;
+@property (nonatomic, readonly) NSInteger quarter;
 
-/*! 进出场动画枚举 默认：1 ，并且默认开启动画开关 */
-@property (nonatomic, assign) BAAlertAnimatingStyle animatingStyle;
+/**
+ 确定每个月是否为闰月
+ */
+@property (nonatomic, readonly) BOOL isLeapMonth;
 
-/*! BAActionSheet 类型，默认：1 */
-@property (nonatomic, assign) BAActionSheetType actionSheetType;
+/**
+ 确定每个月是否为闰年
+ */
+@property (nonatomic, readonly) BOOL isLeapYear;
 
-@property (nonatomic, strong) NSArray <BAActionSheetModel *>*dataArray;
-@property (nonatomic, strong) NSString *title;
+/**
+ 是否是今天
+ */
+@property (nonatomic, readonly) BOOL isToday;
+
+/**
+ 是否是昨天
+ */
+@property (nonatomic, readonly) BOOL isYesterday;
+@property (nonatomic, readonly) BOOL isTomorrow;
+@property (nonatomic, readonly) BOOL isThisWeek;
+@property (nonatomic, readonly) BOOL isNextWeek;
+@property (nonatomic, readonly) BOOL isLastWeek;
+@property (nonatomic, readonly) BOOL isThisMonth;
+@property (nonatomic, readonly) BOOL isThisYear;
+@property (nonatomic, readonly) BOOL isNextYear;
+@property (nonatomic, readonly) BOOL isLastYear;
+@property (nonatomic, readonly) BOOL isInFuture;
+@property (nonatomic, readonly) BOOL isInPast;
+
+@property (nonatomic, readonly) BOOL isTypicallyWorkday;
+@property (nonatomic, readonly) BOOL isTypicallyWeekend;
+
 
 /*!
+ *  计算上报时间差: 几分钟前，几天前，传入 NSDate，自动解析
  *
- *  @param configuration 属性配置：如 bgColor、buttonTitleColor、isTouchEdgeHide...
- *  @param actionBlock   block回调点击的选项
+ *  @return 计算上报时间差: 几分钟前，几天前
  */
-+ (void)ba_actionSheetShowWithConfiguration:(BAActionSheet_ConfigBlock)configuration
-                                actionBlock:(BAActionSheet_ActionBlock)actionBlock;
+- (NSString *)ba_dateFormattedWithDate;
 
 /*!
- *  隐藏 BAActionSheet
+ *  计算上报时间差: 几分钟前，几天前，传入 NSString 类型的 date，如：@"2017-04-25 11:18:01"，自动解析
+ *
+ *  @return 计算上报时间差: 几分钟前，几天前
  */
-- (void)ba_actionSheetHidden;
++ (NSString *)ba_dateCreated_at:(NSString *)date;
 
-@end
+/*!
+ *  获得一个比当前时间大n年的时间，格式为 yyyy-MM-dd
+ */
++ (NSString *)ba_dateAfterYears:(NSInteger)count;
 
-@class BAActionSheetSubContentModel;
-@interface BAActionSheetModel : NSObject
+/*!
+ *  返回一个只有年月日的时间
+ */
+- (NSDate *)ba_dateWithYMD;
 
-@property(nonatomic, copy) NSString *imageUrl;
-@property(nonatomic, copy) NSString *content;
-@property(nonatomic, copy) NSString *subContent;
-@property(nonatomic, strong) NSArray <BAActionSheetSubContentModel *>*subContentArray;
+- (NSDate *)ba_dateWithYM;
 
-@end
+/*!
+ *  获得与当前时间的差距
+ */
+- (NSDateComponents *)ba_dateDeltaWithNow;
 
-@interface BAActionSheetSubContentModel : NSObject
+/**
+ 距离当前的时间间隔描述
 
-@property(nonatomic, copy) NSString *subContent;
+ @return 时间间隔描述
+ */
+- (NSString *)ba_dateTimeIntervalDescription;
+
+/**
+ 精确到分钟的日期描述
+
+ @return 日期描述
+ */
+- (NSString *)ba_dateMinuteDescription;
+
+/**
+ 标准时间日期描述
+
+ @return 标准时间日期描述
+ */
+- (NSString *)ba_dateFormattedTime;
+
+/**
+ 当前日期 距离 1970 时间间隔毫秒
+
+ @return 当前日期 距离 1970 时间间隔毫秒
+ */
+- (double)ba_dateTimeIntervalSince1970InMilliSecond;
+
+/**
+ 距离 时间间隔毫秒 后的日期
+
+ @param timeIntervalInMilliSecond 时间间隔毫秒
+ @return 距离 时间间隔毫秒 后的日期
+ */
++ (NSDate *)ba_dateWithTimeIntervalInMilliSecondSince1970:(double)timeIntervalInMilliSecond;
+
+/**
+ 时间间隔格式化
+
+ @param time 时间间隔
+ @return 时间格式化
+ */
++ (NSString *)ba_dateFormattedTimeFromTimeInterval:(long long)time;
+
+#pragma mark - 距离当前日期最近的日期
++ (NSDate *)ba_dateTomorrow;
++ (NSDate *)ba_dateYesterday;
++ (NSDate *)ba_dateWithDaysFromNow:(NSInteger)days;
++ (NSDate *)ba_dateWithDaysBeforeNow:(NSInteger)days;
++ (NSDate *)ba_dateWithHoursFromNow:(NSInteger)dHours;
++ (NSDate *)ba_dateWithHoursBeforeNow:(NSInteger)dHours;
++ (NSDate *)ba_dateWithMinutesFromNow:(NSInteger)dMinutes;
++ (NSDate *)ba_dateWithMinutesBeforeNow:(NSInteger)dMinutes;
+
+#pragma mark - 比较日期
+- (BOOL)ba_dateIsEqualToDateIgnoringTime:(NSDate *)aDate;
+- (BOOL)ba_dateIsSameWeekAsDate:(NSDate *)aDate;
+- (BOOL)ba_dateIsSameMonthAsDate:(NSDate *)aDate;
+- (BOOL)ba_dateIsSameYearAsDate:(NSDate *)aDate;
+- (BOOL)ba_dateIsEarlierThanDate:(NSDate *)aDate;
+- (BOOL)ba_dateIsLaterThanDate:(NSDate *)aDate;
+
+#pragma mark - 调整日期
+- (NSDate *)ba_dateByAddingDays:(NSInteger)dDays;
+- (NSDate *)ba_dateBySubtractingDays:(NSInteger)dDays;
+- (NSDate *)ba_dateByAddingHours:(NSInteger)dHours;
+- (NSDate *)ba_dateBySubtractingHours:(NSInteger)dHours;
+- (NSDate *)ba_dateByAddingMinutes:(NSInteger)dMinutes;
+- (NSDate *)ba_dateBySubtractingMinutes:(NSInteger)dMinutes;
+- (NSDate *)ba_dateAtStartOfDay;
+- (NSDateComponents *)ba_dateComponentsWithOffsetFromDate:(NSDate *)aDate;
+
+#pragma mark - 时间间隔
+- (NSInteger)ba_dateMinutesAfterDate:(NSDate *)aDate;
+- (NSInteger)ba_dateMinutesBeforeDate:(NSDate *)aDate;
+- (NSInteger)ba_dateHoursAfterDate:(NSDate *)aDate;
+- (NSInteger)ba_dateHoursBeforeDate:(NSDate *)aDate;
+- (NSInteger)ba_dateDaysAfterDate:(NSDate *)aDate;
+- (NSInteger)ba_dateDaysBeforeDate:(NSDate *)aDate;
+- (NSInteger)ba_dateDistanceInDaysToDate:(NSDate *)anotherDate;
 
 @end
 ```
 ### demo 示例
 ```
-- (void)actionSheet1
+- (void)pickView1
 {
-    NSMutableArray *dataArray = [NSMutableArray array];
-    NSArray *contentArray = @[@"微信支付", @"支付宝", @"预付款账户"];
-    NSArray *subContentArray = @[@"", @"18588888888", @"余额：￥480.00"];
-    NSArray *imageArray = @[@"123.png", @"背景.jpg", @"美女.jpg"];
-    
-    for (NSInteger i = 0; i < contentArray.count; i++)
-    {
-        BAActionSheetModel *model = [BAActionSheetModel new];
-        model.imageUrl = imageArray[i];
-        model.content = contentArray[i];
-        model.subContent = subContentArray[i];
-        
-        [dataArray addObject:model];
-    }
     BAKit_WeakSelf
-    [BAActionSheet ba_actionSheetShowWithConfiguration:^(BAActionSheet *tempView) {
-        
+    [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
-        tempView.title = @"支付方式";
-        tempView.dataArray = dataArray;
-        tempView.isTouchEdgeHide = NO;
-        tempView.showAnimate = YES;
-        
-        self.actionSheet = tempView;
-    } actionBlock:^(NSIndexPath *indexPath, BAActionSheetModel *model) {
-        BAKit_ShowAlertWithMsg_ios8(model.content);
+        self.pickView = tempView;
+    } block:^(BAKit_CityModel *model) {
+        BAKit_StrongSelf
+        // 返回 BAKit_CityModel，包含省市县 和 详细的经纬度
+        NSString *msg = [NSString stringWithFormat:@"%@%@%@\n纬度：%f\n经度：%f", model.province, model.city, model.area, model.coordie.latitude, model.coordie.longitude];
+        NSLog(@"%@", msg);
+        BAKit_ShowAlertWithMsg_ios8(msg);
     }];
 }
 
-- (void)actionSheet2
+- (void)pickView2
 {
-    NSMutableArray *dataArray = [NSMutableArray array];
-    NSArray *contentArray = @[@"微信支付", @"支付宝", @"预付款账户"];
-
-    for (NSInteger i = 0; i < contentArray.count; i++)
-    {
-        BAActionSheetModel *model = [BAActionSheetModel new];
-//        model.imageUrl = imageArray[i];
-        model.content = contentArray[i];
-//        model.subContent = subContentArray[i];
-        
-        [dataArray addObject:model];
-    }
-    BAKit_WeakSelf
-    [BAActionSheet ba_actionSheetShowWithConfiguration:^(BAActionSheet *tempView) {
-        
-        BAKit_StrongSelf
-//        tempView.title = @"支付方式";
-        tempView.dataArray = dataArray;
-        tempView.actionSheetType = BAActionSheetTypeCustom;
-        //        tempView.isTouchEdgeHide = NO;
-        
-        self.actionSheet = tempView;
-    } actionBlock:^(NSIndexPath *indexPath, BAActionSheetModel *model) {
-        BAKit_ShowAlertWithMsg_ios8(model.content);
-    }];
-}
-
-- (void)actionSheet3
-{
-    NSArray *contentArray = @[@"微信支付", @"支付宝", @"预付款账户", @"中行"];
-    NSArray <NSArray *>*subContentArray = @[
-                                            @[@"微信支付1", @"微信支付2", @"微信支付3"],
-                                            @[@"支付宝1", @"支付宝2", @"支付宝3", @"支付宝4"],
-                                            @[],
-                                            @[@"中行1", @"中行2", @"中行3", @"中行4", @"中行5", @"中行6", @"中行7", @"中行2", @"中行3", @"中行4", @"中行5", @"中行6", @"中行7", @"中行2", @"中行3", @"中行4", @"中行5", @"中行6", @"中行7", @"中行2", @"中行3", @"中行4", @"中行5", @"中行6", @"中行7"]
-                                            ];
-    
-    NSMutableArray *dataArray = @[].mutableCopy;
-    for (NSInteger i = 0; i < contentArray.count; i++)
-    {
-        BAActionSheetModel *model = [BAActionSheetModel new];
-        model.content = contentArray[i];
-        
-        NSMutableArray *mutArray = @[].mutableCopy;
-        for (NSInteger j = 0; j < subContentArray[i].count; j ++)
-        {
-            BAActionSheetSubContentModel *subContentModel = [BAActionSheetSubContentModel new];
-            subContentModel.subContent = subContentArray[i][j];
-            [mutArray addObject:subContentModel];
-        }
-        model.subContentArray = mutArray;
-        
-        [dataArray addObject:model];
-    }
+    NSArray *array = @[@"男", @"女"];
     
     BAKit_WeakSelf
-    [BAActionSheet ba_actionSheetShowWithConfiguration:^(BAActionSheet *tempView) {
+    [BAKit_PickerView ba_creatCustomPickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
+        BAKit_StrongSelf
+        // 可以自由定制 toolBar 和 pickView 的背景颜色
+        tempView.backgroundColor_toolBar = [UIColor cyanColor];
+        tempView.backgroundColor_pickView = [UIColor greenColor];
+        self.pickView = tempView;
+    } block:^(NSString *resultString) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    }];
+}
+
+- (void)pickView3
+{
+    BAKit_WeakSelf
+    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDate configuration:^(BAKit_PickerView *tempView) {
+        BAKit_StrongSelf
+        
+        // 可以自由定制 NSDateFormatter
+        tempView.dateType = BAKit_PickerViewDateTypeYMDEHMS;
+        tempView.dateMode = BAKit_PickerViewTypeDate;
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        formatter.dateFormat = @"yyyy年MM月dd日";
+//        tempView.customDateFormatter = formatter;
+        // 可以自由定制按钮颜色
+        tempView.buttonTitleColor_sure = [UIColor redColor];
+        tempView.buttonTitleColor_cancle = [UIColor greenColor];
+        self.pickView = tempView;
+        
+    } block:^(NSString *resultString) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    }];
+}
+
+- (void)pickView4
+{
+    BAKit_WeakSelf
+    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateYM configuration:^(BAKit_PickerView *tempView) {
         
         BAKit_StrongSelf
-        tempView.title = @"支付方式";
-        tempView.dataArray = dataArray;
-        tempView.actionSheetType = BAActionSheetTypeExpand;
-        //        tempView.isTouchEdgeHide = NO;
-        
-        self.actionSheet = tempView;
-    } actionBlock:^(NSIndexPath *indexPath, BAActionSheetModel *model) {
-        if (model.subContentArray.count > 0)
-        {
-            BAKit_ShowAlertWithMsg_ios8(model.subContentArray[indexPath.row].subContent);
-        }
-        else
-        {
-            BAKit_ShowAlertWithMsg_ios8(model.content);
-        }
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM";
+        tempView.customDateFormatter = formatter;
+        self.pickView = tempView;
+    } block:^(NSString *resultString) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
-}
-
-
-- (void)alert1
-{
-    BAKit_WeakSelf
-    /*! 第一种封装使用示例 */
-    [BAAlert ba_alertShowWithTitle:title0 message:titleMsg0 image:nil buttonTitleArray:@[@"取消",@"确定",@"确定2",@"确定3"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor], [UIColor grayColor], [UIColor purpleColor]] configuration:^(BAAlert *tempView) {
-        BAKit_StrongSelf
-        //        temp.bgColor       = [UIColor colorWithRed:0 green:1.0 blue:0 alpha:0.3];
-        /*! 开启边缘触摸隐藏alertView */
-        tempView.isTouchEdgeHide = YES;
-        /*! 添加高斯模糊的样式 */
-        tempView.blurEffectStyle = BAAlertBlurEffectStyleLight;
-        /*! 开启动画 */
-                tempView.showAnimate   = YES;
-        //        /*! 进出场动画样式 默认为：1 */
-        //        tempView.animatingStyle  = 1;
-        self.alertView1 = tempView;
-    } actionBlock:^(NSInteger index) {
-        BAKit_StrongSelf
-        [self.alertView1 ba_alertHidden];
-        if (index == 1)
-        {
-            NSLog(@"点击了确定按钮！");
-            ViewController2 *vc2 = [ViewController2 new];
-            vc2.title = @"alert1";
-            [self.navigationController pushViewController:vc2 animated:YES];
-        }
-    }];
-}
-
-- (void)alert2
-{
-//    /*! 2、自定义按钮颜色 */
-    BAKit_WeakSelf
-    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg2 image:nil buttonTitleArray:@[@"取消", @"跳转VC2"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor]] configuration:^(BAAlert *tempView) {
-        BAKit_StrongSelf
-        /*! 自定义按钮文字颜色 */
-        //    tempView.buttonTitleColor = [UIColor orangeColor];
-        tempView.bgColor = [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:0.3];
-        tempView.isTouchEdgeHide = YES;
-
-        /*! 是否开启进出场动画 默认：NO，如果 YES ，并且同步设置进出场动画枚举为默认值：1 */
-        tempView.showAnimate = YES;
-        tempView.animatingStyle  = BAAlertAnimatingStyleShake;
-
-        self.alertView2 = tempView;
-
-    } actionBlock:^(NSInteger index) {
-        BAKit_StrongSelf
-        [self.alertView2 ba_alertHidden];
-        if (index == 0)
-        {
-            NSLog(@"点击了取消按钮！");
-        }
-        else if (index == 1)
-        {
-            NSLog(@"点击了确定按钮！");
-            ViewController2 *vc2 = [ViewController2 new];
-            vc2.title = @"alert2";
-            [self.navigationController pushViewController:vc2 animated:YES];
-        }
-    }];
-}
-
-- (void)alert3
-{
-    /*! 3、自定义背景图片 */
-    BAKit_WeakSelf
-    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg1 image:nil buttonTitleArray:@[@"取消", @"确定"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor]] configuration:^(BAAlert *tempView) {
-        BAKit_StrongSelf
-        /*! 自定义按钮文字颜色 */
-        //    tempView.buttonTitleColor = [UIColor orangeColor];
-        /*! 自定义alert的背景图片 */
-        tempView.bgImageName      = @"背景.jpg";
-        /*! 开启动画，并且设置动画样式，默认：1 */
-//        tempView.showAnimate = YES;
-        
-        /*! 没有开启动画，直接进出场动画样式，默认开启动画 */
-        tempView.animatingStyle  = BAAlertAnimatingStyleFall;
-        
-        self.alertView3 = tempView;
-    } actionBlock:^(NSInteger index) {
-        BAKit_StrongSelf
-        [self.alertView3 ba_alertHidden];
-        if (index == 0)
-        {
-            NSLog(@"点击了取消按钮！");
-        }
-        else if (index == 1)
-        {
-            NSLog(@"点击了确定按钮！");
-            ViewController2 *vc2 = [ViewController2 new];
-            vc2.title = @"alert3";
-            [self.navigationController pushViewController:vc2 animated:YES];
-        }
-    }];
-}
-
-- (void)alert4
-{
-    /*! 4、内置图片和文字，可滑动查看 */
-    BAKit_WeakSelf
-    [BAAlert ba_alertShowWithTitle:@"温馨提示：" message:titleMsg1 image:[UIImage imageNamed:@"美女.jpg"] buttonTitleArray:@[@"取消", @"跳转VC2"] buttonTitleColorArray:@[[UIColor redColor], [UIColor greenColor]] configuration:^(BAAlert *tempView) {
-        BAKit_StrongSelf
-        /*! 自定义按钮文字颜色 */
-        //    tempView.buttonTitleColor = [UIColor orangeColor];
-        /*! 自定义alert的背景图片 */
-        tempView.bgImageName = @"背景.jpg";
-        /*! 是否显示动画效果 */
-        tempView.showAnimate = YES;
-        self.alertView4 = tempView;
-    } actionBlock:^(NSInteger index) {
-        BAKit_StrongSelf
-        [self.alertView4 ba_alertHidden];
-        if (index == 0)
-        {
-            NSLog(@"点击了取消按钮！");
-        }
-        else if (index == 1)
-        {
-            NSLog(@"点击了确定按钮！");
-            ViewController2 *vc2 = [ViewController2 new];
-            vc2.title = @"alert4";
-            [self.navigationController pushViewController:vc2 animated:YES];
-        }
-    }];
-}
-
-- (void)alert5
-{
-    /*! 5、完全自定义alert */
-    _customView = [CustomView new];
-    self.customView.frame = CGRectMake(50, SCREENHEIGHT - 300, SCREENWIDTH - 50 * 2, 162);
-
-    BAKit_WeakSelf
-    [BAAlert ba_alertShowCustomView:self.customView configuration:^(BAAlert *tempView) {
-        BAKit_StrongSelf
-        tempView.isTouchEdgeHide = YES;
-        tempView.animatingStyle = BAAlertAnimatingStyleScale;
-        self.alertView5 = tempView;
-    }];
-    
-    self.customView.block = ^(NSInteger index) {
-        BAKit_StrongSelf
-        if (index == 1)
-        {
-            [self.alertView5 ba_alertHidden];
-        }
-    };
 }
 
 其他示例可下载demo查看源码！
@@ -494,51 +507,16 @@ typedef void (^BAActionSheet_ActionBlock)(NSIndexPath *indexPath, BAActionSheetM
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
-最新更新时间：2017-05-20 【倒叙】 <br>
- 最新Version：【Version：1.1.9】 <br>
+ 最新更新时间：2017-05-16 【倒叙】 <br>
+ 最新Version：【Version：1.0.0】 <br>
  更新内容： <br>
- 1.1.9.1、修复动画过度白屏问题  <br>
-
- 
- 最新更新时间：2017-05-15 【倒叙】 <br>
- 最新Version：【Version：1.1.8】 <br>
- 更新内容： <br>
- 1.1.8.1、精简代码结构，删除多余或者重复代码  <br>
- 1.1.8.2、规范代码属性和方法命名，原有方法名和属性名有较大改动，忘见谅  <br>
- 1.1.8.3、重构 actionSheet，新增多种样式  <br>
-
- 
- 最新更新时间：2017-05-13 【倒叙】 <br>
- 最新Version：【Version：1.1.7】 <br>
- 更新内容： <br>
- 1.1.7.1、精简代码结构，删除多余或者重复代码  <br>
- 1.1.7.2、规范代码属性和方法命名，原有方法名和属性名有较大改动，忘见谅  <br>
- 1.1.7.3、优化部分动画  <br>
- 1.1.7.4、subView 布局优化  <br>
- 1.1.7.5、actionSheet 新增自定义文字颜色、title 字体颜色  <br>
-
- 
- 最新更新时间：2017-05-10 【倒叙】 <br>
- 最新Version：【Version：1.1.5】 <br>
- 更新内容： <br>
- 1.1.5.1、删除原有封装内部按钮点击事件中 ba_dismissAlertView 方法，此方法可在外部自由调用  <br>
- 
- 
- 最新更新时间：2017-05-09 【倒叙】 <br>
- 最新Version：【Version：1.1.4】 <br>
- 更新内容： <br>
- 1.1.4.1、pod 更新xib 文件 <br>
- 
- 
- 最新更新时间：2017-05-08 【倒叙】
- 最新Version：【Version：1.1.0】
- 更新内容：
- 1.1.0.1、优化方法名命名规范
- 1.1.0.2、新增键盘内部处理
- 1.1.0.3、用原生 autoLayout 重构，自定义 alert 的布局再也不是问题了
- 1.1.0.4、优化代码结构，修复内在隐藏内存泄漏
- 1.1.0.5、新增 BAAlert_OC.h 文件，只需导入 BAAlert_OC.h 一个文件就可以使用 alert 和 actionSheet 了
- 1.1.0.6、删除了部分代码和属性，具体见源码 和 demo
+ 1.0.0.1、城市选择器，三级联动，可返回省市县和精确的经纬度  <br>
+ 1.0.0.2、可以自定义 array 显示，性别选择等【目前只支持单行数据】  <br>
+ 1.0.0.3、日期选择器：年月日，可以完全自定义 NSDateFormatter  <br>
+ 1.0.0.4、日期选择器：年月，可以完全自定义 NSDateFormatter  <br>
+ 1.0.0.5、横竖屏适配完美  <br>
+ 1.0.0.6、可以自定义按钮颜色、背景颜色等  <br>
+ 1.0.0.7、理论完全兼容现有所有 iOS 系统版本  <br>
 
 ## 6、bug 反馈 和 联系方式
 > 1、开发中遇到 bug，希望小伙伴儿们能够及时反馈与我们 BAHome 团队，我们必定会认真对待每一个问题！ <br>
