@@ -227,5 +227,4 @@
 - (NSInteger)ba_dateDaysBeforeDate:(NSDate *)aDate;
 - (NSInteger)ba_dateDistanceInDaysToDate:(NSDate *)anotherDate;
 
-
 @end

@@ -58,6 +58,12 @@
  */
 
 
+#ifndef BAPickView_OC_h
+#define BAPickView_OC_h
+
+#import "BAKit_PickerView.h"
+#import "BAPickView_Config.h"
+
 /*!
  *********************************************************************************
  ************************************ 更新说明 ************************************
@@ -75,12 +81,6 @@
  1.0.0.7、理论完全兼容现有所有 iOS 系统版本  <br>
 
 */
-
-#ifndef BAPickView_OC_h
-#define BAPickView_OC_h
-
-#import "BAKit_PickerView.h"
-#import "BAPickView_Config.h"
 
 
 #endif /* BAPickView_OC_h */
