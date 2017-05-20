@@ -132,6 +132,8 @@
 @property(nonatomic, strong) NSString *defaultYearString;
 
 @property (nonatomic, strong) UIWindow *alertWindow;
+@property(nonatomic, assign) BOOL isAnimating;
+
 
 @end
 
@@ -434,22 +436,41 @@
     [self.alertWindow addSubview:self];
     [self ba_layoutSubViews];
     
-    [self.bgView ba_animation_scaleShowWithDuration:0.6f ratio:1.0f finishBlock:nil];
+    self.isAnimating = YES;
+    BAKit_WeakSelf
+    [self.bgView ba_animation_scaleShowWithDuration:0.6f ratio:1.0f finishBlock:^{
+        BAKit_StrongSelf
+        self.isAnimating = NO;
+    }];
 }
 
 - (void)ba_pickViewHidden
 {
+    self.isAnimating = YES;
     BAKit_WeakSelf
     [self.bgView ba_animation_scaleDismissWithDuration:0.6f ratio:1.0f finishBlock:^{
         BAKit_StrongSelf
+        self.isAnimating = NO;
         [self ba_removeSelf];
     }];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    NSLog(@"触摸了边缘隐藏View！");
     UITouch *touch = [touches anyObject];
     UIView *view = [touch view];
+    
+    if (self.isAnimating)
+    {
+        NSLog(@"请在动画结束时点击！");
+        return;
+    }
+    if (!self.isTouchEdgeHide)
+    {
+        NSLog(@"触摸了View边缘，但您未开启触摸边缘隐藏方法，请设置 isTouchEdgeHide 属性为 YES 后再使用！");
+    }
+    
     if ([view isKindOfClass:[self class]])
     {
         [self ba_pickViewHidden];
@@ -1003,6 +1024,16 @@
 {
     _customDateFormatter = customDateFormatter;
     self.formatter =  customDateFormatter;
+}
+
+- (void)setIsAnimating:(BOOL)isAnimating
+{
+    _isAnimating = isAnimating;
+}
+
+- (void)setIsTouchEdgeHide:(BOOL)isTouchEdgeHide
+{
+    _isTouchEdgeHide = isTouchEdgeHide;
 }
 
 @end

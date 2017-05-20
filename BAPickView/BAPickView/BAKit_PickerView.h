@@ -137,6 +137,9 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property (nonatomic, copy) BAKit_PickerViewBlock block;
 @property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
 
+/*! 是否开启边缘触摸隐藏 默认：NO */
+@property (nonatomic, assign) BOOL isTouchEdgeHide;
+
 /**
  选择器样式，默认为城市选择器
  */

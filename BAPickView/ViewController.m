@@ -178,10 +178,11 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         BAKit_StrongSelf
         
         // 可以自由定制 NSDateFormatter
-//        tempView.dateType = BAKit_PickerViewDateTypeYMDEHMS;
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyy年MM月dd日";
-        tempView.customDateFormatter = formatter;
+        tempView.dateType = BAKit_PickerViewDateTypeYMDEHMS;
+        tempView.dateMode = BAKit_PickerViewTypeDate;
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        formatter.dateFormat = @"yyyy年MM月dd日";
+//        tempView.customDateFormatter = formatter;
         // 可以自由定制按钮颜色
         tempView.buttonTitleColor_sure = [UIColor redColor];
         tempView.buttonTitleColor_cancle = [UIColor greenColor];
