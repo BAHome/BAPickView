@@ -64,8 +64,10 @@
 
 + (id)ba_dateFormatter;
 
-+ (id)ba_dateFormatterWithFormat:(NSString *)dateFormat;
++ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString;
 
++ (id)ba_dateFormatterWithFormatString:(NSString *)fmtString timezoneName:(NSString *)timezoneName;
++ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString dateStyle:(NSDateFormatterStyle)dateStyle;
 /**
  格式化：yyyy-MM-dd HH:mm:ss
 

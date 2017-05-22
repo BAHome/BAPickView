@@ -128,8 +128,11 @@
 
 @property(nonatomic, strong) NSMutableArray *yearArray;
 @property(nonatomic, strong) NSMutableArray *mounthArray;
+@property(nonatomic, strong) NSMutableArray *weekArray;
+
 @property(nonatomic, strong) NSString *defaultMounthString;
 @property(nonatomic, strong) NSString *defaultYearString;
+@property(nonatomic, strong) NSString *defaultWeekString;
 
 @property (nonatomic, strong) UIWindow *alertWindow;
 @property(nonatomic, assign) BOOL isAnimating;
@@ -280,10 +283,11 @@
         case BAKit_PickerViewTypeDate:
             return 0;
             break;
+        case BAKit_PickerViewTypeDateWeek:
         case BAKit_PickerViewTypeDateYM:
             return 2;
             break;
-            
+        
         default:
             break;
     }
@@ -314,7 +318,11 @@
             return (component == 0) ? self.yearArray.count : self.mounthArray.count;
         }
             break;
-            
+        case BAKit_PickerViewTypeDateWeek:
+        {
+            return (component == 0) ? self.yearArray.count : self.weekArray.count;
+        }
+            break;
         default:
             break;
     }
@@ -338,7 +346,10 @@
     {
         return (component == 0) ? self.yearArray[row] : self.mounthArray[row];
     }
-    
+    else if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
+    {
+        return (component == 0) ? self.yearArray[row] : self.weekArray[row];
+    }
     return nil;
 }
 
@@ -428,6 +439,35 @@
             self.resultString = [self.customDateFormatter stringFromDate:date];
         }
     }
+    else if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
+    {
+        if (component == 0)
+        {
+            self.defaultYearString = self.yearArray[row];
+            [self ba_refreshWeeksByYear:self.defaultYearString];
+            [pickerView reloadComponent:1];
+            [pickerView selectRow:0 inComponent:1 animated:YES];
+        }
+        else
+        {
+            self.defaultMounthString = self.weekArray[row];
+        }
+        NSString *yearString = [self.defaultYearString substringToIndex:4];
+        
+        NSString *weekString = @"";
+        NSString *week = [NSString stringWithFormat:@"%02li", (long)BAKit_Current_Date.weekOfYear];
+        
+        if ([self.defaultMounthString isEqualToString:week])
+        {
+            weekString = week;
+        }
+        else
+        {
+            weekString = [self.defaultWeekString substringToIndex:self.defaultWeekString.length - 1];
+        }
+        
+        self.resultString = [NSString stringWithFormat:@"%@年，第 %@ 周", yearString, self.defaultWeekString];
+    }
 }
 
 #pragma mark - custom method
@@ -516,7 +556,8 @@
         }
         else if (self.pickerViewType == BAKit_PickerViewTypeArray ||
                  self.pickerViewType == BAKit_PickerViewTypeDate ||
-                 self.pickerViewType == BAKit_PickerViewTypeDateYM )
+                 self.pickerViewType == BAKit_PickerViewTypeDateYM  ||
+                 self.pickerViewType == BAKit_PickerViewTypeDateWeek )
         {
             if (self.resultString.length > 0)
             {
@@ -592,25 +633,57 @@
 {
     NSDate *current_date = [NSDate date];
     NSInteger current_year = current_date.year;
-    NSInteger current_mounth = current_date.month;
     
     self.defaultYearString = [NSString stringWithFormat:@"%04li", current_year];
-    self.defaultMounthString = [NSString stringWithFormat:@"%02li", current_mounth];
+    if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
+    {
+        self.defaultWeekString = [NSString stringWithFormat:@"%ld", (long)current_date.weekOfYear];
+    }
+    else
+    {
+        NSInteger current_mounth = current_date.month;
+        self.defaultMounthString = [NSString stringWithFormat:@"%02li", current_mounth];
+    }
     
     NSInteger index_year = [self.defaultYearString integerValue];
     NSInteger index_mounth = [self.defaultMounthString integerValue];
-    
+    NSInteger index_week = [self.defaultWeekString integerValue];
+
     [self.pickView selectRow:(index_year - 1900) inComponent:0 animated:YES];
-    [self.pickView selectRow:(index_mounth - 1) inComponent:1 animated:YES];
-    
-    // 设置年月选择器的默认值
-    self.resultString = [NSString stringWithFormat:@"%@-%@", self.defaultYearString, self.defaultMounthString];
-    if (self.customDateFormatter)
+
+    // 设置年月、年周选择器的默认值
+    if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
     {
-        self.resultString = [self.resultString stringByAppendingString:@"-10"];
-        NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
-        NSDate *date = [formatter dateFromString:self.resultString];
-        self.resultString = [self.customDateFormatter stringFromDate:date];
+        [self ba_refreshWeeksByYear:self.defaultYearString];
+        [self.pickView reloadComponent:1];
+        [self.pickView selectRow:(index_week - 1) inComponent:1 animated:YES];
+
+        self.resultString = [NSString stringWithFormat:@"%@年，第 %@ 周", self.defaultYearString, self.defaultWeekString];
+    }
+    else
+    {
+        [self.pickView selectRow:(index_mounth - 1) inComponent:1 animated:YES];
+
+        self.resultString = [NSString stringWithFormat:@"%@-%@", self.defaultYearString, self.defaultMounthString];
+        
+        if (self.customDateFormatter)
+        {
+            self.resultString = [self.resultString stringByAppendingString:@"-10"];
+            NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
+            NSDate *date = [formatter dateFromString:self.resultString];
+            self.resultString = [self.customDateFormatter stringFromDate:date];
+        }
+    }
+}
+
+#pragma mark 刷新年份的最大周数
+- (void)ba_refreshWeeksByYear:(NSString *)year
+{
+    [self ba_removcArray:self.weekArray];
+    
+    for (NSInteger i = 1; i < [NSDate ba_dateGetWeekNumbersOfYear:[year integerValue]]+1; i++)
+    {
+        [self.weekArray addObject:[NSString stringWithFormat:@"第 %ld 周", i]];
     }
 }
 
@@ -872,6 +945,15 @@
     return _mounthArray;
 }
 
+- (NSMutableArray *)weekArray
+{
+    if (!_weekArray)
+    {
+        _weekArray = @[].mutableCopy;
+    }
+    return _weekArray;
+}
+
 - (void)setDataArray:(NSArray *)dataArray
 {
     _dataArray = dataArray;
@@ -936,6 +1018,16 @@
         }
             break;
         case BAKit_PickerViewTypeDateYM:
+        {
+            if (self.datePicker)
+            {
+                [self.datePicker removeFromSuperview];
+            }
+            self.dateType = BAKit_PickerViewDateTypeYM;
+            [self setupDateYM];
+        }
+            break;
+        case BAKit_PickerViewTypeDateWeek:
         {
             if (self.datePicker)
             {

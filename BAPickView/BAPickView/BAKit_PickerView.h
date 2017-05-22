@@ -70,13 +70,15 @@
  - BAKit_PickerViewTypeArray: 普通数组自定义数据
  - BAKit_PickerViewTypeDate: 日期选择器：年月日，可以完全自定义 NSDateFormatter
  - BAKit_PickerViewTypeDateYM: 日期选择器：年月，可以完全自定义 NSDateFormatter
+ - BAKit_PickerViewTypeDateWeek: 日期选择器：年周，如：2017年，第21周
 
  */
 typedef NS_ENUM(NSUInteger, BAKit_PickerViewType) {
     BAKit_PickerViewTypeCity = 0,
     BAKit_PickerViewTypeArray,
     BAKit_PickerViewTypeDate,
-    BAKit_PickerViewTypeDateYM
+    BAKit_PickerViewTypeDateYM,
+    BAKit_PickerViewTypeDateWeek
 };
 
 /**

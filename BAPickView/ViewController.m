@@ -103,6 +103,11 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
                 [self pickView4];
             }
                 break;
+            case 4:
+            {
+                [self pickView5];
+            }
+                break;
                 
             default:
                 break;
@@ -141,6 +146,10 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
 
 - (void)pickView1
 {
+//    NSInteger year = 2015;
+//    NSInteger maxWeak = [NSDate ba_dateGetWeekNumbersOfYear:year];
+//    NSLog(@"%ld 年有 %ld 周！", year, (long)maxWeak);
+    
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
@@ -210,6 +219,22 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
     }];
 }
 
+- (void)pickView5
+{
+    BAKit_WeakSelf
+    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
+        
+        BAKit_StrongSelf
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        formatter.dateFormat = @"yyyy-MM";
+//        tempView.customDateFormatter = formatter;
+        self.pickView = tempView;
+    } block:^(NSString *resultString) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    }];
+}
+
 #pragma mark - setter / getter
 
 - (UITableView *)tableView
@@ -236,6 +261,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
                                                  @"2、普通数组自定义数据",
                                                  @"3、日期选择器：年月日，可以完全自定义 NSDateFormatter",
                                                  @"4、日期选择器：年月，可以完全自定义 NSDateFormatter",
+                                                 @"5、日期选择器：年周，如：2017年，第21周",
                                                  ],
                       @[@"1、城市选择器，三级联动，可返回省市县和精确的经纬度\n2、可以自定义 array 显示，性别选择等【目前只支持单行数据】\n3、日期选择器：年月日，可以完全自定义 NSDateFormatter\n4、日期选择器：年月，可以完全自定义 NSDateFormatter\n5、横竖屏适配完美\n6、可以自定义按钮颜色、背景颜色等\n7、理论完全兼容现有所有 iOS 系统版本"
                         ], nil];
