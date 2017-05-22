@@ -10,8 +10,9 @@
 * 2、可以自定义 array 显示，性别选择等【目前只支持单行数据】
 * 3、日期选择器：年月日，可以完全自定义 NSDateFormatter
 * 4、日期选择器：年月，可以完全自定义 NSDateFormatter
-* 5、横竖屏适配完美
-* 6、可以自定义按钮颜色、背景颜色等
+* 5、日期选择器：年周，如：2017年，第21周
+* 6、横竖屏适配完美
+* 7、可以自定义按钮颜色、背景颜色等
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
@@ -46,6 +47,12 @@
  ************************************ 更新说明 ************************************
  *********************************************************************************
  
+  最新更新时间：2017-05-22 【倒叙】 <br>
+ 最新Version：【Version：1.0.1】 <br>
+ 更新内容： <br>
+ 1.0.1.1、新增年周选择器，如：2017年，第21周  <br>
+ 
+ 
  最新更新时间：2017-05-16 【倒叙】 <br>
  最新Version：【Version：1.0.0】 <br>
  更新内容： <br>
@@ -77,13 +84,15 @@
  - BAKit_PickerViewTypeArray: 普通数组自定义数据
  - BAKit_PickerViewTypeDate: 日期选择器：年月日，可以完全自定义 NSDateFormatter
  - BAKit_PickerViewTypeDateYM: 日期选择器：年月，可以完全自定义 NSDateFormatter
+ - BAKit_PickerViewTypeDateWeek: 日期选择器：年周，如：2017年，第21周
 
  */
 typedef NS_ENUM(NSUInteger, BAKit_PickerViewType) {
     BAKit_PickerViewTypeCity = 0,
     BAKit_PickerViewTypeArray,
     BAKit_PickerViewTypeDate,
-    BAKit_PickerViewTypeDateYM
+    BAKit_PickerViewTypeDateYM,
+    BAKit_PickerViewTypeDateWeek
 };
 
 /**
@@ -273,6 +282,8 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property (nonatomic, readonly) NSInteger second;
 @property (nonatomic, readonly) NSInteger nanosecond;
 @property (nonatomic, readonly) NSInteger weekday;
+//PRC 中国
+@property (nonatomic, readonly) NSInteger weekdayPRC;
 @property (nonatomic, readonly) NSInteger weekdayOrdinal;
 @property (nonatomic, readonly) NSInteger weekOfMonth;
 @property (nonatomic, readonly) NSInteger weekOfYear;
@@ -388,6 +399,12 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  */
 + (NSString *)ba_dateFormattedTimeFromTimeInterval:(long long)time;
 
+#pragma mark UTC
+//UTC世界统一时间
+- (NSNumber *)ba_dateGetUtcTimeIntervalSince1970;
+- (NSNumber *)ba_dateGetUtcTimeIntervalIntSince1970;
+- (NSString *)ba_dateTimeIntervalStringSince1970;
+
 #pragma mark - 距离当前日期最近的日期
 + (NSDate *)ba_dateTomorrow;
 + (NSDate *)ba_dateYesterday;
@@ -424,6 +441,44 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 - (NSInteger)ba_dateDaysAfterDate:(NSDate *)aDate;
 - (NSInteger)ba_dateDaysBeforeDate:(NSDate *)aDate;
 - (NSInteger)ba_dateDistanceInDaysToDate:(NSDate *)anotherDate;
+/**
+ 多少天之后
+ */
+- (NSDate *)ba_dateGetAfterYear:(int)year OrMonth:(int)month OrDay:(int)day;
+
+#pragma mark - 一年有多少周
++ (NSString *)ba_dateGetWeekInyearOrMouth:(BOOL)inYear WithDate:(NSDate *)date;
+// 2015、2009、004、1998 这四年是 53 周（目前已知），其余均是52周
++ (NSInteger)ba_dateGetWeekNumbersOfYear:(NSInteger)year;
+
+@end
+
+/**
+ *  中国农历
+ */
+
+@interface NSDate (LunarCalendar)
+
+/**
+ * 例如 : 2016丙申年四月初一
+ */
+
+- (NSInteger)lunarShortYear;  // 农历年份,数字表示  2016
+
+- (NSString *)lunarLongYear;  // 农历年份,干支表示  丙申年
+
+- (NSInteger)lunarShortMonth; // 农历月份,数字表示  4
+
+- (NSString *)lunarLongMonth; // 农历月份,汉字表示  四月
+
+- (NSInteger)lunarShortDay;   // 农历日期,数字表示  1
+
+- (NSString *)lunarLongDay;   // 农历日期,汉字表示  初一
+
+- (NSString *)lunarSolarTerms;// 农历节气 (立春 雨水 惊蛰 春分...)
+
+/** 传入阳历的年月日返回当天的农历节气 */
++ (NSString *)getLunarSolarTermsWithYear:(int)iYear Month:(int)iMonth Day:(int)iDay;
 
 @end
 ```
@@ -500,6 +555,18 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     }];
 }
 
+- (void)pickView5
+{
+    BAKit_WeakSelf
+    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
+        
+        BAKit_StrongSelf
+        self.pickView = tempView;
+    } block:^(NSString *resultString) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    }];
+}
 其他示例可下载demo查看源码！
 ```
 
@@ -507,6 +574,12 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
+ 最新更新时间：2017-05-22 【倒叙】 <br>
+ 最新Version：【Version：1.0.1】 <br>
+ 更新内容： <br>
+ 1.0.1.1、新增年周选择器，如：2017年，第21周  <br>
+ 
+
  最新更新时间：2017-05-16 【倒叙】 <br>
  最新Version：【Version：1.0.0】 <br>
  更新内容： <br>

@@ -225,9 +225,6 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
         
         BAKit_StrongSelf
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        formatter.dateFormat = @"yyyy-MM";
-//        tempView.customDateFormatter = formatter;
         self.pickView = tempView;
     } block:^(NSString *resultString) {
         BAKit_StrongSelf
