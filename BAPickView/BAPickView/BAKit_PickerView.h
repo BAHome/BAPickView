@@ -119,6 +119,14 @@ typedef NS_ENUM(NSInteger, BAKit_PickerViewDateMode) {
     BAKit_PickerViewDateModeCountDownTimer
 };
 
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewAnimationType) {
+    BAKit_PickerViewAnimationTypeScale = 0,
+    BAKit_PickerViewAnimationTypeTop,
+    BAKit_PickerViewAnimationTypeBottom,
+    BAKit_PickerViewAnimationTypeLeft,
+    BAKit_PickerViewAnimationTypeRight
+};
+
 /**
  城市选择器的返回值
 
@@ -139,8 +147,13 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property (nonatomic, copy) BAKit_PickerViewBlock block;
 @property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
 
-/*! 是否开启边缘触摸隐藏 默认：NO */
+/*! 是否开启边缘触摸隐藏 默认：YES */
 @property (nonatomic, assign) BOOL isTouchEdgeHide;
+
+/**
+ 动画样式
+ */
+@property(nonatomic, assign) BAKit_PickerViewAnimationType animationType;
 
 /**
  选择器样式，默认为城市选择器

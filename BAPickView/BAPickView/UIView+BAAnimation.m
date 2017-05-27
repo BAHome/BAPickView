@@ -1,62 +1,10 @@
-
-/*!
- *  @header BAKit.h
- *          BABaseProject
- *
- *  @brief  BAKit
- *
- *  @author 博爱
- *  @copyright    Copyright © 2016年 博爱. All rights reserved.
- *  @version    V1.0
- */
-
-//                            _ooOoo_
-//                           o8888888o
-//                           88" . "88
-//                           (| -_- |)
-//                            O\ = /O
-//                        ____/`---'\____
-//                      .   ' \\| |// `.
-//                       / \\||| : |||// \
-//                     / _||||| -:- |||||- \
-//                       | | \\\ - /// | |
-//                     | \_| ''\---/'' | |
-//                      \ .-\__ `-` ___/-. /
-//                   ___`. .' /--.--\ `. . __
-//                ."" '< `.___\_<|>_/___.' >'"".
-//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
-//                 \ \ `-. \_ __\ /__ _/ .-` / /
-//         ======`-.____`-.___\_____/___.-`____.-'======
-//                            `=---='
 //
-//         .............................................
-//                  佛祖镇楼                  BUG辟易
-//          佛曰:
-//                  写字楼里写字间，写字间里程序员；
-//                  程序人员写程序，又拿程序换酒钱。
-//                  酒醒只在网上坐，酒醉还来网下眠；
-//                  酒醉酒醒日复日，网上网下年复年。
-//                  但愿老死电脑间，不愿鞠躬老板前；
-//                  奔驰宝马贵者趣，公交自行程序员。
-//                  别人笑我忒疯癫，我笑自己命太贱；
-//                  不见满街漂亮妹，哪个归得程序员？
-
-/*
- 
- *********************************************************************************
- *
- * 在使用BAKit的过程中如果出现bug请及时以以下任意一种方式联系我，我会及时修复bug
- *
- * QQ     : 可以添加ios开发技术群 479663605 在这里找到我(博爱1616【137361770】)
- * 微博    : 博爱1616
- * Email  : 137361770@qq.com
- * GitHub : https://github.com/boai
- * 博客    : http://boaihome.com
- 
- *********************************************************************************
- 
- */
-
+//  UIView+BAAnimation.m
+//  BAAnimation
+//
+//  Created by 博爱 on 2016/12/19.
+//  Copyright © 2016年 DS-Team. All rights reserved.
+//
 
 #import "UIView+BAAnimation.h"
 
@@ -89,6 +37,7 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:duration animations:^{
             self.transform = CGAffineTransformIdentity;
+//            self.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
         } completion:^(BOOL finished) {
             if (finishBlock)
             {
@@ -247,6 +196,11 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1.0f animations:^{
             self.bounds = originalBounds;
+        } completion:^(BOOL finished) {
+            if (finishBlock)
+            {
+                finishBlock();
+            }
         }];
     }];
 }
@@ -273,6 +227,11 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.5f animations:^{
             self.center = originalCenter;
+        } completion:^(BOOL finished) {
+            if (finishBlock)
+            {
+                finishBlock();
+            }
         }];
     }];
 }
@@ -315,16 +274,172 @@
         }
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:duration delay:0.f usingSpringWithDamping:damping initialSpringVelocity:initialSpringVelocity options:finishOptions animations:^{
+        } completion:^(BOOL finished) {
             if (finishBlock)
             {
                 finishBlock();
             }
-        } completion:^(BOOL finished) {
-            
         }];
     }];
 }
 
+/**
+ view 出现动画
+ 
+ @param positionType 位置类型
+ @param duration duration 默认：1.0f
+ @param finishBlock finishBlock
+ */
+- (void)ba_animation_showFromPositionType:(BAAnimationPositionType)positionType
+                                 duration:(CGFloat)duration
+                              finishBlock:(void(^)())finishBlock
+{
+    CGPoint min_center = self.center;
+    CGPoint min_center2 = self.center;
+    CGRect  min_frame  = self.frame;
+    CGSize  min_screen_size = [UIScreen mainScreen].bounds.size;
+
+    switch (positionType) {
+        case BAAnimationPositionTypeTop:
+        {
+            // From
+            min_center.y = -min_frame.size.height;
+            self.center = min_center;
+            
+            // TO
+//            min_center.y = (min_screen_size.height - min_frame.size.height) * 0.5;
+            min_center.y = min_center2.y;
+        }
+            break;
+        case BAAnimationPositionTypeBottom:
+        {
+            // From
+            min_center.y = min_screen_size.height + min_frame.size.height;
+            self.center = min_center;
+            
+            // TO
+//            min_center.y = (min_screen_size.height - min_frame.size.height) * 0.5;
+            min_center.y = min_center2.y;
+        }
+            break;
+        case BAAnimationPositionTypeLeft:
+        {
+            // From
+            min_center.x = - min_center.x - min_screen_size.width * 0.5;
+            self.center = min_center;
+            
+            // TO
+//            min_center.x = (min_screen_size.width - min_frame.size.width) * 0.5;
+            min_center.x = min_center2.x;
+        }
+            break;
+        case BAAnimationPositionTypeRitht:
+        {
+            // From
+            min_center.x = min_screen_size.width + min_frame.size.width;
+            self.center = min_center;
+            
+            // TO
+//            min_center.x = (min_screen_size.width - min_frame.size.width) * 0.5;
+            min_center.x = min_center2.x;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    if (!duration)
+    {
+        duration = 1.5f;
+    }
+    [UIView animateWithDuration:duration animations:^{
+//        self.alpha = 0.3f;
+        self.center = min_center;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.f animations:^{
+//            self.alpha = 1.0f;
+            if (finishBlock)
+            {
+                finishBlock();
+            }
+        }];
+    }];
+}
+
+- (void)ba_view_showFromScreenBottom
+{
+    CGRect frame = self.frame;
+    
+    // frame.origin.x = 0;
+    frame.origin.y = [UIScreen mainScreen].bounds.size.height;
+    self.frame = frame;
+    
+    // TO POS
+    frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+    
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+/**
+ view 消失动画
+ 
+ @param positionType 位置类型
+ @param duration duration 默认：1.0f
+ @param finishBlock finishBlock
+ */
+- (void)ba_animation_dismissFromPositionType:(BAAnimationPositionType)positionType
+                                    duration:(CGFloat)duration
+                                 finishBlock:(void(^)())finishBlock
+{
+    CGPoint min_center = self.center;
+    CGRect  min_frame  = self.frame;
+    CGSize  min_screen_size = [UIScreen mainScreen].bounds.size;
+    
+    switch (positionType) {
+        case BAAnimationPositionTypeTop:
+        {
+            min_center.y = - min_frame.size.height * 0.5;
+        }
+            break;
+        case BAAnimationPositionTypeBottom:
+        {
+            min_center.y = min_screen_size.height + min_frame.size.height * 0.5;
+        }
+            break;
+        case BAAnimationPositionTypeLeft:
+        {
+            min_center.x = - min_center.x - min_screen_size.width * 0.5;
+        }
+            break;
+        case BAAnimationPositionTypeRitht:
+        {
+            min_center.x = min_screen_size.width + min_frame.size.width;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    if (!duration)
+    {
+        duration = 1.5f;
+    }
+    [UIView animateWithDuration:duration animations:^{
+        
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:duration animations:^{
+            self.center = min_center;
+        } completion:^(BOOL finished) {
+            if (finishBlock) {
+                finishBlock();
+            }
+        }];
+    }];
+}
 
 
 @end

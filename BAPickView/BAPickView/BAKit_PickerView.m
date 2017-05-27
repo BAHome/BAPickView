@@ -224,6 +224,8 @@
     self.pickerViewType = BAKit_PickerViewTypeCity;
     self.dateType = BAKit_PickerViewDateTypeYMD;
     self.dateMode = BAKit_PickerViewDateModeDate;
+    self.animationType = BAKit_PickerViewAnimationTypeScale;
+    self.isTouchEdgeHide = YES;
     self.toolBarView.backgroundColor = BAKit_Color_White;
     self.pickView.backgroundColor = BAKit_Color_White;
     self.datePicker.backgroundColor = BAKit_Color_White;
@@ -476,23 +478,135 @@
     [self.alertWindow addSubview:self];
     [self ba_layoutSubViews];
     
-    self.isAnimating = YES;
-    BAKit_WeakSelf
-    [self.bgView ba_animation_scaleShowWithDuration:0.6f ratio:1.0f finishBlock:^{
-        BAKit_StrongSelf
-        self.isAnimating = NO;
-    }];
+    [self ba_pickViewShowAnimation];
 }
 
 - (void)ba_pickViewHidden
 {
+//    self.isAnimating = YES;
+//    BAKit_WeakSelf
+//    [self.bgView ba_animation_scaleDismissWithDuration:0.6f ratio:1.0f finishBlock:^{
+//        BAKit_StrongSelf
+//        self.isAnimating = NO;
+//        [self ba_removeSelf];
+//    }];
+    [self ba_pickViewHiddenAnimation];
+}
+
+#pragma mark 进场动画
+
+- (void)ba_pickViewShowAnimation
+{
     self.isAnimating = YES;
     BAKit_WeakSelf
-    [self.bgView ba_animation_scaleDismissWithDuration:0.6f ratio:1.0f finishBlock:^{
-        BAKit_StrongSelf
-        self.isAnimating = NO;
-        [self ba_removeSelf];
-    }];
+    switch (self.animationType) {
+        case BAKit_PickerViewAnimationTypeScale:
+        {
+            [self.bgView ba_animation_scaleShowWithDuration:0.6f ratio:1.0f finishBlock:^{
+                BAKit_StrongSelf
+                self.isAnimating = NO;
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeTop:
+        {
+            [self.bgView ba_animation_showFromPositionType:BAAnimationPositionTypeTop duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.isAnimating = NO;
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeBottom:
+        {
+            [self.bgView ba_animation_showFromPositionType:BAAnimationPositionTypeBottom duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.isAnimating = NO;
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeLeft:
+        {
+            [self.bgView ba_animation_showFromPositionType:BAAnimationPositionTypeLeft duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.isAnimating = NO;
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeRight:
+        {
+            [self.bgView ba_animation_showFromPositionType:BAAnimationPositionTypeRitht duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.isAnimating = NO;
+            }];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark 出场动画
+- (void)ba_pickViewHiddenAnimation
+{
+    self.isAnimating = YES;
+    self.bgView.alpha = 1.0f;
+    BAKit_WeakSelf
+    switch (self.animationType) {
+        case BAKit_PickerViewAnimationTypeScale:
+        {
+            [self.bgView ba_animation_scaleDismissWithDuration:0.6f ratio:1.0f finishBlock:^{
+                BAKit_StrongSelf
+                self.bgView.alpha = 0.1f;
+                self.isAnimating = NO;
+                [self ba_removeSelf];
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeTop:
+        {
+            [self.bgView ba_animation_dismissFromPositionType:BAAnimationPositionTypeTop duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.bgView.alpha = 0.1f;
+                self.isAnimating = NO;
+                [self ba_removeSelf];
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeBottom:
+        {
+            [self.bgView ba_animation_dismissFromPositionType:BAAnimationPositionTypeBottom duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.bgView.alpha = 0.1f;
+                self.isAnimating = NO;
+                [self ba_removeSelf];
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeLeft:
+        {
+            [self.bgView ba_animation_dismissFromPositionType:BAAnimationPositionTypeLeft duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.bgView.alpha = 0.1f;
+                self.isAnimating = NO;
+                [self ba_removeSelf];
+            }];
+        }
+            break;
+        case BAKit_PickerViewAnimationTypeRight:
+        {
+            [self.bgView ba_animation_dismissFromPositionType:BAAnimationPositionTypeRitht duration:0.6f finishBlock:^{
+                BAKit_StrongSelf
+                self.bgView.alpha = 0.1f;
+                self.isAnimating = NO;
+                [self ba_removeSelf];
+            }];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -509,6 +623,7 @@
     if (!self.isTouchEdgeHide)
     {
         NSLog(@"触摸了View边缘，但您未开启触摸边缘隐藏方法，请设置 isTouchEdgeHide 属性为 YES 后再使用！");
+        return;
     }
     
     if ([view isKindOfClass:[self class]])
@@ -605,10 +720,10 @@
 
 - (void)ba_removcArray:(NSMutableArray *)array
 {
-    if (array.count > 0) {
+    if (array.count > 0)
+    {
         [array removeAllObjects];
     }
-    
 }
 
 - (NSString *)cutLocalStringForShow:(NSString *)iStr
@@ -1109,7 +1224,6 @@
         default:
             break;
     }
-    
 }
 
 - (void)setCustomDateFormatter:(NSDateFormatter *)customDateFormatter
@@ -1126,6 +1240,11 @@
 - (void)setIsTouchEdgeHide:(BOOL)isTouchEdgeHide
 {
     _isTouchEdgeHide = isTouchEdgeHide;
+}
+
+- (void)setAnimationType:(BAKit_PickerViewAnimationType)animationType
+{
+    _animationType = animationType;
 }
 
 @end

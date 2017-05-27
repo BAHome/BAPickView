@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "BAPickView"
-    s.version      = "1.0.1"
+    s.version      = "1.0.2"
     s.summary      = '目前为止，最为精简的 自定义 pickView 和 日期选择器 封装！'
     s.homepage     = 'https://github.com/BAHome/BAPickView'
     s.license      = 'MIT'

@@ -13,12 +13,13 @@
 * 5、日期选择器：年周，如：2017年，第21周
 * 6、横竖屏适配完美
 * 7、可以自定义按钮颜色、背景颜色等
+* 8、新增各种展示、消失动画，如：缩放、上下左右展示、消失动画等
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
 
 ## 3、安装、导入示例和源码地址
-* 1、pod 导入【最新版本：version 1.0.0】： <br>
+* 1、pod 导入【最新版本：version 1.0.2】： <br>
  `pod 'BAPickView'`  <br>
 如果发现 `pod search BAPickView` 搜索出来的不是最新版本，需要在终端执行 cd 转换文件路径命令退回到 desktop，然后执行 `pod setup` 命令更新本地spec缓存（可能需要几分钟），然后再搜索就可以了。<br>
 具体步骤：
@@ -47,11 +48,19 @@
  ************************************ 更新说明 ************************************
  *********************************************************************************
  
-  最新更新时间：2017-05-22 【倒叙】 <br>
+ 项目源码地址：
+ OC 版 ：https://github.com/BAHome/BAPickView
+ 
+ 最新更新时间：2017-05-27 【倒叙】 <br>
+ 最新Version：【Version：1.0.2】 <br>
+ 更新内容： <br>
+ 1.0.2.1、新增进出场动画，缩放、上下左右展示、消失动画  <br>
+ 1.0.2.2、修复 isTouchEdgeHide 失效的 bug <br>
+ 
+ 最新更新时间：2017-05-22 【倒叙】 <br>
  最新Version：【Version：1.0.1】 <br>
  更新内容： <br>
  1.0.1.1、新增年周选择器，如：2017年，第21周  <br>
- 
  
  最新更新时间：2017-05-16 【倒叙】 <br>
  最新Version：【Version：1.0.0】 <br>
@@ -133,6 +142,14 @@ typedef NS_ENUM(NSInteger, BAKit_PickerViewDateMode) {
     BAKit_PickerViewDateModeCountDownTimer
 };
 
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewAnimationType) {
+    BAKit_PickerViewAnimationTypeScale = 0,
+    BAKit_PickerViewAnimationTypeTop,
+    BAKit_PickerViewAnimationTypeBottom,
+    BAKit_PickerViewAnimationTypeLeft,
+    BAKit_PickerViewAnimationTypeRight
+};
+
 /**
  城市选择器的返回值
 
@@ -153,8 +170,13 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property (nonatomic, copy) BAKit_PickerViewBlock block;
 @property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
 
-/*! 是否开启边缘触摸隐藏 默认：NO */
+/*! 是否开启边缘触摸隐藏 默认：YES */
 @property (nonatomic, assign) BOOL isTouchEdgeHide;
+
+/**
+ 动画样式
+ */
+@property(nonatomic, assign) BAKit_PickerViewAnimationType animationType;
 
 /**
  选择器样式，默认为城市选择器
@@ -489,6 +511,8 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
+        tempView.isTouchEdgeHide = NO;
+        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
         self.pickView = tempView;
     } block:^(BAKit_CityModel *model) {
         BAKit_StrongSelf
@@ -509,6 +533,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
         // 可以自由定制 toolBar 和 pickView 的背景颜色
         tempView.backgroundColor_toolBar = [UIColor cyanColor];
         tempView.backgroundColor_pickView = [UIColor greenColor];
+        tempView.animationType = BAKit_PickerViewAnimationTypeTop;
         self.pickView = tempView;
     } block:^(NSString *resultString) {
         BAKit_StrongSelf
@@ -531,6 +556,8 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
         // 可以自由定制按钮颜色
         tempView.buttonTitleColor_sure = [UIColor redColor];
         tempView.buttonTitleColor_cancle = [UIColor greenColor];
+        tempView.animationType = BAKit_PickerViewAnimationTypeLeft;
+
         self.pickView = tempView;
         
     } block:^(NSString *resultString) {
@@ -548,6 +575,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM";
         tempView.customDateFormatter = formatter;
+        tempView.animationType = BAKit_PickerViewAnimationTypeRight;
         self.pickView = tempView;
     } block:^(NSString *resultString) {
         BAKit_StrongSelf
@@ -567,6 +595,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
 }
+
 其他示例可下载demo查看源码！
 ```
 
@@ -574,11 +603,16 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
+ 最新更新时间：2017-05-27 【倒叙】 <br>
+ 最新Version：【Version：1.0.2】 <br>
+ 更新内容： <br>
+ 1.0.2.1、新增进出场动画，缩放、上下左右展示、消失动画  <br>
+ 1.0.2.2、修复 isTouchEdgeHide 失效的 bug <br>
+ 
  最新更新时间：2017-05-22 【倒叙】 <br>
  最新Version：【Version：1.0.1】 <br>
  更新内容： <br>
  1.0.1.1、新增年周选择器，如：2017年，第21周  <br>
- 
 
  最新更新时间：2017-05-16 【倒叙】 <br>
  最新Version：【Version：1.0.0】 <br>

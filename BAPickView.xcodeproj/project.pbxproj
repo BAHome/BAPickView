@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C487C0EE1ED95E1900775DE9 /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C487C0ED1ED95E1900775DE9 /* UIView+BAAnimation.m */; };
 		C4E7BE981ECAAFFA003F6AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE971ECAAFFA003F6AF1 /* main.m */; };
 		C4E7BE9B1ECAAFFA003F6AF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE9A1ECAAFFA003F6AF1 /* AppDelegate.m */; };
 		C4E7BE9E1ECAAFFA003F6AF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE9D1ECAAFFA003F6AF1 /* ViewController.m */; };
@@ -17,10 +18,11 @@
 		C4E7BEB21ECAB075003F6AF1 /* BAPickView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4E7BEB11ECAB075003F6AF1 /* BAPickView.bundle */; };
 		C4E7BEB71ECACC07003F6AF1 /* NSDate+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BEB61ECACC07003F6AF1 /* NSDate+BAKit.m */; };
 		C4E7BEBA1ECACC12003F6AF1 /* NSDateFormatter+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BEB91ECACC12003F6AF1 /* NSDateFormatter+BAKit.m */; };
-		C4E7BEBD1ECACCE6003F6AF1 /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BEBC1ECACCE6003F6AF1 /* UIView+BAAnimation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C487C0EC1ED95E1900775DE9 /* UIView+BAAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BAAnimation.h"; sourceTree = "<group>"; };
+		C487C0ED1ED95E1900775DE9 /* UIView+BAAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BAAnimation.m"; sourceTree = "<group>"; };
 		C4E7BE931ECAAFFA003F6AF1 /* BAPickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAPickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E7BE971ECAAFFA003F6AF1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4E7BE991ECAAFFA003F6AF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -40,8 +42,6 @@
 		C4E7BEB61ECACC07003F6AF1 /* NSDate+BAKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BAKit.m"; sourceTree = "<group>"; };
 		C4E7BEB81ECACC12003F6AF1 /* NSDateFormatter+BAKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+BAKit.h"; sourceTree = "<group>"; };
 		C4E7BEB91ECACC12003F6AF1 /* NSDateFormatter+BAKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+BAKit.m"; sourceTree = "<group>"; };
-		C4E7BEBB1ECACCE6003F6AF1 /* UIView+BAAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BAAnimation.h"; sourceTree = "<group>"; };
-		C4E7BEBC1ECACCE6003F6AF1 /* UIView+BAAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BAAnimation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +107,8 @@
 				C4E7BEB61ECACC07003F6AF1 /* NSDate+BAKit.m */,
 				C4E7BEB81ECACC12003F6AF1 /* NSDateFormatter+BAKit.h */,
 				C4E7BEB91ECACC12003F6AF1 /* NSDateFormatter+BAKit.m */,
-				C4E7BEBB1ECACCE6003F6AF1 /* UIView+BAAnimation.h */,
-				C4E7BEBC1ECACCE6003F6AF1 /* UIView+BAAnimation.m */,
+				C487C0EC1ED95E1900775DE9 /* UIView+BAAnimation.h */,
+				C487C0ED1ED95E1900775DE9 /* UIView+BAAnimation.m */,
 				C4E7BEB11ECAB075003F6AF1 /* BAPickView.bundle */,
 			);
 			path = BAPickView;
@@ -187,7 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4E7BEBD1ECACCE6003F6AF1 /* UIView+BAAnimation.m in Sources */,
+				C487C0EE1ED95E1900775DE9 /* UIView+BAAnimation.m in Sources */,
 				C4E7BEB01ECAB054003F6AF1 /* BAKit_PickerView.m in Sources */,
 				C4E7BEBA1ECACC12003F6AF1 /* NSDateFormatter+BAKit.m in Sources */,
 				C4E7BE9E1ECAAFFA003F6AF1 /* ViewController.m in Sources */,

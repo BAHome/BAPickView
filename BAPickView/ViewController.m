@@ -146,13 +146,11 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
 
 - (void)pickView1
 {
-//    NSInteger year = 2015;
-//    NSInteger maxWeak = [NSDate ba_dateGetWeekNumbersOfYear:year];
-//    NSLog(@"%ld 年有 %ld 周！", year, (long)maxWeak);
-    
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
+        tempView.isTouchEdgeHide = NO;
+        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
         self.pickView = tempView;
     } block:^(BAKit_CityModel *model) {
         BAKit_StrongSelf
@@ -173,6 +171,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         // 可以自由定制 toolBar 和 pickView 的背景颜色
         tempView.backgroundColor_toolBar = [UIColor cyanColor];
         tempView.backgroundColor_pickView = [UIColor greenColor];
+        tempView.animationType = BAKit_PickerViewAnimationTypeTop;
         self.pickView = tempView;
     } block:^(NSString *resultString) {
         BAKit_StrongSelf
@@ -195,6 +194,8 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         // 可以自由定制按钮颜色
         tempView.buttonTitleColor_sure = [UIColor redColor];
         tempView.buttonTitleColor_cancle = [UIColor greenColor];
+        tempView.animationType = BAKit_PickerViewAnimationTypeLeft;
+
         self.pickView = tempView;
         
     } block:^(NSString *resultString) {
@@ -212,6 +213,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM";
         tempView.customDateFormatter = formatter;
+        tempView.animationType = BAKit_PickerViewAnimationTypeRight;
         self.pickView = tempView;
     } block:^(NSString *resultString) {
         BAKit_StrongSelf

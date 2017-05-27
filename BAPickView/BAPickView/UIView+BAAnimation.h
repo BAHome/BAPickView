@@ -60,6 +60,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, BAAnimationPositionType) {
+    BAAnimationPositionTypeTop,
+    BAAnimationPositionTypeBottom,
+    BAAnimationPositionTypeLeft,
+    BAAnimationPositionTypeRitht,
+};
+
 @interface UIView (BAAnimation)
 
 /*!
@@ -165,6 +172,29 @@
                           finishOptions:(UIViewAnimationOptions)finishOptions
                              startBlock:(void(^)())startBlock
                             finishBlock:(void(^)())finishBlock;
+
+/**
+ view 出现动画
+ 
+ @param positionType 位置类型
+ @param duration duration 默认：1.0f
+ @param finishBlock finishBlock
+ */
+- (void)ba_animation_showFromPositionType:(BAAnimationPositionType)positionType
+                                 duration:(CGFloat)duration
+                              finishBlock:(void(^)())finishBlock;
+
+/**
+ view 消失动画
+ 
+ @param positionType 位置类型
+ @param duration duration 默认：1.0f
+ @param finishBlock finishBlock
+ */
+- (void)ba_animation_dismissFromPositionType:(BAAnimationPositionType)positionType
+                                    duration:(CGFloat)duration
+                                 finishBlock:(void(^)())finishBlock;
+
 @end
 
 
