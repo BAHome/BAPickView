@@ -149,8 +149,23 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
+        // 设置“取消“和”确定“ button 在 pickerView 的底部
+        tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
+        // 设置 pickerView 在屏幕中的位置
+        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+        // 是否开启边缘触摸隐藏 默认：YES
         tempView.isTouchEdgeHide = NO;
+        // 动画样式
         tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
+        /**
+         pickView 字体，默认：[UIFont boldSystemFontOfSize:17]
+         */
+        tempView.ba_pickViewFont = [UIFont systemFontOfSize:17];
+        /**
+         pickView 字体颜色，默认：[UIColor blackColor]
+         */
+        tempView.ba_pickViewTextColor = [UIColor orangeColor];
+        
         self.pickView = tempView;
     } block:^(BAKit_CityModel *model) {
         BAKit_StrongSelf
@@ -172,6 +187,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         tempView.backgroundColor_toolBar = [UIColor cyanColor];
         tempView.backgroundColor_pickView = [UIColor greenColor];
         tempView.animationType = BAKit_PickerViewAnimationTypeTop;
+        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
         self.pickView = tempView;
     } block:^(NSString *resultString) {
         BAKit_StrongSelf
@@ -186,8 +202,8 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         BAKit_StrongSelf
         
         // 可以自由定制 NSDateFormatter
-        tempView.dateType = BAKit_PickerViewDateTypeYMDEHMS;
-        tempView.dateMode = BAKit_PickerViewTypeDate;
+        tempView.dateMode = BAKit_PickerViewDateModeDate;
+        tempView.dateType = BAKit_PickerViewDateTypeYMD;
 //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //        formatter.dateFormat = @"yyyy年MM月dd日";
 //        tempView.customDateFormatter = formatter;
@@ -208,7 +224,6 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateYM configuration:^(BAKit_PickerView *tempView) {
-        
         BAKit_StrongSelf
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM";
@@ -262,7 +277,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
                                                  @"4、日期选择器：年月，可以完全自定义 NSDateFormatter",
                                                  @"5、日期选择器：年周，如：2017年，第21周",
                                                  ],
-                      @[@"1、城市选择器，三级联动，可返回省市县和精确的经纬度\n2、可以自定义 array 显示，性别选择等【目前只支持单行数据】\n3、日期选择器：年月日，可以完全自定义 NSDateFormatter\n4、日期选择器：年月，可以完全自定义 NSDateFormatter\n5、横竖屏适配完美\n6、可以自定义按钮颜色、背景颜色等\n7、理论完全兼容现有所有 iOS 系统版本"
+                      @[@"1、城市选择器，三级联动，可返回省市县和精确的经纬度\n2、可以自定义 array 显示，性别选择等【目前只支持单行数据】\n3、日期选择器：年月日，可以完全自定义 NSDateFormatter\n4、日期选择器：年月，可以完全自定义 NSDateFormatter\n5、横竖屏适配完美\n6、可以自定义按钮颜色、背景颜色等\n7、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示\n8、10、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改\n9、理论完全兼容现有所有 iOS 系统版本"
                         ], nil];
     }
     return _dataArray;

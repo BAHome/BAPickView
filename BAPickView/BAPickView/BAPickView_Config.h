@@ -91,6 +91,14 @@ BAKit_Color_RGBA(u_char r,u_char g, u_char b, u_char a) {
 #define BAKit_ScaleXAndWidth    BAKit_SCREEN_WIDTH/BAKit_BaseScreenWidth
 #define BAKit_ScaleYAndHeight   BAKit_SCREEN_HEIGHT/BAKit_BaseScreenHeight
 
+#define BAKit_Objc_setObj(key, value) objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+
+#define BAKit_Objc_setObjCOPY(key, value) objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_COPY)
+
+#define BAKit_Objc_getObj objc_getAssociatedObject(self, _cmd)
+
+#define BAKit_Objc_exchangeMethodAToB(methodA,methodB) method_exchangeImplementations(class_getInstanceMethod([self class], methodA),class_getInstanceMethod([self class], methodB));
+
 
 /*! 获取sharedApplication */
 #define BAKit_SharedApplication    [UIApplication sharedApplication]

@@ -14,12 +14,14 @@
 * 6、横竖屏适配完美
 * 7、可以自定义按钮颜色、背景颜色等
 * 8、新增各种展示、消失动画，如：缩放、上下左右展示、消失动画等
+* 9、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示 <br>
+* 10、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改 <br>
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
 
 ## 3、安装、导入示例和源码地址
-* 1、pod 导入【最新版本：version 1.0.2】： <br>
+* 1、pod 导入【最新版本：![](https://img.shields.io/cocoapods/v/BAPickView.svg?style=flat)】： <br>
  `pod 'BAPickView'`  <br>
 如果发现 `pod search BAPickView` 搜索出来的不是最新版本，需要在终端执行 cd 转换文件路径命令退回到 desktop，然后执行 `pod setup` 命令更新本地spec缓存（可能需要几分钟），然后再搜索就可以了。<br>
 具体步骤：
@@ -42,14 +44,27 @@
 
 #import "BAKit_PickerView.h"
 #import "BAPickView_Config.h"
+#import "NSDate+BAKit.h"
+#import "UIView+BARectCorner.h"
+#import "NSDateFormatter+BAKit.h"
+#import "UIView+BAAnimation.h"
 
 /*!
  *********************************************************************************
  ************************************ 更新说明 ************************************
  *********************************************************************************
  
+ 欢迎使用 BAHome 系列开源代码 ！
+ 如有更多需求，请前往：https://github.com/BAHome
+ 
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
+ 
+ 最新更新时间：2017-06-03 【倒叙】 <br>
+ 最新Version：【Version：1.0.3】 <br>
+ 更新内容： <br>
+ 1.0.3.1、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示 <br>
+ 1.0.3.2、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改 <br>
  
  最新更新时间：2017-05-27 【倒叙】 <br>
  最新Version：【Version：1.0.2】 <br>
@@ -74,7 +89,6 @@
  1.0.0.7、理论完全兼容现有所有 iOS 系统版本  <br>
 
 */
-
 
 #endif /* BAPickView_OC_h */
 ```
@@ -151,6 +165,30 @@ typedef NS_ENUM(NSUInteger, BAKit_PickerViewAnimationType) {
 };
 
 /**
+ 设置取消和确定按钮相对pickerView的位置
+ 
+ - BAKit_PickerViewPositionTypeNormal: 默认PickerView在屏幕的底部
+ - BAKit_PickerViewPositionTypeBottom: 设置pickerView在屏幕的中心
+ 
+ */
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewPositionType) {
+    BAKit_PickerViewPositionTypeNormal = 0,
+    BAKit_PickerViewPositionTypeCenter,
+};
+
+/**
+ 设置取消和确定按钮相对pickerView的位置
+ 
+ - BAKit_PickerViewButtonPositionTypeNormal: 默认“取消”和“确定”button在pickerView的顶部
+ - BAKit_PickerViewButtonPositionTypeBottom: 设置“取消”和“确定”button在pickerView的底部
+ 
+ */
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewButtonPositionType) {
+    BAKit_PickerViewButtonPositionTypeNormal = 0,
+    BAKit_PickerViewButtonPositionTypeBottom,
+};
+
+/**
  城市选择器的返回值
 
  @param model BAKit_CityModel
@@ -184,6 +222,8 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property(nonatomic, assign) BAKit_PickerViewType pickerViewType;
 @property(nonatomic, assign) BAKit_PickerViewDateType dateType;
 @property(nonatomic, assign) BAKit_PickerViewDateMode dateMode;
+@property(nonatomic, assign) BAKit_PickerViewButtonPositionType buttonPositionType;
+@property(nonatomic, assign) BAKit_PickerViewPositionType pickerViewPositionType;
 
 /**
  自定义 NSDateFormatter，返回的日期格式，注意：如果同时设置 BAKit_PickerViewDateType 和 customDateFormatter，以 customDateFormatter 为主
@@ -214,6 +254,16 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  sureButton title颜色，默认：黑色
  */
 @property(nonatomic, strong) UIColor *buttonTitleColor_sure;
+
+/**
+ pickView 字体，默认：[UIFont boldSystemFontOfSize:17]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIFont *ba_pickViewFont;
+
+/**
+ pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
 
 
 #pragma mark - custom method
@@ -511,8 +561,23 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
+        // 设置“取消“和”确定“ button 在 pickerView 的底部
+        tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
+        // 设置 pickerView 在屏幕中的位置
+        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+        // 是否开启边缘触摸隐藏 默认：YES
         tempView.isTouchEdgeHide = NO;
+        // 动画样式
         tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
+        /**
+         pickView 字体，默认：[UIFont boldSystemFontOfSize:17]
+         */
+        tempView.ba_pickViewFont = [UIFont systemFontOfSize:17];
+        /**
+         pickView 字体颜色，默认：[UIColor blackColor]
+         */
+        tempView.ba_pickViewTextColor = [UIColor orangeColor];
+        
         self.pickView = tempView;
     } block:^(BAKit_CityModel *model) {
         BAKit_StrongSelf
@@ -534,6 +599,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
         tempView.backgroundColor_toolBar = [UIColor cyanColor];
         tempView.backgroundColor_pickView = [UIColor greenColor];
         tempView.animationType = BAKit_PickerViewAnimationTypeTop;
+        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
         self.pickView = tempView;
     } block:^(NSString *resultString) {
         BAKit_StrongSelf
@@ -548,8 +614,8 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
         BAKit_StrongSelf
         
         // 可以自由定制 NSDateFormatter
-        tempView.dateType = BAKit_PickerViewDateTypeYMDEHMS;
-        tempView.dateMode = BAKit_PickerViewTypeDate;
+        tempView.dateMode = BAKit_PickerViewDateModeDate;
+        tempView.dateType = BAKit_PickerViewDateTypeYMD;
 //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //        formatter.dateFormat = @"yyyy年MM月dd日";
 //        tempView.customDateFormatter = formatter;
@@ -570,7 +636,6 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateYM configuration:^(BAKit_PickerView *tempView) {
-        
         BAKit_StrongSelf
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy-MM";
@@ -602,6 +667,12 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 ## 5、更新记录：【倒叙】
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
+ 
+ 最新更新时间：2017-06-03 【倒叙】 <br>
+ 最新Version：【Version：1.0.3】 <br>
+ 更新内容： <br>
+ 1.0.3.1、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示 <br>
+ 1.0.3.2、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改 <br>
  
  最新更新时间：2017-05-27 【倒叙】 <br>
  最新Version：【Version：1.0.2】 <br>

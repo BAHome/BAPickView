@@ -64,6 +64,7 @@
 #import "NSDateFormatter+BAKit.h"
 #import "NSDate+BAKit.h"
 #import "UIView+BAAnimation.h"
+#import "UIView+BARectCorner.h"
 
 #define kBAKit_PickerView_H        200 * BAKit_ScaleYAndHeight
 #define kBAKit_PickerViewToolBar_H 40 * BAKit_ScaleYAndHeight
@@ -229,6 +230,8 @@
     self.toolBarView.backgroundColor = BAKit_Color_White;
     self.pickView.backgroundColor = BAKit_Color_White;
     self.datePicker.backgroundColor = BAKit_Color_White;
+    self.ba_pickViewFont = [UIFont boldSystemFontOfSize:17];
+    self.ba_pickViewTextColor = [UIColor blackColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
@@ -239,37 +242,101 @@
     [self ba_layoutSubViews];
 }
 
+#pragma mark - layout
 - (void)ba_layoutSubViews
 {
     self.frame = [UIScreen mainScreen].bounds;
     self.alertWindow.frame = self.window.bounds;
-
+    
+    
     CGFloat min_x = 0;
     CGFloat min_y = 0;
     CGFloat min_w = 0;
     CGFloat min_h = 0;
     
+    CGFloat min_view_w = CGRectGetWidth(self.frame);
+    CGFloat min_view_h = CGRectGetHeight(self.frame);
+
+    
     min_h = kBAKit_PickerView_H + kBAKit_PickerViewToolBar_H;
-    min_y = CGRectGetHeight(self.frame) - min_h;
-    min_w = CGRectGetWidth(self.frame);
+    min_y = min_view_h - min_h;
+    min_w = min_view_w;
+    
+    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
+    {
+        min_w = 250 * BAKit_ScaleXAndWidth;
+    }
+
     self.bgView.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
-    min_y = kBAKit_PickerViewToolBar_H;
-    min_h = kBAKit_PickerView_H;
-    self.pickView.frame = CGRectMake(min_x, min_y, min_w, min_h);
-    self.datePicker.frame = self.pickView.frame;
+    CGFloat min_bgView_w = CGRectGetWidth(self.bgView.frame);
+    CGFloat min_bgView_h = CGRectGetHeight(self.bgView.frame);
     
-    min_y = 0;
-    min_h = kBAKit_PickerViewToolBar_H;
-    self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
+    {
+        self.bgView.center = self.center;
+    }
     
-    min_x = 20;
-    min_w = 40;
-    min_h = kBAKit_PickerViewToolBar_H;
-    self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeNormal)
+    {
+        min_y = kBAKit_PickerViewToolBar_H;
+        min_h = kBAKit_PickerView_H;
+        self.pickView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        self.datePicker.frame = self.pickView.frame;
+        
+        min_y = 0;
+        min_h = kBAKit_PickerViewToolBar_H;
+        self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        
+        min_x = 20;
+        min_w = 40;
+        min_h = kBAKit_PickerViewToolBar_H;
+        self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        
+        if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter && CGRectGetWidth(self.frame) > CGRectGetHeight(self.frame))
+        {
+            min_x = min_bgView_h - 40 - 20;
+        }
+        else
+        {
+            min_x = min_bgView_w - 40 - 20;
+        }
+        self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    }
+    else if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeBottom)
+    {
+        min_y = 0;
+        min_w = min_bgView_w;
+        min_h = min_bgView_h - kBAKit_PickerViewToolBar_H;
+        min_x = 0;
+        self.pickView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        self.datePicker.frame = self.pickView.frame;
+
+        min_y = CGRectGetMaxY(self.pickView.frame);
+        min_h = kBAKit_PickerViewToolBar_H;
+        self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        
+        min_y = 0;
+        min_x = 20;
+        min_w = 40;
+        min_h = kBAKit_PickerViewToolBar_H;
+        self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        
+        if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter && min_view_w > min_view_h)
+        {
+            min_x = min_bgView_h - 40 - 20;
+        }
+        else
+        {
+            min_x = min_bgView_w - 40 - 20;
+        }
+        self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    }
     
-    min_x = CGRectGetWidth(self.frame) - 40 - 20;
-    self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
+    {
+        [self.bgView ba_view_setBAViewRectCornerType:BAViewRectCornerTypeAllCorners viewCornerRadius:10];
+    }
 }
 
 #pragma mark - UIPickerViewDelegate UIPickerViewDataSource
@@ -470,6 +537,21 @@
         
         self.resultString = [NSString stringWithFormat:@"%@年，第 %@ 周", yearString, self.defaultWeekString];
     }
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel* pickerLabel = (UILabel*)view;
+    if (!pickerLabel){
+        pickerLabel = [[UILabel alloc] init];
+        pickerLabel.adjustsFontSizeToFitWidth = YES;
+        pickerLabel.textAlignment = NSTextAlignmentCenter;
+        pickerLabel.backgroundColor = [UIColor clearColor];
+        pickerLabel.font = self.ba_pickViewFont;
+        pickerLabel.textColor = self.ba_pickViewTextColor;
+    }
+    pickerLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    return pickerLabel;
 }
 
 #pragma mark - custom method
@@ -1245,6 +1327,16 @@
 - (void)setAnimationType:(BAKit_PickerViewAnimationType)animationType
 {
     _animationType = animationType;
+}
+
+- (void)setBa_pickViewFont:(UIFont *)ba_pickViewFont
+{
+    _ba_pickViewFont = ba_pickViewFont;
+}
+
+- (void)setBa_pickViewTextColor:(UIColor *)ba_pickViewTextColor
+{
+    _ba_pickViewTextColor = ba_pickViewTextColor;
 }
 
 @end

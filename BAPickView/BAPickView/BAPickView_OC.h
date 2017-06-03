@@ -64,14 +64,26 @@
 #import "BAKit_PickerView.h"
 #import "BAPickView_Config.h"
 #import "NSDate+BAKit.h"
+#import "UIView+BARectCorner.h"
+#import "NSDateFormatter+BAKit.h"
+#import "UIView+BAAnimation.h"
 
 /*!
  *********************************************************************************
  ************************************ 更新说明 ************************************
  *********************************************************************************
  
+ 欢迎使用 BAHome 系列开源代码 ！
+ 如有更多需求，请前往：https://github.com/BAHome
+ 
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
+ 
+ 最新更新时间：2017-06-03 【倒叙】 <br>
+ 最新Version：【Version：1.0.3】 <br>
+ 更新内容： <br>
+ 1.0.3.1、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示 <br>
+ 1.0.3.2、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改 <br>
  
  最新更新时间：2017-05-27 【倒叙】 <br>
  最新Version：【Version：1.0.2】 <br>
@@ -96,6 +108,5 @@
  1.0.0.7、理论完全兼容现有所有 iOS 系统版本  <br>
 
 */
-
 
 #endif /* BAPickView_OC_h */

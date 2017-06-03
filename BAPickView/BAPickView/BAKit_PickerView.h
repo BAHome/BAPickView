@@ -128,6 +128,30 @@ typedef NS_ENUM(NSUInteger, BAKit_PickerViewAnimationType) {
 };
 
 /**
+ 设置取消和确定按钮相对pickerView的位置
+ 
+ - BAKit_PickerViewPositionTypeNormal: 默认PickerView在屏幕的底部
+ - BAKit_PickerViewPositionTypeBottom: 设置pickerView在屏幕的中心
+ 
+ */
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewPositionType) {
+    BAKit_PickerViewPositionTypeNormal = 0,
+    BAKit_PickerViewPositionTypeCenter,
+};
+
+/**
+ 设置取消和确定按钮相对pickerView的位置
+ 
+ - BAKit_PickerViewButtonPositionTypeNormal: 默认“取消”和“确定”button在pickerView的顶部
+ - BAKit_PickerViewButtonPositionTypeBottom: 设置“取消”和“确定”button在pickerView的底部
+ 
+ */
+typedef NS_ENUM(NSUInteger, BAKit_PickerViewButtonPositionType) {
+    BAKit_PickerViewButtonPositionTypeNormal = 0,
+    BAKit_PickerViewButtonPositionTypeBottom,
+};
+
+/**
  城市选择器的返回值
 
  @param model BAKit_CityModel
@@ -161,6 +185,8 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property(nonatomic, assign) BAKit_PickerViewType pickerViewType;
 @property(nonatomic, assign) BAKit_PickerViewDateType dateType;
 @property(nonatomic, assign) BAKit_PickerViewDateMode dateMode;
+@property(nonatomic, assign) BAKit_PickerViewButtonPositionType buttonPositionType;
+@property(nonatomic, assign) BAKit_PickerViewPositionType pickerViewPositionType;
 
 /**
  自定义 NSDateFormatter，返回的日期格式，注意：如果同时设置 BAKit_PickerViewDateType 和 customDateFormatter，以 customDateFormatter 为主
@@ -191,6 +217,16 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  sureButton title颜色，默认：黑色
  */
 @property(nonatomic, strong) UIColor *buttonTitleColor_sure;
+
+/**
+ pickView 字体，默认：[UIFont boldSystemFontOfSize:17]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIFont *ba_pickViewFont;
+
+/**
+ pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
 
 
 #pragma mark - custom method

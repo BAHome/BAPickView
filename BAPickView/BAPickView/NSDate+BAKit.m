@@ -998,7 +998,7 @@ typedef NS_ENUM(NSUInteger, LunarCalendarDateComponent) {
 }
 
 static int const StartYear = 2001;
-static int const EndYear = 2050;
+//static int const EndYear = 2050;
 static int64_t gLunarHolDay[]=
 {
     
