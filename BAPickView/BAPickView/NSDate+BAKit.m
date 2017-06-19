@@ -835,7 +835,24 @@
     }
     return maxNum;
 }
-
+#pragma mark - 获取该月有多少天
++ (NSInteger)ba_dateGetDayNumbersOfYear:(NSDate *)date
+{
+  
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
+    NSUInteger numberOfDaysInMonth = range.length;
+    return numberOfDaysInMonth;
+}
+//+ (NSInteger)ba_dateGetMonthNumbersOfYear:(NSInteger)year{
+//    NSString *dateString = [NSString stringWithFormat:@"%ld-12-31",(long)year];
+//   NSDateFormatter *format = [NSDateFormatter ba_dateFormatterWithFormatString:@"yyyy-MM-dd"];
+//   NSDate *lastDay = [format dateFromString:dateString];
+//    
+//   NSCalendar *calendar = [NSCalendar currentCalendar];
+//   NSRange range = [calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitYear forDate:lastDay];
+//    return range.length;
+//}
 @end
 
 typedef NS_ENUM(NSUInteger, LunarCalendarDateComponent) {

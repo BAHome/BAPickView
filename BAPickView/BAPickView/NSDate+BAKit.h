@@ -243,7 +243,7 @@
 + (NSString *)ba_dateGetWeekInyearOrMouth:(BOOL)inYear WithDate:(NSDate *)date;
 // 2015、2009、004、1998 这四年是 53 周（目前已知），其余均是52周
 + (NSInteger)ba_dateGetWeekNumbersOfYear:(NSInteger)year;
-
++ (NSInteger)ba_dateGetDayNumbersOfYear:(NSDate *)date;
 @end
 
 /**

@@ -1,18 +1,17 @@
 //
 //  UIView+BARectCorner.m
-//  BAButton
+//  BAKit
 //
-//  Created by boai on 2017/5/19.
-//  Copyright © 2017年 boai. All rights reserved.
+//  Created by boai on 2017/6/6.
+//  Copyright © 2017年 BAHome. All rights reserved.
 //
 
 #import "UIView+BARectCorner.h"
-#import <objc/runtime.h>
-#import "BAPickView_Config.h"
+#import "BAKit_ConfigurationDefine.h"
 
 @implementation UIView (BARectCorner)
 
-- (void)ba_view_setBAViewRectCornerType:(BAViewRectCornerType)type viewCornerRadius:(CGFloat)viewCornerRadius
+- (void)ba_view_setViewRectCornerType:(BAKit_ViewRectCornerType)type viewCornerRadius:(CGFloat)viewCornerRadius
 {
     self.viewCornerRadius = viewCornerRadius;
     self.viewRectCornerType = type;
@@ -32,57 +31,57 @@
     
     switch (self.viewRectCornerType)
     {
-        case BAViewRectCornerTypeBottomLeft:
+        case BAKit_ViewRectCornerTypeBottomLeft:
         {
             corners = UIRectCornerBottomLeft;
         }
             break;
-        case BAViewRectCornerTypeBottomRight:
+        case BAKit_ViewRectCornerTypeBottomRight:
         {
             corners = UIRectCornerBottomRight;
         }
             break;
-        case BAViewRectCornerTypeTopLeft:
+        case BAKit_ViewRectCornerTypeTopLeft:
         {
             corners = UIRectCornerTopLeft;
         }
             break;
-        case BAViewRectCornerTypeTopRight:
+        case BAKit_ViewRectCornerTypeTopRight:
         {
             corners = UIRectCornerTopRight;
         }
             break;
-        case BAViewRectCornerTypeBottomLeftAndBottomRight:
+        case BAKit_ViewRectCornerTypeBottomLeftAndBottomRight:
         {
             corners = UIRectCornerBottomLeft | UIRectCornerBottomRight;
         }
             break;
-        case BAViewRectCornerTypeTopLeftAndTopRight:
+        case BAKit_ViewRectCornerTypeTopLeftAndTopRight:
         {
             corners = UIRectCornerTopLeft | UIRectCornerTopRight;
         }
             break;
-        case BAViewRectCornerTypeBottomLeftAndTopLeft:
+        case BAKit_ViewRectCornerTypeBottomLeftAndTopLeft:
         {
             corners = UIRectCornerBottomLeft | UIRectCornerTopLeft;
         }
             break;
-        case BAViewRectCornerTypeBottomRightAndTopRight:
+        case BAKit_ViewRectCornerTypeBottomRightAndTopRight:
         {
             corners = UIRectCornerBottomRight | UIRectCornerTopRight;
         }
             break;
-        case BAViewRectCornerTypeBottomRightAndTopRightAndTopLeft:
+        case BAKit_ViewRectCornerTypeBottomRightAndTopRightAndTopLeft:
         {
             corners = UIRectCornerBottomRight | UIRectCornerTopRight | UIRectCornerTopLeft;
         }
             break;
-        case BAViewRectCornerTypeBottomRightAndTopRightAndBottomLeft:
+        case BAKit_ViewRectCornerTypeBottomRightAndTopRightAndBottomLeft:
         {
             corners = UIRectCornerBottomRight | UIRectCornerTopRight | UIRectCornerBottomLeft;
         }
             break;
-        case BAViewRectCornerTypeAllCorners:
+        case BAKit_ViewRectCornerTypeAllCorners:
         {
             corners = UIRectCornerAllCorners;
         }
@@ -103,13 +102,13 @@
 
 #pragma mark - setter / getter
 
-- (void)setViewRectCornerType:(BAViewRectCornerType)viewRectCornerType
+- (void)setViewRectCornerType:(BAKit_ViewRectCornerType)viewRectCornerType
 {
     BAKit_Objc_setObj(@selector(viewRectCornerType), @(viewRectCornerType));
     [self setupButtonCornerType];
 }
 
-- (BAViewRectCornerType)viewRectCornerType
+- (BAKit_ViewRectCornerType)viewRectCornerType
 {
     return [BAKit_Objc_getObj integerValue];
 }

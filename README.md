@@ -16,6 +16,11 @@
 * 8、新增各种展示、消失动画，如：缩放、上下左右展示、消失动画等
 * 9、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示 <br>
 * 10、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改 <br>
+* 11、新增 各种自定义 datePicker：年、年月、年月日、时间等等，你能想到的效果都有 <br>
+* 12、可以自定义 datePicker 的字体颜色、字体、字体大小、背景颜色等 <br>
+* 13、可以自定义 datePicker 的最大、最小年限 <br>
+* 14、可以自定义 datePicker 的 toolBar 位置、字体、背景颜色等
+
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
@@ -35,7 +40,7 @@
  OC 版 ：[https://github.com/BAHome/BAPickView](https://github.com/BAHome/BAPickView)<br>
 
 ## 4、BAPickView 的类结构及 demo 示例
-![BAPickView1.png](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView1.png)
+![BAPickView.png](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.png)
 
 ### BAPickView_OC.h
 ```
@@ -43,11 +48,14 @@
 #define BAPickView_OC_h
 
 #import "BAKit_PickerView.h"
-#import "BAPickView_Config.h"
+#import "BAKit_DatePicker.h"
+#import "BAKit_ConfigurationDefine.h"
 #import "NSDate+BAKit.h"
 #import "UIView+BARectCorner.h"
 #import "NSDateFormatter+BAKit.h"
 #import "UIView+BAAnimation.h"
+
+#import "BAKit_PickerViewConfig.h"
 
 /*!
  *********************************************************************************
@@ -60,6 +68,14 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 最新更新时间：2017-06-19 【倒叙】 <br>
+ 最新Version：【Version：1.0.4】 <br>
+ 更新内容： <br>
+ 1.0.4.1、新增 各种自定义 datePicker：年、年月、年月日、时间等等，你能想到的效果都有 <br>
+ 1.0.4.2、可以自定义 datePicker 的字体颜色、字体、字体大小、背景颜色等 <br>
+ 1.0.4.3、可以自定义 datePicker 的最大、最小年限 <br>
+ 1.0.4.4、可以自定义 datePicker 的 toolBar 位置、字体、背景颜色等
+
  最新更新时间：2017-06-03 【倒叙】 <br>
  最新Version：【Version：1.0.3】 <br>
  更新内容： <br>
@@ -97,96 +113,9 @@
 ```
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CLLocation.h>
+#import "BAKit_PickerViewConfig.h"
 
 @class BAKit_CityModel;
-
-/**
- 选择器样式，默认为：BAKit_PickerViewTypeCity
-
- - BAKit_PickerViewTypeCity: 城市选择器
- - BAKit_PickerViewTypeArray: 普通数组自定义数据
- - BAKit_PickerViewTypeDate: 日期选择器：年月日，可以完全自定义 NSDateFormatter
- - BAKit_PickerViewTypeDateYM: 日期选择器：年月，可以完全自定义 NSDateFormatter
- - BAKit_PickerViewTypeDateWeek: 日期选择器：年周，如：2017年，第21周
-
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewType) {
-    BAKit_PickerViewTypeCity = 0,
-    BAKit_PickerViewTypeArray,
-    BAKit_PickerViewTypeDate,
-    BAKit_PickerViewTypeDateYM,
-    BAKit_PickerViewTypeDateWeek
-};
-
-/**
- 日期选择器样式下返回的数据格式，默认为：BAKit_PickerViewDateTypeYMD
-
- - BAKit_PickerViewDateTypeYY: 如：2017
- - BAKit_PickerViewDateTypeYM: 如：2017-03
- - BAKit_PickerViewDateTypeYMD: 如：20172017-03-01
- - BAKit_PickerViewDateTypeYMDHMS: 如：2017-03-01 18:20:12
- - BAKit_PickerViewDateTypeYMDEHMS: 如：2017-03-01，周二, 18:20:12
- - BAKit_PickerViewDateTypeHM: 如：18:20
- - BAKit_PickerViewDateTypeHMS: 如：18:20:12
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewDateType) {
-    BAKit_PickerViewDateTypeYY = 0,
-    BAKit_PickerViewDateTypeYM,
-    BAKit_PickerViewDateTypeYMD,
-    BAKit_PickerViewDateTypeYMDHMS,
-    BAKit_PickerViewDateTypeYMDEHMS,
-    BAKit_PickerViewDateTypeHM,
-    BAKit_PickerViewDateTypeHMS
-};
-
-/**
- 设置日期选择器的样式，具体的显示顺序取决于设备的本地化设置。默认为：BAKit_PickerViewDateModeDate
-
- - BAKit_PickerViewDateModeTime: 显示时、分、AM／PM标志(可选)
- - BAKit_PickerViewDateModeDate: 显示年、月、日
- - BAKit_PickerViewDateModeDateAndTime: 显示日期的月、日、星期，时间的时、分、AM／PM标志(可选)
- - BAKit_PickerViewDateModeCountDownTimer: 显示时、分。应用程序必须实现一个计数器（NSTimer对象），让倒计时中的时间不断减少。
- */
-typedef NS_ENUM(NSInteger, BAKit_PickerViewDateMode) {
-    BAKit_PickerViewDateModeTime,
-    /*! 选择此样式后，dateType 默认为：BAKit_PickerViewDateTypeYMD */
-    BAKit_PickerViewDateModeDate,
-    /*! 选择此样式后，dateType 默认为：ba_setupDateFormatterWithYMDEHMS */
-    BAKit_PickerViewDateModeDateAndTime,
-    BAKit_PickerViewDateModeCountDownTimer
-};
-
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewAnimationType) {
-    BAKit_PickerViewAnimationTypeScale = 0,
-    BAKit_PickerViewAnimationTypeTop,
-    BAKit_PickerViewAnimationTypeBottom,
-    BAKit_PickerViewAnimationTypeLeft,
-    BAKit_PickerViewAnimationTypeRight
-};
-
-/**
- 设置取消和确定按钮相对pickerView的位置
- 
- - BAKit_PickerViewPositionTypeNormal: 默认PickerView在屏幕的底部
- - BAKit_PickerViewPositionTypeBottom: 设置pickerView在屏幕的中心
- 
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewPositionType) {
-    BAKit_PickerViewPositionTypeNormal = 0,
-    BAKit_PickerViewPositionTypeCenter,
-};
-
-/**
- 设置取消和确定按钮相对pickerView的位置
- 
- - BAKit_PickerViewButtonPositionTypeNormal: 默认“取消”和“确定”button在pickerView的顶部
- - BAKit_PickerViewButtonPositionTypeBottom: 设置“取消”和“确定”button在pickerView的底部
- 
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewButtonPositionType) {
-    BAKit_PickerViewButtonPositionTypeNormal = 0,
-    BAKit_PickerViewButtonPositionTypeBottom,
-};
 
 /**
  城市选择器的返回值
@@ -238,22 +167,22 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 /**
  toolBar 背景颜色，默认：白色
  */
-@property(nonatomic, strong) UIColor *backgroundColor_toolBar;
+@property(nonatomic, strong) UIColor *ba_backgroundColor_toolBar;
 
 /**
  pickView 背景颜色，默认：白色
  */
-@property(nonatomic, strong) UIColor *backgroundColor_pickView;
+@property(nonatomic, strong) UIColor *ba_backgroundColor_pickView;
 
 /**
  cancleButton title颜色，默认：黑色
  */
-@property(nonatomic, strong) UIColor *buttonTitleColor_cancle;
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_cancle;
 
 /**
  sureButton title颜色，默认：黑色
  */
-@property(nonatomic, strong) UIColor *buttonTitleColor_sure;
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
 
 /**
  pickView 字体，默认：[UIFont boldSystemFontOfSize:17]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
@@ -331,6 +260,94 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  经纬度
  */
 @property (nonatomic, assign) CLLocationCoordinate2D coordie;
+
+@end
+
+```
+
+### BAKit_DatePicker.h
+```
+#import <UIKit/UIKit.h>
+#import "BAKit_PickerViewConfig.h"
+
+@interface BAKit_DatePicker : UIView
+
+/**
+ 日期选择器的最大年限，默认为：2050
+ */
+@property(assign, nonatomic) NSInteger ba_maxYear;
+
+/**
+ 日期选择器的最小年限，默认为：1900
+ */
+@property(assign, nonatomic) NSInteger ba_minYear;
+
+/**
+ 日期选择器默认选中的日期，默认为：日期选择器弹出时的日期
+ */
+@property(strong, nonatomic) NSDate *ba_defautDate;
+
+/**
+ 日期选择器 添加弹出动画，默认为：如果不设置该属性将不会显示动画
+ */
+@property(assign, nonatomic) BAKit_PickerViewAnimationType animationType;
+@property(nonatomic, assign) BAKit_PickerViewButtonPositionType buttonPositionType;
+@property(nonatomic, assign) BAKit_PickerViewPositionType pickerViewPositionType;
+
+/*! 是否开启边缘触摸隐藏 默认：YES */
+@property (nonatomic, assign) BOOL isTouchEdgeHide;
+
+/**
+ toolBar 背景颜色，默认：白色
+ */
+@property(nonatomic, strong) UIColor *ba_backgroundColor_toolBar;
+
+/**
+ pickView 背景颜色，默认：白色
+ */
+@property(nonatomic, strong) UIColor *ba_backgroundColor_pickView;
+
+/**
+ cancleButton title颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_cancle;
+
+/**
+ sureButton title颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
+
+/**
+ pickView 字体，默认：非选中状态 [UIFont systemFontOfSize:10]，选中状态比非选中状态大5，即 15
+ */
+@property(nonatomic, strong) UIFont *ba_pickViewFont;
+
+/**
+ pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
+
+
+/**
+ 快速创建 BAKit_DatePicker
+
+ @param pickerViewType pickerViewType
+ @param configuration configuration
+ @param block block
+ */
++ (void)ba_creatPickerViewWithType:(BAKit_CustomDatePickerDateType)pickerViewType
+                     configuration:(void (^)(BAKit_DatePicker *tempView))configuration
+                             block:(BAKit_PickerViewResultBlock)block;
+
+/**
+ 显示 pick
+ */
+- (void)ba_pickViewShow;
+
+/**
+ 隐藏 pick
+ */
+- (void)ba_pickViewHidden;
 
 @end
 ```
@@ -596,8 +613,8 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     [BAKit_PickerView ba_creatCustomPickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
         // 可以自由定制 toolBar 和 pickView 的背景颜色
-        tempView.backgroundColor_toolBar = [UIColor cyanColor];
-        tempView.backgroundColor_pickView = [UIColor greenColor];
+        tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
+        tempView.ba_backgroundColor_pickView = [UIColor greenColor];
         tempView.animationType = BAKit_PickerViewAnimationTypeTop;
         tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
         self.pickView = tempView;
@@ -615,13 +632,13 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
         
         // 可以自由定制 NSDateFormatter
         tempView.dateMode = BAKit_PickerViewDateModeDate;
-        tempView.dateType = BAKit_PickerViewDateTypeYMD;
+        tempView.dateType = BAKit_PickerViewDateTypeYMDHMS;
 //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //        formatter.dateFormat = @"yyyy年MM月dd日";
 //        tempView.customDateFormatter = formatter;
         // 可以自由定制按钮颜色
-        tempView.buttonTitleColor_sure = [UIColor redColor];
-        tempView.buttonTitleColor_cancle = [UIColor greenColor];
+        tempView.ba_buttonTitleColor_sure = [UIColor redColor];
+        tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
         tempView.animationType = BAKit_PickerViewAnimationTypeLeft;
 
         self.pickView = tempView;
@@ -661,6 +678,37 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     }];
 }
 
+// 示例2：自定义日期选择器
+[BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
+            // 自定义：最小年份
+            tempView.ba_minYear = BAKit_Current_Date.year;
+            // 自定义：最大年份
+            tempView.ba_maxYear = tempView.ba_minYear + 5;
+            // 自定义：动画样式
+            tempView.animationType = BAKit_PickerViewAnimationTypeScale;
+            // 自定义：pickView 位置
+            tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+            // 自定义：toolBar 位置
+            tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
+            // 自定义：pickView 文字颜色
+            tempView.ba_pickViewTextColor = [UIColor redColor];
+            // 自定义：pickView 文字字体
+            tempView.ba_pickViewFont = [UIFont systemFontOfSize:13];
+            
+            // 可以自由定制按钮颜色
+            tempView.ba_buttonTitleColor_sure = [UIColor redColor];
+            tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
+            
+            // 可以自由定制 toolBar 和 pickView 的背景颜色
+            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
+            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
+            
+        } block:^(NSString *resultString) {
+            
+            BAKit_ShowAlertWithMsg_ios8(resultString);
+        }];
+
+
 其他示例可下载demo查看源码！
 ```
 
@@ -668,6 +716,14 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
+ 最新更新时间：2017-06-19 【倒叙】 <br>
+ 最新Version：【Version：1.0.4】 <br>
+ 更新内容： <br>
+ 1.0.4.1、新增 各种自定义 datePicker：年、年月、年月日、时间等等，你能想到的效果都有 <br>
+ 1.0.4.2、可以自定义 datePicker 的字体颜色、字体、字体大小、背景颜色等 <br>
+ 1.0.4.3、可以自定义 datePicker 的最大、最小年限 <br>
+ 1.0.4.4、可以自定义 datePicker 的 toolBar 位置、字体、背景颜色等
+
  最新更新时间：2017-06-03 【倒叙】 <br>
  最新Version：【Version：1.0.3】 <br>
  更新内容： <br>

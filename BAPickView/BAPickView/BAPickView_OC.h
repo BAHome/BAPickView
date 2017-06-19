@@ -62,11 +62,14 @@
 #define BAPickView_OC_h
 
 #import "BAKit_PickerView.h"
-#import "BAPickView_Config.h"
+#import "BAKit_DatePicker.h"
+#import "BAKit_ConfigurationDefine.h"
 #import "NSDate+BAKit.h"
 #import "UIView+BARectCorner.h"
 #import "NSDateFormatter+BAKit.h"
 #import "UIView+BAAnimation.h"
+
+#import "BAKit_PickerViewConfig.h"
 
 /*!
  *********************************************************************************
@@ -79,6 +82,14 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 最新更新时间：2017-06-19 【倒叙】 <br>
+ 最新Version：【Version：1.0.4】 <br>
+ 更新内容： <br>
+ 1.0.4.1、新增 各种自定义 datePicker：年、年月、年月日、时间等等，你能想到的效果都有 <br>
+ 1.0.4.2、可以自定义 datePicker 的字体颜色、字体、字体大小、背景颜色等 <br>
+ 1.0.4.3、可以自定义 datePicker 的最大、最小年限 <br>
+ 1.0.4.4、可以自定义 datePicker 的 toolBar 位置、字体、背景颜色等
+
  最新更新时间：2017-06-03 【倒叙】 <br>
  最新Version：【Version：1.0.3】 <br>
  更新内容： <br>

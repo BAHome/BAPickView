@@ -60,96 +60,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CLLocation.h>
+#import "BAKit_PickerViewConfig.h"
 
 @class BAKit_CityModel;
-
-/**
- 选择器样式，默认为：BAKit_PickerViewTypeCity
-
- - BAKit_PickerViewTypeCity: 城市选择器
- - BAKit_PickerViewTypeArray: 普通数组自定义数据
- - BAKit_PickerViewTypeDate: 日期选择器：年月日，可以完全自定义 NSDateFormatter
- - BAKit_PickerViewTypeDateYM: 日期选择器：年月，可以完全自定义 NSDateFormatter
- - BAKit_PickerViewTypeDateWeek: 日期选择器：年周，如：2017年，第21周
-
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewType) {
-    BAKit_PickerViewTypeCity = 0,
-    BAKit_PickerViewTypeArray,
-    BAKit_PickerViewTypeDate,
-    BAKit_PickerViewTypeDateYM,
-    BAKit_PickerViewTypeDateWeek
-};
-
-/**
- 日期选择器样式下返回的数据格式，默认为：BAKit_PickerViewDateTypeYMD
-
- - BAKit_PickerViewDateTypeYY: 如：2017
- - BAKit_PickerViewDateTypeYM: 如：2017-03
- - BAKit_PickerViewDateTypeYMD: 如：20172017-03-01
- - BAKit_PickerViewDateTypeYMDHMS: 如：2017-03-01 18:20:12
- - BAKit_PickerViewDateTypeYMDEHMS: 如：2017-03-01，周二, 18:20:12
- - BAKit_PickerViewDateTypeHM: 如：18:20
- - BAKit_PickerViewDateTypeHMS: 如：18:20:12
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewDateType) {
-    BAKit_PickerViewDateTypeYY = 0,
-    BAKit_PickerViewDateTypeYM,
-    BAKit_PickerViewDateTypeYMD,
-    BAKit_PickerViewDateTypeYMDHMS,
-    BAKit_PickerViewDateTypeYMDEHMS,
-    BAKit_PickerViewDateTypeHM,
-    BAKit_PickerViewDateTypeHMS
-};
-
-/**
- 设置日期选择器的样式，具体的显示顺序取决于设备的本地化设置。默认为：BAKit_PickerViewDateModeDate
-
- - BAKit_PickerViewDateModeTime: 显示时、分、AM／PM标志(可选)
- - BAKit_PickerViewDateModeDate: 显示年、月、日
- - BAKit_PickerViewDateModeDateAndTime: 显示日期的月、日、星期，时间的时、分、AM／PM标志(可选)
- - BAKit_PickerViewDateModeCountDownTimer: 显示时、分。应用程序必须实现一个计数器（NSTimer对象），让倒计时中的时间不断减少。
- */
-typedef NS_ENUM(NSInteger, BAKit_PickerViewDateMode) {
-    BAKit_PickerViewDateModeTime,
-    /*! 选择此样式后，dateType 默认为：BAKit_PickerViewDateTypeYMD */
-    BAKit_PickerViewDateModeDate,
-    /*! 选择此样式后，dateType 默认为：ba_setupDateFormatterWithYMDEHMS */
-    BAKit_PickerViewDateModeDateAndTime,
-    BAKit_PickerViewDateModeCountDownTimer
-};
-
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewAnimationType) {
-    BAKit_PickerViewAnimationTypeScale = 0,
-    BAKit_PickerViewAnimationTypeTop,
-    BAKit_PickerViewAnimationTypeBottom,
-    BAKit_PickerViewAnimationTypeLeft,
-    BAKit_PickerViewAnimationTypeRight
-};
-
-/**
- 设置取消和确定按钮相对pickerView的位置
- 
- - BAKit_PickerViewPositionTypeNormal: 默认PickerView在屏幕的底部
- - BAKit_PickerViewPositionTypeBottom: 设置pickerView在屏幕的中心
- 
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewPositionType) {
-    BAKit_PickerViewPositionTypeNormal = 0,
-    BAKit_PickerViewPositionTypeCenter,
-};
-
-/**
- 设置取消和确定按钮相对pickerView的位置
- 
- - BAKit_PickerViewButtonPositionTypeNormal: 默认“取消”和“确定”button在pickerView的顶部
- - BAKit_PickerViewButtonPositionTypeBottom: 设置“取消”和“确定”button在pickerView的底部
- 
- */
-typedef NS_ENUM(NSUInteger, BAKit_PickerViewButtonPositionType) {
-    BAKit_PickerViewButtonPositionTypeNormal = 0,
-    BAKit_PickerViewButtonPositionTypeBottom,
-};
 
 /**
  城市选择器的返回值
@@ -201,22 +114,22 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 /**
  toolBar 背景颜色，默认：白色
  */
-@property(nonatomic, strong) UIColor *backgroundColor_toolBar;
+@property(nonatomic, strong) UIColor *ba_backgroundColor_toolBar;
 
 /**
  pickView 背景颜色，默认：白色
  */
-@property(nonatomic, strong) UIColor *backgroundColor_pickView;
+@property(nonatomic, strong) UIColor *ba_backgroundColor_pickView;
 
 /**
  cancleButton title颜色，默认：黑色
  */
-@property(nonatomic, strong) UIColor *buttonTitleColor_cancle;
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_cancle;
 
 /**
  sureButton title颜色，默认：黑色
  */
-@property(nonatomic, strong) UIColor *buttonTitleColor_sure;
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
 
 /**
  pickView 字体，默认：[UIFont boldSystemFontOfSize:17]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改

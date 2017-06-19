@@ -1,9 +1,9 @@
 //
 //  UIView+BAAnimation.m
-//  BAAnimation
+//  BAKit
 //
-//  Created by 博爱 on 2016/12/19.
-//  Copyright © 2016年 DS-Team. All rights reserved.
+//  Created by boai on 2017/6/6.
+//  Copyright © 2017年 BAHome. All rights reserved.
 //
 
 #import "UIView+BAAnimation.h"

@@ -60,7 +60,7 @@
 
 #import "BAKit_PickerView.h"
 
-#import "BAPickView_Config.h"
+#import "BAKit_ConfigurationDefine.h"
 #import "NSDateFormatter+BAKit.h"
 #import "NSDate+BAKit.h"
 #import "UIView+BAAnimation.h"
@@ -129,10 +129,20 @@
 
 @property(nonatomic, strong) NSMutableArray *yearArray;
 @property(nonatomic, strong) NSMutableArray *mounthArray;
+@property(nonatomic, strong) NSMutableArray *dayArray;
+@property(nonatomic, strong) NSMutableArray *hoursArray;
+@property(nonatomic, strong) NSMutableArray *minutesArray;
+@property(nonatomic, strong) NSMutableArray *secondsArray;
+
 @property(nonatomic, strong) NSMutableArray *weekArray;
 
 @property(nonatomic, strong) NSString *defaultMounthString;
 @property(nonatomic, strong) NSString *defaultYearString;
+@property(nonatomic, strong) NSString *defaultDayString;
+@property(nonatomic, strong) NSString *defaultHoursString;
+@property(nonatomic, strong) NSString *defaultMinutesString;
+@property(nonatomic, strong) NSString *defaultSecondsString;
+
 @property(nonatomic, strong) NSString *defaultWeekString;
 
 @property (nonatomic, strong) UIWindow *alertWindow;
@@ -166,6 +176,7 @@
     if (self = [super init])
     {
         [self setupUI];
+        
     }
     return self;
 }
@@ -203,12 +214,12 @@
                              block:(BAKit_PickerViewResultBlock)block
 {
     BAKit_PickerView *pickerView = [[BAKit_PickerView alloc] init];
-    pickerView.pickerViewType = pickerViewType;
     
     if (configuration)
     {
         configuration(pickerView);
     }
+    pickerView.pickerViewType = pickerViewType;
     [pickerView ba_pickViewShow];
     pickerView.resultBlock = block;
 }
@@ -232,8 +243,10 @@
     self.datePicker.backgroundColor = BAKit_Color_White;
     self.ba_pickViewFont = [UIFont boldSystemFontOfSize:17];
     self.ba_pickViewTextColor = [UIColor blackColor];
+    self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
+    self.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 #pragma mark - 通知处理
@@ -275,6 +288,7 @@
     if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
     {
         self.bgView.center = self.center;
+        [self.bgView ba_view_setViewRectCornerType:BAKit_ViewRectCornerTypeAllCorners viewCornerRadius:10];
     }
     
     if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeNormal)
@@ -292,15 +306,8 @@
         min_w = 40;
         min_h = kBAKit_PickerViewToolBar_H;
         self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        
-        if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter && CGRectGetWidth(self.frame) > CGRectGetHeight(self.frame))
-        {
-            min_x = min_bgView_h - 40 - 20;
-        }
-        else
-        {
-            min_x = min_bgView_w - 40 - 20;
-        }
+        min_x = min_bgView_w - 40 - 20;
+
         self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
     }
     else if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeBottom)
@@ -322,21 +329,11 @@
         min_h = kBAKit_PickerViewToolBar_H;
         self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
         
-        if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter && min_view_w > min_view_h)
-        {
-            min_x = min_bgView_h - 40 - 20;
-        }
-        else
-        {
-            min_x = min_bgView_w - 40 - 20;
-        }
+
+        min_x = min_bgView_w - 40 - 20;
         self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
     }
-    
-    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
-    {
-        [self.bgView ba_view_setBAViewRectCornerType:BAViewRectCornerTypeAllCorners viewCornerRadius:10];
-    }
+
 }
 
 #pragma mark - UIPickerViewDelegate UIPickerViewDataSource
@@ -350,7 +347,16 @@
             return 1;
             break;
         case BAKit_PickerViewTypeDate:
-            return 0;
+        {
+            if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
+                return 6;
+            }
+            else
+            {
+              return 0;
+            }
+        }
+             return 0;
             break;
         case BAKit_PickerViewTypeDateWeek:
         case BAKit_PickerViewTypeDateYM:
@@ -358,6 +364,7 @@
             break;
         
         default:
+            
             break;
     }
 }
@@ -379,6 +386,30 @@
             
         case BAKit_PickerViewTypeDate:
         {
+            if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
+                switch (component) {
+                    case 0:
+                        return self.yearArray.count;
+                        break;
+                    case 1:
+                        return self.mounthArray.count;
+                        break;
+                    case 2:
+                        return self.dayArray.count;
+                        break;
+                    case 3:
+                        return self.hoursArray.count;
+                        break;
+                    case 4:
+                        return self.minutesArray.count;
+                        break;
+                    case 5:
+                        return self.secondsArray.count;
+                        break;
+                    default:
+                        break;
+                }
+            }
             return 0;
         }
             break;
@@ -392,6 +423,7 @@
             return (component == 0) ? self.yearArray.count : self.weekArray.count;
         }
             break;
+        
         default:
             break;
     }
@@ -409,7 +441,32 @@
     }
     else if (self.pickerViewType == BAKit_PickerViewTypeDate)
     {
-        
+        if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
+            
+            switch (component) {
+                case 0:
+                    return self.yearArray[row];
+                    break;
+                case 1:
+                    return self.mounthArray[row];
+                    break;
+                case 2:
+                    return self.dayArray[row];
+                    break;
+                case 3:
+                    return self.hoursArray[row];
+                    break;
+                case 4:
+                    return self.minutesArray[row];
+                    break;
+                case 5:
+                    return self.secondsArray[row];
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
     else if (self.pickerViewType == BAKit_PickerViewTypeDateYM)
     {
@@ -421,7 +478,11 @@
     }
     return nil;
 }
-
+- (nullable UIView *)viewForRow:(NSInteger)row forComponent:(NSInteger)component{
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor redColor];
+    return view;
+}
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (self.pickerViewType == BAKit_PickerViewTypeCity)
@@ -471,6 +532,50 @@
     }
     else if (self.pickerViewType == BAKit_PickerViewTypeDate)
     {
+        if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
+            switch (component) {
+                case 0:
+                {
+                    self.defaultYearString = self.yearArray[row];
+                    [self refreshDay];
+                    
+                }
+                    break;
+                case 1:
+                {
+                    self.defaultMounthString = self.mounthArray[row];
+                    [self refreshDay];
+                }
+                    break;
+                case 2:
+                {
+                    self.defaultDayString = self.dayArray[row];
+
+                }
+                    break;
+                case 3:
+                {
+                    self.defaultHoursString = self.hoursArray[row];
+
+                }
+                    break;
+                case 4:
+                {
+                    self.defaultMinutesString = self.minutesArray[row];
+
+                }
+                    break;
+                case 5:
+                {
+                    self.defaultSecondsString = self.secondsArray[row];
+
+                }
+                    break;
+                default:
+                    break;
+            }
+
+        }
         
     }
     else if (self.pickerViewType == BAKit_PickerViewTypeDateYM)
@@ -483,6 +588,7 @@
         {
             self.defaultMounthString = self.mounthArray[row];
         }
+        
         
         NSString *yearString = [self.defaultYearString substringToIndex:4];
         
@@ -516,11 +622,13 @@
             [self ba_refreshWeeksByYear:self.defaultYearString];
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:YES];
+            self.defaultWeekString = self.weekArray.firstObject;
         }
         else
         {
-            self.defaultMounthString = self.weekArray[row];
+            self.defaultWeekString = self.weekArray[row];
         }
+        
         NSString *yearString = [self.defaultYearString substringToIndex:4];
         
         NSString *weekString = @"";
@@ -535,7 +643,7 @@
             weekString = [self.defaultWeekString substringToIndex:self.defaultWeekString.length - 1];
         }
         
-        self.resultString = [NSString stringWithFormat:@"%@年，第 %@ 周", yearString, self.defaultWeekString];
+        self.resultString = [NSString stringWithFormat:@"%@年，%@", yearString, self.defaultWeekString];
     }
 }
 
@@ -565,13 +673,6 @@
 
 - (void)ba_pickViewHidden
 {
-//    self.isAnimating = YES;
-//    BAKit_WeakSelf
-//    [self.bgView ba_animation_scaleDismissWithDuration:0.6f ratio:1.0f finishBlock:^{
-//        BAKit_StrongSelf
-//        self.isAnimating = NO;
-//        [self ba_removeSelf];
-//    }];
     [self ba_pickViewHiddenAnimation];
 }
 
@@ -756,6 +857,9 @@
                  self.pickerViewType == BAKit_PickerViewTypeDateYM  ||
                  self.pickerViewType == BAKit_PickerViewTypeDateWeek )
         {
+            if (self.pickerViewType == BAKit_PickerViewTypeDate && self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
+                self.resultString = [NSString stringWithFormat:@"%@%@%@ %@%@%@",self.defaultYearString,self.defaultMounthString,self.defaultDayString,self.defaultHoursString,self.defaultMinutesString,self.defaultSecondsString];
+            }
             if (self.resultString.length > 0)
             {
                 if (self.resultBlock)
@@ -889,7 +993,30 @@
 {
     self.resultString = [self.formatter stringFromDate:sender.date];
 }
+-(void)refreshDay
+{
+    [self.dayArray removeAllObjects];
+    NSString *year = self.defaultYearString;
+    if ([self.defaultYearString containsString:@"年"]) {
+         year = [self.defaultYearString substringToIndex:self.defaultYearString.length - 1];
+    }
+    NSString *mounth = self.defaultMounthString;
+    if ([self.defaultMounthString containsString:@"月"]) {
+        mounth = [self.defaultMounthString substringToIndex:self.defaultMounthString.length - 1];
+    }
+    
+    NSString * dateStr = [NSString stringWithFormat:@"%@-%@",year,mounth];
+    NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYM];
+    NSDate * date = [formatter dateFromString:dateStr];
+    NSInteger count =  [self ba_totaldaysInMonth:date];
+    for (int i = 1; i < count + 1; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%02i日",i];
+        [_dayArray addObject:str];
+    }
+    [self.pickView reloadComponent:2];
 
+}
 #pragma mark 计算出当月有多少天
 - (NSInteger)ba_totaldaysInMonth:(NSDate *)date
 {
@@ -978,8 +1105,8 @@
         /*! 1、设置日期选择控件的地区 */
         [_datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
         /*! 英文 */
-        //        [_datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_SC"]];
-        
+//            [_datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_SC"]];
+         //[_datePicker setLocale:[NSLocale systemLocale]];
         /*! 2、设置DatePicker的日历。默认为当天。 */
         [_datePicker setCalendar:[NSCalendar currentCalendar]];
         
@@ -987,7 +1114,7 @@
         [_datePicker setTimeZone:[NSTimeZone defaultTimeZone]];
         
         /*! 4、设置DatePicker的日期。 */
-        [_datePicker setDate:BAKit_Current_Date];
+        //[_datePicker setDate:BAKit_Current_Date];
         
         /*! 5、设置DatePicker的允许的最小日期。 */
         //        NSDate *minDate = [[NSDate alloc]initWithTimeIntervalSince1970:NSTimeIntervalSince1970];
@@ -1008,8 +1135,14 @@
         comps.year = -30;
         
         NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-        _datePicker.minimumDate = [minDate ba_dateWithYMD];
-        _datePicker.maximumDate = [maxDate ba_dateWithYMD];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        
+        NSString *selfStr = [formatter stringFromDate:minDate];
+        NSString *maxStr = [formatter stringFromDate:maxDate];
+       
+        _datePicker.minimumDate = [formatter dateFromString:selfStr];
+        _datePicker.maximumDate = [formatter dateFromString:maxStr];
         
 //        /*! 7、显示年月日，名称根据本地设置，显示小时，分钟和AM/PM,这个的名称是根据本地设置的 */
 //        [_datePicker setDatePickerMode:UIDatePickerModeDate];
@@ -1142,6 +1275,62 @@
     return _mounthArray;
 }
 
+- (NSMutableArray *)dayArray
+{
+    if (!_dayArray)
+    {
+        _dayArray = @[].mutableCopy;
+        [self refreshDay];
+    }
+    
+    return _dayArray;
+}
+
+- (NSMutableArray *)hoursArray
+{
+    if (!_hoursArray)
+    {
+        _hoursArray = @[].mutableCopy;
+        
+        for (int i = 0; i < 24; i++)
+        {
+            NSString *str = [NSString stringWithFormat:@"%02i时",i];
+            [_hoursArray addObject:str];
+        }
+    }
+    return _hoursArray;
+}
+
+- (NSMutableArray *)minutesArray
+{
+    if (!_minutesArray)
+    {
+        _minutesArray = @[].mutableCopy;
+        
+        for (int i = 0; i < 60; i++)
+        {
+            NSString *str = [NSString stringWithFormat:@"%02i分",i];
+            [_minutesArray addObject:str];
+        }
+    }
+    return _minutesArray;
+}
+
+- (NSMutableArray *)secondsArray
+{
+    if (!_secondsArray)
+    {
+        _secondsArray = @[].mutableCopy;
+        
+        for (int i = 0; i < 60; i++)
+        {
+            NSString *str = [NSString stringWithFormat:@"%02i秒",i];
+            [_secondsArray addObject:str];
+        }
+    }
+    return _secondsArray;
+}
+
 - (NSMutableArray *)weekArray
 {
     if (!_weekArray)
@@ -1157,29 +1346,29 @@
     self.resultString = dataArray[0];
 }
 
-- (void)setBackgroundColor_toolBar:(UIColor *)backgroundColor_toolBar
+- (void)setBa_backgroundColor_toolBar:(UIColor *)ba_backgroundColor_toolBar
 {
-    _backgroundColor_toolBar = backgroundColor_toolBar;
-    self.toolBarView.backgroundColor = backgroundColor_toolBar;
+    _ba_backgroundColor_toolBar = ba_backgroundColor_toolBar;
+    self.toolBarView.backgroundColor = ba_backgroundColor_toolBar;
 }
 
-- (void)setBackgroundColor_pickView:(UIColor *)backgroundColor_pickView
+- (void)setBa_backgroundColor_pickView:(UIColor *)ba_backgroundColor_pickView
 {
-    _backgroundColor_pickView = backgroundColor_pickView;
-    self.pickView.backgroundColor = backgroundColor_pickView;
-    self.datePicker.backgroundColor = backgroundColor_pickView;
+    _ba_backgroundColor_pickView = ba_backgroundColor_pickView;
+    self.pickView.backgroundColor = ba_backgroundColor_pickView;
+    self.datePicker.backgroundColor = ba_backgroundColor_pickView;
 }
 
-- (void)setButtonTitleColor_cancle:(UIColor *)buttonTitleColor_cancle
+- (void)setBa_buttonTitleColor_cancle:(UIColor *)ba_buttonTitleColor_cancle
 {
-    _buttonTitleColor_cancle = buttonTitleColor_cancle;
-    [self.cancleButton setTitleColor:buttonTitleColor_cancle forState:UIControlStateNormal];
+    _ba_buttonTitleColor_cancle = ba_buttonTitleColor_cancle;
+    [self.cancleButton setTitleColor:ba_buttonTitleColor_cancle forState:UIControlStateNormal];
 }
 
-- (void)setButtonTitleColor_sure:(UIColor *)buttonTitleColor_sure
+- (void)setBa_buttonTitleColor_sure:(UIColor *)ba_buttonTitleColor_sure
 {
-    _buttonTitleColor_sure = buttonTitleColor_sure;
-    [self.sureButton setTitleColor:buttonTitleColor_sure forState:UIControlStateNormal];
+    _ba_buttonTitleColor_sure = ba_buttonTitleColor_sure;
+    [self.sureButton setTitleColor:ba_buttonTitleColor_sure forState:UIControlStateNormal];
 }
 
 - (void)setPickerViewType:(BAKit_PickerViewType)pickerViewType
@@ -1207,11 +1396,62 @@
             break;
         case BAKit_PickerViewTypeDate:
         {
-            if (self.pickView)
+            if (self.dateType == BAKit_PickerViewDateTypeYMDHMS)
             {
-                [self.pickView removeFromSuperview];
+                NSDate *nowDate = [NSDate date];
+                
+                self.defaultYearString = [NSString stringWithFormat:@"%04li年",(long)nowDate.year];
+                
+                
+                self.defaultMounthString = [NSString stringWithFormat:@"%02li月",(long)nowDate.month];
+                NSInteger mounthIndex =[self.mounthArray indexOfObject:self.defaultMounthString];
+                if (mounthIndex <self.mounthArray.count) {
+                    [self.pickView selectRow:[self.mounthArray indexOfObject:self.defaultMounthString] inComponent:1 animated:NO];
+                }
+                
+                self.defaultDayString = [NSString stringWithFormat:@"%02li日",(long)nowDate.day];
+                NSInteger dayIndex =[self.dayArray indexOfObject:self.defaultDayString];
+                if (dayIndex <self.dayArray.count) {
+                   [self.pickView selectRow:[self.dayArray indexOfObject:self.defaultDayString] inComponent:2 animated:NO];
+                }
+                
+                
+                self.defaultHoursString = [NSString stringWithFormat:@"%02li时",(long)nowDate.hour];
+                NSInteger hourIndex =[self.hoursArray indexOfObject:self.defaultHoursString];
+                if (hourIndex <self.hoursArray.count) {
+                     [self.pickView selectRow:[self.hoursArray indexOfObject:self.defaultHoursString] inComponent:3 animated:NO];
+                }
+               
+                
+                self.defaultMinutesString = [NSString stringWithFormat:@"%02li分",(long)nowDate.minute];
+                NSInteger minutesIndex =[self.minutesArray indexOfObject:self.defaultMinutesString];
+                if (minutesIndex <self.minutesArray.count) {
+                    [self.pickView selectRow:[self.minutesArray indexOfObject:self.defaultMinutesString] inComponent:4 animated:NO];
+                }
+                
+                
+                self.defaultSecondsString = [NSString stringWithFormat:@"%02li秒",(long)nowDate.second];
+                NSInteger secondsIndex =[self.secondsArray indexOfObject:self.defaultSecondsString];
+                
+                if (secondsIndex <self.secondsArray.count) {
+                   [self.pickView selectRow:[self.secondsArray indexOfObject:self.defaultSecondsString] inComponent:5 animated:NO];
+                }
+                
+                NSInteger yearIndex =[self.yearArray indexOfObject:self.defaultYearString];
+                if (yearIndex <self.yearArray.count) {
+                    [self.pickView selectRow:[self.yearArray indexOfObject:self.defaultYearString] inComponent:0 animated:NO];
+                }
+                [self.datePicker removeFromSuperview];
             }
-            [self.bgView addSubview:self.datePicker];
+            else
+            {
+                if (self.pickView)
+                {
+                    [self.pickView removeFromSuperview];
+                }
+                [self.bgView addSubview:self.datePicker];
+            }
+            
         }
             break;
         case BAKit_PickerViewTypeDateYM:
@@ -1234,7 +1474,6 @@
             [self setupDateYM];
         }
             break;
-            
         default:
             break;
     }
@@ -1338,6 +1577,7 @@
 {
     _ba_pickViewTextColor = ba_pickViewTextColor;
 }
+
 
 @end
 
