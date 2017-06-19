@@ -188,8 +188,8 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
             tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
             
             // 可以自由定制 toolBar 和 pickView 的背景颜色
-            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
-            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
+//            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
+//            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
             
         } block:^(NSString *resultString) {
             

@@ -105,6 +105,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 {
     // 默认配置
     self.isTouchEdgeHide = YES;
+    self.ba_backgroundColor_pickView = BAKit_Color_White;
+    self.ba_backgroundColor_toolBar = BAKit_Color_White;
     self.animationType = BAKit_PickerViewAnimationTypeScale;
     self.ba_pickViewFont = [UIFont systemFontOfSize:10];
     self.ba_pickViewTextColor = BAKit_Color_Black;

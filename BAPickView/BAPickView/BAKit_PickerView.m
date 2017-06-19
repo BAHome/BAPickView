@@ -238,9 +238,8 @@
     self.dateMode = BAKit_PickerViewDateModeDate;
     self.animationType = BAKit_PickerViewAnimationTypeScale;
     self.isTouchEdgeHide = YES;
-    self.toolBarView.backgroundColor = BAKit_Color_White;
-    self.pickView.backgroundColor = BAKit_Color_White;
-    self.datePicker.backgroundColor = BAKit_Color_White;
+    self.ba_backgroundColor_pickView = BAKit_Color_White;
+    self.ba_backgroundColor_toolBar = BAKit_Color_White;
     self.ba_pickViewFont = [UIFont boldSystemFontOfSize:17];
     self.ba_pickViewTextColor = [UIColor blackColor];
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
