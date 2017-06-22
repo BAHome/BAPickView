@@ -1,9 +1,9 @@
 //
 //  UIView+BAAnimation.m
-//  BAKit
+//  BAAnimation
 //
-//  Created by boai on 2017/6/6.
-//  Copyright © 2017年 BAHome. All rights reserved.
+//  Created by 博爱 on 2016/12/19.
+//  Copyright © 2016年 DS-Team. All rights reserved.
 //
 
 #import "UIView+BAAnimation.h"
@@ -290,7 +290,7 @@
  @param duration duration 默认：1.0f
  @param finishBlock finishBlock
  */
-- (void)ba_animation_showFromPositionType:(BAAnimationPositionType)positionType
+- (void)ba_animation_showFromPositionType:(BAKit_ViewAnimationEnterDirectionType)positionType
                                  duration:(CGFloat)duration
                               finishBlock:(void(^)())finishBlock
 {
@@ -300,7 +300,7 @@
     CGSize  min_screen_size = [UIScreen mainScreen].bounds.size;
 
     switch (positionType) {
-        case BAAnimationPositionTypeTop:
+        case BAKit_ViewAnimationEnterDirectionTypeTop:
         {
             // From
             min_center.y = -min_frame.size.height;
@@ -311,7 +311,18 @@
             min_center.y = min_center2.y;
         }
             break;
-        case BAAnimationPositionTypeBottom:
+        case BAKit_ViewAnimationEnterDirectionTypeLeft:
+        {
+            // From
+            min_center.x = - min_center.x - min_screen_size.width * 0.5;
+            self.center = min_center;
+            
+            // TO
+            //            min_center.x = (min_screen_size.width - min_frame.size.width) * 0.5;
+            min_center.x = min_center2.x;
+        }
+            break;
+        case BAKit_ViewAnimationEnterDirectionTypeBottom:
         {
             // From
             min_center.y = min_screen_size.height + min_frame.size.height;
@@ -322,18 +333,7 @@
             min_center.y = min_center2.y;
         }
             break;
-        case BAAnimationPositionTypeLeft:
-        {
-            // From
-            min_center.x = - min_center.x - min_screen_size.width * 0.5;
-            self.center = min_center;
-            
-            // TO
-//            min_center.x = (min_screen_size.width - min_frame.size.width) * 0.5;
-            min_center.x = min_center2.x;
-        }
-            break;
-        case BAAnimationPositionTypeRitht:
+        case BAKit_ViewAnimationEnterDirectionTypeRitht:
         {
             // From
             min_center.x = min_screen_size.width + min_frame.size.width;
@@ -391,7 +391,7 @@
  @param duration duration 默认：1.0f
  @param finishBlock finishBlock
  */
-- (void)ba_animation_dismissFromPositionType:(BAAnimationPositionType)positionType
+- (void)ba_animation_dismissFromPositionType:(BAKit_ViewAnimationEnterDirectionType)positionType
                                     duration:(CGFloat)duration
                                  finishBlock:(void(^)())finishBlock
 {
@@ -400,22 +400,22 @@
     CGSize  min_screen_size = [UIScreen mainScreen].bounds.size;
     
     switch (positionType) {
-        case BAAnimationPositionTypeTop:
+        case BAKit_ViewAnimationEnterDirectionTypeTop:
         {
             min_center.y = - min_frame.size.height * 0.5;
         }
             break;
-        case BAAnimationPositionTypeBottom:
+        case BAKit_ViewAnimationEnterDirectionTypeBottom:
         {
             min_center.y = min_screen_size.height + min_frame.size.height * 0.5;
         }
             break;
-        case BAAnimationPositionTypeLeft:
+        case BAKit_ViewAnimationEnterDirectionTypeLeft:
         {
             min_center.x = - min_center.x - min_screen_size.width * 0.5;
         }
             break;
-        case BAAnimationPositionTypeRitht:
+        case BAKit_ViewAnimationEnterDirectionTypeRitht:
         {
             min_center.x = min_screen_size.width + min_frame.size.width;
         }
@@ -441,5 +441,171 @@
     }];
 }
 
+/**
+ view 翻转动画
+ 
+ @param duration 位置类型
+ @param direction duration 默认：1.0f
+ */
+- (void)ba_animation_flipWithDuration:(NSTimeInterval)duration
+                            direction:(BAKit_ViewAnimationFlipDirectionType)direction
+{
+    if (!duration)
+    {
+        duration = 1.5f;
+    }
+    NSString *subtype = nil;
+    
+    switch(direction)
+    {
+        case BAKit_ViewAnimationFlipDirectionTypeTop:
+            subtype = @"fromTop";
+            break;
+        case BAKit_ViewAnimationFlipDirectionTypeLeft:
+            subtype = @"fromLeft";
+            break;
+        case BAKit_ViewAnimationFlipDirectionTypeBottom:
+            subtype = @"fromBottom";
+            break;
+        case BAKit_ViewAnimationFlipDirectionTypeRight:
+        default:
+            subtype = @"fromRight";
+            break;
+    }
+    
+    CATransition *transition = [CATransition animation];
+    
+    transition.startProgress = 0;
+    transition.endProgress = 1.0;
+    transition.type = @"flip";
+    transition.subtype = subtype;
+    transition.duration = duration;
+    transition.repeatCount = 1;
+    transition.autoreverses = 1;
+    
+    [self.layer addAnimation:transition forKey:@"flip"];
+}
+
+- (void)translateAroundTheView:(UIView *)topView
+                      duration:(CGFloat)duration
+                     direction:(UIViewAnimationTranslationDirection)direction
+                        repeat:(BOOL)repeat
+                 startFromEdge:(BOOL)startFromEdge
+{
+    CGFloat startPosition = self.center.x, endPosition;
+    switch(direction)
+    {
+        case UIViewAnimationTranslationDirectionFromLeftToRight:
+        {
+            startPosition = self.frame.size.width / 2;
+            endPosition = -(self.frame.size.width / 2) + topView.frame.size.width;
+            break;
+        }
+        case UIViewAnimationTranslationDirectionFromRightToLeft:
+        default:
+        {
+            startPosition = -(self.frame.size.width / 2) + topView.frame.size.width;
+            endPosition = self.frame.size.width / 2;
+            break;
+        }
+    }
+    
+    if(startFromEdge)
+    {
+        [self setCenter:CGPointMake(startPosition, self.center.y)];
+    }
+    
+    [UIView animateWithDuration:duration / 2 delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self setCenter:CGPointMake(endPosition, self.center.y)];
+    } completion:^(BOOL finished) {
+        if(finished)
+        {
+            [UIView animateWithDuration:duration / 2 delay:0.5f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [self setCenter:CGPointMake(startPosition, self.center.y)];
+            } completion:^(BOOL finished) {
+                if(finished)
+                {
+                    if(repeat)
+                    {
+                        [self translateAroundTheView:topView duration:duration direction:direction repeat:repeat startFromEdge:startFromEdge];
+                    }
+                }
+            }];
+        }
+    }];
+}
+
+/**
+ 线性梯度：渐变色，注意：渐变颜色必须要有两个及两个以上颜色，否则设置无效！
+
+ @param colorArray 颜色数组，至少两个
+ @param frame frame
+ @param direction 方向，横向还是纵向
+ */
+- (void)ba_createGradientWithColorArray:(NSArray *)colorArray
+                                  frame:(CGRect)frame
+                              direction:(UIViewLinearGradientDirection)direction
+{
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = frame;
+    
+    NSMutableArray *mutableColors = colorArray.mutableCopy;
+    if (colorArray.count < 2)
+    {
+        NSLog(@"%s，渐变颜色必须要有两个及两个以上颜色，否则设置无效！", __func__);
+        return;
+    }
+    for(int i = 0; i < colorArray.count; i++)
+    {
+        UIColor *currentColor = colorArray[i];
+        [mutableColors replaceObjectAtIndex:i withObject:(id)currentColor.CGColor];
+    }
+    gradient.colors = mutableColors;
+    
+    switch (direction)
+    {
+        case UIViewLinearGradientDirectionVertical:
+        {
+            gradient.startPoint = CGPointMake(0.5f, 0.0f);
+            gradient.endPoint = CGPointMake(0.5f, 1.0f);
+            break;
+        }
+        case UIViewLinearGradientDirectionHorizontal:
+        {
+            gradient.startPoint = CGPointMake(0.0f, 0.5f);
+            gradient.endPoint = CGPointMake(1.0f, 0.5f);
+            break;
+        }
+        case UIViewLinearGradientDirectionDiagonalFromLeftToRightAndTopToDown:
+        {
+            gradient.startPoint = CGPointMake(0.0f, 0.0f);
+            gradient.endPoint = CGPointMake(1.0f, 1.0f);
+            break;
+        }
+        case UIViewLinearGradientDirectionDiagonalFromLeftToRightAndDownToTop:
+        {
+            gradient.startPoint = CGPointMake(0.0f, 1.0f);
+            gradient.endPoint = CGPointMake(1.0f, 0.0f);
+            break;
+        }
+        case UIViewLinearGradientDirectionDiagonalFromRightToLeftAndTopToDown:
+        {
+            gradient.startPoint = CGPointMake(1.0f, 0.0f);
+            gradient.endPoint = CGPointMake(0.0f, 1.0f);
+            break;
+        }
+        case UIViewLinearGradientDirectionDiagonalFromRightToLeftAndDownToTop:
+        {
+            gradient.startPoint = CGPointMake(1.0f, 1.0f);
+            gradient.endPoint = CGPointMake(0.0f, 0.0f);
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+    [self.layer insertSublayer:gradient atIndex:0];
+}
 
 @end

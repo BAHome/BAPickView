@@ -165,7 +165,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeTop:
         {
-            [self.backView ba_animation_showFromPositionType:BAAnimationPositionTypeTop duration:0.6f finishBlock:^{
+            [self.backView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
@@ -173,7 +173,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeBottom:
         {
-            [self.backView ba_animation_showFromPositionType:BAAnimationPositionTypeBottom duration:0.6f finishBlock:^{
+            [self.backView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
@@ -181,7 +181,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeLeft:
         {
-            [self.backView ba_animation_showFromPositionType:BAAnimationPositionTypeLeft duration:0.6f finishBlock:^{
+            [self.backView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeLeft duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
@@ -189,7 +189,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeRight:
         {
-            [self.backView ba_animation_showFromPositionType:BAAnimationPositionTypeRitht duration:0.6f finishBlock:^{
+            [self.backView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeRitht duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
@@ -220,7 +220,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeTop:
         {
-            [self.backView ba_animation_dismissFromPositionType:BAAnimationPositionTypeTop duration:0.6f finishBlock:^{
+            [self.backView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
                 self.backView.alpha = 0.1f;
@@ -230,7 +230,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeBottom:
         {
-            [self.backView ba_animation_dismissFromPositionType:BAAnimationPositionTypeBottom duration:0.6f finishBlock:^{
+            [self.backView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
                 self.backView.alpha = 0.1f;
@@ -240,7 +240,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeLeft:
         {
-            [self.backView ba_animation_dismissFromPositionType:BAAnimationPositionTypeLeft duration:0.6f finishBlock:^{
+            [self.backView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeLeft duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
                 self.backView.alpha = 0.1f;
@@ -250,7 +250,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             break;
         case BAKit_PickerViewAnimationTypeRight:
         {
-            [self.backView ba_animation_dismissFromPositionType:BAAnimationPositionTypeRitht duration:0.6f finishBlock:^{
+            [self.backView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeRitht duration:0.6f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
                 self.backView.alpha = 0.1f;

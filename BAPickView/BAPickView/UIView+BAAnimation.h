@@ -1,12 +1,11 @@
 
 /*!
  *  @header BAKit.h
- *          BABaseProject
  *
  *  @brief  BAKit
  *
  *  @author 博爱
- *  @copyright    Copyright © 2016年 博爱. All rights reserved.
+ *  @copyright  Copyright © 2016年 博爱. All rights reserved.
  *  @version    V1.0
  */
 
@@ -45,27 +44,101 @@
  
  *********************************************************************************
  *
- * 在使用BAKit的过程中如果出现bug请及时以以下任意一种方式联系我，我会及时修复bug
+ * 在使用 BAKit 的过程中如果出现 bug 请及时以以下任意一种方式联系我，我会及时修复 bug
  *
  * QQ     : 可以添加ios开发技术群 479663605 在这里找到我(博爱1616【137361770】)
  * 微博    : 博爱1616
  * Email  : 137361770@qq.com
  * GitHub : https://github.com/boai
+ * BAHome : https://github.com/BAHome
  * 博客    : http://boaihome.com
  
  *********************************************************************************
  
  */
 
+
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, BAAnimationPositionType) {
-    BAAnimationPositionTypeTop,
-    BAAnimationPositionTypeBottom,
-    BAAnimationPositionTypeLeft,
-    BAAnimationPositionTypeRitht,
+
+/**
+ view 的 进出场动画 方向
+
+ - BAKit_ViewAnimationEnterDirectionTypeTop: 从 top 进入
+ - BAKit_ViewAnimationEnterDirectionTypeLeft: 从 left 进入
+ - BAKit_ViewAnimationEnterDirectionTypeBottom: 从 bottom 进入
+ - BAKit_ViewAnimationEnterDirectionTypeRitht: 从 right 进入
+ */
+typedef NS_ENUM(NSUInteger, BAKit_ViewAnimationEnterDirectionType) {
+    BAKit_ViewAnimationEnterDirectionTypeTop,
+    BAKit_ViewAnimationEnterDirectionTypeLeft,
+    BAKit_ViewAnimationEnterDirectionTypeBottom,
+    BAKit_ViewAnimationEnterDirectionTypeRitht,
 };
+
+/**
+ view 的 翻动动画 方向
+
+ - BAKit_ViewAnimationFlipDirectionTypeTop: 向 top 翻动
+ - BAKit_ViewAnimationFlipDirectionTypeLeft: 向 left 翻动
+ - BAKit_ViewAnimationFlipDirectionTypeBottom: 向 bottom 翻动
+ - BAKit_ViewAnimationFlipDirectionTypeRight: 向 right 翻动
+ */
+typedef NS_ENUM(NSUInteger, BAKit_ViewAnimationFlipDirectionType)
+{
+    BAKit_ViewAnimationFlipDirectionTypeTop = 0,
+    BAKit_ViewAnimationFlipDirectionTypeLeft,
+    BAKit_ViewAnimationFlipDirectionTypeBottom,
+    BAKit_ViewAnimationFlipDirectionTypeRight,
+};
+
+/**
+ *  Direction of the translation
+ */
+typedef NS_ENUM(NSInteger, UIViewAnimationTranslationDirection)
+{
+    /**
+     *  Translation from left to right
+     */
+    UIViewAnimationTranslationDirectionFromLeftToRight = 0,
+    /**
+     *  Translation from right to left
+     */
+    UIViewAnimationTranslationDirectionFromRightToLeft
+};
+
+/**
+ *  Direction of the linear gradient
+ */
+typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
+{
+    /**
+     *  Linear gradient vertical
+     */
+    UIViewLinearGradientDirectionVertical = 0,
+    /**
+     *  Linear gradient horizontal
+     */
+    UIViewLinearGradientDirectionHorizontal,
+    /**
+     *  Linear gradient from left to right and top to down
+     */
+    UIViewLinearGradientDirectionDiagonalFromLeftToRightAndTopToDown,
+    /**
+     *  Linear gradient from left to right and down to top
+     */
+    UIViewLinearGradientDirectionDiagonalFromLeftToRightAndDownToTop,
+    /**
+     *  Linear gradient from right to left and top to down
+     */
+    UIViewLinearGradientDirectionDiagonalFromRightToLeftAndTopToDown,
+    /**
+     *  Linear gradient from right to left and down to top
+     */
+    UIViewLinearGradientDirectionDiagonalFromRightToLeftAndDownToTop
+};
+
 
 @interface UIView (BAAnimation)
 
@@ -180,7 +253,7 @@ typedef NS_ENUM(NSUInteger, BAAnimationPositionType) {
  @param duration duration 默认：1.0f
  @param finishBlock finishBlock
  */
-- (void)ba_animation_showFromPositionType:(BAAnimationPositionType)positionType
+- (void)ba_animation_showFromPositionType:(BAKit_ViewAnimationEnterDirectionType)positionType
                                  duration:(CGFloat)duration
                               finishBlock:(void(^)())finishBlock;
 
@@ -191,9 +264,35 @@ typedef NS_ENUM(NSUInteger, BAAnimationPositionType) {
  @param duration duration 默认：1.0f
  @param finishBlock finishBlock
  */
-- (void)ba_animation_dismissFromPositionType:(BAAnimationPositionType)positionType
+- (void)ba_animation_dismissFromPositionType:(BAKit_ViewAnimationEnterDirectionType)positionType
                                     duration:(CGFloat)duration
                                  finishBlock:(void(^)())finishBlock;
+
+/**
+ view 翻转动画
+ 
+ @param duration 位置类型
+ @param direction duration 默认：1.0f
+ */
+- (void)ba_animation_flipWithDuration:(NSTimeInterval)duration
+                            direction:(BAKit_ViewAnimationFlipDirectionType)direction;
+
+- (void)translateAroundTheView:(UIView *)topView
+                      duration:(CGFloat)duration
+                     direction:(UIViewAnimationTranslationDirection)direction
+                        repeat:(BOOL)repeat
+                 startFromEdge:(BOOL)startFromEdge;
+
+/**
+ 线性梯度：渐变色，注意：渐变颜色必须要有两个及两个以上颜色，否则设置无效！
+ 
+ @param colorArray 颜色数组，至少两个
+ @param frame frame
+ @param direction 方向，横向还是纵向
+ */
+- (void)ba_createGradientWithColorArray:(NSArray *)colorArray
+                                  frame:(CGRect)frame
+                              direction:(UIViewLinearGradientDirection)direction;
 
 @end
 

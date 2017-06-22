@@ -82,6 +82,11 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 最新更新时间：2017-06-22 【倒叙】 <br>
+ 最新Version：【Version：1.0.5】 <br>
+ 更新内容： <br>
+ 1.0.5.1、新增 多种动画样式 <br>
+ 
  最新更新时间：2017-06-19 【倒叙】 <br>
  最新Version：【Version：1.0.4】 <br>
  更新内容： <br>
