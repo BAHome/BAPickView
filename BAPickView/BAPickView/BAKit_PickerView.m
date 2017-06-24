@@ -226,7 +226,7 @@
 
 - (void)setupUI
 {
-    self.backgroundColor = BAKit_Color_Translucent;
+    self.backgroundColor = BAKit_Color_Translucent_pod;
     self.pickView.hidden = NO;
     
     self.pickView.delegate = self;
@@ -238,8 +238,8 @@
     self.dateMode = BAKit_PickerViewDateModeDate;
     self.animationType = BAKit_PickerViewAnimationTypeScale;
     self.isTouchEdgeHide = YES;
-    self.ba_backgroundColor_pickView = BAKit_Color_White;
-    self.ba_backgroundColor_toolBar = BAKit_Color_White;
+    self.ba_backgroundColor_pickView = BAKit_Color_White_pod;
+    self.ba_backgroundColor_toolBar = BAKit_Color_White_pod;
     self.ba_pickViewFont = [UIFont boldSystemFontOfSize:17];
     self.ba_pickViewTextColor = [UIColor blackColor];
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
@@ -1074,7 +1074,7 @@
     if (!_bgView)
     {
         _bgView = [UIView new];
-        self.bgView.backgroundColor = BAKit_Color_Clear;
+        self.bgView.backgroundColor = BAKit_Color_Clear_pod;
         
         [self addSubview:self.bgView];
     }
@@ -1172,7 +1172,7 @@
     {
         _cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.cancleButton setTitle:@"取消" forState:UIControlStateNormal];
-        [self.cancleButton setTitleColor:BAKit_Color_Black forState:UIControlStateNormal];
+        [self.cancleButton setTitleColor:BAKit_Color_Black_pod forState:UIControlStateNormal];
         [self.cancleButton addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         self.cancleButton.tag = 1000;
         [self.toolBarView addSubview:self.cancleButton];
@@ -1186,7 +1186,7 @@
     {
         _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.sureButton setTitle:@"确定" forState:UIControlStateNormal];
-        [self.sureButton setTitleColor:BAKit_Color_Black forState:UIControlStateNormal];
+        [self.sureButton setTitleColor:BAKit_Color_Black_pod forState:UIControlStateNormal];
         [self.sureButton addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         self.sureButton.tag = 1001;
         [self.toolBarView addSubview:self.sureButton];
@@ -1205,7 +1205,7 @@
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"windowLevel == %ld AND hidden == 0 " , UIWindowLevelNormal];
             self.alertWindow = [[UIApplication sharedApplication].windows filteredArrayUsingPredicate:predicate].firstObject;
         }
-        self.alertWindow.backgroundColor = BAKit_Color_Translucent;
+        self.alertWindow.backgroundColor = BAKit_Color_Translucent_pod;
     }
     return _alertWindow;
 }

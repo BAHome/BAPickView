@@ -105,11 +105,11 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 {
     // 默认配置
     self.isTouchEdgeHide = YES;
-    self.ba_backgroundColor_pickView = BAKit_Color_White;
-    self.ba_backgroundColor_toolBar = BAKit_Color_White;
+    self.ba_backgroundColor_pickView = BAKit_Color_White_pod;
+    self.ba_backgroundColor_toolBar = BAKit_Color_White_pod;
     self.animationType = BAKit_PickerViewAnimationTypeScale;
     self.ba_pickViewFont = [UIFont systemFontOfSize:10];
-    self.ba_pickViewTextColor = BAKit_Color_Black;
+    self.ba_pickViewTextColor = BAKit_Color_Black_pod;
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
     self.pickerViewPositionType = BAKit_PickerViewButtonPositionTypeNormal;
     
@@ -929,7 +929,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 - (UIView *)topLine{
     if (!_topLine) {
         _topLine = [[UIView alloc]init];
-        _topLine.backgroundColor = BAKit_Color_Gray_9;
+        _topLine.backgroundColor = BAKit_Color_Gray_9_pod;
         [self.backView addSubview:_topLine];
     }
     return _topLine;
@@ -938,7 +938,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 - (UIView *)bottomLine{
     if (!_bottomLine) {
         _bottomLine = [[UIView alloc]init];
-        _bottomLine.backgroundColor = BAKit_Color_Gray_9;
+        _bottomLine.backgroundColor = BAKit_Color_Gray_9_pod;
 
         [self.backView addSubview:_bottomLine];
     }
@@ -949,7 +949,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 - (UIView *)toolBarView{
     if (!_toolBarView) {
         _toolBarView = [[UIView alloc]init];
-        _toolBarView.backgroundColor = BAKit_Color_Gray_11;
+        _toolBarView.backgroundColor = BAKit_Color_Gray_11_pod;
         [self.backView addSubview:_toolBarView];
     }
     return _toolBarView;
@@ -994,7 +994,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"windowLevel == %ld AND hidden == 0 " , UIWindowLevelNormal];
             self.alertWindow = [[UIApplication sharedApplication].windows filteredArrayUsingPredicate:predicate].firstObject;
         }
-        self.alertWindow.backgroundColor = BAKit_Color_Translucent;
+        self.alertWindow.backgroundColor = BAKit_Color_Translucent_pod;
     }
     return _alertWindow;
 }
@@ -1046,7 +1046,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     //    CGFloat min_view_w = CGRectGetWidth(self.frame);
     CGFloat min_view_h = CGRectGetHeight(self.frame);
     
-    self.backgroundColor = BAKit_Color_Translucent;
+    self.backgroundColor = BAKit_Color_Translucent_pod;
     
     min_x = 0;
     min_y = min_view_h - BAKit_Default_Height;

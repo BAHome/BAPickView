@@ -361,7 +361,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
         self.tableView.dataSource =  self;
         self.tableView.estimatedRowHeight = 44;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.backgroundColor = BAKit_Color_Gray_11;
+        self.tableView.backgroundColor = BAKit_Color_Gray_11_pod;
         
         [self.view addSubview:self.tableView];
     }
