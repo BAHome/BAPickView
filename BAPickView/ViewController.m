@@ -173,11 +173,11 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
             // 自定义：最大年份
             tempView.ba_maxYear = tempView.ba_minYear + 5;
             // 自定义：动画样式
-            tempView.animationType = BAKit_PickerViewAnimationTypeScale;
+            tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
             // 自定义：pickView 位置
-            tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+//            tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
             // 自定义：toolBar 位置
-            tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
+//            tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
             // 自定义：pickView 文字颜色
             tempView.ba_pickViewTextColor = [UIColor redColor];
             // 自定义：pickView 文字字体

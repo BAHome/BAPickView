@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		181D1FAA1EE7E45E00064FF0 /* BAKit_DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1FA91EE7E45E00064FF0 /* BAKit_DatePicker.m */; };
 		C4738ADC1EFB5E8300608E17 /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C4738AD91EFB5E8300608E17 /* UIView+BAAnimation.m */; };
-		C4738ADD1EFB5E8300608E17 /* UIView+BARectCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner.m */; };
+		C4738ADD1EFB5E8300608E17 /* UIView+BARectCorner_pick.m in Sources */ = {isa = PBXBuildFile; fileRef = C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner_pick.m */; };
 		C4E7BE981ECAAFFA003F6AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE971ECAAFFA003F6AF1 /* main.m */; };
 		C4E7BE9B1ECAAFFA003F6AF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE9A1ECAAFFA003F6AF1 /* AppDelegate.m */; };
 		C4E7BE9E1ECAAFFA003F6AF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE9D1ECAAFFA003F6AF1 /* ViewController.m */; };
@@ -29,8 +29,8 @@
 		C43D26621EF7AE2700CD078C /* BAKit_PickerViewConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAKit_PickerViewConfig.h; sourceTree = "<group>"; };
 		C4738AD81EFB5E8300608E17 /* UIView+BAAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BAAnimation.h"; sourceTree = "<group>"; };
 		C4738AD91EFB5E8300608E17 /* UIView+BAAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BAAnimation.m"; sourceTree = "<group>"; };
-		C4738ADA1EFB5E8300608E17 /* UIView+BARectCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BARectCorner.h"; sourceTree = "<group>"; };
-		C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BARectCorner.m"; sourceTree = "<group>"; };
+		C4738ADA1EFB5E8300608E17 /* UIView+BARectCorner_pick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BARectCorner_pick.h"; sourceTree = "<group>"; };
+		C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner_pick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BARectCorner_pick.m"; sourceTree = "<group>"; };
 		C4E7BE931ECAAFFA003F6AF1 /* BAPickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAPickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E7BE971ECAAFFA003F6AF1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4E7BE991ECAAFFA003F6AF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -120,8 +120,8 @@
 				C4E7BEB91ECACC12003F6AF1 /* NSDateFormatter+BAKit.m */,
 				C4738AD81EFB5E8300608E17 /* UIView+BAAnimation.h */,
 				C4738AD91EFB5E8300608E17 /* UIView+BAAnimation.m */,
-				C4738ADA1EFB5E8300608E17 /* UIView+BARectCorner.h */,
-				C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner.m */,
+				C4738ADA1EFB5E8300608E17 /* UIView+BARectCorner_pick.h */,
+				C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner_pick.m */,
 			);
 			path = BAPickView;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 				181D1FAA1EE7E45E00064FF0 /* BAKit_DatePicker.m in Sources */,
 				C4E7BEB01ECAB054003F6AF1 /* BAKit_PickerView.m in Sources */,
 				C4E7BEBA1ECACC12003F6AF1 /* NSDateFormatter+BAKit.m in Sources */,
-				C4738ADD1EFB5E8300608E17 /* UIView+BARectCorner.m in Sources */,
+				C4738ADD1EFB5E8300608E17 /* UIView+BARectCorner_pick.m in Sources */,
 				C4E7BE9E1ECAAFFA003F6AF1 /* ViewController.m in Sources */,
 				C4E7BE9B1ECAAFFA003F6AF1 /* AppDelegate.m in Sources */,
 				C4E7BE981ECAAFFA003F6AF1 /* main.m in Sources */,

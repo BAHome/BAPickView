@@ -10,7 +10,7 @@
 #import "NSDate+BAKit.h"
 #import "UIView+BAAnimation.h"
 #import "BAKit_ConfigurationDefine.h"
-#import "UIView+BARectCorner.h"
+#import "UIView+BARectCorner_pick.h"
 
 static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
@@ -111,7 +111,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     self.ba_pickViewFont = [UIFont systemFontOfSize:10];
     self.ba_pickViewTextColor = BAKit_Color_Black_pod;
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
-    self.pickerViewPositionType = BAKit_PickerViewButtonPositionTypeNormal;
+    self.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
     
     [self registCell];
     [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -1051,12 +1051,11 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     min_x = 0;
     min_y = min_view_h - BAKit_Default_Height;
     min_h = BAKit_Default_Height;
-    
+    min_w = BAKit_SCREEN_WIDTH;
     if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
     {
         min_w = 280 * BAKit_ScaleXAndWidth;
     }
-    
     self.backView.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     CGFloat min_bgView_w = CGRectGetWidth(self.backView.frame);

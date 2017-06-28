@@ -6,10 +6,10 @@
 //  Copyright © 2017年 boai. All rights reserved.
 //
 
-#import "UIView+BARectCorner.h"
+#import "UIView+BARectCorner_pick.h"
 #import "BAKit_ConfigurationDefine.h"
 
-@implementation UIView (BARectCorner)
+@implementation UIView (BARectCorner_pick)
 
 - (void)ba_view_setViewRectCornerType:(BAKit_ViewRectCornerType)type
                      viewCornerRadius:(CGFloat)viewCornerRadius

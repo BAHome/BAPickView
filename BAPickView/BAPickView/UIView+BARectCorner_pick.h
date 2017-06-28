@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, BAKit_ViewRectCornerType) {
     BAKit_ViewRectCornerTypeAllCorners
 };
 
-@interface UIView (BARectCorner)
+@interface UIView (BARectCorner_pick)
 
 /**
  设置 viewRectCornerType 样式，注意：BAKit_ViewRectCornerType 必须要先设置 viewCornerRadius，才能有效，否则设置无效，如果是 xib，需要要有固定 宽高，要不然 iOS 10 设置无效

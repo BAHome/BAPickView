@@ -37,7 +37,6 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:duration animations:^{
             self.transform = CGAffineTransformIdentity;
-//            self.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
         } completion:^(BOOL finished) {
             if (finishBlock)
             {

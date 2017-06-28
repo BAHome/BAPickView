@@ -65,7 +65,7 @@
 #import "BAKit_DatePicker.h"
 #import "BAKit_ConfigurationDefine.h"
 #import "NSDate+BAKit.h"
-#import "UIView+BARectCorner.h"
+#import "UIView+BARectCorner_pick.h"
 #import "NSDateFormatter+BAKit.h"
 #import "UIView+BAAnimation.h"
 
@@ -81,6 +81,11 @@
  
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
+ 
+ 最新更新时间：2017-06-28 【倒叙】 <br>
+ 最新Version：【Version：1.0.7】 <br>
+ 更新内容： <br>
+ 1.0.7.1、修复 日期选择器 不同样式下错乱的 bug(感谢群里 [@西瓜Sama](https://github.com/lipengda) 同学提出的 bug！) <br>
  
  最新更新时间：2017-06-23 【倒叙】
  最新Version：【Version：1.0.6】
