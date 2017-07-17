@@ -82,6 +82,11 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 最新更新时间：2017-07-17 【倒叙】 <br>
+ 最新Version：【Version：1.0.8】 <br>
+ 更新内容： <br>
+ 1.0.8.1、新增分割线开关和分割线颜色自定义(感谢群里 [@杭州-可米](https://github.com/fan-xiang) 和 [@紫暄](https://github.com/rainy0426)同学提出的 需求！) <br>
+ 
  最新更新时间：2017-06-28 【倒叙】 <br>
  最新Version：【Version：1.0.7】 <br>
  更新内容： <br>

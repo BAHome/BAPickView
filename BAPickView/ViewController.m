@@ -267,6 +267,15 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
          */
         tempView.ba_pickViewTextColor = [UIColor orangeColor];
         
+        /**
+         是否显示分割线，默认：NO，不显示，注意：iOS 10 开始，pickerView 默认没有分割线，这里是自己添加的分割线
+         */
+        tempView.isShowLineView = YES;
+        /**
+         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+         */
+        tempView.ba_pickViewLineViewColor = BAKit_Color_Red_pod;
+        
         self.pickView = tempView;
     } block:^(BAKit_CityModel *model) {
         BAKit_StrongSelf

@@ -141,6 +141,15 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  */
 @property(nonatomic, strong) UIColor *ba_pickViewTextColor;
 
+/**
+ 是否显示分割线，默认：NO，不显示，注意：iOS 10 开始，pickerView 默认没有分割线，这里是自己添加的分割线
+ */
+@property(nonatomic, assign) BOOL isShowLineView;
+
+/**
+ pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewLineViewColor;
 
 #pragma mark - custom method
 

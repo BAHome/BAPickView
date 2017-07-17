@@ -244,6 +244,8 @@
     self.ba_pickViewTextColor = [UIColor blackColor];
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
     self.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
+    self.isShowLineView = NO;
+    self.ba_pickViewLineViewColor = [UIColor lightGrayColor];
     
     [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
@@ -658,6 +660,18 @@
         pickerLabel.textColor = self.ba_pickViewTextColor;
     }
     pickerLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
+    
+    if (self.isShowLineView)
+    {
+        for (UIView *lineView in pickerView.subviews)
+        {
+            if (lineView.frame.size.height < 1)
+            {
+                lineView.backgroundColor = self.ba_pickViewLineViewColor;
+            }
+        }
+    }
+    
     return pickerLabel;
 }
 
@@ -1577,6 +1591,15 @@
     _ba_pickViewTextColor = ba_pickViewTextColor;
 }
 
+- (void)setIsShowLineView:(BOOL)isShowLineView
+{
+    _isShowLineView = isShowLineView;
+}
+
+- (void)setBa_pickViewLineViewColor:(UIColor *)ba_pickViewLineViewColor
+{
+    _ba_pickViewLineViewColor = ba_pickViewLineViewColor;
+}
 
 @end
 

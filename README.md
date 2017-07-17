@@ -20,7 +20,7 @@
 * 12、可以自定义 datePicker 的字体颜色、字体、字体大小、背景颜色等 <br>
 * 13、可以自定义 datePicker 的最大、最小年限 <br>
 * 14、可以自定义 datePicker 的 toolBar 位置、字体、背景颜色等
-
+* 15、可以自定义显示隐藏 分割线和分割线颜色
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
@@ -67,6 +67,11 @@
  
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
+ 
+ 最新更新时间：2017-07-17 【倒叙】 <br>
+ 最新Version：【Version：1.0.8】 <br>
+ 更新内容： <br>
+ 1.0.8.1、新增分割线开关和分割线颜色自定义(感谢群里 [@杭州-可米](https://github.com/fan-xiang) 和 [@紫暄](https://github.com/rainy0426)同学提出的 需求！) <br>
  
  最新更新时间：2017-06-28 【倒叙】 <br>
  最新Version：【Version：1.0.7】 <br>
@@ -209,6 +214,15 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  */
 @property(nonatomic, strong) UIColor *ba_pickViewTextColor;
 
+/**
+ 是否显示分割线，默认：NO，不显示，注意：iOS 10 开始，pickerView 默认没有分割线，这里是自己添加的分割线
+ */
+@property(nonatomic, assign) BOOL isShowLineView;
+
+/**
+ pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewLineViewColor;
 
 #pragma mark - custom method
 
@@ -730,6 +744,11 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 ## 5、更新记录：【倒叙】
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
+ 
+ 最新更新时间：2017-07-17 【倒叙】 <br>
+ 最新Version：【Version：1.0.8】 <br>
+ 更新内容： <br>
+ 1.0.8.1、新增分割线开关和分割线颜色自定义(感谢群里 [@杭州-可米](https://github.com/fan-xiang) 和 [@紫暄](https://github.com/rainy0426)同学提出的 需求！) <br>
  
  最新更新时间：2017-06-28 【倒叙】 <br>
  最新Version：【Version：1.0.7】 <br>
