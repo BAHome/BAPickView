@@ -21,6 +21,8 @@
 * 13、可以自定义 datePicker 的最大、最小年限 <br>
 * 14、可以自定义 datePicker 的 toolBar 位置、字体、背景颜色等
 * 15、可以自定义显示隐藏 分割线和分割线颜色
+* 16、日期选择器新增 最大月份限制(感谢简书网友 [@洁简](http://www.jianshu.com/u/62f0c72a2004) 同学提出的 需求！) <br>
+
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
@@ -67,6 +69,12 @@
  
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
+ 
+ 
+ 最新更新时间：2017-07-18 【倒叙】 <br>
+ 最新Version：【Version：1.0.9】 <br>
+ 更新内容： <br>
+ 1.0.9.1、日期选择器新增 最大月份限制(感谢简书网友 [@洁简](http://www.jianshu.com/u/62f0c72a2004) 同学提出的 需求！) <br>
  
  最新更新时间：2017-07-17 【倒叙】 <br>
  最新Version：【Version：1.0.8】 <br>
@@ -300,6 +308,11 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 #import "BAKit_PickerViewConfig.h"
 
 @interface BAKit_DatePicker : UIView
+
+/**
+ 日期选择器的最大月份，默认为：12  值范围 1-12 前提要设置最大年份
+ */
+@property(assign, nonatomic) NSInteger ba_maxMonth;
 
 /**
  日期选择器的最大年限，默认为：2050
@@ -713,6 +726,9 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
             tempView.ba_minYear = BAKit_Current_Date.year;
             // 自定义：最大年份
             tempView.ba_maxYear = tempView.ba_minYear + 5;
+            // 自定义: 最大月份，注意：前提是设置了最大年份才会管用
+            tempView.ba_maxMonth = BAKit_Current_Date.month;
+
             // 自定义：动画样式
             tempView.animationType = BAKit_PickerViewAnimationTypeScale;
             // 自定义：pickView 位置
@@ -744,6 +760,12 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 ## 5、更新记录：【倒叙】
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
+ 
+ 
+ 最新更新时间：2017-07-18 【倒叙】 <br>
+ 最新Version：【Version：1.0.9】 <br>
+ 更新内容： <br>
+ 1.0.9.1、日期选择器新增 最大月份限制(感谢简书网友 [@洁简](http://www.jianshu.com/u/62f0c72a2004) 同学提出的 需求！) <br>
  
  最新更新时间：2017-07-17 【倒叙】 <br>
  最新Version：【Version：1.0.8】 <br>
@@ -808,7 +830,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 
 ## 7、BAHome 团队成员
 > 1、QQ 群 
-479663605 <br> 
+ 479663605 <br> 
 【注意：此群为 2 元 付费群，介意的小伙伴儿勿扰！】<br> 
 
 > 孙博岩 <br> 
@@ -841,6 +863,11 @@ QQ：498121294 <br>
 QQ：363605775 <br> 
 git：[https://github.com/CrazyCoderShi](https://github.com/CrazyCoderShi) <br>
 简书：[http://www.jianshu.com/u/0726f4d689a3](http://www.jianshu.com/u/0726f4d689a3)
+
+> 丁寅初 <br> 
+QQ：1137155216 <br> 
+git：[https://github.com/1137155216](https://github.com/1137155216) <br>
+博客园：[http://www.cnblogs.com/ios-dyc1998](http://www.cnblogs.com/ios-dyc1998)
 
 ## 8、开发环境 和 支持版本
 > 开发使用 最新版本 Xcode，理论上支持 iOS 8 及以上版本，如有版本适配问题，请及时反馈！多谢合作！

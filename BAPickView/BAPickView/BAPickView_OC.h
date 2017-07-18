@@ -82,6 +82,12 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 
+ 最新更新时间：2017-07-18 【倒叙】 <br>
+ 最新Version：【Version：1.0.9】 <br>
+ 更新内容： <br>
+ 1.0.9.1、日期选择器新增 最大月份限制(感谢简书网友 [@洁简](http://www.jianshu.com/u/62f0c72a2004) 同学提出的 需求！) <br>
+ 
  最新更新时间：2017-07-17 【倒叙】 <br>
  最新Version：【Version：1.0.8】 <br>
  更新内容： <br>

@@ -64,6 +64,11 @@
 @interface BAKit_DatePicker : UIView
 
 /**
+ 日期选择器的最大月份，默认为：12  值范围 1-12 前提要设置最大年份
+ */
+@property(assign, nonatomic) NSInteger ba_maxMonth;
+
+/**
  日期选择器的最大年限，默认为：2050
  */
 @property(assign, nonatomic) NSInteger ba_maxYear;
@@ -121,7 +126,7 @@
 
 /**
  快速创建 BAKit_DatePicker
-
+ 
  @param pickerViewType pickerViewType
  @param configuration configuration
  @param block block

@@ -137,7 +137,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 {
     [self.alertWindow addSubview:self];
     [self ba_layoutSubViews];
-
+    
     if (self.animationType != 0)
     {
         [self ba_pickViewShowAnimation];
@@ -315,7 +315,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     switch (tableView.tag)
-{
+    {
         case 0:
             return self.yearArray.count  + 4;
             break;
@@ -410,7 +410,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
         }
             break;
     }
-
+    
     if (indexPath.row <2 || indexPath.row > dataArray.count + 1)
     {
         titleLabel.text = @"";
@@ -432,7 +432,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     NSArray *cells = table.visibleCells;
     [cells enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         BACustomTabelViewCell *cell = (BACustomTabelViewCell *)obj;
-         [self changeLabelWithTabelView:table cell:cell];
+        [self changeLabelWithTabelView:table cell:cell];
     }];
     
 }
@@ -456,8 +456,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
         UILabel *titleLabel = [cell.contentView viewWithTag:100];
         if (titleLabel.alpha == 1.0)
         {
-             [table scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-           
+            [table scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            
             NSString *key = @"";
             switch (scrollView.tag) {
                 case 0:
@@ -480,6 +480,11 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
                     break;
                 default:
                     break;
+            }
+            if ([key isEqualToString:@"year"]) {
+                if (self.ba_maxYear != 0) {
+                    [self refreshMonthIsYearState:[titleLabel.text isEqualToString:[self.yearArray lastObject]]];
+                }
             }
             if (![titleLabel.text isEqualToString:@""])
             {
@@ -509,7 +514,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     
     CGFloat cellY = viewRect.origin.y + viewRect.size.height / 2.0 ;
     UILabel *titleLabel = [cell.contentView viewWithTag:100];
-   
+    
     if (maxY > cellY && minY < cellY)
     {
         titleLabel.alpha = 1;
@@ -527,8 +532,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 #pragma mark - customButton
 - (void)handleButtonAction:(UIButton *)button
 {
-     if (button.tag == 1001)
-     {
+    if (button.tag == 1001)
+    {
         // 确定
         NSString *resoultDateStr = @"";
         
@@ -594,7 +599,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
                 resoultDateStr = [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@",year,mouth,day,hour,minute,seconds];
             }
                 break;
-
+                
             case BAKit_CustomDatePickerDateTypeHM:
             {
                 resoultDateStr = [NSString stringWithFormat:@"%@:%@",hour,minute];
@@ -614,10 +619,31 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             default:
                 break;
         }
-         
+        
         self.resultBlock(resoultDateStr);
     }
     [self ba_pickViewHiddenAnimation];
+}
+
+- (void)refreshMonthIsYearState:(BOOL)state
+{
+    CGFloat max = 12;
+    if (self.ba_maxMonth < 1 || self.ba_maxMonth > 12 || self.ba_maxYear == 0 || state == NO )
+    {
+        NSLog(@"ba_maxMonth 参数不规范");
+    }
+    else
+    {
+        max = self.ba_maxMonth;
+    }
+    
+    [self.monthArray removeAllObjects];
+    for (NSInteger i = 1; i < max + 1; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%02li月",(long)i];
+        [self.monthArray addObject:str];
+    }
+    [self.monthTableView reloadData];
 }
 
 - (void)refreshYear
@@ -674,7 +700,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
             dataArray = self.secondArray;
             tableView = self.secondTableView;
         }
-       
+        
         NSInteger index = [dataArray indexOfObject:defaultDateStr];
         
         if (index < dataArray.count && index > 0)
@@ -704,7 +730,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     [formatter setDateFormat:@"yyyy-MM"];
     NSDate * date = [formatter dateFromString:dateStr];
     NSInteger count =  [self ba_totaldaysInMonth:date];
-
+    
     [self.dayArray removeAllObjects];
     for (int i = 1; i < count + 1; i++)
     {
@@ -732,6 +758,17 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 }
 
 #pragma mark - setter / getter
+- (void)setBa_maxMonth:(NSInteger)ba_maxMonth {
+    _ba_maxMonth = ba_maxMonth;
+    if (self.ba_maxYear) {
+        if (self.ba_maxYear-1 == BAKit_Current_Date.year) {
+            [self refreshMonthIsYearState:YES];
+        } else {
+            [self refreshMonthIsYearState:NO];
+        }
+    }
+}
+
 - (void)setBa_maxYear:(NSInteger)ba_maxYear
 {
     _ba_maxYear = ba_maxYear;
@@ -796,7 +833,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     {
         _monthTableView = [self ba_creatTableView];
         _monthTableView.tag = 1;
-
+        
         [self.backView addSubview:_monthTableView];
     }
     return _monthTableView;
@@ -807,7 +844,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     if (!_dayTableView) {
         _dayTableView = [self ba_creatTableView];
         _dayTableView.tag = 2;
-
+        
         [self.backView addSubview:_dayTableView];
     }
     return _dayTableView;
@@ -817,7 +854,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     if (!_hourTableView) {
         _hourTableView = [self ba_creatTableView];
         _hourTableView.tag = 3;
-
+        
         [self.backView addSubview:_hourTableView];
     }
     return _hourTableView;
@@ -827,7 +864,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     if (!_minuteTableView) {
         _minuteTableView = [self ba_creatTableView];
         _minuteTableView.tag = 4;
-
+        
         [self.backView addSubview:_minuteTableView];
     }
     return _minuteTableView;
@@ -837,7 +874,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     if (!_secondTableView) {
         _secondTableView = [self ba_creatTableView];
         _secondTableView.tag = 5;
-
+        
         [self.backView addSubview:_secondTableView];
     }
     return _secondTableView;
@@ -939,7 +976,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     if (!_bottomLine) {
         _bottomLine = [[UIView alloc]init];
         _bottomLine.backgroundColor = BAKit_Color_Gray_9_pod;
-
+        
         [self.backView addSubview:_bottomLine];
     }
     return _bottomLine;

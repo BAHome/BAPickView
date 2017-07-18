@@ -172,6 +172,9 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
             tempView.ba_minYear = BAKit_Current_Date.year;
             // 自定义：最大年份
             tempView.ba_maxYear = tempView.ba_minYear + 5;
+            // 自定义: 最大月份，注意：前提是设置了最大年份才会管用
+            tempView.ba_maxMonth = BAKit_Current_Date.month;
+
             // 自定义：动画样式
             tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
             // 自定义：pickView 位置
