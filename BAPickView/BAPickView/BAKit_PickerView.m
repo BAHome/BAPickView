@@ -147,7 +147,7 @@
 
 @property (nonatomic, strong) UIWindow *alertWindow;
 @property(nonatomic, assign) BOOL isAnimating;
-
+@property (nonatomic, strong) UILabel * contentTitleLabel;
 
 @end
 
@@ -199,12 +199,28 @@
 {
     BAKit_PickerView *pickerView = [[BAKit_PickerView alloc] init];
     pickerView.pickerViewType = BAKit_PickerViewTypeArray;
-
+    
     if (configuration)
     {
         configuration(pickerView);
     }
     pickerView.dataArray = dataArray;
+    [pickerView ba_pickViewShow];
+    pickerView.resultBlock = block;
+}
+
++ (void)ba_creatCustomMultiplePickerViewWithDataArray:(NSArray *)dataArray
+                                        configuration:(void (^)(BAKit_PickerView *tempView)) configuration
+                                                block:(BAKit_PickerViewResultBlock)block
+{
+    BAKit_PickerView *pickerView = [[BAKit_PickerView alloc] init];
+    pickerView.pickerViewType = BAKit_PickerViewTypeMultipleArray;
+    
+    if (configuration)
+    {
+        configuration(pickerView);
+    }
+    pickerView.multipleDataArray = dataArray;
     [pickerView ba_pickViewShow];
     pickerView.resultBlock = block;
 }
@@ -238,6 +254,7 @@
     self.dateMode = BAKit_PickerViewDateModeDate;
     self.animationType = BAKit_PickerViewAnimationTypeScale;
     self.isTouchEdgeHide = YES;
+    self.isShowTitle = YES;
     self.ba_backgroundColor_pickView = BAKit_Color_White_pod;
     self.ba_backgroundColor_toolBar = BAKit_Color_White_pod;
     self.ba_pickViewFont = [UIFont boldSystemFontOfSize:17];
@@ -296,6 +313,21 @@
     {
         min_y = kBAKit_PickerViewToolBar_H;
         min_h = kBAKit_PickerView_H;
+        if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
+        {
+            if (self.multipleTitleArray.count == self.multipleDataArray.count)
+            {
+                for (int i = 0; i < self.multipleTitleArray.count; i ++)
+                {
+                    CGRect frame = CGRectMake(min_x + i*(min_w/self.multipleTitleArray.count), min_y, min_w/self.multipleTitleArray.count, 30);
+                    
+                    UILabel * titleLabel = [self ba_creatTitleLabelWithFrame:frame index:i];
+                    [self.bgView addSubview:titleLabel];
+                }
+                min_y = min_y + 30;
+                min_h = min_h - 30;
+            }
+        }
         self.pickView.frame = CGRectMake(min_x, min_y, min_w, min_h);
         self.datePicker.frame = self.pickView.frame;
         
@@ -310,6 +342,10 @@
         min_x = min_bgView_w - 40 - 20;
 
         self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        
+        min_x = 20 + min_w + 10;
+        min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 40 - 20;
+        self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     }
     else if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeBottom)
     {
@@ -317,6 +353,21 @@
         min_w = min_bgView_w;
         min_h = min_bgView_h - kBAKit_PickerViewToolBar_H;
         min_x = 0;
+        if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
+        {
+            if (self.multipleTitleArray.count == self.multipleDataArray.count)
+            {
+                for (int i = 0; i < self.multipleTitleArray.count; i ++)
+                {
+                    CGRect frame = CGRectMake(min_x + i*(min_w/self.multipleTitleArray.count), min_y, min_w/self.multipleTitleArray.count, 30);
+                    
+                    UILabel * titleLabel = [self ba_creatTitleLabelWithFrame:frame index:i];
+                    [self.bgView addSubview:titleLabel];
+                }
+                min_y = min_y + 30;
+                min_h = min_h - 30;
+            }
+        }
         self.pickView.frame = CGRectMake(min_x, min_y, min_w, min_h);
         self.datePicker.frame = self.pickView.frame;
 
@@ -329,12 +380,27 @@
         min_w = 40;
         min_h = kBAKit_PickerViewToolBar_H;
         self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        
 
         min_x = min_bgView_w - 40 - 20;
         self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
+        
+        min_x = 20 + min_w + 10;
+        min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 40 - 20;
+        self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     }
+}
 
+- (UILabel *)ba_creatTitleLabelWithFrame:(CGRect)frame
+                                   index:(NSInteger)index
+{
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:frame];
+    titleLabel.text = self.multipleTitleArray[index];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor =[UIColor blackColor];
+    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.backgroundColor = self.ba_backgroundColor_pickView;
+    
+    return titleLabel;
 }
 
 #pragma mark - UIPickerViewDelegate UIPickerViewDataSource
@@ -346,6 +412,9 @@
             break;
         case BAKit_PickerViewTypeArray:
             return 1;
+            break;
+        case BAKit_PickerViewTypeMultipleArray:
+            return self.multipleDataArray.count;
             break;
         case BAKit_PickerViewTypeDate:
         {
@@ -382,6 +451,12 @@
         case BAKit_PickerViewTypeArray:
         {
             return self.dataArray.count;
+        }
+            break;
+            
+        case BAKit_PickerViewTypeMultipleArray:
+        {
+            return [self.multipleDataArray[component] count];
         }
             break;
             
@@ -440,6 +515,10 @@
     {
         return self.dataArray[row];
     }
+    else if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
+    {
+        return self.multipleDataArray[component][row];
+    }
     else if (self.pickerViewType == BAKit_PickerViewTypeDate)
     {
         if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
@@ -479,11 +558,14 @@
     }
     return nil;
 }
-- (nullable UIView *)viewForRow:(NSInteger)row forComponent:(NSInteger)component{
+
+- (nullable UIView *)viewForRow:(NSInteger)row forComponent:(NSInteger)component
+{
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor redColor];
     return view;
 }
+
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (self.pickerViewType == BAKit_PickerViewTypeCity)
@@ -526,20 +608,35 @@
         self.province = [self cutLocalString:self.provinceArray[provinces]];
         self.city = [self cutLocalString:self.cityArray[city]];
         self.area = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[area]];
+        
+        if (!BAKit_stringIsBlank_pod(self.area))
+        {
+            self.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@,%@", self.province, self.city, self.area];
+        }
+        else
+        {
+            self.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@", self.province, self.city];
+        }
     }
     else if (self.pickerViewType == BAKit_PickerViewTypeArray)
     {
         self.resultString = self.dataArray[row];
     }
+    else if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
+    {
+
+        [self.selectedArray replaceObjectAtIndex:component withObject:self.multipleDataArray[component][row]];
+        self.resultString = [self.selectedArray componentsJoinedByString:@","];
+    }
     else if (self.pickerViewType == BAKit_PickerViewTypeDate)
     {
-        if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
+        if (self.dateType == BAKit_PickerViewDateTypeYMDHMS)
+        {
             switch (component) {
                 case 0:
                 {
                     self.defaultYearString = self.yearArray[row];
                     [self refreshDay];
-                    
                 }
                     break;
                 case 1:
@@ -551,33 +648,27 @@
                 case 2:
                 {
                     self.defaultDayString = self.dayArray[row];
-
                 }
                     break;
                 case 3:
                 {
                     self.defaultHoursString = self.hoursArray[row];
-
                 }
                     break;
                 case 4:
                 {
                     self.defaultMinutesString = self.minutesArray[row];
-
                 }
                     break;
                 case 5:
                 {
                     self.defaultSecondsString = self.secondsArray[row];
-
                 }
                     break;
                 default:
                     break;
             }
-
         }
-        
     }
     else if (self.pickerViewType == BAKit_PickerViewTypeDateYM)
     {
@@ -589,8 +680,6 @@
         {
             self.defaultMounthString = self.mounthArray[row];
         }
-        
-        
         NSString *yearString = [self.defaultYearString substringToIndex:4];
         
         NSString *monthString = @"";
@@ -646,11 +735,15 @@
         
         self.resultString = [NSString stringWithFormat:@"%@年，%@", yearString, self.defaultWeekString];
     }
+    if (self.pickerViewType != BAKit_PickerViewTypeCity)
+    {
+        self.contentTitleLabel.text = self.resultString;
+    }
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    UILabel* pickerLabel = (UILabel*)view;
+    UILabel *pickerLabel = (UILabel*)view;
     if (!pickerLabel){
         pickerLabel = [[UILabel alloc] init];
         pickerLabel.adjustsFontSizeToFitWidth = YES;
@@ -866,6 +959,7 @@
             }
         }
         else if (self.pickerViewType == BAKit_PickerViewTypeArray ||
+                 self.pickerViewType == BAKit_PickerViewTypeMultipleArray ||
                  self.pickerViewType == BAKit_PickerViewTypeDate ||
                  self.pickerViewType == BAKit_PickerViewTypeDateYM  ||
                  self.pickerViewType == BAKit_PickerViewTypeDateWeek )
@@ -885,7 +979,6 @@
                 
             }
         }
-        
         [self ba_pickViewHidden];
     }
 }
@@ -1224,6 +1317,18 @@
     return _alertWindow;
 }
 
+- (UILabel *)contentTitleLabel {
+    if (!_contentTitleLabel)
+    {
+        _contentTitleLabel = [[UILabel alloc] init];
+        _contentTitleLabel.font = [UIFont systemFontOfSize:15];
+        _contentTitleLabel.textAlignment = NSTextAlignmentCenter;
+        _contentTitleLabel.textColor = [UIColor blackColor];
+        [self.toolBarView addSubview:_contentTitleLabel];
+    }
+    return _contentTitleLabel;
+}
+
 - (NSMutableArray *)provinceArray
 {
     if (!_provinceArray)
@@ -1357,6 +1462,22 @@
 {
     _dataArray = dataArray;
     self.resultString = dataArray[0];
+}
+
+- (void)setMultipleDataArray:(NSArray *)multipleDataArray
+{
+    _multipleDataArray = multipleDataArray;
+    [self.selectedArray removeAllObjects];
+
+    for (NSArray * arry in _multipleDataArray) {
+        [self.selectedArray addObject:arry[0]];
+    }
+    
+    self.resultString = [self.selectedArray componentsJoinedByString:@","];
+}
+
+- (void)setMultipleTitleArray:(NSArray *)multipleTitleArray {
+    _multipleTitleArray = multipleTitleArray;
 }
 
 - (void)setBa_backgroundColor_toolBar:(UIColor *)ba_backgroundColor_toolBar
@@ -1576,6 +1697,19 @@
     _isTouchEdgeHide = isTouchEdgeHide;
 }
 
+- (void)setIsShowTitle:(BOOL)isShowTitle
+{
+    _isShowTitle = isShowTitle;
+    if (_isShowTitle == YES)
+    {
+        self.contentTitleLabel.hidden = NO;
+    }
+    else
+    {
+        self.contentTitleLabel.hidden = YES;
+    }
+}
+
 - (void)setAnimationType:(BAKit_PickerViewAnimationType)animationType
 {
     _animationType = animationType;
@@ -1599,6 +1733,19 @@
 - (void)setBa_pickViewLineViewColor:(UIColor *)ba_pickViewLineViewColor
 {
     _ba_pickViewLineViewColor = ba_pickViewLineViewColor;
+}
+
+- (void)setBa_pickViewTitleFont:(UIFont *)ba_pickViewTitleFont
+{
+    _ba_pickViewTitleFont = ba_pickViewTitleFont;
+    
+    self.contentTitleLabel.font = ba_pickViewTitleFont;
+}
+
+- (void)setBa_pickViewTitleColor:(UIColor *)ba_pickViewTitleColor
+{
+    _ba_pickViewTitleColor = ba_pickViewTitleColor;
+    self.contentTitleLabel.textColor = ba_pickViewTitleColor;
 }
 
 @end

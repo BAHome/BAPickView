@@ -80,12 +80,19 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 
 @interface BAKit_PickerView : UIView
 
-#pragma mark - 自定义样式
+#pragma mark - 自定义属性
 @property (nonatomic, copy) BAKit_PickerViewBlock block;
 @property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
 
-/*! 是否开启边缘触摸隐藏 默认：YES */
+/**
+ 是否开启边缘触摸隐藏，默认：YES
+ */
 @property (nonatomic, assign) BOOL isTouchEdgeHide;
+
+/**
+ 是否关闭选择内容显示在工具栏，默认：YES
+ */
+@property (nonatomic, assign) BOOL isShowTitle;
 
 /**
  动画样式
@@ -112,6 +119,16 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property(nonatomic, strong) NSArray *dataArray;
 
 /**
+ 自定义多列数据的数组，如：@[@[@"男", @"女"],@[@"21", @"22"],@[@"39", @"40"]]
+ */
+@property(nonatomic, strong) NSArray *multipleDataArray;
+
+/**
+ 自定义多列数据的标题,如  @[@"性别",@"名字",@"年龄"] 此属性配合multipleDataArray属性使用 , 此处 count 应与多列数据 count 一致否者不管用
+ */
+@property(nonatomic, strong) NSArray *multipleTitleArray;
+
+/**
  toolBar 背景颜色，默认：白色
  */
 @property(nonatomic, strong) UIColor *ba_backgroundColor_toolBar;
@@ -132,9 +149,19 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
 
 /**
+ title 颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTitleColor;
+
+/**
  pickView 字体，默认：[UIFont boldSystemFontOfSize:17]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
  */
 @property(nonatomic, strong) UIFont *ba_pickViewFont;
+
+/**
+ pickView title 字体，默认：[UIFont boldSystemFontOfSize:15]
+ */
+@property(nonatomic, strong) UIFont *ba_pickViewTitleFont;
 
 /**
  pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
@@ -183,6 +210,18 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 + (void)ba_creatCustomPickerViewWithDataArray:(NSArray *)dataArray
                                 configuration:(void (^)(BAKit_PickerView *tempView)) configuration
                                         block:(BAKit_PickerViewResultBlock)block;
+
+/**
+ 快速创建一个 自定义多列 pickerView
+ 
+ @param dataArray 数组 @[@[@"男", @"女"],@[@"21", @"22"],@[@"39", @"40"]]
+ @param configuration 可以设置 BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatCustomMultiplePickerViewWithDataArray:(NSArray *)dataArray
+                                        configuration:(void (^)(BAKit_PickerView *tempView)) configuration
+                                                block:(BAKit_PickerViewResultBlock)block;
+
 /**
  显示 pick
  */

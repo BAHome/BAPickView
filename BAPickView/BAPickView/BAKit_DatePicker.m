@@ -11,6 +11,7 @@
 #import "UIView+BAAnimation.h"
 #import "BAKit_ConfigurationDefine.h"
 #import "UIView+BARectCorner_pick.h"
+#import "NSDateFormatter+BAKit.h"
 
 static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
@@ -41,6 +42,10 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 @property(strong, nonatomic) NSMutableDictionary *resoultDictionary;
 
+@property(strong, nonatomic) NSDate * maxDate;
+@property(strong, nonatomic) NSDate * minDate;
+@property(strong, nonatomic) NSDate * defautDate;
+
 @property (assign, nonatomic) CGFloat cellHight;
 @property (nonatomic, strong) UIWindow *alertWindow;
 @property (nonatomic, strong) UIView *backView;
@@ -64,6 +69,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 @property(nonatomic, assign) BOOL isAnimating;
 
+@property (nonatomic, strong) UILabel * contentTitleLabel;
+
 
 @end
 
@@ -71,8 +78,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 + (void)ba_creatPickerViewWithType:(BAKit_CustomDatePickerDateType)pickerViewType
                      configuration:(void (^)(BAKit_DatePicker *tempView))configuration
-                             block:(BAKit_PickerViewResultBlock)block{
-    
+                             block:(BAKit_PickerViewResultBlock)block
+{
     BAKit_DatePicker *pickerView = [[BAKit_DatePicker alloc] init];
     
     if (configuration)
@@ -481,22 +488,41 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
                 default:
                     break;
             }
-            if ([key isEqualToString:@"year"]) {
-                if (self.ba_maxYear != 0) {
-                    [self refreshMonthIsYearState:[titleLabel.text isEqualToString:[self.yearArray lastObject]]];
-                }
-            }
-            if (![titleLabel.text isEqualToString:@""])
+            
+            if (!BAKit_stringIsBlank_pod(titleLabel.text))
             {
                 [self.resoultDictionary setObject:titleLabel.text forKey:key];
                 
-                if ([key isEqualToString:@"mounth"] &&(self.pickerViewType ==BAKit_CustomDatePickerDateTypeYMD || self.pickerViewType ==BAKit_CustomDatePickerDateTypeYMDHMS))
+                NSString *year = self.resoultDictionary[@"year"];
+                NSString *mounth = self.resoultDictionary[@"mounth"];
+                NSString *day = self.resoultDictionary[@"day"];
+                NSString *hour = self.resoultDictionary[@"hour"];
+                NSString *minute = self.resoultDictionary[@"minute"];
+                
+                if ([key isEqualToString:@"year"])
                 {
-                    [self refreshDay];
+                    [self refreshMonthIsMaxYearState:[year isEqualToString:[self.yearArray lastObject]] MinYear:[year isEqualToString:self.yearArray[0]]];
+                }
+                if ([key isEqualToString:@"year"] || [key isEqualToString:@"mounth"])
+                {
+                    [self refreshDayIsMaxMonthState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]]) MinMonth:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]])];
+                }
+                 if ([key isEqualToString:@"year"] || [key isEqualToString:@"mounth"] || [key isEqualToString:@"day"])
+                {
+                    [self refreshHourIsMaxDayState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]] && [day isEqualToString:[self.dayArray lastObject]]) MinDay:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]] && [day isEqualToString:self.dayArray[0]])];
+                }
+                if ([key isEqualToString:@"year"] || [key isEqualToString:@"mounth"] || [key isEqualToString:@"day"] || [key isEqualToString:@"hour"])
+                {
+                    [self refreshMinuteIsMaxHourState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]] && [day isEqualToString:[self.dayArray lastObject]]&& [hour isEqualToString:[self.hourArray lastObject]]) MinHour:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]] && [day isEqualToString:self.dayArray[0]]&& [hour isEqualToString:self.hourArray[0]])];
+                }
+                if (![key isEqualToString:@"seconds"])
+                {
+                    [self refreshSecondsIsMaxMinuteState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]] && [day isEqualToString:[self.dayArray lastObject]]&& [hour isEqualToString:[self.hourArray lastObject]] && [minute isEqualToString:[self.minuteArray lastObject]]) MinMinute:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]] && [day isEqualToString:self.dayArray[0]]&& [hour isEqualToString:self.hourArray[0]] && [minute isEqualToString:self.minuteArray[0]])];
                 }
             }
         }
     }
+    self.contentTitleLabel.text = [self selectedTitmeResults];
 }
 
 /**
@@ -534,140 +560,232 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 {
     if (button.tag == 1001)
     {
-        // 确定
-        NSString *resoultDateStr = @"";
-        
-        NSString *year = self.resoultDictionary[@"year"];
-        if ([year containsString:@"年"])
-        {
-            year = [year substringToIndex:year.length - 1];
-        }
-        
-        NSString *mouth = self.resoultDictionary[@"mounth"];
-        if ([mouth containsString:@"月"])
-        {
-            mouth = [mouth substringToIndex:mouth.length - 1];
-        }
-        
-        NSString *day = self.resoultDictionary[@"day"];
-        if ([day containsString:@"日"])
-        {
-            day = [day substringToIndex:day.length - 1];
-        }
-        
-        NSString *hour = self.resoultDictionary[@"hour"];
-        if ([hour containsString:@"时"])
-        {
-            hour = [hour substringToIndex:hour.length - 1];
-        }
-        
-        NSString *minute = self.resoultDictionary[@"minute"];
-        if ([minute containsString:@"分"])
-        {
-            minute = [minute substringToIndex:minute.length - 1];
-        }
-        
-        NSString *seconds = self.resoultDictionary[@"seconds"];
-        if ([seconds containsString:@"秒"])
-        {
-            seconds = [seconds substringToIndex:seconds.length - 1];
-        }
-        
-        switch (self.pickerViewType) {
-            case BAKit_CustomDatePickerDateTypeYY:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@",year];
-            }
-                break;
-            case BAKit_CustomDatePickerDateTypeYM:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@-%@",year,mouth];
-            }
-                break;
-            case BAKit_CustomDatePickerDateTypeYMD:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@-%@-%@",year,mouth,day];
-            }
-                break;
-            case BAKit_CustomDatePickerDateTypeYMDHM:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@-%@-%@ %@:%@",year,mouth,day,hour,minute];
-            }
-                break;
-            case BAKit_CustomDatePickerDateTypeYMDHMS:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@",year,mouth,day,hour,minute,seconds];
-            }
-                break;
-                
-            case BAKit_CustomDatePickerDateTypeHM:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@:%@",hour,minute];
-            }
-                break;
-            case BAKit_CustomDatePickerDateTypeMD:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@-%@",mouth,day];
-            }
-                break;
-            case BAKit_CustomDatePickerDateTypeHMS:
-            {
-                resoultDateStr = [NSString stringWithFormat:@"%@:%@:%@",hour,minute,seconds];
-            }
-                break;
-                
-            default:
-                break;
-        }
-        
-        self.resultBlock(resoultDateStr);
+        self.resultBlock([self selectedTitmeResults]);
     }
     [self ba_pickViewHiddenAnimation];
 }
-
-- (void)refreshMonthIsYearState:(BOOL)state
+- (NSString *)selectedTitmeResults
 {
-    CGFloat max = 12;
-    if (self.ba_maxMonth < 1 || self.ba_maxMonth > 12 || self.ba_maxYear == 0 || state == NO )
+    // 确定
+    NSString *resoultDateStr = @"";
+    
+    NSString *year = self.resoultDictionary[@"year"];
+    if ([year containsString:@"年"])
     {
-        NSLog(@"ba_maxMonth 参数不规范");
-    }
-    else
-    {
-        max = self.ba_maxMonth;
+        year = [year substringToIndex:year.length - 1];
     }
     
+    NSString *mouth = self.resoultDictionary[@"mounth"];
+    if ([mouth containsString:@"月"])
+    {
+        mouth = [mouth substringToIndex:mouth.length - 1];
+    }
+    
+    NSString *day = self.resoultDictionary[@"day"];
+    if ([day containsString:@"日"])
+    {
+        day = [day substringToIndex:day.length - 1];
+    }
+    
+    NSString *hour = self.resoultDictionary[@"hour"];
+    if ([hour containsString:@"时"])
+    {
+        hour = [hour substringToIndex:hour.length - 1];
+    }
+    
+    NSString *minute = self.resoultDictionary[@"minute"];
+    if ([minute containsString:@"分"])
+    {
+        minute = [minute substringToIndex:minute.length - 1];
+    }
+    
+    NSString *seconds = self.resoultDictionary[@"seconds"];
+    if ([seconds containsString:@"秒"])
+    {
+        seconds = [seconds substringToIndex:seconds.length - 1];
+    }
+    
+    switch (self.pickerViewType) {
+        case BAKit_CustomDatePickerDateTypeYY:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@",year];
+        }
+            break;
+        case BAKit_CustomDatePickerDateTypeYM:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@-%@",year,mouth];
+        }
+            break;
+        case BAKit_CustomDatePickerDateTypeYMD:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@-%@-%@",year,mouth,day];
+        }
+            break;
+        case BAKit_CustomDatePickerDateTypeYMDHM:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@-%@-%@ %@:%@",year,mouth,day,hour,minute];
+        }
+            break;
+        case BAKit_CustomDatePickerDateTypeYMDHMS:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%@",year,mouth,day,hour,minute,seconds];
+        }
+            break;
+            
+        case BAKit_CustomDatePickerDateTypeHM:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@:%@",hour,minute];
+        }
+            break;
+        case BAKit_CustomDatePickerDateTypeMD:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@-%@",mouth,day];
+        }
+            break;
+        case BAKit_CustomDatePickerDateTypeHMS:
+        {
+            resoultDateStr = [NSString stringWithFormat:@"%@:%@:%@",hour,minute,seconds];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return resoultDateStr;
+}
+#pragma mark 计算出当月有多少天
+- (void)refreshSecondsIsMaxMinuteState:(BOOL)maxState MinMinute:(BOOL)minState
+{
+    NSInteger min = 0;
+    NSInteger max = 59;
+    if (maxState == YES)
+    {
+        max = self.maxDate.second;
+    }
+    if (minState == YES)
+    {
+        min = self.minDate.second;
+    }
+    [self.secondArray removeAllObjects];
+    for (NSInteger i = min; i < max+1; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%02li秒",(long)i];
+        [self.secondArray addObject:str];
+    }
+    [self setSelectDate:@"seconds"];
+    [self.secondTableView reloadData];
+}
+
+- (void)refreshMinuteIsMaxHourState:(BOOL)maxState MinHour:(BOOL)minState
+{
+    NSInteger min = 0;
+    NSInteger max = 59;
+    if (maxState == YES)
+    {
+        max = self.maxDate.minute;
+    }
+    if (minState == YES)
+    {
+        min = self.minDate.minute;
+    }
+    [self.minuteArray removeAllObjects];
+    for (NSInteger i = min; i < max+1; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%02li分",(long)i];
+        [self.minuteArray addObject:str];
+    }
+    [self setSelectDate:@"minute"];
+    [self.minuteTableView reloadData];
+}
+
+- (void)refreshHourIsMaxDayState:(BOOL)maxState MinDay:(BOOL)minState
+{
+    NSInteger min = 0;
+    NSInteger max = 23;
+    if (maxState == YES)
+    {
+        max = self.maxDate.hour;
+    }
+    if (minState == YES)
+    {
+        min = self.minDate.hour;
+    }
+    [self.hourArray removeAllObjects];
+    for (NSInteger i = min; i < max+1; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%02li时",(long)i];
+        [self.hourArray addObject:str];
+    }
+    [self setSelectDate:@"hour"];
+    [self.hourTableView reloadData];
+}
+- (void)refreshDayIsMaxMonthState:(BOOL)maxState MinMonth:(BOOL)minState
+{
+    NSString *year = self.resoultDictionary[@"year"];
+    if ([year containsString:@"年"])
+    {
+        year = [year substringToIndex:year.length - 1];
+    }
+    NSString *mounth = self.resoultDictionary[@"mounth"];
+    if ([mounth containsString:@"月"])
+    {
+        mounth = [mounth substringToIndex:mounth.length - 1];
+    }
+    
+    NSString * dateStr = [NSString stringWithFormat:@"%@-%@",year,mounth];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM"];
+    NSDate * date = [formatter dateFromString:dateStr];
+    
+    NSInteger min = 1;
+    NSInteger max =  [self ba_totaldaysInMonth:date];
+    
+    if (maxState == YES)
+    {
+        max = self.maxDate.day;
+    }
+    if (minState == YES)
+    {
+        min = self.minDate.day;
+    }
+    
+    [self.dayArray removeAllObjects];
+    for (NSInteger i = min; i < max+1; i++)
+    {
+        NSString *str = [NSString stringWithFormat:@"%02li日",(long)i];
+        [self.dayArray addObject:str];
+    }
+    [self setSelectDate:@"day"];
+    [self.dayTableView reloadData];
+    
+}
+
+- (void)refreshMonthIsMaxYearState:(BOOL)maxState MinYear:(BOOL)minState
+{
+    NSInteger min = 1;
+    NSInteger max = 12;
+    if (maxState == YES)
+    {
+        max = self.maxDate.month;
+    }
+    if (minState == YES)
+    {
+        min = self.minDate.month;
+    }
     [self.monthArray removeAllObjects];
-    for (NSInteger i = 1; i < max + 1; i++)
+    for (NSInteger i = min; i < max+1; i++)
     {
         NSString *str = [NSString stringWithFormat:@"%02li月",(long)i];
         [self.monthArray addObject:str];
     }
+    [self setSelectDate:@"mounth"];
     [self.monthTableView reloadData];
 }
 
 - (void)refreshYear
 {
-    CGFloat max = 0; CGFloat min = 0;
-    if (self.ba_minYear == 0 && self.ba_maxYear == 0)
-    {
-        max = 2050,min = 1900;
-    }
-    else if (self.ba_minYear == 0 && self.ba_maxYear != 0)
-    {
-        max = self.ba_maxYear,min = 1900;
-    }
-    else if (self.ba_maxYear == 0 && self.ba_minYear != 0)
-    {
-        max = 2050, min = self.ba_minYear;
-    }
-    else
-    {
-        max = self.ba_maxYear, min = self.ba_minYear;
-    }
-    
     [self.yearArray removeAllObjects];
-    for (NSInteger i = min; i < max; i++)
+    for (NSInteger i = self.minDate.year; i < self.maxDate.year+1; i++)
     {
         NSString *str = [NSString stringWithFormat:@"%ld年",(long)i];
         [_yearArray addObject:str];
@@ -675,9 +793,22 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     [self setSelectDate:@"year"];
 }
 
-- (void)setSelectDate:(NSString *)typeKey{
+- (void)refreshAllTime
+{
+    [self refreshYear];
+    [self refreshMonthIsMaxYearState:self.maxDate.year <= self.defautDate.year MinYear:self.minDate.year == self.defautDate.year];
+    [self refreshDayIsMaxMonthState:(self.maxDate.year <= self.defautDate.year && self.maxDate.month <= self.defautDate.month) MinMonth:(self.minDate.year == self.defautDate.year && self.minDate.month >= self.defautDate.month)];
+    [self refreshHourIsMaxDayState:(self.maxDate.year <= self.defautDate.year && self.maxDate.month <= self.defautDate.month && self.maxDate.day <= self.defautDate.day) MinDay:(self.minDate.year == self.defautDate.year && self.minDate.month >= self.defautDate.month && self.minDate.day >= self.defautDate.day)];
+    [self refreshMinuteIsMaxHourState:(self.maxDate.year <= self.defautDate.year && self.maxDate.month <= self.defautDate.month && self.maxDate.day <= self.defautDate.day && self.maxDate.hour <= self.defautDate.hour) MinHour:(self.minDate.year == self.defautDate.year && self.minDate.month >= self.defautDate.month && self.minDate.day >= self.defautDate.day && self.minDate.hour >= self.defautDate.hour)];
+    [self refreshSecondsIsMaxMinuteState:(self.maxDate.year <= self.defautDate.year && self.maxDate.month <= self.defautDate.month && self.maxDate.day <= self.defautDate.day && self.maxDate.hour <= self.defautDate.hour && self.maxDate.minute <= self.defautDate.minute) MinMinute:(self.minDate.year == self.defautDate.year && self.minDate.month >= self.defautDate.month && self.minDate.day >= self.defautDate.day && self.minDate.hour >= self.defautDate.hour && self.minDate.minute >= self.defautDate.minute)];
+}
+
+- (void)setSelectDate:(NSString *)typeKey
+{
+    BAKit_WeakSelf
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
+        BAKit_StrongSelf
         NSString *defaultDateStr = [self.resoultDictionary objectForKey:typeKey];
         NSArray *dataArray;
         UITableView *tableView;
@@ -711,36 +842,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     });
 }
 
-#pragma mark 计算出当月有多少天
-- (void)refreshDay
-{
-    NSString *year = self.resoultDictionary[@"year"];
-    if ([year containsString:@"年"])
-    {
-        year = [year substringToIndex:year.length - 1];
-    }
-    NSString *mounth = self.resoultDictionary[@"mounth"];
-    if ([mounth containsString:@"月"])
-    {
-        mounth = [mounth substringToIndex:mounth.length - 1];
-    }
-    
-    NSString * dateStr = [NSString stringWithFormat:@"%@-%@",year,mounth];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM"];
-    NSDate * date = [formatter dateFromString:dateStr];
-    NSInteger count =  [self ba_totaldaysInMonth:date];
-    
-    [self.dayArray removeAllObjects];
-    for (int i = 1; i < count + 1; i++)
-    {
-        NSString *str = [NSString stringWithFormat:@"%02i日",i];
-        [_dayArray addObject:str];
-    }
-    [self.dayTableView reloadData];
-    [self setSelectDate:@"day"];
-}
-
 - (NSInteger)ba_totaldaysInMonth:(NSDate *)date
 {
     NSRange daysInOfMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
@@ -749,42 +850,43 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 - (void)refreshDayDefautDate
 {
-    [_resoultDictionary setObject:[NSString stringWithFormat:@"%ld年",(long)self.ba_defautDate.year] forKey:@"year"];
-    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li月",(long)self.ba_defautDate.month] forKey:@"mounth"];
-    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li日",(long)self.ba_defautDate.day] forKey:@"day"];
-    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li时",(long)self.ba_defautDate.hour] forKey:@"hour"];
-    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li分",(long)self.ba_defautDate.minute] forKey:@"minute"];
-    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li秒",(long)self.ba_defautDate.second] forKey:@"seconds"];
+    [_resoultDictionary setObject:[NSString stringWithFormat:@"%ld年",(long)self.defautDate.year] forKey:@"year"];
+    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li月",(long)self.defautDate.month] forKey:@"mounth"];
+    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li日",(long)self.defautDate.day] forKey:@"day"];
+    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li时",(long)self.defautDate.hour] forKey:@"hour"];
+    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li分",(long)self.defautDate.minute] forKey:@"minute"];
+    [_resoultDictionary setObject:[NSString stringWithFormat:@"%02li秒",(long)self.defautDate.second] forKey:@"seconds"];
 }
 
 #pragma mark - setter / getter
-- (void)setBa_maxMonth:(NSInteger)ba_maxMonth {
-    _ba_maxMonth = ba_maxMonth;
-    if (self.ba_maxYear) {
-        if (self.ba_maxYear-1 == BAKit_Current_Date.year) {
-            [self refreshMonthIsYearState:YES];
-        } else {
-            [self refreshMonthIsYearState:NO];
-        }
+- (void)setBa_maxDate:(NSDate *)ba_maxDate {
+    _ba_maxDate = ba_maxDate;
+    if ([_ba_maxDate ba_dateTimeIntervalSince1970InMilliSecond] < [self.defautDate ba_dateTimeIntervalSince1970InMilliSecond])
+    {
+        NSLog(@"最大时间小于默认选中时间,最大时间为默认选中时间");
+        self.defautDate = _ba_maxDate;
     }
+    self.maxDate = _ba_maxDate;
+    [self refreshAllTime];
 }
 
-- (void)setBa_maxYear:(NSInteger)ba_maxYear
-{
-    _ba_maxYear = ba_maxYear;
-    [self refreshYear];
-}
-
-- (void)setBa_minYear:(NSInteger)ba_minYear
-{
-    _ba_minYear = ba_minYear;
-    [self refreshYear];
+- (void)setBa_minDate:(NSDate *)ba_minDate {
+    _ba_minDate = ba_minDate;
+    if ([_ba_minDate ba_dateTimeIntervalSince1970InMilliSecond] > [self.defautDate ba_dateTimeIntervalSince1970InMilliSecond])
+    {
+        NSLog(@"最小时间大于默认选中时间,最小时间为默认选中时间");
+        self.defautDate = _ba_minDate;
+    }
+    self.minDate = _ba_minDate;
+    [self refreshAllTime];
 }
 
 - (void)setBa_defautDate:(NSDate *)ba_defautDate
 {
     _ba_defautDate = ba_defautDate;
+    self.defautDate = _ba_defautDate;
     [self refreshDayDefautDate];
+    [self refreshAllTime];
 }
 
 // 存放滑动中选择的当前选中日期
@@ -793,10 +895,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     if (!_resoultDictionary)
     {
         _resoultDictionary = [NSMutableDictionary dictionary];
-        if (self.ba_defautDate == nil)
-        {
-            self.ba_defautDate = BAKit_Current_Date;
-        }
         [self refreshDayDefautDate];
     }
     return _resoultDictionary;
@@ -816,7 +914,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 - (UITableView *)ba_creatTableView
 {
-    UITableView *tableView = [[UITableView alloc]init];
+    UITableView *tableView = [[UITableView alloc] init];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.backgroundColor = [UIColor clearColor];
@@ -881,6 +979,28 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 }
 
 // 初始化日期数据
+- (NSDate *)defautDate {
+    if (!_defautDate) {
+        _defautDate = BAKit_Current_Date;
+    }
+    return _defautDate;
+}
+
+- (NSDate *)maxDate {
+    if (!_maxDate) {
+        _maxDate = self.defautDate;
+    }
+    return _maxDate;
+}
+
+- (NSDate *)minDate {
+    if (!_minDate) {
+        NSString *string = @"1970-01-01 00:00:00";
+        NSDateFormatter *fmt = [NSDateFormatter ba_setupDateFormatterWithYMDHMS];
+        _minDate = [fmt dateFromString:string];
+    }
+    return _minDate;
+}
 - (NSMutableArray *)yearArray
 {
     if (!_yearArray)
@@ -896,12 +1016,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 {
     if (!_monthArray) {
         _monthArray = [NSMutableArray array];
-        for (NSInteger i = 1; i < 13; i++)
-        {
-            NSString *str = [NSString stringWithFormat:@"%02li月",(long)i];
-            [_monthArray addObject:str];
-        }
-        [self setSelectDate:@"mounth"];
+        [self refreshMonthIsMaxYearState:YES MinYear:NO];
     }
     return _monthArray;
 }
@@ -909,7 +1024,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 - (NSMutableArray *)dayArray{
     if (!_dayArray) {
         _dayArray = [NSMutableArray array];
-        [self refreshDay];
+        [self refreshDayIsMaxMonthState:YES MinMonth:NO];
     }
     return _dayArray;
 }
@@ -917,12 +1032,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 - (NSMutableArray *)hourArray{
     if (!_hourArray) {
         _hourArray = [NSMutableArray array];
-        for (int i = 0; i < 24; i++)
-        {
-            NSString *str = [NSString stringWithFormat:@"%02i时",i];
-            [_hourArray addObject:str];
-        }
-        [self setSelectDate:@"hour"];
+        [self refreshHourIsMaxDayState:YES MinDay:NO];
     }
     return _hourArray;
 }
@@ -930,12 +1040,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 - (NSMutableArray *)minuteArray{
     if (!_minuteArray) {
         _minuteArray = [NSMutableArray array];
-        for (int i = 0; i < 60; i++)
-        {
-            NSString *str = [NSString stringWithFormat:@"%02i分",i];
-            [_minuteArray addObject:str];
-        }
-        [self setSelectDate:@"minute"];
+        [self refreshMinuteIsMaxHourState:YES MinHour:NO];
     }
     return _minuteArray;
 }
@@ -943,17 +1048,12 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 - (NSMutableArray *)secondArray{
     if (!_secondArray) {
         _secondArray = [NSMutableArray array];
-        for (int i = 0; i < 60; i++)
-        {
-            NSString *str = [NSString stringWithFormat:@"%02i秒",i];
-            [_secondArray addObject:str];
-        }
-        [self setSelectDate:@"seconds"];
+        [self refreshSecondsIsMaxMinuteState:YES MinMinute:NO];
     }
     return _secondArray;
 }
 
-- (UIView *)backView{
+- (UIView *)backView {
     if (!_backView) {
         _backView = [[UIView alloc]init];
         
@@ -963,7 +1063,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 }
 
 // 添加选中日期的分割线
-- (UIView *)topLine{
+- (UIView *)topLine {
     if (!_topLine) {
         _topLine = [[UIView alloc]init];
         _topLine.backgroundColor = BAKit_Color_Gray_9_pod;
@@ -972,7 +1072,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     return _topLine;
 }
 
-- (UIView *)bottomLine{
+- (UIView *)bottomLine {
     if (!_bottomLine) {
         _bottomLine = [[UIView alloc]init];
         _bottomLine.backgroundColor = BAKit_Color_Gray_9_pod;
@@ -983,7 +1083,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 }
 
 // 添加 取消和确定按钮的背景View
-- (UIView *)toolBarView{
+- (UIView *)toolBarView {
     if (!_toolBarView) {
         _toolBarView = [[UIView alloc]init];
         _toolBarView.backgroundColor = BAKit_Color_Gray_11_pod;
@@ -1036,6 +1136,18 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     return _alertWindow;
 }
 
+- (UILabel *)contentTitleLabel {
+    if (!_contentTitleLabel)
+    {
+        _contentTitleLabel = [[UILabel alloc] init];
+        _contentTitleLabel.font = [UIFont systemFontOfSize:15];
+        _contentTitleLabel.textAlignment = NSTextAlignmentCenter;
+        _contentTitleLabel.textColor = [UIColor blackColor];
+        [self.toolBarView addSubview:_contentTitleLabel];
+    }
+    return _contentTitleLabel;
+}
+
 - (void)setBa_backgroundColor_toolBar:(UIColor *)ba_backgroundColor_toolBar
 {
     _ba_backgroundColor_toolBar = ba_backgroundColor_toolBar;
@@ -1065,6 +1177,33 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     _ba_pickViewFont = ba_pickViewFont;
 }
 
+- (void)setIsShowTitle:(BOOL)isShowTitle
+{
+    _isShowTitle = isShowTitle;
+    if (_isShowTitle == YES)
+    {
+        self.contentTitleLabel.hidden = NO;
+    }
+    else
+    {
+        self.contentTitleLabel.hidden = YES;
+    }
+}
+
+- (void)setBa_pickViewTitleFont:(UIFont *)ba_pickViewTitleFont
+{
+    _ba_pickViewTitleFont = ba_pickViewTitleFont;
+    
+    self.contentTitleLabel.font = ba_pickViewTitleFont;
+}
+
+- (void)setBa_pickViewTitleColor:(UIColor *)ba_pickViewTitleColor
+{
+    _ba_pickViewTitleColor = ba_pickViewTitleColor;
+    self.contentTitleLabel.textColor = ba_pickViewTitleColor;
+}
+
+
 - (void)setBa_pickViewTextColor:(UIColor *)ba_pickViewTextColor
 {
     _ba_pickViewTextColor = ba_pickViewTextColor;
@@ -1080,7 +1219,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     CGFloat min_w = 0;
     CGFloat min_h = 0;
     
-    //    CGFloat min_view_w = CGRectGetWidth(self.frame);
+    CGFloat min_view_w = CGRectGetWidth(self.frame);
     CGFloat min_view_h = CGRectGetHeight(self.frame);
     
     self.backgroundColor = BAKit_Color_Translucent_pod;
@@ -1088,7 +1227,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     min_x = 0;
     min_y = min_view_h - BAKit_Default_Height;
     min_h = BAKit_Default_Height;
-    min_w = BAKit_SCREEN_WIDTH;
+    min_w = min_view_w;
     if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
     {
         min_w = 280 * BAKit_ScaleXAndWidth;
@@ -1131,7 +1270,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     min_y = min_line_y;
     min_w = min_bgView_w;
     min_h = 0.5;
-    
     self.topLine.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_y = min_line_y + self.cellHight;
@@ -1141,12 +1279,14 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     min_y = 0;
     min_w = 50;
     min_h = 40;
-    
     self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = CGRectGetWidth(self.toolBarView.frame) - min_w - 20;
     self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
+    min_x = 20 + min_w + 10;
+    min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 50 - 20;
+    self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = 0;
     min_y = min_picker_y;

@@ -10,12 +10,6 @@
 #import "BAPickView_OC.h"
 #import "BAKit_DatePicker.h"
 
-/*! VC 用 BAKit_ShowAlertWithMsg */
-#define BAKit_ShowAlertWithMsg_ios8(msg) UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:msg preferredStyle:UIAlertControllerStyleAlert];\
-UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAlertActionStyleDefault handler:nil];\
-[alert addAction:sureAction];\
-[self presentViewController:alert animated:YES completion:nil];
-
 @interface ViewController ()
 <
     UITableViewDelegate,
@@ -49,7 +43,6 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
     self.tableView.frame = self.view.bounds;
     
 }
-
 
 #pragma mark - UITableViewDataSource / UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -110,6 +103,11 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
                 [self pickView5];
             }
                 break;
+            case 5:
+            {
+                [self pickView6];
+            }
+                break;
                 
             default:
                 break;
@@ -131,7 +129,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
                 break;
             case 2:
             {
-                type = BAKit_CustomDatePickerDateTypeYMD ;
+                type = BAKit_CustomDatePickerDateTypeYMD;
             }
                 break;
 
@@ -166,38 +164,8 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
             default:
                 break;
         }
-        
-        [BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
-            // 自定义：最小年份
-            tempView.ba_minYear = BAKit_Current_Date.year;
-            // 自定义：最大年份
-            tempView.ba_maxYear = tempView.ba_minYear + 5;
-            // 自定义: 最大月份，注意：前提是设置了最大年份才会管用
-            tempView.ba_maxMonth = BAKit_Current_Date.month;
 
-            // 自定义：动画样式
-            tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
-            // 自定义：pickView 位置
-//            tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
-            // 自定义：toolBar 位置
-//            tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
-            // 自定义：pickView 文字颜色
-            tempView.ba_pickViewTextColor = [UIColor redColor];
-            // 自定义：pickView 文字字体
-            tempView.ba_pickViewFont = [UIFont systemFontOfSize:13];
-            
-            // 可以自由定制按钮颜色
-            tempView.ba_buttonTitleColor_sure = [UIColor redColor];
-            tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
-            
-            // 可以自由定制 toolBar 和 pickView 的背景颜色
-//            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
-//            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
-            
-        } block:^(NSString *resultString) {
-            
-            BAKit_ShowAlertWithMsg_ios8(resultString);
-        }];
+        [self ba_creatDatePickerWithType:type];
     }
 }
 
@@ -362,6 +330,102 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
     }];
 }
 
+- (void)pickView6
+{
+    NSArray *array = @[
+                       @[@"男", @"女"],
+                       @[@"18", @"22"],
+                       @[@"163", @"168"]
+                    ];
+    NSArray *titleArray = @[@"性别", @"年龄", @"身高"];
+    BAKit_WeakSelf
+    [BAKit_PickerView ba_creatCustomMultiplePickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
+        
+        BAKit_StrongSelf
+        tempView.multipleTitleArray = titleArray;
+        // 是否显示 pickview title
+//        tempView.isShowTitle = NO;
+        // 自定义 pickview title 的字体颜色
+        tempView.ba_pickViewTitleColor = BAKit_Color_Red_pod;
+        // 自定义 pickview title 的字体
+        tempView.ba_pickViewTitleFont = [UIFont boldSystemFontOfSize:15];
+        // 可以自由定制 toolBar 和 pickView 的背景颜色
+        tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
+        tempView.ba_backgroundColor_pickView = [UIColor greenColor];
+        tempView.animationType = BAKit_PickerViewAnimationTypeTop;
+        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+        self.pickView = tempView;
+    } block:^(NSString *resultString) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+        NSLog(@"%@", resultString);
+    }];
+}
+
+#pragma mark 自定义日期选择器
+- (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type
+{
+    [BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
+        
+        NSDate *maxdDate;
+        NSDate *mindDate;
+        // 自定义：最大最小日期格式
+        if (type == BAKit_CustomDatePickerDateTypeYMD)
+        {
+            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
+            maxdDate = [format dateFromString:@"2018-08-09"];
+            mindDate = [format dateFromString:@"2016-07-20"];
+        }
+        else if (type == BAKit_CustomDatePickerDateTypeYM)
+        {
+            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYM];
+            maxdDate = [format dateFromString:@"2018-08"];
+            mindDate = [format dateFromString:@"2016-07"];
+        }
+        
+        if (maxdDate)
+        {
+            // 自定义：最大日期
+            tempView.ba_maxDate = maxdDate;
+        }
+        if (mindDate)
+        {
+            // 自定义：最小日期
+            tempView.ba_minDate = mindDate;
+        }
+        
+        // 是否显示 pickview title
+        //        tempView.isShowTitle = NO;
+        // 自定义 pickview title 的字体颜色
+        tempView.ba_pickViewTitleColor = BAKit_Color_Red_pod;
+        // 自定义 pickview title 的字体
+        tempView.ba_pickViewTitleFont = [UIFont boldSystemFontOfSize:15];
+        
+        // 自定义：动画样式
+        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
+        // 自定义：pickView 位置
+        //            tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+        // 自定义：toolBar 位置
+        //            tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
+        // 自定义：pickView 文字颜色
+        tempView.ba_pickViewTextColor = [UIColor redColor];
+        // 自定义：pickView 文字字体
+        tempView.ba_pickViewFont = [UIFont systemFontOfSize:13];
+        
+        // 可以自由定制按钮颜色
+        tempView.ba_buttonTitleColor_sure = [UIColor redColor];
+        tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
+        
+        // 可以自由定制 toolBar 和 pickView 的背景颜色
+        //            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
+        //            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
+        
+    } block:^(NSString *resultString) {
+        
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    }];
+}
+
 #pragma mark - setter / getter
 
 - (UITableView *)tableView
@@ -389,6 +453,7 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
                                                  @"3、日期选择器：年月日，可以完全自定义 NSDateFormatter",
                                                  @"4、日期选择器：年月，可以完全自定义 NSDateFormatter",
                                                  @"5、日期选择器：年周，如：2017年，第21周",
+                                                 @"5、多数组自定义数据",
                                                  ],
                      @[@"1、YYYY-MM-DD HH:mm:ss",@"2、YYYY-MM-DD HH:mm",@"3、YYYY-MM-DD",@"4、HH:mm:ss",@"5、YYYY-MM",@"6、MM-DD",@"7、HH:mm",@"8、YYYY"],
                       @[@"1、城市选择器，三级联动，可返回省市县和精确的经纬度\n2、可以自定义 array 显示，性别选择等【目前只支持单行数据】\n3、日期选择器：年月日，可以完全自定义 NSDateFormatter\n4、日期选择器：年月，可以完全自定义 NSDateFormatter\n5、横竖屏适配完美\n6、可以自定义按钮颜色、背景颜色等\n7、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示\n8、10、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改\n9、理论完全兼容现有所有 iOS 系统版本"

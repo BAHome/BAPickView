@@ -46,7 +46,7 @@
  *
  * 在使用 BAKit 的过程中如果出现 bug 请及时以以下任意一种方式联系我，我会及时修复 bug
  *
- * QQ     : 可以添加ios开发技术群 479663605 在这里找到我(博爱1616【137361770】)
+ * QQ     : 可以添加 ios 开发技术群 479663605 在这里找到我(博爱1616【137361770】)
  * 微博    : 博爱1616
  * Email  : 137361770@qq.com
  * GitHub : https://github.com/boai
@@ -64,19 +64,14 @@
 @interface BAKit_DatePicker : UIView
 
 /**
- 日期选择器的最大月份，默认为：12  值范围 1-12 前提要设置最大年份
+ 日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒
  */
-@property(assign, nonatomic) NSInteger ba_maxMonth;
+@property(strong, nonatomic) NSDate * ba_maxDate;
 
 /**
- 日期选择器的最大年限，默认为：2050
+ 日期选择器的最小日期，默认为: 当前时间
  */
-@property(assign, nonatomic) NSInteger ba_maxYear;
-
-/**
- 日期选择器的最小年限，默认为：1900
- */
-@property(assign, nonatomic) NSInteger ba_minYear;
+@property(strong, nonatomic) NSDate * ba_minDate;
 
 /**
  日期选择器默认选中的日期，默认为：日期选择器弹出时的日期
@@ -92,6 +87,11 @@
 
 /*! 是否开启边缘触摸隐藏 默认：YES */
 @property (nonatomic, assign) BOOL isTouchEdgeHide;
+
+/**
+ 是否关闭选择内容显示在工具栏，默认：YES
+ */
+@property (nonatomic, assign) BOOL isShowTitle;
 
 /**
  toolBar 背景颜色，默认：白色
@@ -114,9 +114,19 @@
 @property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
 
 /**
+ title 颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTitleColor;
+
+/**
  pickView 字体，默认：非选中状态 [UIFont systemFontOfSize:10]，选中状态比非选中状态大5，即 15
  */
 @property(nonatomic, strong) UIFont *ba_pickViewFont;
+
+/**
+ pickView title 字体，默认：[UIFont boldSystemFontOfSize:15]
+ */
+@property(nonatomic, strong) UIFont *ba_pickViewTitleFont;
 
 /**
  pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
