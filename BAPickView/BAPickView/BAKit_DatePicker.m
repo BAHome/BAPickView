@@ -81,12 +81,11 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
                              block:(BAKit_PickerViewResultBlock)block
 {
     BAKit_DatePicker *pickerView = [[BAKit_DatePicker alloc] init];
-    
+    pickerView.pickerViewType = pickerViewType;
     if (configuration)
     {
         configuration(pickerView);
     }
-    pickerView.pickerViewType = pickerViewType;
     
     pickerView.resultBlock = block;
     [pickerView ba_pickViewShow];
@@ -456,7 +455,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 - (void)refreshSelectDateWith:(UIScrollView *)scrollView
 {
-    
     UITableView *table = (UITableView *)scrollView;
     NSArray * cells =   table.visibleCells;
     for (BACustomTabelViewCell *cell in cells) {
@@ -502,27 +500,73 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
                 if ([key isEqualToString:@"year"])
                 {
                     [self refreshMonthIsMaxYearState:[year isEqualToString:[self.yearArray lastObject]] MinYear:[year isEqualToString:self.yearArray[0]]];
+                    [self refreshSelectDateWithTableViewTag:1];
                 }
                 if ([key isEqualToString:@"year"] || [key isEqualToString:@"mounth"])
                 {
                     [self refreshDayIsMaxMonthState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]]) MinMonth:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]])];
+                    [self refreshSelectDateWithTableViewTag:2];
                 }
                  if ([key isEqualToString:@"year"] || [key isEqualToString:@"mounth"] || [key isEqualToString:@"day"])
                 {
                     [self refreshHourIsMaxDayState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]] && [day isEqualToString:[self.dayArray lastObject]]) MinDay:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]] && [day isEqualToString:self.dayArray[0]])];
+                    [self refreshSelectDateWithTableViewTag:3];
                 }
                 if ([key isEqualToString:@"year"] || [key isEqualToString:@"mounth"] || [key isEqualToString:@"day"] || [key isEqualToString:@"hour"])
                 {
                     [self refreshMinuteIsMaxHourState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]] && [day isEqualToString:[self.dayArray lastObject]]&& [hour isEqualToString:[self.hourArray lastObject]]) MinHour:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]] && [day isEqualToString:self.dayArray[0]]&& [hour isEqualToString:self.hourArray[0]])];
+                    [self refreshSelectDateWithTableViewTag:4];
                 }
                 if (![key isEqualToString:@"seconds"])
                 {
                     [self refreshSecondsIsMaxMinuteState:([year isEqualToString:[self.yearArray lastObject]] && [mounth isEqualToString:[self.monthArray lastObject]] && [day isEqualToString:[self.dayArray lastObject]]&& [hour isEqualToString:[self.hourArray lastObject]] && [minute isEqualToString:[self.minuteArray lastObject]]) MinMinute:([year isEqualToString:self.yearArray[0]] && [mounth isEqualToString:self.monthArray[0]] && [day isEqualToString:self.dayArray[0]]&& [hour isEqualToString:self.hourArray[0]] && [minute isEqualToString:self.minuteArray[0]])];
+                    [self refreshSelectDateWithTableViewTag:5];
                 }
             }
         }
     }
     self.contentTitleLabel.text = [self selectedTitmeResults];
+}
+- (void)refreshSelectDateWithTableViewTag:(NSInteger)tag {
+    
+    UITableView *table = [self.backView viewWithTag:tag];
+    NSArray * cells =   table.visibleCells;
+    for (BACustomTabelViewCell *cell in cells) {
+        UILabel *titleLabel = [cell.contentView viewWithTag:100];
+        if (titleLabel.alpha == 1.0)
+        {
+            [table scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            
+            NSString *key = @"";
+            switch (table.tag) {
+                case 0:
+                    key = @"year";
+                    break;
+                case 1:
+                    key = @"mounth";
+                    break;
+                case 2:
+                    key = @"day";
+                    break;
+                case 3:
+                    key = @"hour";
+                    break;
+                case 4:
+                    key = @"minute";
+                    break;
+                case 5:
+                    key = @"seconds";
+                    break;
+                default:
+                    break;
+            }
+            
+            if (!BAKit_stringIsBlank_pod(titleLabel.text))
+            {
+                [self.resoultDictionary setObject:titleLabel.text forKey:key];
+            }
+        }
+    }
 }
 
 /**
@@ -1143,6 +1187,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
         _contentTitleLabel.font = [UIFont systemFontOfSize:15];
         _contentTitleLabel.textAlignment = NSTextAlignmentCenter;
         _contentTitleLabel.textColor = [UIColor blackColor];
+        _contentTitleLabel.text = [self selectedTitmeResults];
         [self.toolBarView addSubview:_contentTitleLabel];
     }
     return _contentTitleLabel;

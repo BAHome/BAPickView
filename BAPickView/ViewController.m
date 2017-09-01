@@ -372,9 +372,20 @@
         // 自定义：最大最小日期格式
         if (type == BAKit_CustomDatePickerDateTypeYMD)
         {
+//            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
+//            maxdDate = [format dateFromString:@"2018-08-09"];
+//            mindDate = [format dateFromString:@"2016-07-20"];
             NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-            maxdDate = [format dateFromString:@"2018-08-09"];
-            mindDate = [format dateFromString:@"2016-07-20"];
+            NSDate *today = [[NSDate alloc]init];
+            [format setDateFormat:@"yyyy-MM-dd"];
+            
+            // 最小时间，当前时间
+            mindDate = [format dateFromString:[format stringFromDate:today]];
+            
+            NSTimeInterval oneDay = 24 * 60 * 60;
+            // 最大时间，当前时间+180天
+            NSDate *theDay = [today initWithTimeIntervalSinceNow:oneDay * 180];
+            maxdDate = [format dateFromString:[format stringFromDate:theDay]];
         }
         else if (type == BAKit_CustomDatePickerDateTypeYM)
         {
