@@ -10,12 +10,12 @@
 		181D1FAA1EE7E45E00064FF0 /* BAKit_DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 181D1FA91EE7E45E00064FF0 /* BAKit_DatePicker.m */; };
 		C4738ADC1EFB5E8300608E17 /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C4738AD91EFB5E8300608E17 /* UIView+BAAnimation.m */; };
 		C4738ADD1EFB5E8300608E17 /* UIView+BARectCorner_pick.m in Sources */ = {isa = PBXBuildFile; fileRef = C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner_pick.m */; };
+		C4BBF8EF1F89CF7B008C6622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4BBF8EE1F89CF7B008C6622 /* LaunchScreen.storyboard */; };
 		C4E7BE981ECAAFFA003F6AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE971ECAAFFA003F6AF1 /* main.m */; };
 		C4E7BE9B1ECAAFFA003F6AF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE9A1ECAAFFA003F6AF1 /* AppDelegate.m */; };
 		C4E7BE9E1ECAAFFA003F6AF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BE9D1ECAAFFA003F6AF1 /* ViewController.m */; };
 		C4E7BEA11ECAAFFA003F6AF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4E7BE9F1ECAAFFA003F6AF1 /* Main.storyboard */; };
 		C4E7BEA31ECAAFFA003F6AF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4E7BEA21ECAAFFA003F6AF1 /* Assets.xcassets */; };
-		C4E7BEA61ECAAFFA003F6AF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4E7BEA41ECAAFFA003F6AF1 /* LaunchScreen.storyboard */; };
 		C4E7BEB01ECAB054003F6AF1 /* BAKit_PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BEAF1ECAB054003F6AF1 /* BAKit_PickerView.m */; };
 		C4E7BEB21ECAB075003F6AF1 /* BAPickView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C4E7BEB11ECAB075003F6AF1 /* BAPickView.bundle */; };
 		C4E7BEB71ECACC07003F6AF1 /* NSDate+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7BEB61ECACC07003F6AF1 /* NSDate+BAKit.m */; };
@@ -32,6 +32,7 @@
 		C4738ADA1EFB5E8300608E17 /* UIView+BARectCorner_pick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BARectCorner_pick.h"; sourceTree = "<group>"; };
 		C4738ADB1EFB5E8300608E17 /* UIView+BARectCorner_pick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BARectCorner_pick.m"; sourceTree = "<group>"; };
 		C4BBF8ED1F89BE99008C6622 /* BAPickView_Version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAPickView_Version.h; sourceTree = "<group>"; };
+		C4BBF8EE1F89CF7B008C6622 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4E7BE931ECAAFFA003F6AF1 /* BAPickView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BAPickView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E7BE971ECAAFFA003F6AF1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4E7BE991ECAAFFA003F6AF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -40,7 +41,6 @@
 		C4E7BE9D1ECAAFFA003F6AF1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C4E7BEA01ECAAFFA003F6AF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4E7BEA21ECAAFFA003F6AF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C4E7BEA51ECAAFFA003F6AF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4E7BEA71ECAAFFA003F6AF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4E7BEAE1ECAB054003F6AF1 /* BAKit_PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAKit_PickerView.h; sourceTree = "<group>"; };
 		C4E7BEAF1ECAB054003F6AF1 /* BAKit_PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAKit_PickerView.m; sourceTree = "<group>"; };
@@ -88,8 +88,8 @@
 				C4E7BE9C1ECAAFFA003F6AF1 /* ViewController.h */,
 				C4E7BE9D1ECAAFFA003F6AF1 /* ViewController.m */,
 				C4E7BE9F1ECAAFFA003F6AF1 /* Main.storyboard */,
+				C4BBF8EE1F89CF7B008C6622 /* LaunchScreen.storyboard */,
 				C4E7BEA21ECAAFFA003F6AF1 /* Assets.xcassets */,
-				C4E7BEA41ECAAFFA003F6AF1 /* LaunchScreen.storyboard */,
 				C4E7BEA71ECAAFFA003F6AF1 /* Info.plist */,
 				C4E7BE961ECAAFFA003F6AF1 /* Supporting Files */,
 			);
@@ -154,7 +154,7 @@
 		C4E7BE8B1ECAAFF9003F6AF1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = boai;
 				TargetAttributes = {
 					C4E7BE921ECAAFFA003F6AF1 = {
@@ -187,8 +187,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4E7BEA61ECAAFFA003F6AF1 /* LaunchScreen.storyboard in Resources */,
 				C4E7BEA31ECAAFFA003F6AF1 /* Assets.xcassets in Resources */,
+				C4BBF8EF1F89CF7B008C6622 /* LaunchScreen.storyboard in Resources */,
 				C4E7BEB21ECAB075003F6AF1 /* BAPickView.bundle in Resources */,
 				C4E7BEA11ECAAFFA003F6AF1 /* Main.storyboard in Resources */,
 			);
@@ -224,14 +224,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		C4E7BEA41ECAAFFA003F6AF1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C4E7BEA51ECAAFFA003F6AF1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -245,7 +237,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -253,7 +247,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -293,7 +291,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -301,7 +301,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -331,7 +335,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8JQ2PK6XN8;
 				INFOPLIST_FILE = BAPickView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boaihome.BAPickView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -345,7 +349,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8JQ2PK6XN8;
 				INFOPLIST_FILE = BAPickView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.boaihome.BAPickView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
