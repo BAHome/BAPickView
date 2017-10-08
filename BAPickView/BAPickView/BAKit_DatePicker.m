@@ -13,7 +13,7 @@
 #import "UIView+BARectCorner_pick.h"
 #import "NSDateFormatter+BAKit.h"
 
-static NSString *const BAKit_DatePickerCellID = @"cell" ;
+static NSString *const BAKit_DatePickerCellID = @"cell";
 
 #define BAKit_Default_Height    240
 
@@ -53,6 +53,11 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 
 @property (nonatomic, strong) UIView *topLine;
 @property (nonatomic, strong) UIView *bottomLine;
+
+/**
+ 年份背景
+ */
+@property (nonatomic, strong) UILabel *bgShowYearLabel;
 
 @property (nonatomic, assign) BAKit_CustomDatePickerDateType pickerViewType;
 @property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
@@ -111,11 +116,13 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
 {
     // 默认配置
     self.isTouchEdgeHide = YES;
+    self.isShowBackgroundYearLabel = NO;
     self.ba_backgroundColor_pickView = BAKit_Color_White_pod;
     self.ba_backgroundColor_toolBar = BAKit_Color_White_pod;
     self.animationType = BAKit_PickerViewAnimationTypeScale;
     self.ba_pickViewFont = [UIFont systemFontOfSize:10];
     self.ba_pickViewTextColor = BAKit_Color_Black_pod;
+    self.bgShowYearLabel.textColor = [UIColor colorWithRed:237.0/255.0 green:240.0/255.0 blue:244.0/255.0 alpha:1];
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
     self.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
     
@@ -617,6 +624,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     if ([year containsString:@"年"])
     {
         year = [year substringToIndex:year.length - 1];
+        self.bgShowYearLabel.text = year;
     }
     
     NSString *mouth = self.resoultDictionary[@"mounth"];
@@ -1022,6 +1030,18 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     return _secondTableView;
 }
 
+- (UILabel *)bgShowYearLabel {
+    if (!_bgShowYearLabel) {
+        _bgShowYearLabel = [[UILabel alloc] init];
+        _bgShowYearLabel.font = [UIFont systemFontOfSize:100];
+        _bgShowYearLabel.textAlignment = NSTextAlignmentCenter;
+        [self.backView addSubview:_bgShowYearLabel];
+        _bgShowYearLabel.text = [NSString stringWithFormat:@"%ld",self.defautDate.year];
+    }
+    return _bgShowYearLabel;
+}
+
+
 // 初始化日期数据
 - (NSDate *)defautDate {
     if (!_defautDate) {
@@ -1248,10 +1268,33 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     self.contentTitleLabel.textColor = ba_pickViewTitleColor;
 }
 
+- (void)setBa_bgYearTitleFont:(UIFont *)ba_bgYearTitleFont {
+    _ba_bgYearTitleFont = ba_bgYearTitleFont;
+    self.bgShowYearLabel.font = _ba_bgYearTitleFont;
+}
+
+- (void)setBa_bgYearTitleColor:(UIColor *)ba_bgYearTitleColor {
+    _ba_bgYearTitleColor = ba_bgYearTitleColor;
+    self.bgShowYearLabel.textColor = _ba_bgYearTitleColor;
+}
 
 - (void)setBa_pickViewTextColor:(UIColor *)ba_pickViewTextColor
 {
     _ba_pickViewTextColor = ba_pickViewTextColor;
+}
+
+- (void)setIsShowBackgroundYearLabel:(BOOL)isShowBackgroundYearLabel
+{
+    _isShowBackgroundYearLabel = isShowBackgroundYearLabel;
+    
+    if (_isShowBackgroundYearLabel == YES)
+    {
+        self.bgShowYearLabel.hidden = NO;
+    }
+    else
+    {
+        self.bgShowYearLabel.hidden = YES;
+    }
 }
 
 - (void)ba_layoutSubViews
@@ -1336,6 +1379,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell" ;
     min_x = 0;
     min_y = min_picker_y;
     min_h = min_bgView_h - 40;
+    
+    self.bgShowYearLabel.frame = CGRectMake(min_x, min_y, min_bgView_w, min_h);
     
     switch (self.pickerViewType) {
         case BAKit_CustomDatePickerDateTypeYY:

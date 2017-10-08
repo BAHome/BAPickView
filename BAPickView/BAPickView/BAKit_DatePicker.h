@@ -63,6 +63,7 @@
 
 @interface BAKit_DatePicker : UIView
 
+#pragma mark - 默认配置
 /**
  日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒
  */
@@ -78,6 +79,7 @@
  */
 @property(strong, nonatomic) NSDate *ba_defautDate;
 
+#pragma mark - 类型选择
 /**
  日期选择器 添加弹出动画，默认为：如果不设置该属性将不会显示动画
  */
@@ -85,14 +87,21 @@
 @property(nonatomic, assign) BAKit_PickerViewButtonPositionType buttonPositionType;
 @property(nonatomic, assign) BAKit_PickerViewPositionType pickerViewPositionType;
 
+#pragma mark - 开关
 /*! 是否开启边缘触摸隐藏 默认：YES */
 @property (nonatomic, assign) BOOL isTouchEdgeHide;
 
 /**
- 是否关闭选择内容显示在工具栏，默认：YES
+ 是否显示选择结果显示在工具栏，默认：YES
  */
 @property (nonatomic, assign) BOOL isShowTitle;
 
+/**
+ 是否显示背景年份水印，默认：NO
+ */
+@property (nonatomic, assign) BOOL isShowBackgroundYearLabel;
+
+#pragma mark - color
 /**
  toolBar 背景颜色，默认：白色
  */
@@ -119,6 +128,17 @@
 @property(nonatomic, strong) UIColor *ba_pickViewTitleColor;
 
 /**
+ bgYearTitle 颜色，默认：[UIColor colorWithRed:237.0/255.0 green:240.0/255.0 blue:244.0/255.0 alpha:1]
+ */
+@property(nonatomic, strong) UIColor *ba_bgYearTitleColor;
+
+/**
+ pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
+
+#pragma mark - font
+/**
  pickView 字体，默认：非选中状态 [UIFont systemFontOfSize:10]，选中状态比非选中状态大5，即 15
  */
 @property(nonatomic, strong) UIFont *ba_pickViewFont;
@@ -129,11 +149,12 @@
 @property(nonatomic, strong) UIFont *ba_pickViewTitleFont;
 
 /**
- pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ bgYearTitle 字体，默认：[UIFont boldSystemFontOfSize:100]
  */
-@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
+@property(nonatomic, strong) UIFont *ba_bgYearTitleFont;
 
 
+#pragma mark - public method
 /**
  快速创建 BAKit_DatePicker
  

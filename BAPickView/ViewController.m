@@ -386,6 +386,7 @@
             // 最大时间，当前时间+180天
             NSDate *theDay = [today initWithTimeIntervalSinceNow:oneDay * 180];
             maxdDate = [format dateFromString:[format stringFromDate:theDay]];
+            
         }
         else if (type == BAKit_CustomDatePickerDateTypeYM)
         {
@@ -405,13 +406,21 @@
             tempView.ba_minDate = mindDate;
         }
         
+        /**
+         是否显示背景年份水印，默认：NO
+         */
+        tempView.isShowBackgroundYearLabel = YES;
+
         // 是否显示 pickview title
         //        tempView.isShowTitle = NO;
         // 自定义 pickview title 的字体颜色
         tempView.ba_pickViewTitleColor = BAKit_Color_Red_pod;
         // 自定义 pickview title 的字体
         tempView.ba_pickViewTitleFont = [UIFont boldSystemFontOfSize:15];
-        
+        // 自定义 pickview背景 title 的字体颜色
+//        tempView.ba_bgYearTitleColor = [UIColor orangeColor];
+//        // 自定义 pickview背景 title 的字体
+//        tempView.ba_bgYearTitleFont = [UIFont systemFontOfSize:50];
         // 自定义：动画样式
         tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
         // 自定义：pickView 位置
