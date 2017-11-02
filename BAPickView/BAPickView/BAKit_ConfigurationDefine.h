@@ -282,6 +282,10 @@ BAKit_Color_RandomRGBA_pod(){
 
 #define BAKit_SCREEN_HEIGHT ((([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait) || ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)) ? [[UIScreen mainScreen] bounds].size.height : [[UIScreen mainScreen] bounds].size.width)
 
+// iOS 11.0 的 view.safeAreaInsets
+#define BAKit_ViewSafeAreaInsets(view) ({UIEdgeInsets i; if(@available(iOS 11.0, *)) {i = view.safeAreaInsets;} else {i = UIEdgeInsetsZero;} i;})
+
+
 #define BAKit_BaseScreenWidth   320.0f
 #define BAKit_BaseScreenHeight  568.0f
 

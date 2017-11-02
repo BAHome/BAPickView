@@ -4,28 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BAPickView/BAPickView/BACustomDatePicker.m"
-            timestampString = "518587271.902796"
+            filePath = "BAPickView/BAPickView/BAKit_DatePicker.m"
+            timestampString = "531235486.865895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
-            landmarkName = "-ba_pickViewHiddenAnimation"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BAPickView/BAPickView/BACustomDatePicker.m"
-            timestampString = "518587271.902796"
+            filePath = "BAPickView/BAPickView/BAKit_DatePicker.m"
+            timestampString = "531235486.866489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
-            landmarkName = "-changeLabelWithTabelView:cell:"
+            startingLineNumber = "1451"
+            endingLineNumber = "1451"
+            landmarkName = "-ba_layoutSubViews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BAPickView/BAPickView/BACustomDatePicker.m"
-            timestampString = "518587271.902796"
+            filePath = "BAPickView/BAPickView/BAKit_DatePicker.m"
+            timestampString = "531235486.866957"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "535"
-            endingLineNumber = "535"
-            landmarkName = "-changeLabelWithTabelView:cell:"
+            startingLineNumber = "1312"
+            endingLineNumber = "1312"
+            landmarkName = "-layoutSubviews"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

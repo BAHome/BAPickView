@@ -288,21 +288,18 @@
     CGFloat min_view_w = CGRectGetWidth(self.frame);
     CGFloat min_view_h = CGRectGetHeight(self.frame);
 
-    
     min_h = kBAKit_PickerView_H + kBAKit_PickerViewToolBar_H;
-    min_y = min_view_h - min_h;
-    min_w = min_view_w;
+    min_y = min_view_h - min_h - BAKit_ViewSafeAreaInsets(self).bottom;
+    min_w = min_view_w - BAKit_ViewSafeAreaInsets(self).left - BAKit_ViewSafeAreaInsets(self).right;
     
     if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
     {
         min_w = 250 * BAKit_ScaleXAndWidth;
     }
 
-    self.bgView.frame = CGRectMake(min_x, min_y, min_w, min_h);
-    
+    self.bgView.frame = CGRectMake(BAKit_ViewSafeAreaInsets(self).left, min_y, min_w, min_h);
     CGFloat min_bgView_w = CGRectGetWidth(self.bgView.frame);
     CGFloat min_bgView_h = CGRectGetHeight(self.bgView.frame);
-    
     if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
     {
         self.bgView.center = self.center;

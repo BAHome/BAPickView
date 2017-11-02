@@ -17,7 +17,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 
 #define BAKit_Default_Height    240
 
-
 @interface BACustomTabelViewCell : UITableViewCell
 
 @property(strong, nonatomic)NSIndexPath *indexPath;
@@ -127,7 +126,9 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     self.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
     
     [self registCell];
+
     [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
+
 }
 
 - (void)registCell
@@ -144,6 +145,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 - (void)handleDeviceOrientationRotateAction:(NSNotification *)notification
 {
     [self ba_layoutSubViews];
+    
 }
 
 - (void)ba_pickViewShow
@@ -370,10 +372,11 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         titleLabel = [[UILabel alloc] initWithFrame:cell.bounds];
         titleLabel.tag = 100;
         titleLabel.textAlignment = NSTextAlignmentCenter;
+        
         [cell.contentView addSubview:titleLabel];
     }
     
-    
+    titleLabel.frame = cell.contentView.bounds;
     titleLabel.textColor = self.ba_pickViewTextColor;
     
     NSArray * dataArray;
@@ -1297,6 +1300,17 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     }
 }
 
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    [self.yearTableView reloadData];
+    [self.monthTableView reloadData];
+    [self.dayTableView reloadData];
+    [self.hourTableView reloadData];
+    [self.minuteTableView reloadData];
+    [self.secondTableView reloadData];
+
+}
+
 - (void)ba_layoutSubViews
 {
     self.frame = [UIScreen mainScreen].bounds;
@@ -1312,10 +1326,10 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     
     self.backgroundColor = BAKit_Color_Translucent_pod;
     
-    min_x = 0;
-    min_y = min_view_h - BAKit_Default_Height;
+    min_x = BAKit_ViewSafeAreaInsets(self).left;
+    min_y = min_view_h - BAKit_Default_Height - BAKit_ViewSafeAreaInsets(self).bottom;
     min_h = BAKit_Default_Height;
-    min_w = min_view_w;
+    min_w = min_view_w - BAKit_ViewSafeAreaInsets(self).left - BAKit_ViewSafeAreaInsets(self).right;
     if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
     {
         min_w = 280 * BAKit_ScaleXAndWidth;
@@ -1413,12 +1427,16 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
             self.yearTableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
             min_x = min_w;
             self.monthTableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+
             min_x = min_w * 2;
             self.dayTableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+
             min_x = min_w * 3;
             self.hourTableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+
             min_x = min_w * 4;
             self.minuteTableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+
         }
             break;
         case BAKit_CustomDatePickerDateTypeYMDHMS:
@@ -1478,6 +1496,12 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         default:
             break;
     }
+    [self setSelectDate:@"seconds"];
+    [self setSelectDate:@"minute"];
+    [self setSelectDate:@"hour"];
+    [self setSelectDate:@"day"];
+    [self setSelectDate:@"mounth"];
+    [self setSelectDate:@"year"];
 }
 
 @end
