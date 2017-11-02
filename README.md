@@ -25,7 +25,7 @@
 * 17、日期选择器新增 优化了最大最小年份月份的写法，现在可以自由定义最大最小日期了，详见 demo<br>
 * 18、新增 选中结果直接显示在 工具栏的中间，且可以自定义颜色、字体 <br>
 * 19、日期选择器 新增背景年份水印显示 <br>
-
+* 20、完美适配 iOS 11 和 iPhone X <br>
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
@@ -811,7 +811,11 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
-  
+ 最新更新时间：2017-11-02 【倒叙】 <br>
+ 最新Version：【Version：1.1.3】 <br>
+ 更新内容： <br>
+ 1.1.3.1、完美适配 iOS 11 和 iPhone X <br>
+ 
  最新更新时间：2017-10-08 【倒叙】 <br>
  最新Version：【Version：1.1.2】 <br>
  更新内容： <br>
@@ -944,7 +948,7 @@ git：[https://github.com/Gang679](https://github.com/Gang679) <br>
 
 
 ## 8、开发环境 和 支持版本
-> 开发使用 最新版本 Xcode，理论上支持 iOS 8 及以上版本，如有版本适配问题，请及时反馈！多谢合作！
+> 开发使用 最新版本 Xcode，理论上支持 iOS 9 及以上版本，如有版本适配问题，请及时反馈！多谢合作！
 
 ## 9、感谢
 > 感谢 [【BAHome】](https://github.com/BAHome)  团队成员倾力合作，后期会推出一系列 常用 UI 控件的封装，大家有需求得也可以在 issue 提出，如果合理，我们会尽快推出新版本！<br>
