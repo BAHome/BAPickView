@@ -20,6 +20,12 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 
+ 最新更新时间：2017-12-13 【倒叙】 <br>
+ 最新Version：【Version：1.1.4】 <br>
+ 更新内容： <br>
+ 1.1.4.1、修复 城市选择器 plist 文件读取失败后崩溃的 bug ，新增【城市数据读取失败】打印 log和弹框提示！(感谢简书网友 [@不会凉的黄花菜](http://www.jianshu.com/u/5b75c9f02124 ) 同学提出的 bug！) <br>
+ 
  最新更新时间：2017-11-02 【倒叙】 <br>
  最新Version：【Version：1.1.3】 <br>
  更新内容： <br>

@@ -189,6 +189,7 @@
     {
         configuration(pickerView);
     }
+    
     [pickerView ba_pickViewShow];
     pickerView.block = block;
 }
@@ -768,10 +769,19 @@
 #pragma mark - custom method
 - (void)ba_pickViewShow
 {
-    [self.alertWindow addSubview:self];
-    [self ba_layoutSubViews];
-    
-    [self ba_pickViewShowAnimation];
+    if (self.pickerViewType == BAKit_PickerViewTypeCity && self.provinceArray.count == 0)
+    {
+        NSString *msg = @"您的数据有误，请检查数据！";
+        NSLog(@"%@", msg);
+        BAKit_ShowAlertWithMsg(msg);
+    }
+    else
+    {
+        [self.alertWindow addSubview:self];
+        [self ba_layoutSubViews];
+        
+        [self ba_pickViewShowAnimation];
+    }
 }
 
 - (void)ba_pickViewHidden
@@ -984,27 +994,31 @@
 - (void)setupCityData
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"BAPickView.bundle/BACity" ofType:@"plist"];
-    NSArray *provinceArray = [[NSArray alloc]initWithContentsOfFile:path];
+    
+    NSArray *provinceArray = [[NSArray alloc] initWithContentsOfFile:path];
 
-    [self ba_removcArray:self.provinceArray];
-    [self ba_removcArray:self.cityArray];
-    [self ba_removcArray:self.areaArray];
-
-    [provinceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self.provinceArray addObject:obj[@"state"]];
-    }];
-    
-    NSMutableArray *citys = provinceArray[0][@"cities"];
-    [citys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self.cityArray addObject:obj[@"city"]];
-    }];
-    
-    self.areaArray = citys[0][@"areas"];
-    
-    // 设置城市选择器的默认值
-    self.province = [self cutLocalString:self.provinceArray[0]];
-    self.city = [self cutLocalString:self.cityArray[0]];
-    self.area = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[0]];
+    if (provinceArray.count > 0)
+    {
+        [self ba_removcArray:self.provinceArray];
+        [self ba_removcArray:self.cityArray];
+        [self ba_removcArray:self.areaArray];
+        
+        [provinceArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.provinceArray addObject:obj[@"state"]];
+        }];
+        
+        NSMutableArray *citys = provinceArray[0][@"cities"];
+        [citys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.cityArray addObject:obj[@"city"]];
+        }];
+        
+        self.areaArray = citys[0][@"areas"];
+        
+        // 设置城市选择器的默认值
+        self.province = [self cutLocalString:self.provinceArray[0]];
+        self.city = [self cutLocalString:self.cityArray[0]];
+        self.area = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[0]];
+    }
 }
 
 - (void)ba_removcArray:(NSMutableArray *)array
