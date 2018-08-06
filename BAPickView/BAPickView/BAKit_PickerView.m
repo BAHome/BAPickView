@@ -1203,8 +1203,8 @@
 {
     if (!_pickView)
     {
-        _pickView = [UIPickerView new];
-        
+        //小于等于9.3以下的系统初始化要给宽度，不然会出现UIPickerView宽度错误的BUG
+        _pickView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, kBAKit_PickerView_H)];
         [self.bgView addSubview:self.pickView];
     }
     return _pickView;
