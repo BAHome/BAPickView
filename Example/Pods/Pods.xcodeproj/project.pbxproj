@@ -1,0 +1,797 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		092302E924F759D01EDDC3B0B2AED39C /* BAPickView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3124819F1DCCB0261F8E108C59E64A30 /* BAPickView.bundle */; };
+		0A0A7F4CD272D77755B9DD359B2F7B43 /* Pods-BAPickView_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CA2E0365DD8F069D0088BB601FF420E2 /* Pods-BAPickView_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D10E0FE7684FE6AF7A91BB3258CBE25 /* NSBundle+BAPod.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BD754869A0106A13A9EB60186E6FA4F /* NSBundle+BAPod.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1EBFB2D266BB9F24F8EBDB5E0F611FD9 /* NSDateFormatter+BAKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C13B12FD55B7F411347FA2FA9FC9DF0C /* NSDateFormatter+BAKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		350A83C0CE4721CAF9FE210161A47A1E /* NSString+BATime.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F2E5898EBE9A944A9CAFEE3D81636BB /* NSString+BATime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3BC3EE2EDD356A21D8E4A48AB25D9925 /* BAKit_DefineFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 17F8F29441F2CD0CCE800620740A1918 /* BAKit_DefineFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4A797F521CD903A4E19C8F9039B62BBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
+		4E6441C174A9F44ECB1911C417D51190 /* BAKit_PickerViewConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7210D4733F6EFD38E1FE9F0BDF04270E /* BAKit_PickerViewConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		62BACA123358FA70585A1C95D43603BB /* BAPickView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F52B71683BF9C4161EF614D18F6373DB /* BAPickView-dummy.m */; };
+		6D4A0EEEF1850088D8C73B5427163B70 /* BAKit_DatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = BACE09352B6ACF4C256B182FF5E47A72 /* BAKit_DatePicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73A1C9E8055F0750B981057E05D8250D /* UIView+BAAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B46C26C1537725AD998CCFB90DF1C4D /* UIView+BAAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73DF906F2E4C7A67E23182FF3944512E /* UIView+BARectCorner_pick.m in Sources */ = {isa = PBXBuildFile; fileRef = E586B1951B03E2C096321D2F4D992F45 /* UIView+BARectCorner_pick.m */; };
+		7FC7AD817FB0D0FD04AEAAC9F2C462F0 /* NSDateFormatter+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A305C5F80CDF0BC579190D9CDE8F5C2 /* NSDateFormatter+BAKit.m */; };
+		8BA753C1D3E86A0B5A4769D3F8BB7430 /* BAPickView_OC.h in Headers */ = {isa = PBXBuildFile; fileRef = F7F1058FCCE540778E9F4A645A964AEB /* BAPickView_OC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D63470D4652784E32B5489152E30905 /* NSBundle+BAPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 138BC1D9F725ABFF7DE9CC72FBDB5243 /* NSBundle+BAPod.m */; };
+		8F59C97ADBAF832BF4BDD7D90164CBE4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */; };
+		99B0E0589C77BFAF906DE53C57261756 /* BAPickView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 79F2587D9DE76BBCA24A3C13F902D0C1 /* BAPickView.bundle */; };
+		A3C5C5A89E2208286BE7A33F53748FFE /* BAKit_DefineCurrent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D821BDAFA12B9B836AD8889AE3B9405 /* BAKit_DefineCurrent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A90207B871A205B44C2589E53DC7CC34 /* UIView+BARectCorner_pick.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BF4D39D62BD7336E5AB92B8DF8C3DC1 /* UIView+BARectCorner_pick.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF273EE84779B5FD51F0743112BCF907 /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 95296EB1E8A7D739C81218422425ECD1 /* UIView+BAAnimation.m */; };
+		C40F4ACB54A4A11E9DFE4EDBF9258547 /* BAKit_DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2708BB23C0468378C1F1CDA9E65868C1 /* BAKit_DatePicker.m */; };
+		C5CD81783E68FFDF782AF059C41AB01F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E404AA6957590324067E330E0EC533 /* UIKit.framework */; };
+		C76958820141D465C013442738C059FD /* BAKit_ConfigurationDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 50AF9CBAA6F71047EBEADA4627AF1F7A /* BAKit_ConfigurationDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2FFF59D5143DEEA841CF9B8E23522D0 /* BAPickView_Version.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D37ACF50510203C48D2CC33ECF89A9D /* BAPickView_Version.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D73BEB433864B835CCC3DA6607313190 /* BAKit_PickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = E870998574AB0AD8E174C84A2C8F3B4F /* BAKit_PickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DFCD9B3105B4CD3EB0115A4BB16E4DAD /* Pods-BAPickView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D5EC88928DF23074B0C9B9ACC5CDDA /* Pods-BAPickView_Example-dummy.m */; };
+		E24D36D2D204F661B25A67E74A3745FA /* NSDate+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F9787607F22C832A093A6CBC7029FF /* NSDate+BAKit.m */; };
+		E8B71EA0FFF7A097815C81247E2F02A2 /* BAKit_PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B031A14DAB5A76B2F4109E47A5D4D8EC /* BAKit_PickerView.m */; };
+		EDB2286A32265277149249CE7AB42B26 /* BAPickView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AB4A0B5B0AFA143F97A0C46D838E34B /* BAPickView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB0279473E7967050F1282359F195C5F /* NSDate+BAKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C5968D3B99E191FDDAA7D64DF8621BF7 /* NSDate+BAKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FE6B3CDF61F52C51DC6096592BD6118A /* NSString+BATime.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E992AF202B660ACB93A188F4573CBA5 /* NSString+BATime.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4D53EE6F2E8322A96AB7A568FE1108A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6311083A15AB8506363AC2E4DC00A42;
+			remoteInfo = BAPickView;
+		};
+		75D5106A6A1836BFDFBB14658F2FDCDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E9322D29F385164BA42DF82DC849235;
+			remoteInfo = "BAPickView-BAPickView";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0BF4D39D62BD7336E5AB92B8DF8C3DC1 /* UIView+BARectCorner_pick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+BARectCorner_pick.h"; path = "BAPickView/Classes/BAPickView/UIView+BARectCorner_pick.h"; sourceTree = "<group>"; };
+		0E992AF202B660ACB93A188F4573CBA5 /* NSString+BATime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+BATime.m"; path = "BAPickView/Classes/BAPickView/NSString+BATime.m"; sourceTree = "<group>"; };
+		138BC1D9F725ABFF7DE9CC72FBDB5243 /* NSBundle+BAPod.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+BAPod.m"; path = "BAPickView/Classes/BAPickView/NSBundle+BAPod.m"; sourceTree = "<group>"; };
+		17F8F29441F2CD0CCE800620740A1918 /* BAKit_DefineFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DefineFormat.h; path = BAPickView/Classes/BAPickView/BAKit_DefineFormat.h; sourceTree = "<group>"; };
+		1D6C0FAEAB8C9DDA0F6874C51014E611 /* BAPickView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BAPickView.framework; path = BAPickView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D821BDAFA12B9B836AD8889AE3B9405 /* BAKit_DefineCurrent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DefineCurrent.h; path = BAPickView/Classes/BAPickView/BAKit_DefineCurrent.h; sourceTree = "<group>"; };
+		26D181AE7CD65E7393221E5498F6B2EC /* BAPickView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BAPickView.modulemap; sourceTree = "<group>"; };
+		2708BB23C0468378C1F1CDA9E65868C1 /* BAKit_DatePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_DatePicker.m; path = BAPickView/Classes/BAPickView/BAKit_DatePicker.m; sourceTree = "<group>"; };
+		2B46C26C1537725AD998CCFB90DF1C4D /* UIView+BAAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+BAAnimation.h"; path = "BAPickView/Classes/BAPickView/UIView+BAAnimation.h"; sourceTree = "<group>"; };
+		2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		2F2E5898EBE9A944A9CAFEE3D81636BB /* NSString+BATime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+BATime.h"; path = "BAPickView/Classes/BAPickView/NSString+BATime.h"; sourceTree = "<group>"; };
+		30BD5E2055203B14802C2B3BAC26AADA /* BAPickView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BAPickView-Info.plist"; sourceTree = "<group>"; };
+		3124819F1DCCB0261F8E108C59E64A30 /* BAPickView.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BAPickView.bundle; path = "BAPickView-BAPickView.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		31F9787607F22C832A093A6CBC7029FF /* NSDate+BAKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+BAKit.m"; path = "BAPickView/Classes/BAPickView/NSDate+BAKit.m"; sourceTree = "<group>"; };
+		3A305C5F80CDF0BC579190D9CDE8F5C2 /* NSDateFormatter+BAKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+BAKit.m"; path = "BAPickView/Classes/BAPickView/NSDateFormatter+BAKit.m"; sourceTree = "<group>"; };
+		45D5EC88928DF23074B0C9B9ACC5CDDA /* Pods-BAPickView_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BAPickView_Example-dummy.m"; sourceTree = "<group>"; };
+		4B1C2F5AA7DAB676033CB0F187A2ACF2 /* BAPickView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BAPickView.xcconfig; sourceTree = "<group>"; };
+		4D37ACF50510203C48D2CC33ECF89A9D /* BAPickView_Version.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAPickView_Version.h; path = BAPickView/Classes/BAPickView/BAPickView_Version.h; sourceTree = "<group>"; };
+		50AF9CBAA6F71047EBEADA4627AF1F7A /* BAKit_ConfigurationDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_ConfigurationDefine.h; path = BAPickView/Classes/BAPickView/BAKit_ConfigurationDefine.h; sourceTree = "<group>"; };
+		5FA4730FBB5B7E99D4C2D88CA19AF91E /* Pods-BAPickView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BAPickView_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		67972E1D55B15CB71A735F7B524AD4D1 /* Pods-BAPickView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BAPickView_Example.release.xcconfig"; sourceTree = "<group>"; };
+		690168D992D56901DF73B1CE917E56C8 /* Pods-BAPickView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BAPickView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		7210D4733F6EFD38E1FE9F0BDF04270E /* BAKit_PickerViewConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerViewConfig.h; path = BAPickView/Classes/BAPickView/BAKit_PickerViewConfig.h; sourceTree = "<group>"; };
+		74E404AA6957590324067E330E0EC533 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		79F2587D9DE76BBCA24A3C13F902D0C1 /* BAPickView.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = BAPickView.bundle; path = BAPickView/Resources/BAPickView.bundle; sourceTree = "<group>"; };
+		7BD754869A0106A13A9EB60186E6FA4F /* NSBundle+BAPod.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+BAPod.h"; path = "BAPickView/Classes/BAPickView/NSBundle+BAPod.h"; sourceTree = "<group>"; };
+		85F61157230BBD331D0CF15C6BF28681 /* BAPickView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BAPickView-prefix.pch"; sourceTree = "<group>"; };
+		8AB4A0B5B0AFA143F97A0C46D838E34B /* BAPickView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BAPickView-umbrella.h"; sourceTree = "<group>"; };
+		8AFBDBC8C655B2F54C69DFC15600A338 /* BAPickView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = BAPickView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8BE9CF8EE7E86BBFC3B2D45041BC5D49 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		8C9CD63EB0582CC07387EF8FD37D6D31 /* Pods_BAPickView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BAPickView_Example.framework; path = "Pods-BAPickView_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95296EB1E8A7D739C81218422425ECD1 /* UIView+BAAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+BAAnimation.m"; path = "BAPickView/Classes/BAPickView/UIView+BAAnimation.m"; sourceTree = "<group>"; };
+		987AA07EF04FD02BFD143DB91094B88C /* Pods-BAPickView_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BAPickView_Example-Info.plist"; sourceTree = "<group>"; };
+		B031A14DAB5A76B2F4109E47A5D4D8EC /* BAKit_PickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_PickerView.m; path = BAPickView/Classes/BAPickView/BAKit_PickerView.m; sourceTree = "<group>"; };
+		B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B8ECFB568679DAF2475A0C858096D0BF /* Pods-BAPickView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BAPickView_Example.modulemap"; sourceTree = "<group>"; };
+		BACE09352B6ACF4C256B182FF5E47A72 /* BAKit_DatePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DatePicker.h; path = BAPickView/Classes/BAPickView/BAKit_DatePicker.h; sourceTree = "<group>"; };
+		BD48D7047ED09A3F1A64F5B30AA1A91F /* Pods-BAPickView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BAPickView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C13B12FD55B7F411347FA2FA9FC9DF0C /* NSDateFormatter+BAKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+BAKit.h"; path = "BAPickView/Classes/BAPickView/NSDateFormatter+BAKit.h"; sourceTree = "<group>"; };
+		C5968D3B99E191FDDAA7D64DF8621BF7 /* NSDate+BAKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+BAKit.h"; path = "BAPickView/Classes/BAPickView/NSDate+BAKit.h"; sourceTree = "<group>"; };
+		CA2E0365DD8F069D0088BB601FF420E2 /* Pods-BAPickView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BAPickView_Example-umbrella.h"; sourceTree = "<group>"; };
+		CF3FB4A613F566E1D160658BC660BF91 /* Pods-BAPickView_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BAPickView_Example-frameworks.sh"; sourceTree = "<group>"; };
+		D4F862290C353B399C8342C01AD78BFC /* ResourceBundle-BAPickView-BAPickView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-BAPickView-BAPickView-Info.plist"; sourceTree = "<group>"; };
+		E586B1951B03E2C096321D2F4D992F45 /* UIView+BARectCorner_pick.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+BARectCorner_pick.m"; path = "BAPickView/Classes/BAPickView/UIView+BARectCorner_pick.m"; sourceTree = "<group>"; };
+		E870998574AB0AD8E174C84A2C8F3B4F /* BAKit_PickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerView.h; path = BAPickView/Classes/BAPickView/BAKit_PickerView.h; sourceTree = "<group>"; };
+		F52B71683BF9C4161EF614D18F6373DB /* BAPickView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BAPickView-dummy.m"; sourceTree = "<group>"; };
+		F6EA3548C2C2C94E0845F18EFE3FAFDB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		F7F1058FCCE540778E9F4A645A964AEB /* BAPickView_OC.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAPickView_OC.h; path = BAPickView/Classes/BAPickView/BAPickView_OC.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D8715466EBA0946ABE916ADB2B17C9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC7C62F4288D8F1DE0BE277D33CB5B3A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F59C97ADBAF832BF4BDD7D90164CBE4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B77A24F2B09BEE321B311EE40745DFBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A797F521CD903A4E19C8F9039B62BBD /* Foundation.framework in Frameworks */,
+				C5CD81783E68FFDF782AF059C41AB01F /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06CDD10DE71306278CF89108B3036DFD /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2EFB40531CB700ADF867FEEE78561E78 /* Foundation.framework */,
+				74E404AA6957590324067E330E0EC533 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		15CE7A72E6C2BB2CCAFFE301D38B9921 /* Pods-BAPickView_Example */ = {
+			isa = PBXGroup;
+			children = (
+				B8ECFB568679DAF2475A0C858096D0BF /* Pods-BAPickView_Example.modulemap */,
+				BD48D7047ED09A3F1A64F5B30AA1A91F /* Pods-BAPickView_Example-acknowledgements.markdown */,
+				690168D992D56901DF73B1CE917E56C8 /* Pods-BAPickView_Example-acknowledgements.plist */,
+				45D5EC88928DF23074B0C9B9ACC5CDDA /* Pods-BAPickView_Example-dummy.m */,
+				CF3FB4A613F566E1D160658BC660BF91 /* Pods-BAPickView_Example-frameworks.sh */,
+				987AA07EF04FD02BFD143DB91094B88C /* Pods-BAPickView_Example-Info.plist */,
+				CA2E0365DD8F069D0088BB601FF420E2 /* Pods-BAPickView_Example-umbrella.h */,
+				5FA4730FBB5B7E99D4C2D88CA19AF91E /* Pods-BAPickView_Example.debug.xcconfig */,
+				67972E1D55B15CB71A735F7B524AD4D1 /* Pods-BAPickView_Example.release.xcconfig */,
+			);
+			name = "Pods-BAPickView_Example";
+			path = "Target Support Files/Pods-BAPickView_Example";
+			sourceTree = "<group>";
+		};
+		31735259719F6961BA71107D8F3D2973 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				8AFBDBC8C655B2F54C69DFC15600A338 /* BAPickView.podspec */,
+				8BE9CF8EE7E86BBFC3B2D45041BC5D49 /* LICENSE */,
+				F6EA3548C2C2C94E0845F18EFE3FAFDB /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		3F1566E6FA636634B790F5E73A90BFBD /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EAD4937149E118DB7D98073C0F43AD0B /* BAPickView */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				06CDD10DE71306278CF89108B3036DFD /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5603CD555CA27F6F75C6765C4801FE23 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				15CE7A72E6C2BB2CCAFFE301D38B9921 /* Pods-BAPickView_Example */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		665F84B4C5F9BE987A945EE4F5127007 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				79F2587D9DE76BBCA24A3C13F902D0C1 /* BAPickView.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		75DFBC985C0D216DE1FC8CA33C9EA15D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3124819F1DCCB0261F8E108C59E64A30 /* BAPickView.bundle */,
+				1D6C0FAEAB8C9DDA0F6874C51014E611 /* BAPickView.framework */,
+				8C9CD63EB0582CC07387EF8FD37D6D31 /* Pods_BAPickView_Example.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D0A9DE87E7A586CC829CE178738B68A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				26D181AE7CD65E7393221E5498F6B2EC /* BAPickView.modulemap */,
+				4B1C2F5AA7DAB676033CB0F187A2ACF2 /* BAPickView.xcconfig */,
+				F52B71683BF9C4161EF614D18F6373DB /* BAPickView-dummy.m */,
+				30BD5E2055203B14802C2B3BAC26AADA /* BAPickView-Info.plist */,
+				85F61157230BBD331D0CF15C6BF28681 /* BAPickView-prefix.pch */,
+				8AB4A0B5B0AFA143F97A0C46D838E34B /* BAPickView-umbrella.h */,
+				D4F862290C353B399C8342C01AD78BFC /* ResourceBundle-BAPickView-BAPickView-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/BAPickView";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				B36AB396275697EEE1A5B13BA8A38FE3 /* Podfile */,
+				3F1566E6FA636634B790F5E73A90BFBD /* Development Pods */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				75DFBC985C0D216DE1FC8CA33C9EA15D /* Products */,
+				5603CD555CA27F6F75C6765C4801FE23 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		EAD4937149E118DB7D98073C0F43AD0B /* BAPickView */ = {
+			isa = PBXGroup;
+			children = (
+				50AF9CBAA6F71047EBEADA4627AF1F7A /* BAKit_ConfigurationDefine.h */,
+				BACE09352B6ACF4C256B182FF5E47A72 /* BAKit_DatePicker.h */,
+				2708BB23C0468378C1F1CDA9E65868C1 /* BAKit_DatePicker.m */,
+				1D821BDAFA12B9B836AD8889AE3B9405 /* BAKit_DefineCurrent.h */,
+				17F8F29441F2CD0CCE800620740A1918 /* BAKit_DefineFormat.h */,
+				E870998574AB0AD8E174C84A2C8F3B4F /* BAKit_PickerView.h */,
+				B031A14DAB5A76B2F4109E47A5D4D8EC /* BAKit_PickerView.m */,
+				7210D4733F6EFD38E1FE9F0BDF04270E /* BAKit_PickerViewConfig.h */,
+				F7F1058FCCE540778E9F4A645A964AEB /* BAPickView_OC.h */,
+				4D37ACF50510203C48D2CC33ECF89A9D /* BAPickView_Version.h */,
+				7BD754869A0106A13A9EB60186E6FA4F /* NSBundle+BAPod.h */,
+				138BC1D9F725ABFF7DE9CC72FBDB5243 /* NSBundle+BAPod.m */,
+				C5968D3B99E191FDDAA7D64DF8621BF7 /* NSDate+BAKit.h */,
+				31F9787607F22C832A093A6CBC7029FF /* NSDate+BAKit.m */,
+				C13B12FD55B7F411347FA2FA9FC9DF0C /* NSDateFormatter+BAKit.h */,
+				3A305C5F80CDF0BC579190D9CDE8F5C2 /* NSDateFormatter+BAKit.m */,
+				2F2E5898EBE9A944A9CAFEE3D81636BB /* NSString+BATime.h */,
+				0E992AF202B660ACB93A188F4573CBA5 /* NSString+BATime.m */,
+				2B46C26C1537725AD998CCFB90DF1C4D /* UIView+BAAnimation.h */,
+				95296EB1E8A7D739C81218422425ECD1 /* UIView+BAAnimation.m */,
+				0BF4D39D62BD7336E5AB92B8DF8C3DC1 /* UIView+BARectCorner_pick.h */,
+				E586B1951B03E2C096321D2F4D992F45 /* UIView+BARectCorner_pick.m */,
+				31735259719F6961BA71107D8F3D2973 /* Pod */,
+				665F84B4C5F9BE987A945EE4F5127007 /* Resources */,
+				7D0A9DE87E7A586CC829CE178738B68A /* Support Files */,
+			);
+			name = BAPickView;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5AA8B3D0F398CF767D7668BC5EBB3E6D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C76958820141D465C013442738C059FD /* BAKit_ConfigurationDefine.h in Headers */,
+				6D4A0EEEF1850088D8C73B5427163B70 /* BAKit_DatePicker.h in Headers */,
+				A3C5C5A89E2208286BE7A33F53748FFE /* BAKit_DefineCurrent.h in Headers */,
+				3BC3EE2EDD356A21D8E4A48AB25D9925 /* BAKit_DefineFormat.h in Headers */,
+				D73BEB433864B835CCC3DA6607313190 /* BAKit_PickerView.h in Headers */,
+				4E6441C174A9F44ECB1911C417D51190 /* BAKit_PickerViewConfig.h in Headers */,
+				EDB2286A32265277149249CE7AB42B26 /* BAPickView-umbrella.h in Headers */,
+				8BA753C1D3E86A0B5A4769D3F8BB7430 /* BAPickView_OC.h in Headers */,
+				D2FFF59D5143DEEA841CF9B8E23522D0 /* BAPickView_Version.h in Headers */,
+				0D10E0FE7684FE6AF7A91BB3258CBE25 /* NSBundle+BAPod.h in Headers */,
+				FB0279473E7967050F1282359F195C5F /* NSDate+BAKit.h in Headers */,
+				1EBFB2D266BB9F24F8EBDB5E0F611FD9 /* NSDateFormatter+BAKit.h in Headers */,
+				350A83C0CE4721CAF9FE210161A47A1E /* NSString+BATime.h in Headers */,
+				73A1C9E8055F0750B981057E05D8250D /* UIView+BAAnimation.h in Headers */,
+				A90207B871A205B44C2589E53DC7CC34 /* UIView+BARectCorner_pick.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7B74AC670C4DC1ECDDAE789D0A4B1B7F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A0A7F4CD272D77755B9DD359B2F7B43 /* Pods-BAPickView_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7E9322D29F385164BA42DF82DC849235 /* BAPickView-BAPickView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45438B0363F9E82CFCB005DDC1E3BF1C /* Build configuration list for PBXNativeTarget "BAPickView-BAPickView" */;
+			buildPhases = (
+				49796B5419F86DF1151278A7B3F94CF9 /* Sources */,
+				8D8715466EBA0946ABE916ADB2B17C9E /* Frameworks */,
+				07750B3382047AF8949C2BA7145B9512 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BAPickView-BAPickView";
+			productName = "BAPickView-BAPickView";
+			productReference = 3124819F1DCCB0261F8E108C59E64A30 /* BAPickView.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		B4A9A8A9487E4090830B981799AAA0C0 /* Pods-BAPickView_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7972D991E532DA797E7BF8B907FE9AD6 /* Build configuration list for PBXNativeTarget "Pods-BAPickView_Example" */;
+			buildPhases = (
+				7B74AC670C4DC1ECDDAE789D0A4B1B7F /* Headers */,
+				4DC20FD5B7EFA91C64F824B624F0C17E /* Sources */,
+				AC7C62F4288D8F1DE0BE277D33CB5B3A /* Frameworks */,
+				46B816B27A0E85E83F2C2DA85807905B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F50EC15B00677F28051FDDB358B88F41 /* PBXTargetDependency */,
+			);
+			name = "Pods-BAPickView_Example";
+			productName = "Pods-BAPickView_Example";
+			productReference = 8C9CD63EB0582CC07387EF8FD37D6D31 /* Pods_BAPickView_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B6311083A15AB8506363AC2E4DC00A42 /* BAPickView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E0DAB0F458A103F6E46DAFCCC856F3F8 /* Build configuration list for PBXNativeTarget "BAPickView" */;
+			buildPhases = (
+				5AA8B3D0F398CF767D7668BC5EBB3E6D /* Headers */,
+				DBE0270A45C6FC28C75CE31B6CCFE4A7 /* Sources */,
+				B77A24F2B09BEE321B311EE40745DFBF /* Frameworks */,
+				4E2979F77E4A88E3C4C5252E375C8BBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3974AB348D31005EEA87BBFA1E6D485 /* PBXTargetDependency */,
+			);
+			name = BAPickView;
+			productName = BAPickView;
+			productReference = 1D6C0FAEAB8C9DDA0F6874C51014E611 /* BAPickView.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 75DFBC985C0D216DE1FC8CA33C9EA15D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B6311083A15AB8506363AC2E4DC00A42 /* BAPickView */,
+				7E9322D29F385164BA42DF82DC849235 /* BAPickView-BAPickView */,
+				B4A9A8A9487E4090830B981799AAA0C0 /* Pods-BAPickView_Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07750B3382047AF8949C2BA7145B9512 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99B0E0589C77BFAF906DE53C57261756 /* BAPickView.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46B816B27A0E85E83F2C2DA85807905B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E2979F77E4A88E3C4C5252E375C8BBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				092302E924F759D01EDDC3B0B2AED39C /* BAPickView.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49796B5419F86DF1151278A7B3F94CF9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DC20FD5B7EFA91C64F824B624F0C17E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFCD9B3105B4CD3EB0115A4BB16E4DAD /* Pods-BAPickView_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBE0270A45C6FC28C75CE31B6CCFE4A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C40F4ACB54A4A11E9DFE4EDBF9258547 /* BAKit_DatePicker.m in Sources */,
+				E8B71EA0FFF7A097815C81247E2F02A2 /* BAKit_PickerView.m in Sources */,
+				62BACA123358FA70585A1C95D43603BB /* BAPickView-dummy.m in Sources */,
+				8D63470D4652784E32B5489152E30905 /* NSBundle+BAPod.m in Sources */,
+				E24D36D2D204F661B25A67E74A3745FA /* NSDate+BAKit.m in Sources */,
+				7FC7AD817FB0D0FD04AEAAC9F2C462F0 /* NSDateFormatter+BAKit.m in Sources */,
+				FE6B3CDF61F52C51DC6096592BD6118A /* NSString+BATime.m in Sources */,
+				BF273EE84779B5FD51F0743112BCF907 /* UIView+BAAnimation.m in Sources */,
+				73DF906F2E4C7A67E23182FF3944512E /* UIView+BARectCorner_pick.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C3974AB348D31005EEA87BBFA1E6D485 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "BAPickView-BAPickView";
+			target = 7E9322D29F385164BA42DF82DC849235 /* BAPickView-BAPickView */;
+			targetProxy = 75D5106A6A1836BFDFBB14658F2FDCDC /* PBXContainerItemProxy */;
+		};
+		F50EC15B00677F28051FDDB358B88F41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BAPickView;
+			target = B6311083A15AB8506363AC2E4DC00A42 /* BAPickView */;
+			targetProxy = 4D53EE6F2E8322A96AB7A568FE1108A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1E430156E175E2ED0F2D90B0A391396A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67972E1D55B15CB71A735F7B524AD4D1 /* Pods-BAPickView_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		2170E09A463CF77F9B74553DEA9A0CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1C2F5AA7DAB676033CB0F187A2ACF2 /* BAPickView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BAPickView/BAPickView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BAPickView/BAPickView.modulemap";
+				PRODUCT_MODULE_NAME = BAPickView;
+				PRODUCT_NAME = BAPickView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2E697DD10E2C4F5C1A374487641FE081 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FA4730FBB5B7E99D4C2D88CA19AF91E /* Pods-BAPickView_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5153DC2E9BB4F6D6F85AF7C0A4A2A27F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		6A949A208667F02694AF29D5DCC8D4BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		9849130D76274265160E623E1411798C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1C2F5AA7DAB676033CB0F187A2ACF2 /* BAPickView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
+				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = BAPickView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		A5F2FE2E0B91ECE4B23BFCEA83432287 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1C2F5AA7DAB676033CB0F187A2ACF2 /* BAPickView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BAPickView/BAPickView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BAPickView/BAPickView.modulemap";
+				PRODUCT_MODULE_NAME = BAPickView;
+				PRODUCT_NAME = BAPickView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DC6DD7C2B0D59F768C83DBD22A7A8EC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1C2F5AA7DAB676033CB0F187A2ACF2 /* BAPickView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
+				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = BAPickView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5153DC2E9BB4F6D6F85AF7C0A4A2A27F /* Debug */,
+				6A949A208667F02694AF29D5DCC8D4BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45438B0363F9E82CFCB005DDC1E3BF1C /* Build configuration list for PBXNativeTarget "BAPickView-BAPickView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9849130D76274265160E623E1411798C /* Debug */,
+				DC6DD7C2B0D59F768C83DBD22A7A8EC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7972D991E532DA797E7BF8B907FE9AD6 /* Build configuration list for PBXNativeTarget "Pods-BAPickView_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E697DD10E2C4F5C1A374487641FE081 /* Debug */,
+				1E430156E175E2ED0F2D90B0A391396A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E0DAB0F458A103F6E46DAFCCC856F3F8 /* Build configuration list for PBXNativeTarget "BAPickView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2170E09A463CF77F9B74553DEA9A0CAA /* Debug */,
+				A5F2FE2E0B91ECE4B23BFCEA83432287 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

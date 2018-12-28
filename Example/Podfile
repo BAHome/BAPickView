@@ -1,0 +1,6 @@
+use_frameworks!
+
+target 'BAPickView_Example' do
+  pod 'BAPickView', :path => '../'
+
+end
