@@ -919,6 +919,13 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 #pragma mark - setter / getter
 - (void)setBa_maxDate:(NSDate *)ba_maxDate {
     _ba_maxDate = ba_maxDate;
+    if (self.minDate) {
+        if ([_ba_maxDate ba_dateTimeIntervalSince1970InMilliSecond] <= [self.minDate ba_dateTimeIntervalSince1970InMilliSecond]) {
+             NSLog(@"请检查最大最小日期,最大时间必须大于最小时间");
+            return;
+        }
+    }
+    
     if ([_ba_maxDate ba_dateTimeIntervalSince1970InMilliSecond] < [self.defautDate ba_dateTimeIntervalSince1970InMilliSecond])
     {
         NSLog(@"最大时间小于默认选中时间,最大时间为默认选中时间");
@@ -930,6 +937,12 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 
 - (void)setBa_minDate:(NSDate *)ba_minDate {
     _ba_minDate = ba_minDate;
+    if (self.maxDate) {
+        if ([self.minDate ba_dateTimeIntervalSince1970InMilliSecond] <= [_ba_minDate ba_dateTimeIntervalSince1970InMilliSecond]) {
+            NSLog(@"请检查最大最小日期,最大时间必须大于最小时间");
+            return;
+        }
+    }
     if ([_ba_minDate ba_dateTimeIntervalSince1970InMilliSecond] > [self.defautDate ba_dateTimeIntervalSince1970InMilliSecond])
     {
         NSLog(@"最小时间大于默认选中时间,最小时间为默认选中时间");

@@ -260,7 +260,7 @@
 
 - (void)pickView2
 {
-    NSArray *array = @[@"男", @"女"];
+    NSArray *array = @[@"男", @"女",@"我们的"];
     
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCustomPickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {

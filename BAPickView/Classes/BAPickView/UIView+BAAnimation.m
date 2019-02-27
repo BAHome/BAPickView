@@ -21,15 +21,6 @@
                                  ratio:(CGFloat)scaleRatio
                                finishBlock:(void(^)(void))finishBlock
 {
-    if (!duration)
-    {
-        duration = 1.0f;
-    }
-    if (!scaleRatio)
-    {
-        scaleRatio = 1.6f;
-    }
-
     self.transform = CGAffineTransformScale(self.transform, 0.01f, 0.01f);
     
     [UIView animateWithDuration:duration animations:^{
@@ -57,15 +48,6 @@
                                  ratio:(CGFloat)scaleRatio
                                   finishBlock:(void(^)(void))finishBlock
 {
-    if (!duration)
-    {
-        duration = 1.0f;
-    }
-    if (!scaleRatio)
-    {
-        scaleRatio = 1.6f;
-    }
-
     [UIView animateWithDuration:duration animations:^{
         self.transform = CGAffineTransformMakeScale(scaleRatio, scaleRatio);
     } completion:^(BOOL finished) {
@@ -90,10 +72,6 @@
                             startAlpha:(CGFloat)startAlpha
                            finishAlpha:(CGFloat)finishAlpha
 {
-    if (!duration)
-    {
-        duration = 1.5f;
-    }
     if (!startAlpha)
     {
         startAlpha = 0.2f;
@@ -124,10 +102,6 @@
                                finishOptions:(UIViewAnimationOptions)finishOptions
                                 finishBlock:(void(^)(void))finishBlock
 {
-    if (!duration)
-    {
-        duration = 1.5f;
-    }
     [UIView transitionWithView:self duration:duration options:startOptions animations:^{
         
     } completion:^(BOOL finished) {
@@ -155,10 +129,6 @@
                                    newFrame:(CGRect)newFrame
                                 finishBlock:(void(^)(void))finishBlock
 {
-    if (!duration)
-    {
-        duration = 1.5f;
-    }
     [UIView animateWithDuration:1.0f animations:^{
         self.frame = newFrame;
     } completion:^(BOOL finished) {
@@ -186,10 +156,6 @@
                                    newBounds:(CGRect)newBounds
                                  finishBlock:(void(^)(void))finishBlock
 {
-    if (!duration)
-    {
-        duration = 1.5f;
-    }
     [UIView animateWithDuration:duration animations:^{
         self.bounds = newBounds;
     } completion:^(BOOL finished) {
@@ -217,10 +183,6 @@
                                    newCenter:(CGPoint)newCenter
                                  finishBlock:(void(^)(void))finishBlock
 {
-    if (!duration)
-    {
-        duration = 1.5f;
-    }
     [UIView animateWithDuration:0.5f animations:^{
         self.center = newCenter;
     } completion:^(BOOL finished) {
@@ -254,10 +216,6 @@
                              startBlock:(void(^)(void))startBlock
                             finishBlock:(void(^)(void))finishBlock
 {
-    if (!duration)
-    {
-        duration = 1.5f;
-    }
     if (!damping)
     {
         damping = 1.0f;
@@ -449,10 +407,6 @@
 - (void)ba_animation_flipWithDuration:(NSTimeInterval)duration
                             direction:(BAKit_ViewAnimationFlipDirectionType)direction
 {
-    if (!duration)
-    {
-        duration = 1.5f;
-    }
     NSString *subtype = nil;
     
     switch(direction)

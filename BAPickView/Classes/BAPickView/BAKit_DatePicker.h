@@ -65,12 +65,12 @@
 
 #pragma mark - 默认配置
 /**
- 日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒
+ 日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒;最大日期必须大于最小日期
  */
 @property(strong, nonatomic) NSDate * ba_maxDate;
 
 /**
- 日期选择器的最小日期，默认为: 当前时间
+ 日期选择器的最小日期，默认为: 当前时间;最大日期必须大于最小日期
  */
 @property(strong, nonatomic) NSDate * ba_minDate;
 

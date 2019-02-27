@@ -704,7 +704,21 @@
     for (int i = 0; i < pickerView.numberOfComponents; i ++) {
         NSInteger selectRow = [pickerView selectedRowInComponent:i];
         UILabel * label = (UILabel *)[pickerView viewForRow:selectRow forComponent:i];
-        NSString * strTo = [label.text substringToIndex:label.text.length - 1];
+        NSString * strTo = @"";
+        switch (self.pickerViewType) {
+            case BAKit_PickerViewTypeCity:
+            case BAKit_PickerViewTypeArray:
+            case BAKit_PickerViewTypeMultipleArray:
+                strTo = label.text;
+                break;
+            case BAKit_PickerViewTypeDate:
+            case BAKit_PickerViewTypeDateYM:
+            case BAKit_PickerViewTypeDateWeek:
+                strTo = [label.text substringToIndex:label.text.length - 1];
+                break;
+            default:
+                break;
+        }
         dateStrArray.count - 1 < i ? [dateStrArray addObject:strTo] : [dateStrArray setObject:strTo atIndexedSubscript:i];
     }
     self.resultString = [dateStrArray componentsJoinedByString:@"-"];

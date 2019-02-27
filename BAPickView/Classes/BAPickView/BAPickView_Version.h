@@ -20,6 +20,11 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 最新更新时间：2019-2-27 【倒叙】 <br>
+ 最新Version：【Version：1.1.6】 <br>
+ 更新内容： <br>
+ 1.1.6.1、修复部分自定义数组取值不全的问题，(感谢简书网友 [@徐国伟](https://www.jianshu.com/u/cabe0049e1bc ) 同学提出的 bug！) <br>
+ 
  最新更新时间：2018-12-28 【倒叙】 <br>
  最新Version：【Version：1.1.5】 <br>
  更新内容： <br>
