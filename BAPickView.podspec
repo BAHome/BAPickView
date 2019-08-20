@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BAPickView'
-  s.version          = '1.1.6'
+  s.version          = '1.1.7'
   s.summary          = 'BAPickView 精简高效的选择器！'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+                      修复最大最小日期取值错误问题
                        DESC
 
   s.homepage         = 'https://github.com/BAHome/BAPickView'

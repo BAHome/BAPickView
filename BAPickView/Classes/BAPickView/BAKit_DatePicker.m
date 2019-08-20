@@ -938,7 +938,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 - (void)setBa_minDate:(NSDate *)ba_minDate {
     _ba_minDate = ba_minDate;
     if (self.maxDate) {
-        if ([self.minDate ba_dateTimeIntervalSince1970InMilliSecond] <= [_ba_minDate ba_dateTimeIntervalSince1970InMilliSecond]) {
+        if ([self.maxDate ba_dateTimeIntervalSince1970InMilliSecond] <= [_ba_minDate ba_dateTimeIntervalSince1970InMilliSecond]) {
             NSLog(@"请检查最大最小日期,最大时间必须大于最小时间");
             return;
         }
