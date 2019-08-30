@@ -639,8 +639,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 ```
 ### demo 示例
 ```
-- (void)pickView1
-{
+- (void)pickView1 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
@@ -671,8 +670,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     }];
 }
 
-- (void)pickView2
-{
+- (void)pickView2 {
     NSArray *array = @[@"男", @"女"];
     
     BAKit_WeakSelf
@@ -690,8 +688,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     }];
 }
 
-- (void)pickView3
-{
+- (void)pickView3 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDate configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
@@ -715,8 +712,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     }];
 }
 
-- (void)pickView4
-{
+- (void)pickView4 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateYM configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
@@ -731,8 +727,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
     }];
 }
 
-- (void)pickView5
-{
+- (void)pickView5 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
         
@@ -746,15 +741,13 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 
 // 示例2：自定义日期选择器
 #pragma mark 自定义日期选择器
-- (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type
-{
+- (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type {
     [BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
         
         NSDate *maxdDate;
         NSDate *mindDate;
         // 自定义：最大最小日期格式
-        if (type == BAKit_CustomDatePickerDateTypeYMD)
-        {
+        if (type == BAKit_CustomDatePickerDateTypeYMD) {
 //            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
 //            maxdDate = [format dateFromString:@"2018-08-09"];
 //            mindDate = [format dateFromString:@"2016-07-20"];
@@ -771,20 +764,17 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
             maxdDate = [format dateFromString:[format stringFromDate:theDay]];
             
         }
-        else if (type == BAKit_CustomDatePickerDateTypeYM)
-        {
+        else if (type == BAKit_CustomDatePickerDateTypeYM) {
             NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYM];
             maxdDate = [format dateFromString:@"2018-08"];
             mindDate = [format dateFromString:@"2016-07"];
         }
         
-        if (maxdDate)
-        {
+        if (maxdDate) {
             // 自定义：最大日期
             tempView.ba_maxDate = maxdDate;
         }
-        if (mindDate)
-        {
+        if (mindDate) {
             // 自定义：最小日期
             tempView.ba_minDate = mindDate;
         }
@@ -835,6 +825,11 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 ## 5、更新记录：【倒叙】
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
+ 
+ 最新更新时间：2019-8-30 【倒叙】 <br>
+ 最新Version：【Version：1.1.8】 <br>
+ 更新内容： <br>
+ 1.1.8.1、优化适配异形屏，优化部分动画性能，(感谢git网友 [@李智慧](https://github.com/luobojiangzi ) 同学提出的 bug！) <br>
  
  最新更新时间：2019-8-20 【倒叙】 <br>
  最新Version：【Version：1.1.7】 <br>

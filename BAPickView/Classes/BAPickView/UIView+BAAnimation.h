@@ -85,8 +85,7 @@ typedef NS_ENUM(NSUInteger, BAKit_ViewAnimationEnterDirectionType) {
  - BAKit_ViewAnimationFlipDirectionTypeBottom: 向 bottom 翻动
  - BAKit_ViewAnimationFlipDirectionTypeRight: 向 right 翻动
  */
-typedef NS_ENUM(NSUInteger, BAKit_ViewAnimationFlipDirectionType)
-{
+typedef NS_ENUM(NSUInteger, BAKit_ViewAnimationFlipDirectionType) {
     BAKit_ViewAnimationFlipDirectionTypeTop = 0,
     BAKit_ViewAnimationFlipDirectionTypeLeft,
     BAKit_ViewAnimationFlipDirectionTypeBottom,
@@ -96,8 +95,7 @@ typedef NS_ENUM(NSUInteger, BAKit_ViewAnimationFlipDirectionType)
 /**
  *  Direction of the translation
  */
-typedef NS_ENUM(NSInteger, UIViewAnimationTranslationDirection)
-{
+typedef NS_ENUM(NSInteger, UIViewAnimationTranslationDirection) {
     /**
      *  Translation from left to right
      */
@@ -111,8 +109,7 @@ typedef NS_ENUM(NSInteger, UIViewAnimationTranslationDirection)
 /**
  *  Direction of the linear gradient
  */
-typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
-{
+typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection) {
     /**
      *  Linear gradient vertical
      */
@@ -145,7 +142,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  缩放显示动画
  *
- *  @param duration    持续时间，默认：1.0f
+ *  @param duration    持续时间
  *  @param scaleRatio  缩放比率，默认：1.6f
  *  @param finishBlock 缩放完成回调
  */
@@ -156,7 +153,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  缩放消失动画
  *
- *  @param duration    持续时间，默认：1.0f
+ *  @param duration    持续时间
  *  @param scaleRatio  缩放比率，默认：1.6f
  *  @param finishBlock 缩放完成回调
  */
@@ -167,7 +164,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  透明度动画
  *
- *  @param duration    持续时间，默认：1.5f
+ *  @param duration    持续时间
  *  @param startAlpha  开始的 alpha，默认：0.2f
  *  @param finishAlpha 结束的 alpha，默认：1.0f
  */
@@ -178,7 +175,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  转场动画
  *
- *  @param duration      持续时间，默认：1.5f
+ *  @param duration      持续时间
  *  @param startOptions  开始转场动画样式
  *  @param finishOptions 结束转场动画样式
  *  @param finishBlock   转场结束回调
@@ -191,7 +188,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  改变 frame 动画
  *
- *  @param duration      持续时间，默认：1.5f
+ *  @param duration      持续时间
  *  @param originalFrame 原始 frame
  *  @param newFrame      更改后的 frame
  *  @param finishBlock   结束回调
@@ -204,7 +201,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  改变 Bounds 动画
  *
- *  @param duration       持续时间，默认：1.5f
+ *  @param duration       持续时间
  *  @param originalBounds 原始 Bounds
  *  @param newBounds      更改后的 Bounds
  *  @param finishBlock    结束回调
@@ -217,7 +214,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  改变 Center 动画
  *
- *  @param duration       持续时间，默认：1.5f
+ *  @param duration       持续时间
  *  @param originalCenter 原始 Center
  *  @param newCenter      更改后的 Center
  *  @param finishBlock    结束回调
@@ -230,7 +227,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
 /*!
  *  弹簧动画
  *
- *  @param duration              持续时间，默认：1.5f
+ *  @param duration              持续时间
  *  @param damping               弹性比率
  *  @param initialSpringVelocity 初始弹簧速度
  *  @param startOptions          开始动画样式
@@ -250,7 +247,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
  view 出现动画
  
  @param positionType 位置类型
- @param duration duration 默认：1.0f
+ @param duration duration 默认
  @param finishBlock finishBlock
  */
 - (void)ba_animation_showFromPositionType:(BAKit_ViewAnimationEnterDirectionType)positionType
@@ -261,7 +258,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
  view 消失动画
  
  @param positionType 位置类型
- @param duration duration 默认：1.0f
+ @param duration duration 默认
  @param finishBlock finishBlock
  */
 - (void)ba_animation_dismissFromPositionType:(BAKit_ViewAnimationEnterDirectionType)positionType
@@ -272,7 +269,7 @@ typedef NS_ENUM(NSInteger, UIViewLinearGradientDirection)
  view 翻转动画
  
  @param duration 位置类型
- @param direction duration 默认：1.0f
+ @param direction duration
  */
 - (void)ba_animation_flipWithDuration:(NSTimeInterval)duration
                             direction:(BAKit_ViewAnimationFlipDirectionType)direction;

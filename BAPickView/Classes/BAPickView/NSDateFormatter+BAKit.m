@@ -84,15 +84,12 @@
 
 @implementation NSDateFormatter (BAKit)
 
-+ (id)ba_dateFormatter
-{
++ (id)ba_dateFormatter {
     return [[self alloc] init];
 }
 
-+ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString
-{
-    if (dateFormatString == nil || ![dateFormatString isKindOfClass:[NSString class]] || [dateFormatString isEqualToString:@""])
-    {
++ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString {
+    if (dateFormatString == nil || ![dateFormatString isKindOfClass:[NSString class]] || [dateFormatString isEqualToString:@""]) {
         return nil;
     }
     
@@ -102,8 +99,7 @@
     return dateFormatter;
 }
 
-+ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString timezoneName:(NSString *)timezoneName
-{
++ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString timezoneName:(NSString *)timezoneName {
     NSDateFormatter *dateFormatter = [NSDateFormatter ba_dateFormatterWithFormatString:dateFormatString];
     
     if (timezoneName != nil && [timezoneName isKindOfClass:[NSString class]] && ![timezoneName isEqualToString:@""]) {
@@ -112,8 +108,7 @@
     return dateFormatter;
 }
 
-+ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString dateStyle:(NSDateFormatterStyle)dateStyle
-{
++ (id)ba_dateFormatterWithFormatString:(NSString *)dateFormatString dateStyle:(NSDateFormatterStyle)dateStyle {
     
     NSDateFormatter *dateFormatter = [NSDateFormatter ba_dateFormatterWithFormatString:dateFormatString];
 
@@ -123,38 +118,31 @@
     return dateFormatter;
 }
 
-+ (id)ba_setupDateFormatterWithYMDHMS
-{
++ (id)ba_setupDateFormatterWithYMDHMS {
     return [self ba_dateFormatterWithFormatString:BAKit_FormatString_YMDHMS];
 }
 
-+ (id)ba_setupDateFormatterWithYMDEHMS
-{
++ (id)ba_setupDateFormatterWithYMDEHMS {
     return [self ba_dateFormatterWithFormatString:BAKit_FormatString_YMDEHMS];
 }
 
-+ (id)ba_setupDateFormatterWithYMD
-{
++ (id)ba_setupDateFormatterWithYMD {
     return [self ba_dateFormatterWithFormatString:BAKit_FormatString_YMD];
 }
 
-+ (id)ba_setupDateFormatterWithYM
-{
++ (id)ba_setupDateFormatterWithYM {
     return [self ba_dateFormatterWithFormatString:BAKit_FormatString_YM];
 }
 
-+ (id)ba_setupDateFormatterWithYY
-{
++ (id)ba_setupDateFormatterWithYY {
     return [self ba_dateFormatterWithFormatString:BAKit_FormatString_Y];
 }
 
-+ (id)ba_setupDateFormatterWithHM
-{
++ (id)ba_setupDateFormatterWithHM {
     return [self ba_dateFormatterWithFormatString:BAKit_FormatString_HM];
 }
 
-+ (id)ba_setupDateFormatterWithHMS
-{
++ (id)ba_setupDateFormatterWithHMS {
     return [self ba_dateFormatterWithFormatString:BAKit_FormatString_YMDHMS];
 }
 

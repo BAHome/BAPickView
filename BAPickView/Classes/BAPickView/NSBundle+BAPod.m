@@ -18,8 +18,7 @@
  @return bundle
  */
 + (NSBundle *)ba_bundleWithBundleName:(NSString *)bundleName
-                              podName:(NSString *)podName
-{
+                              podName:(NSString *)podName {
     if (bundleName == nil && podName == nil) {
         @throw @"bundleName和podName不能同时为空";
     }else if (bundleName == nil ) {

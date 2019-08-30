@@ -360,12 +360,9 @@ BAKit_getColumnCountWithArrayAndRowCount_pod(NSArray *array, NSInteger rowCount)
     NSUInteger count = array.count;
     
     NSUInteger i = 0;
-    if (count % rowCount == 0)
-    {
+    if (count % rowCount == 0) {
         i = count / rowCount;
-    }
-    else
-    {
+    } else {
         i = count / rowCount + 1;
     }
     return i;

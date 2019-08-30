@@ -180,4 +180,6 @@ typedef NS_ENUM(NSUInteger, BAKit_CustomDatePickerDateType) {
 
 typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 
+static NSString * const kPickErrorMsg = @"当前样式下不适合将按钮放在底部，已自动为您适配合适的方案！";
+
 #endif /* BAKit_PickerViewConfig_h */

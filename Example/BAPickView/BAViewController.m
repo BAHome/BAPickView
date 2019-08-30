@@ -32,37 +32,44 @@
     [self setupUI];
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     self.title = @"BAPickView-OC";
     self.tableView.hidden = NO;
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+   
+    CGFloat min_x = 0;
+    CGFloat min_y = 0;
+    CGFloat min_w = 0;
+    CGFloat min_h = 0;
     
-    self.tableView.frame = self.view.bounds;
+    CGFloat min_view_w = CGRectGetWidth(self.view.frame);
+    CGFloat min_view_h = CGRectGetHeight(self.view.frame);
     
+    min_x = BAKit_ViewSafeAreaInsets(self.view).left;
+    min_h = min_view_h - min_y;
+    min_w = min_view_w - BAKit_ViewSafeAreaInsets(self.view).left - BAKit_ViewSafeAreaInsets(self.view).right;
+    
+    self.tableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+
 }
 
 #pragma mark - UITableViewDataSource / UITableViewDelegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataArray.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.dataArray[section] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if ( !cell )
-    {
+    if ( !cell ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.textLabel.numberOfLines = 0;
         cell.accessoryType = (indexPath.section == 0) ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
@@ -72,40 +79,32 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ( 0 == indexPath.section )
-    {
+    if ( 0 == indexPath.section ) {
         switch ( indexPath.row ) {
-                case 0:
-            {
+                case 0: {
                 [self pickView1];
             }
                 break;
-                case 1:
-            {
+                case 1: {
                 [self pickView2];
             }
                 break;
-                case 2:
-            {
+                case 2: {
                 [self pickView3];
             }
                 break;
-                case 3:
-            {
+                case 3: {
                 [self pickView4];
             }
                 break;
-                case 4:
-            {
+                case 4: {
                 [self pickView5];
             }
                 break;
-                case 5:
-            {
+                case 5: {
                 [self pickView6];
             }
                 break;
@@ -113,51 +112,41 @@
             default:
                 break;
         }
-    }
-    else if (1 == indexPath.section)
-    {
+    } else if (1 == indexPath.section) {
         NSInteger type = 0;
         switch (indexPath.row) {
-                case 0:
-            {
+                case 0: {
                 type = BAKit_CustomDatePickerDateTypeYMDHMS;
             }
                 break;
-                case 1:
-            {
+                case 1: {
                 type = BAKit_CustomDatePickerDateTypeYMDHM;
             }
                 break;
-                case 2:
-            {
+                case 2: {
                 type = BAKit_CustomDatePickerDateTypeYMD;
             }
                 break;
                 
-                case 3:
-            {
+                case 3: {
                 type = BAKit_CustomDatePickerDateTypeHMS;
             }
                 break;
                 
-                case 4:
-            {
+                case 4: {
                 type = BAKit_CustomDatePickerDateTypeYM;
             }
                 break;
                 
-                case 5:
-            {
+                case 5: {
                 type = BAKit_CustomDatePickerDateTypeMD;
             }
                 break;
-                case 6:
-            {
+                case 6: {
                 type = BAKit_CustomDatePickerDateTypeHM;
             }
                 break;
-                case 7:
-            {
+                case 7: {
                 type = BAKit_CustomDatePickerDateTypeYY;
             }
                 break;
@@ -170,8 +159,7 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [UIView new];
     
     UILabel *headerTitle = [UILabel new];
@@ -182,18 +170,15 @@
     
     headerTitle.frame = CGRectMake(20, 0, BAKit_SCREEN_WIDTH - 40, 40);
     switch (section) {
-            case 0:
-        {
+            case 0: {
             headerTitle.text = @"BAPickView 的几种日常用法！";
         }
             break;
-            case 1:
-        {
+            case 1: {
             headerTitle.text = @"自定义 DatePicker";
         }
             break;
-            case 2:
-        {
+            case 2: {
             headerTitle.text = @"BAPickView 的特点！";
         }
             break;
@@ -205,20 +190,17 @@
     return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return FLT_MIN;
 }
 
 #pragma mark - custom method
 
-- (void)pickView1
-{
+- (void)pickView1 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
@@ -258,8 +240,7 @@
     }];
 }
 
-- (void)pickView2
-{
+- (void)pickView2 {
     NSArray *array = @[@"男", @"女",@"我们的"];
     
     BAKit_WeakSelf
@@ -277,8 +258,7 @@
     }];
 }
 
-- (void)pickView3
-{
+- (void)pickView3 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDate configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
@@ -302,8 +282,7 @@
     }];
 }
 
-- (void)pickView4
-{
+- (void)pickView4 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateYM configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
@@ -318,8 +297,7 @@
     }];
 }
 
-- (void)pickView5
-{
+- (void)pickView5 {
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
         
@@ -331,8 +309,7 @@
     }];
 }
 
-- (void)pickView6
-{
+- (void)pickView6 {
     NSArray *array = @[
                        @[@"男", @"女"],
                        @[@"18", @"22"],
@@ -364,49 +341,44 @@
 }
 
 #pragma mark 自定义日期选择器
-- (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type
-{
+- (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type {
     [BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
         
-        NSDate *maxdDate;
-        NSDate *mindDate;
+        NSDate *maxDate;
+        NSDate *minDate;
         // 自定义：最大最小日期格式
-        if (type == BAKit_CustomDatePickerDateTypeYMD)
-        {
+        if (type == BAKit_CustomDatePickerDateTypeYMD) {
             //            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-            //            maxdDate = [format dateFromString:@"2018-08-09"];
-            //            mindDate = [format dateFromString:@"2016-07-20"];
+            //            maxDate = [format dateFromString:@"2018-08-09"];
+            //            minDate = [format dateFromString:@"2016-07-20"];
             NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
             NSDate *today = [[NSDate alloc]init];
             [format setDateFormat:@"yyyy-MM-dd"];
             
             // 最小时间，当前时间
-            mindDate = [format dateFromString:[format stringFromDate:today]];
+            minDate = [format dateFromString:[format stringFromDate:today]];
             
             //            NSTimeInterval oneDay = 24 * 60 * 60;
             //            // 最大时间，当前时间+180天
             //            NSDate *theDay = [today initWithTimeIntervalSinceNow:oneDay * 180];
-            //            maxdDate = [format dateFromString:[format stringFromDate:theDay]];
+            //            maxDate = [format dateFromString:[format stringFromDate:theDay]];
             
-            maxdDate = [format dateFromString:@"2019-01-07"];
+            maxDate = [format dateFromString:@"2019-01-07"];
             
         }
-        else if (type == BAKit_CustomDatePickerDateTypeYM)
-        {
+        else if (type == BAKit_CustomDatePickerDateTypeYM) {
             NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYM];
-            maxdDate = [format dateFromString:@"2018-08"];
-            mindDate = [format dateFromString:@"2016-07"];
+            maxDate = [format dateFromString:@"2018-08"];
+            minDate = [format dateFromString:@"2016-07"];
         }
         
-        if (maxdDate)
-        {
+        if (maxDate) {
             // 自定义：最大日期
-            tempView.ba_maxDate = maxdDate;
+            tempView.ba_maxDate = maxDate;
         }
-        if (mindDate)
-        {
+        if (minDate) {
             // 自定义：最小日期
-            tempView.ba_minDate = mindDate;
+            tempView.ba_minDate = minDate;
         }
         
         /**
@@ -427,9 +399,9 @@
         // 自定义：动画样式
         tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
         // 自定义：pickView 位置
-        //            tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+//                    tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
         // 自定义：toolBar 位置
-        //            tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
+                    tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
         // 自定义：pickView 文字颜色
         tempView.ba_pickViewTextColor = [UIColor redColor];
         // 自定义：pickView 文字字体
@@ -451,10 +423,8 @@
 
 #pragma mark - setter / getter
 
-- (UITableView *)tableView
-{
-    if (!_tableView)
-    {
+- (UITableView *)tableView {
+    if (!_tableView) {
         _tableView = [UITableView new];
         self.tableView.delegate = self;
         self.tableView.dataSource =  self;
@@ -467,10 +437,8 @@
     return _tableView;
 }
 
-- (NSArray *)dataArray
-{
-    if ( !_dataArray )
-    {
+- (NSArray *)dataArray {
+    if ( !_dataArray ) {
         _dataArray = [NSArray arrayWithObjects:@[@"1、城市选择器，返回省市县和经纬度",
                                                  @"2、普通数组自定义数据",
                                                  @"3、日期选择器：年月日，可以完全自定义 NSDateFormatter",

@@ -68,11 +68,12 @@
 #import "BAKit_DefineCurrent.h"
 #import "NSBundle+BAPod.h"
 
-#define kBAKit_PickerView_H        200 * BAKit_ScaleYAndHeight
-#define kBAKit_PickerViewToolBar_H 40 * BAKit_ScaleYAndHeight
+#define kBAKit_PickerView_H        240
+#define kBAKit_PickerViewToolBar_H 40
 
-@interface BAKit_PickerView ()<UIPickerViewDataSource,UIPickerViewDelegate>
-{
+#define kDuration 0.2f
+
+@interface BAKit_PickerView ()<UIPickerViewDataSource,UIPickerViewDelegate> {
     NSString *m_local2DString;
 }
 
@@ -155,8 +156,7 @@
 
 @implementation BAKit_PickerView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setupUI];
@@ -164,10 +164,8 @@
     return self;
 }
 
-- (instancetype)initWitPlist:(NSString *)plistName
-{
-    if (self = [super init])
-    {
+- (instancetype)initWitPlist:(NSString *)plistName {
+    if (self = [super init]) {
         [self setupUI];
         
     }
@@ -175,12 +173,10 @@
 }
 
 + (void)ba_creatCityPickerViewWithConfiguration:(void (^)(BAKit_PickerView *tempView)) configuration
-                                          block:(BAKit_PickerViewBlock)block
-{
+                                          block:(BAKit_PickerViewBlock)block {
     BAKit_PickerView *pickerView = [[BAKit_PickerView alloc] init];
     pickerView.pickerViewType = BAKit_PickerViewTypeCity;
-    if (configuration)
-    {
+    if (configuration) {
         configuration(pickerView);
     }
     [pickerView ba_pickViewShow];
@@ -189,13 +185,11 @@
 
 + (void)ba_creatCustomPickerViewWithDataArray:(NSArray *)dataArray
                                 configuration:(void (^)(BAKit_PickerView *tempView)) configuration
-                                        block:(BAKit_PickerViewResultBlock)block
-{
+                                        block:(BAKit_PickerViewResultBlock)block {
     BAKit_PickerView *pickerView = [[BAKit_PickerView alloc] init];
     pickerView.pickerViewType = BAKit_PickerViewTypeArray;
     
-    if (configuration)
-    {
+    if (configuration) {
         configuration(pickerView);
     }
     pickerView.dataArray = dataArray;
@@ -205,13 +199,11 @@
 
 + (void)ba_creatCustomMultiplePickerViewWithDataArray:(NSArray *)dataArray
                                         configuration:(void (^)(BAKit_PickerView *tempView)) configuration
-                                                block:(BAKit_PickerViewResultBlock)block
-{
+                                                block:(BAKit_PickerViewResultBlock)block {
     BAKit_PickerView *pickerView = [[BAKit_PickerView alloc] init];
     pickerView.pickerViewType = BAKit_PickerViewTypeMultipleArray;
     
-    if (configuration)
-    {
+    if (configuration) {
         configuration(pickerView);
     }
     pickerView.multipleDataArray = dataArray;
@@ -221,12 +213,10 @@
 
 + (void)ba_creatPickerViewWithType:(BAKit_PickerViewType)pickerViewType
                      configuration:(void (^)(BAKit_PickerView *tempView))configuration
-                             block:(BAKit_PickerViewResultBlock)block
-{
+                             block:(BAKit_PickerViewResultBlock)block {
     BAKit_PickerView *pickerView = [[BAKit_PickerView alloc] init];
     
-    if (configuration)
-    {
+    if (configuration) {
         configuration(pickerView);
     }
     pickerView.pickerViewType = pickerViewType;
@@ -234,9 +224,9 @@
     pickerView.resultBlock = block;
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     self.backgroundColor = BAKit_Color_Translucent_pod;
+    self.bgView.backgroundColor = UIColor.whiteColor;
     self.pickView.hidden = NO;
     
     self.pickView.delegate = self;
@@ -261,17 +251,15 @@
 }
 
 #pragma mark - 通知处理
-- (void)handleDeviceOrientationRotateAction:(NSNotification *)notification
-{
+- (void)handleDeviceOrientationRotateAction:(NSNotification *)notification {
     [self ba_layoutSubViews];
 }
 
 #pragma mark - layout
-- (void)ba_layoutSubViews
-{
+
+- (void)ba_layoutSubViews {
     self.frame = [UIScreen mainScreen].bounds;
     self.alertWindow.frame = self.window.bounds;
-    
     
     CGFloat min_x = 0;
     CGFloat min_y = 0;
@@ -282,33 +270,27 @@
     CGFloat min_view_h = CGRectGetHeight(self.frame);
 
     min_h = kBAKit_PickerView_H + kBAKit_PickerViewToolBar_H;
-    min_y = min_view_h - min_h - BAKit_ViewSafeAreaInsets(self).bottom;
-    min_w = min_view_w - BAKit_ViewSafeAreaInsets(self).left - BAKit_ViewSafeAreaInsets(self).right;
+    min_y = min_view_h - min_h + BAKit_ViewSafeAreaInsets(self).bottom;
+    min_w = min_view_w;
     
-    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
-    {
+    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter) {
         min_w = 250 * BAKit_ScaleXAndWidth;
     }
-
-    self.bgView.frame = CGRectMake(BAKit_ViewSafeAreaInsets(self).left, min_y, min_w, min_h);
+    self.bgView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    
     CGFloat min_bgView_w = CGRectGetWidth(self.bgView.frame);
     CGFloat min_bgView_h = CGRectGetHeight(self.bgView.frame);
-    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter)
-    {
+    if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeCenter) {
         self.bgView.center = self.center;
         [self.bgView ba_view_setViewRectCornerType:BAKit_ViewRectCornerTypeAllCorners viewCornerRadius:10];
     }
     
-    if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeNormal)
-    {
+    if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeNormal) {
         min_y = kBAKit_PickerViewToolBar_H;
         min_h = kBAKit_PickerView_H;
-        if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
-        {
-            if (self.multipleTitleArray.count == self.multipleDataArray.count)
-            {
-                for (int i = 0; i < self.multipleTitleArray.count; i ++)
-                {
+        if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray) {
+            if (self.multipleTitleArray.count == self.multipleDataArray.count) {
+                for (int i = 0; i < self.multipleTitleArray.count; i ++) {
                     CGRect frame = CGRectMake(min_x + i*(min_w/self.multipleTitleArray.count), min_y, min_w/self.multipleTitleArray.count, 30);
                     
                     UILabel * titleLabel = [self ba_creatTitleLabelWithFrame:frame index:i];
@@ -321,7 +303,9 @@
         self.pickView.frame = CGRectMake(min_x, min_y, min_w, min_h);
         self.datePicker.frame = self.pickView.frame;
         
+        min_x = BAKit_ViewSafeAreaInsets(self.bgView).left;
         min_y = 0;
+        min_w = min_bgView_w - BAKit_ViewSafeAreaInsets(self).left - BAKit_ViewSafeAreaInsets(self).right;
         min_h = kBAKit_PickerViewToolBar_H;
         self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
         
@@ -329,26 +313,28 @@
         min_w = 40;
         min_h = kBAKit_PickerViewToolBar_H;
         self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        min_x = min_bgView_w - 40 - 20;
-
+        
+        min_x = CGRectGetWidth(self.toolBarView.frame) - 40 - 20;
         self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
         
         min_x = 20 + min_w + 10;
         min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 40 - 20;
         self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
-    }
-    else if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeBottom)
-    {
+        
+    } else if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeBottom) {
+        if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeNormal) {
+            NSLog(kPickErrorMsg);
+            self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
+            [self ba_layoutSubViews];
+            return;
+        }
         min_y = 0;
         min_w = min_bgView_w;
         min_h = min_bgView_h - kBAKit_PickerViewToolBar_H;
         min_x = 0;
-        if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
-        {
-            if (self.multipleTitleArray.count == self.multipleDataArray.count)
-            {
-                for (int i = 0; i < self.multipleTitleArray.count; i ++)
-                {
+        if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray) {
+            if (self.multipleTitleArray.count == self.multipleDataArray.count) {
+                for (int i = 0; i < self.multipleTitleArray.count; i ++) {
                     CGRect frame = CGRectMake(min_x + i*(min_w/self.multipleTitleArray.count), min_y, min_w/self.multipleTitleArray.count, 30);
                     
                     UILabel * titleLabel = [self ba_creatTitleLabelWithFrame:frame index:i];
@@ -361,8 +347,10 @@
         self.pickView.frame = CGRectMake(min_x, min_y, min_w, min_h);
         self.datePicker.frame = self.pickView.frame;
 
-        min_y = CGRectGetMaxY(self.pickView.frame);
         min_h = kBAKit_PickerViewToolBar_H;
+        min_x = BAKit_ViewSafeAreaInsets(self.bgView).left;
+        min_y = CGRectGetMaxY(self.pickView.frame);
+        min_w = CGRectGetWidth(self.bgView.frame) - BAKit_ViewSafeAreaInsets(self).left - BAKit_ViewSafeAreaInsets(self).right;
         self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
         
         min_y = 0;
@@ -371,18 +359,19 @@
         min_h = kBAKit_PickerViewToolBar_H;
         self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
 
-        min_x = min_bgView_w - 40 - 20;
+        min_x = CGRectGetWidth(self.toolBarView.frame) - 40 - 20;
         self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
         
         min_x = 20 + min_w + 10;
         min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 40 - 20;
         self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     }
+    
+    [self.pickView reloadAllComponents];
 }
 
 - (UILabel *)ba_creatTitleLabelWithFrame:(CGRect)frame
-                                   index:(NSInteger)index
-{
+                                   index:(NSInteger)index {
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:frame];
     titleLabel.text = self.multipleTitleArray[index];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -394,8 +383,7 @@
 }
 
 #pragma mark - UIPickerViewDelegate UIPickerViewDataSource
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     switch (self.pickerViewType) {
         case BAKit_PickerViewTypeCity:
             return 3;
@@ -406,13 +394,11 @@
         case BAKit_PickerViewTypeMultipleArray:
             return self.multipleDataArray.count;
             break;
-        case BAKit_PickerViewTypeDate:
-        {
+        case BAKit_PickerViewTypeDate: {
             if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
                 return 6;
             }
-            else
-            {
+            else {
               return 0;
             }
         }
@@ -429,29 +415,24 @@
     }
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     switch (self.pickerViewType) {
-        case BAKit_PickerViewTypeCity:
-        {
+        case BAKit_PickerViewTypeCity: {
             return 0 == component ? self.provinceArray.count : 1 == component ? self.cityArray.count : self.areaArray.count;
         }
             break;
        
-        case BAKit_PickerViewTypeArray:
-        {
+        case BAKit_PickerViewTypeArray: {
             return self.dataArray.count;
         }
             break;
             
-        case BAKit_PickerViewTypeMultipleArray:
-        {
+        case BAKit_PickerViewTypeMultipleArray: {
             return [self.multipleDataArray[component] count];
         }
             break;
             
-        case BAKit_PickerViewTypeDate:
-        {
+        case BAKit_PickerViewTypeDate: {
             if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
                 switch (component) {
                     case 0:
@@ -479,13 +460,11 @@
             return 0;
         }
             break;
-        case BAKit_PickerViewTypeDateYM:
-        {
+        case BAKit_PickerViewTypeDateYM: {
             return (component == 0) ? self.yearArray.count : self.mounthArray.count;
         }
             break;
-        case BAKit_PickerViewTypeDateWeek:
-        {
+        case BAKit_PickerViewTypeDateWeek: {
             return (component == 0) ? self.yearArray.count : self.weekArray.count;
         }
             break;
@@ -495,22 +474,14 @@
     }
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    if (self.pickerViewType == BAKit_PickerViewTypeCity)
-    {
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if (self.pickerViewType == BAKit_PickerViewTypeCity) {
         return 0 == component ? [self cutLocalStringForShow:self.provinceArray[row]] : 1 == component ? [self cutLocalStringForShow:self.cityArray[row]] : 0 == self.areaArray.count ? nil : [self cutLocalStringForShow:self.areaArray[row]];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeArray)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeArray) {
         return self.dataArray[row];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray) {
         return self.multipleDataArray[component][row];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeDate)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeDate) {
         if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
             
             switch (component) {
@@ -537,27 +508,21 @@
             }
         }
 
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeDateYM)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeDateYM) {
         return (component == 0) ? self.yearArray[row] : self.mounthArray[row];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeDateWeek) {
         return (component == 0) ? self.yearArray[row] : self.weekArray[row];
     }
     return nil;
 }
 
-- (nullable UIView *)viewForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+- (nullable UIView *)viewForRow:(NSInteger)row forComponent:(NSInteger)component {
     UIView *view = [UIView new];
     view.backgroundColor = [UIColor redColor];
     return view;
 }
 
-- (NSString *)getFilePath
-{
+- (NSString *)getFilePath {
     NSBundle *bundle = [NSBundle ba_bundleWithBundleName:@"BAPickView" podName:@"BAPickView"];
     NSString *fileBundlePath = [bundle pathForResource:@"BAPickView" ofType:@"bundle"];
     NSBundle *fileBundle = [NSBundle bundleWithPath:fileBundlePath];
@@ -568,15 +533,12 @@
     return path;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    if (self.pickerViewType == BAKit_PickerViewTypeCity)
-    {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if (self.pickerViewType == BAKit_PickerViewTypeCity) {
        
         NSArray *provinceArray = [[NSArray alloc]initWithContentsOfFile:[self getFilePath]];
         
-        if (0 == component)
-        {
+        if (0 == component) {
             self.selectedArray = provinceArray[row][@"cities"];
             [self.cityArray removeAllObjects];
             
@@ -591,10 +553,8 @@
             [pickerView reloadComponent:2];
             [pickerView selectRow:0 inComponent:2 animated:YES];
         }
-        else if (1 == component)
-        {
-            if (0 == self.selectedArray.count)
-            {
+        else if (1 == component) {
+            if (0 == self.selectedArray.count) {
                 self.selectedArray = provinceArray[0][@"cities"];
             }
             
@@ -611,27 +571,19 @@
         self.city = [self cutLocalString:self.cityArray[city]];
         self.area = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[area]];
         
-        if (!BAKit_stringIsBlank_pod(self.area))
-        {
+        if (!BAKit_stringIsBlank_pod(self.area)) {
             self.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@,%@", self.province, self.city, self.area];
         }
-        else
-        {
+        else {
             self.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@", self.province, self.city];
         }
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeArray)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeArray) {
         [self resultStringPickerView:pickerView];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeMultipleArray) {
 
         [self.selectedArray replaceObjectAtIndex:component withObject:self.multipleDataArray[component][row]];
         [self resultStringPickerView:pickerView];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeDate)
-    {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeDate) {
         UILabel * label = (UILabel *)[pickerView viewForRow:row forComponent:component];
         NSString * strFrom = [label.text substringFromIndex:label.text.length - 1];
         if ([strFrom isEqualToString:@"年"]) {
@@ -650,31 +602,23 @@
             self.defaultSecondsString = self.secondsArray[row];
         }
         [self resultStringPickerView:pickerView];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeDateYM)
-    {
-        if (component == 0)
-        {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeDateYM) {
+        if (component == 0) {
             self.defaultYearString = self.yearArray[row];
         }
-        else
-        {
+        else {
             self.defaultMounthString = self.mounthArray[row];
         }
         [self resultStringPickerView:pickerView];
-    }
-    else if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
-    {
-        if (component == 0)
-        {
+    } else if (self.pickerViewType == BAKit_PickerViewTypeDateWeek) {
+        if (component == 0) {
             self.defaultYearString = self.yearArray[row];
             [self ba_refreshWeeksByYear:self.defaultYearString];
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:YES];
             self.defaultWeekString = self.weekArray.firstObject;
         }
-        else
-        {
+        else {
             self.defaultWeekString = self.weekArray[row];
         }
         
@@ -683,19 +627,16 @@
         NSString *weekString = @"";
         NSString *week = [NSString stringWithFormat:@"%02li", (long)BAKit_Current_Date().weekOfYear];
         
-        if ([self.defaultMounthString isEqualToString:week])
-        {
+        if ([self.defaultMounthString isEqualToString:week]) {
             weekString = week;
         }
-        else
-        {
+        else {
             weekString = [self.defaultWeekString substringToIndex:self.defaultWeekString.length - 1];
         }
         
         self.resultString = [NSString stringWithFormat:@"%@年，%@", yearString, self.defaultWeekString];
     }
-    if (self.pickerViewType != BAKit_PickerViewTypeCity)
-    {
+    if (self.pickerViewType != BAKit_PickerViewTypeCity) {
         self.contentTitleLabel.text = self.resultString;
     }
 }
@@ -724,8 +665,7 @@
     self.resultString = [dateStrArray componentsJoinedByString:@"-"];
 }
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
-{
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel *pickerLabel = (UILabel*)view;
     if (!pickerLabel){
         pickerLabel = [[UILabel alloc] init];
@@ -737,12 +677,9 @@
     }
     pickerLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
     
-    if (self.isShowLineView)
-    {
-        for (UIView *lineView in pickerView.subviews)
-        {
-            if (lineView.frame.size.height < 1)
-            {
+    if (self.isShowLineView) {
+        for (UIView *lineView in pickerView.subviews) {
+            if (lineView.frame.size.height < 1) {
                 lineView.backgroundColor = self.ba_pickViewLineViewColor;
             }
         }
@@ -752,16 +689,12 @@
 }
 
 #pragma mark - custom method
-- (void)ba_pickViewShow
-{
-    if (self.pickerViewType == BAKit_PickerViewTypeCity && self.provinceArray.count == 0)
-    {
+- (void)ba_pickViewShow {
+    if (self.pickerViewType == BAKit_PickerViewTypeCity && self.provinceArray.count == 0) {
         NSString *msg = @"您的数据有误，请检查数据！";
         NSLog(@"%@", msg);
         BAKit_ShowAlertWithMsg(msg);
-    }
-    else
-    {
+    } else {
         [self.alertWindow addSubview:self];
         [self ba_layoutSubViews];
         
@@ -769,53 +702,46 @@
     }
 }
 
-- (void)ba_pickViewHidden
-{
+- (void)ba_pickViewHidden {
     [self ba_pickViewHiddenAnimation];
 }
 
 #pragma mark 进场动画
 
-- (void)ba_pickViewShowAnimation
-{
+- (void)ba_pickViewShowAnimation {
     self.isAnimating = YES;
     BAKit_WeakSelf
     switch (self.animationType) {
-        case BAKit_PickerViewAnimationTypeScale:
-        {
-            [self.bgView ba_animation_scaleShowWithDuration:0.6f ratio:1.0f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeScale: {
+            [self.bgView ba_animation_scaleShowWithDuration:kDuration ratio:1.0f finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeTop:
-        {
-            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeTop: {
+            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeBottom:
-        {
-            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeBottom: {
+            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeLeft:
-        {
-            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeLeft duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeLeft: {
+            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeLeft duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeRight:
-        {
-            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeRitht duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeRight: {
+            [self.bgView ba_animation_showFromPositionType:BAKit_ViewAnimationEnterDirectionTypeRitht duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.isAnimating = NO;
             }];
@@ -828,15 +754,13 @@
 }
 
 #pragma mark 出场动画
-- (void)ba_pickViewHiddenAnimation
-{
+- (void)ba_pickViewHiddenAnimation {
     self.isAnimating = YES;
     self.bgView.alpha = 1.0f;
     BAKit_WeakSelf
     switch (self.animationType) {
-        case BAKit_PickerViewAnimationTypeScale:
-        {
-            [self.bgView ba_animation_scaleDismissWithDuration:0.6f ratio:1.0f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeScale: {
+            [self.bgView ba_animation_scaleDismissWithDuration:kDuration ratio:1.0f finishBlock:^{
                 BAKit_StrongSelf
                 self.bgView.alpha = 0.1f;
                 self.isAnimating = NO;
@@ -844,9 +768,8 @@
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeTop:
-        {
-            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeTop: {
+            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeTop duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.bgView.alpha = 0.1f;
                 self.isAnimating = NO;
@@ -854,9 +777,8 @@
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeBottom:
-        {
-            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeBottom: {
+            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeBottom duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.bgView.alpha = 0.1f;
                 self.isAnimating = NO;
@@ -864,9 +786,8 @@
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeLeft:
-        {
-            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeLeft duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeLeft: {
+            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeLeft duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.bgView.alpha = 0.1f;
                 self.isAnimating = NO;
@@ -874,9 +795,8 @@
             }];
         }
             break;
-        case BAKit_PickerViewAnimationTypeRight:
-        {
-            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeRitht duration:0.6f finishBlock:^{
+        case BAKit_PickerViewAnimationTypeRight: {
+            [self.bgView ba_animation_dismissFromPositionType:BAKit_ViewAnimationEnterDirectionTypeRitht duration:kDuration finishBlock:^{
                 BAKit_StrongSelf
                 self.bgView.alpha = 0.1f;
                 self.isAnimating = NO;
@@ -890,41 +810,31 @@
     }
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     NSLog(@"触摸了边缘隐藏View！");
     UITouch *touch = [touches anyObject];
     UIView *view = [touch view];
     
-    if (self.isAnimating)
-    {
+    if (self.isAnimating) {
         NSLog(@"请在动画结束时点击！");
         return;
     }
-    if (!self.isTouchEdgeHide)
-    {
+    if (!self.isTouchEdgeHide) {
         NSLog(@"触摸了View边缘，但您未开启触摸边缘隐藏方法，请设置 isTouchEdgeHide 属性为 YES 后再使用！");
         return;
     }
     
-    if ([view isKindOfClass:[self class]])
-    {
+    if ([view isKindOfClass:[self class]]) {
         [self ba_pickViewHidden];
     }
 }
 
-- (void)handleButtonAction:(UIButton *)sender
-{
-    if (sender.tag == 1000)
-    {
+- (void)handleButtonAction:(UIButton *)sender {
+    if (sender.tag == 1000) {
         [self ba_pickViewHidden];
-    }
-    else if (sender.tag == 1001)
-    {
-        if (self.pickerViewType == BAKit_PickerViewTypeCity)
-        {
-            if (self.province.length > 0)
-            {
+    } else if (sender.tag == 1001) {
+        if (self.pickerViewType == BAKit_PickerViewTypeCity) {
+            if (self.province.length > 0) {
                 BAKit_CityModel *model = [[BAKit_CityModel alloc] init];
                 model.province = self.province;
                 model.city = self.city;
@@ -934,8 +844,7 @@
                 coordie.latitude = 0;
                 coordie.longitude = 0;
                 
-                if (m_local2DString.length > 0)
-                {
+                if (m_local2DString.length > 0) {
                     NSArray *arr = [m_local2DString componentsSeparatedByString:NSLocalizedString(@",", nil)];
                     if([arr count] > 1)
                     {
@@ -944,8 +853,7 @@
                     }
                 }
                 model.coordie = coordie;
-                if (self.block)
-                {
+                if (self.block) {
                     self.block(model);
                 }
             }
@@ -954,20 +862,16 @@
                  self.pickerViewType == BAKit_PickerViewTypeMultipleArray ||
                  self.pickerViewType == BAKit_PickerViewTypeDate ||
                  self.pickerViewType == BAKit_PickerViewTypeDateYM  ||
-                 self.pickerViewType == BAKit_PickerViewTypeDateWeek )
-        {
+                 self.pickerViewType == BAKit_PickerViewTypeDateWeek ) {
             if (self.pickerViewType == BAKit_PickerViewTypeDate && self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
                 self.resultString = [NSString stringWithFormat:@"%@%@%@ %@%@%@",self.defaultYearString,self.defaultMounthString,self.defaultDayString,self.defaultHoursString,self.defaultMinutesString,self.defaultSecondsString];
             }
-            if (self.resultString.length > 0)
-            {
-                if (self.resultBlock)
-                {
+            if (self.resultString.length > 0) {
+                if (self.resultBlock) {
                     self.resultBlock(self.resultString);
                 }
             }
-            else
-            {
+            else {
                 
             }
         }
@@ -976,12 +880,10 @@
 }
 
 #pragma mark 默认配置：城市选择器
-- (void)setupCityData
-{
+- (void)setupCityData {
     NSArray *provinceArray = [[NSArray alloc] initWithContentsOfFile:[self getFilePath]];
 
-    if (provinceArray.count > 0)
-    {
+    if (provinceArray.count > 0) {
         [self ba_removcArray:self.provinceArray];
         [self ba_removcArray:self.cityArray];
         [self ba_removcArray:self.areaArray];
@@ -1004,24 +906,20 @@
     }
 }
 
-- (void)ba_removcArray:(NSMutableArray *)array
-{
-    if (array.count > 0)
-    {
+- (void)ba_removcArray:(NSMutableArray *)array {
+    if (array.count > 0) {
         [array removeAllObjects];
     }
 }
 
-- (NSString *)cutLocalStringForShow:(NSString *)iStr
-{
+- (NSString *)cutLocalStringForShow:(NSString *)iStr {
     // 对显示坐标进行去重
     NSArray *arr = [iStr componentsSeparatedByString:NSLocalizedString(@"|", nil)];
     if([arr count] < 2) return iStr;
     return arr[0];
 }
 
-- (NSString *)cutLocalString:(NSString *)iStr
-{
+- (NSString *)cutLocalString:(NSString *)iStr {
     // 对显示坐标进行去重
     NSArray * arr = [iStr componentsSeparatedByString:NSLocalizedString(@"|", nil)];
     if([arr count] < 2) return iStr;
@@ -1030,18 +928,14 @@
 }
 
 #pragma mark 默认配置：日期选择器-年月
-- (void)setupDateYM
-{
+- (void)setupDateYM {
     NSDate *current_date = [NSDate date];
     NSInteger current_year = current_date.year;
     
     self.defaultYearString = [NSString stringWithFormat:@"%04li", current_year];
-    if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
-    {
+    if (self.pickerViewType == BAKit_PickerViewTypeDateWeek) {
         self.defaultWeekString = [NSString stringWithFormat:@"%ld", (long)current_date.weekOfYear];
-    }
-    else
-    {
+    } else {
         NSInteger current_mounth = current_date.month;
         self.defaultMounthString = [NSString stringWithFormat:@"%02li", current_mounth];
     }
@@ -1053,22 +947,18 @@
     [self.pickView selectRow:(index_year - 1900) inComponent:0 animated:YES];
 
     // 设置年月、年周选择器的默认值
-    if (self.pickerViewType == BAKit_PickerViewTypeDateWeek)
-    {
+    if (self.pickerViewType == BAKit_PickerViewTypeDateWeek) {
         [self ba_refreshWeeksByYear:self.defaultYearString];
         [self.pickView reloadComponent:1];
         [self.pickView selectRow:(index_week - 1) inComponent:1 animated:YES];
 
         self.resultString = [NSString stringWithFormat:@"%@年，第 %@ 周", self.defaultYearString, self.defaultWeekString];
-    }
-    else
-    {
+    } else {
         [self.pickView selectRow:(index_mounth - 1) inComponent:1 animated:YES];
 
         self.resultString = [NSString stringWithFormat:@"%@-%@", self.defaultYearString, self.defaultMounthString];
         
-        if (self.customDateFormatter)
-        {
+        if (self.customDateFormatter) {
             self.resultString = [self.resultString stringByAppendingString:@"-10"];
             NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
             NSDate *date = [formatter dateFromString:self.resultString];
@@ -1078,23 +968,19 @@
 }
 
 #pragma mark 刷新年份的最大周数
-- (void)ba_refreshWeeksByYear:(NSString *)year
-{
+- (void)ba_refreshWeeksByYear:(NSString *)year {
     [self ba_removcArray:self.weekArray];
     
-    for (NSInteger i = 1; i < [NSDate ba_dateGetWeekNumbersOfYear:[year integerValue]]+1; i++)
-    {
+    for (NSInteger i = 1; i < [NSDate ba_dateGetWeekNumbersOfYear:[year integerValue]]+1; i++) {
         [self.weekArray addObject:[NSString stringWithFormat:@"第 %ld 周", i]];
     }
 }
 
 #pragma mark 日期选择器数据更新
-- (void)datePickValueChanged:(UIDatePicker *)sender
-{
+- (void)datePickValueChanged:(UIDatePicker *)sender {
     self.resultString = [self.formatter stringFromDate:sender.date];
 }
--(void)refreshDay
-{
+-(void)refreshDay {
     [self.dayArray removeAllObjects];
     NSString *year = self.defaultYearString;
     if ([self.defaultYearString containsString:@"年"]) {
@@ -1109,8 +995,7 @@
     NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYM];
     NSDate * date = [formatter dateFromString:dateStr];
     NSInteger count =  [self ba_totaldaysInMonth:date];
-    for (int i = 1; i < count + 1; i++)
-    {
+    for (int i = 1; i < count + 1; i++) {
         NSString *str = [NSString stringWithFormat:@"%02i日",i];
         [_dayArray addObject:str];
     }
@@ -1118,28 +1003,23 @@
 
 }
 #pragma mark 计算出当月有多少天
-- (NSInteger)ba_totaldaysInMonth:(NSDate *)date
-{
+- (NSInteger)ba_totaldaysInMonth:(NSDate *)date {
     NSRange daysInOfMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
     return daysInOfMonth.length;
 }
 
-- (void)ba_removeSelf
-{
-    if (self.toolBarView)
-    {
+- (void)ba_removeSelf {
+    if (self.toolBarView) {
         [self.toolBarView removeFromSuperview];
         self.toolBarView = nil;
     }
     
-    if (self.bgView)
-    {
+    if (self.bgView) {
         [self.bgView removeFromSuperview];
         self.bgView = nil;
     }
     
-    if (self.pickView)
-    {
+    if (self.pickView) {
         [self.pickView removeFromSuperview];
         self.pickView = nil;
     }
@@ -1155,25 +1035,21 @@
     [self removeFromSuperview];
 }
 
-- (void)removeAllSubviews
-{
+- (void)removeAllSubviews {
     //[self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     while (self.subviews.count) {
         [self.subviews.lastObject removeFromSuperview];
     }
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [self ba_removeSelf];
 }
 
 #pragma mark - setter / getter
 
-- (UIView *)bgView
-{
-    if (!_bgView)
-    {
+- (UIView *)bgView {
+    if (!_bgView) {
         _bgView = [UIView new];
         self.bgView.backgroundColor = BAKit_Color_Clear_pod;
         
@@ -1182,10 +1058,8 @@
     return _bgView;
 }
 
-- (UIPickerView *)pickView
-{
-    if (!_pickView)
-    {
+- (UIPickerView *)pickView {
+    if (!_pickView) {
         _pickView = [UIPickerView new];
         
         [self.bgView addSubview:self.pickView];
@@ -1193,10 +1067,8 @@
     return _pickView;
 }
 
-- (UIDatePicker *)datePicker
-{
-    if (!_datePicker)
-    {
+- (UIDatePicker *)datePicker {
+    if (!_datePicker) {
         _datePicker = [[UIDatePicker alloc] init];
         
         /*! 跟踪所有可用的地区，取出想要的地区 */
@@ -1256,10 +1128,8 @@
     return _datePicker;
 }
 
-- (UIView *)toolBarView
-{
-    if (!_toolBarView)
-    {
+- (UIView *)toolBarView {
+    if (!_toolBarView) {
         _toolBarView = [UIView new];
         
         [self.bgView addSubview:self.toolBarView];
@@ -1267,10 +1137,8 @@
     return _toolBarView;
 }
 
-- (UIButton *)cancleButton
-{
-    if (!_cancleButton)
-    {
+- (UIButton *)cancleButton {
+    if (!_cancleButton) {
         _cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.cancleButton setTitle:@"取消" forState:UIControlStateNormal];
         [self.cancleButton setTitleColor:BAKit_Color_Black_pod forState:UIControlStateNormal];
@@ -1281,10 +1149,8 @@
     return _cancleButton;
 }
 
-- (UIButton *)sureButton
-{
-    if (!_sureButton)
-    {
+- (UIButton *)sureButton {
+    if (!_sureButton) {
         _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.sureButton setTitle:@"确定" forState:UIControlStateNormal];
         [self.sureButton setTitleColor:BAKit_Color_Black_pod forState:UIControlStateNormal];
@@ -1295,14 +1161,11 @@
     return _sureButton;
 }
 
-- (UIWindow *)alertWindow
-{
-    if (!_alertWindow)
-    {
+- (UIWindow *)alertWindow {
+    if (!_alertWindow) {
         _alertWindow = [UIApplication sharedApplication].keyWindow;
         
-        if (self.alertWindow.windowLevel != UIWindowLevelNormal)
-        {
+        if (self.alertWindow.windowLevel != UIWindowLevelNormal) {
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"windowLevel == %ld AND hidden == 0 " , UIWindowLevelNormal];
             self.alertWindow = [[UIApplication sharedApplication].windows filteredArrayUsingPredicate:predicate].firstObject;
         }
@@ -1312,8 +1175,7 @@
 }
 
 - (UILabel *)contentTitleLabel {
-    if (!_contentTitleLabel)
-    {
+    if (!_contentTitleLabel) {
         _contentTitleLabel = [[UILabel alloc] init];
         _contentTitleLabel.font = [UIFont systemFontOfSize:15];
         _contentTitleLabel.textAlignment = NSTextAlignmentCenter;
@@ -1323,49 +1185,38 @@
     return _contentTitleLabel;
 }
 
-- (NSMutableArray *)provinceArray
-{
-    if (!_provinceArray)
-    {
+- (NSMutableArray *)provinceArray {
+    if (!_provinceArray) {
         _provinceArray = @[].mutableCopy;
     }
     return _provinceArray;
 }
 
-- (NSMutableArray *)cityArray
-{
-    if (!_cityArray)
-    {
+- (NSMutableArray *)cityArray {
+    if (!_cityArray) {
         _cityArray = @[].mutableCopy;
     }
     return _cityArray;
 }
 
-- (NSMutableArray *)areaArray
-{
-    if (!_areaArray)
-    {
+- (NSMutableArray *)areaArray {
+    if (!_areaArray) {
         _areaArray = @[].mutableCopy;
     }
     return _areaArray;
 }
 
-- (NSMutableArray *)selectedArray
-{
-    if (!_selectedArray)
-    {
+- (NSMutableArray *)selectedArray {
+    if (!_selectedArray) {
         _selectedArray = @[].mutableCopy;
     }
     return _selectedArray;
 }
 
-- (NSMutableArray *)yearArray
-{
-    if (!_yearArray)
-    {
+- (NSMutableArray *)yearArray {
+    if (!_yearArray) {
         _yearArray = @[].mutableCopy;
-        for (int i = 1900; i < 2100; i++)
-        {
+        for (int i = 1900; i < 2100; i++) {
             NSString *str = [NSString stringWithFormat:@"%04i%@",i,@"年"];
             [self.yearArray addObject:str];
         }
@@ -1373,13 +1224,10 @@
     return _yearArray;
 }
 
-- (NSMutableArray *)mounthArray
-{
-    if (!_mounthArray)
-    {
+- (NSMutableArray *)mounthArray {
+    if (!_mounthArray) {
         _mounthArray = @[].mutableCopy;
-        for (int i = 1; i < 13; i++)
-        {
+        for (int i = 1; i < 13; i++) {
             NSString *str = [NSString stringWithFormat:@"%02i%@",i,@"月"];
             [self.mounthArray addObject:str];
         }
@@ -1387,10 +1235,8 @@
     return _mounthArray;
 }
 
-- (NSMutableArray *)dayArray
-{
-    if (!_dayArray)
-    {
+- (NSMutableArray *)dayArray {
+    if (!_dayArray) {
         _dayArray = @[].mutableCopy;
         [self refreshDay];
     }
@@ -1398,14 +1244,11 @@
     return _dayArray;
 }
 
-- (NSMutableArray *)hoursArray
-{
-    if (!_hoursArray)
-    {
+- (NSMutableArray *)hoursArray {
+    if (!_hoursArray) {
         _hoursArray = @[].mutableCopy;
         
-        for (int i = 0; i < 24; i++)
-        {
+        for (int i = 0; i < 24; i++) {
             NSString *str = [NSString stringWithFormat:@"%02i时",i];
             [_hoursArray addObject:str];
         }
@@ -1413,14 +1256,11 @@
     return _hoursArray;
 }
 
-- (NSMutableArray *)minutesArray
-{
-    if (!_minutesArray)
-    {
+- (NSMutableArray *)minutesArray {
+    if (!_minutesArray) {
         _minutesArray = @[].mutableCopy;
         
-        for (int i = 0; i < 60; i++)
-        {
+        for (int i = 0; i < 60; i++) {
             NSString *str = [NSString stringWithFormat:@"%02i分",i];
             [_minutesArray addObject:str];
         }
@@ -1428,14 +1268,11 @@
     return _minutesArray;
 }
 
-- (NSMutableArray *)secondsArray
-{
-    if (!_secondsArray)
-    {
+- (NSMutableArray *)secondsArray {
+    if (!_secondsArray) {
         _secondsArray = @[].mutableCopy;
         
-        for (int i = 0; i < 60; i++)
-        {
+        for (int i = 0; i < 60; i++) {
             NSString *str = [NSString stringWithFormat:@"%02i秒",i];
             [_secondsArray addObject:str];
         }
@@ -1443,23 +1280,19 @@
     return _secondsArray;
 }
 
-- (NSMutableArray *)weekArray
-{
-    if (!_weekArray)
-    {
+- (NSMutableArray *)weekArray {
+    if (!_weekArray) {
         _weekArray = @[].mutableCopy;
     }
     return _weekArray;
 }
 
-- (void)setDataArray:(NSArray *)dataArray
-{
+- (void)setDataArray:(NSArray *)dataArray {
     _dataArray = dataArray;
     self.resultString = dataArray[0];
 }
 
-- (void)setMultipleDataArray:(NSArray *)multipleDataArray
-{
+- (void)setMultipleDataArray:(NSArray *)multipleDataArray {
     _multipleDataArray = multipleDataArray;
     [self.selectedArray removeAllObjects];
 
@@ -1474,58 +1307,47 @@
     _multipleTitleArray = multipleTitleArray;
 }
 
-- (void)setBa_backgroundColor_toolBar:(UIColor *)ba_backgroundColor_toolBar
-{
+- (void)setBa_backgroundColor_toolBar:(UIColor *)ba_backgroundColor_toolBar {
     _ba_backgroundColor_toolBar = ba_backgroundColor_toolBar;
     self.toolBarView.backgroundColor = ba_backgroundColor_toolBar;
 }
 
-- (void)setBa_backgroundColor_pickView:(UIColor *)ba_backgroundColor_pickView
-{
+- (void)setBa_backgroundColor_pickView:(UIColor *)ba_backgroundColor_pickView {
     _ba_backgroundColor_pickView = ba_backgroundColor_pickView;
     self.pickView.backgroundColor = ba_backgroundColor_pickView;
     self.datePicker.backgroundColor = ba_backgroundColor_pickView;
 }
 
-- (void)setBa_buttonTitleColor_cancle:(UIColor *)ba_buttonTitleColor_cancle
-{
+- (void)setBa_buttonTitleColor_cancle:(UIColor *)ba_buttonTitleColor_cancle {
     _ba_buttonTitleColor_cancle = ba_buttonTitleColor_cancle;
     [self.cancleButton setTitleColor:ba_buttonTitleColor_cancle forState:UIControlStateNormal];
 }
 
-- (void)setBa_buttonTitleColor_sure:(UIColor *)ba_buttonTitleColor_sure
-{
+- (void)setBa_buttonTitleColor_sure:(UIColor *)ba_buttonTitleColor_sure {
     _ba_buttonTitleColor_sure = ba_buttonTitleColor_sure;
     [self.sureButton setTitleColor:ba_buttonTitleColor_sure forState:UIControlStateNormal];
 }
 
-- (void)setPickerViewType:(BAKit_PickerViewType)pickerViewType
-{
+- (void)setPickerViewType:(BAKit_PickerViewType)pickerViewType {
     _pickerViewType = pickerViewType;
     
     switch (pickerViewType) {
-        case BAKit_PickerViewTypeCity:
-        {
-            if (self.datePicker)
-            {
+        case BAKit_PickerViewTypeCity: {
+            if (self.datePicker) {
                 [self.datePicker removeFromSuperview];
             }
             
             [self setupCityData];
         }
             break;
-        case BAKit_PickerViewTypeArray:
-        {
-            if (self.datePicker)
-            {
+        case BAKit_PickerViewTypeArray: {
+            if (self.datePicker) {
                 [self.datePicker removeFromSuperview];
             }
         }
             break;
-        case BAKit_PickerViewTypeDate:
-        {
-            if (self.dateType == BAKit_PickerViewDateTypeYMDHMS)
-            {
+        case BAKit_PickerViewTypeDate: {
+            if (self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
                 NSDate *nowDate = [NSDate date];
                 
                 self.defaultYearString = [NSString stringWithFormat:@"%04li年",(long)nowDate.year];
@@ -1571,10 +1393,8 @@
                 }
                 [self.datePicker removeFromSuperview];
             }
-            else
-            {
-                if (self.pickView)
-                {
+            else {
+                if (self.pickView) {
                     [self.pickView removeFromSuperview];
                 }
                 [self.bgView addSubview:self.datePicker];
@@ -1582,20 +1402,16 @@
             
         }
             break;
-        case BAKit_PickerViewTypeDateYM:
-        {
-            if (self.datePicker)
-            {
+        case BAKit_PickerViewTypeDateYM: {
+            if (self.datePicker) {
                 [self.datePicker removeFromSuperview];
             }
             self.dateType = BAKit_PickerViewDateTypeYM;
             [self setupDateYM];
         }
             break;
-        case BAKit_PickerViewTypeDateWeek:
-        {
-            if (self.datePicker)
-            {
+        case BAKit_PickerViewTypeDateWeek: {
+            if (self.datePicker) {
                 [self.datePicker removeFromSuperview];
             }
             self.dateType = BAKit_PickerViewDateTypeYM;
@@ -1607,19 +1423,15 @@
     }
 }
 
-- (void)setDateType:(BAKit_PickerViewDateType)dateType
-{
+- (void)setDateType:(BAKit_PickerViewDateType)dateType {
     _dateType = dateType;
     
-    if (self.customDateFormatter)
-    {
+    if (self.customDateFormatter) {
         self.resultString = [self.resultString stringByAppendingString:@"-10"];
         NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYMD];
         NSDate *date = [formatter dateFromString:self.resultString];
         self.resultString = [self.customDateFormatter stringFromDate:date];
-    }
-    else
-    {
+    } else {
         switch (self.dateType) {
             case BAKit_PickerViewDateTypeYY:
                 self.formatter = [NSDateFormatter ba_setupDateFormatterWithYY];
@@ -1650,8 +1462,7 @@
     }
 }
 
-- (void)setDateMode:(BAKit_PickerViewDateMode)dateMode
-{
+- (void)setDateMode:(BAKit_PickerViewDateMode)dateMode {
     _dateMode = dateMode;
     switch (dateMode) {
         case BAKit_PickerViewDateModeTime:
@@ -1675,69 +1486,55 @@
     }
 }
 
-- (void)setCustomDateFormatter:(NSDateFormatter *)customDateFormatter
-{
+- (void)setCustomDateFormatter:(NSDateFormatter *)customDateFormatter {
     _customDateFormatter = customDateFormatter;
     self.formatter =  customDateFormatter;
 }
 
-- (void)setIsAnimating:(BOOL)isAnimating
-{
+- (void)setIsAnimating:(BOOL)isAnimating {
     _isAnimating = isAnimating;
 }
 
-- (void)setIsTouchEdgeHide:(BOOL)isTouchEdgeHide
-{
+- (void)setIsTouchEdgeHide:(BOOL)isTouchEdgeHide {
     _isTouchEdgeHide = isTouchEdgeHide;
 }
 
-- (void)setIsShowTitle:(BOOL)isShowTitle
-{
+- (void)setIsShowTitle:(BOOL)isShowTitle {
     _isShowTitle = isShowTitle;
-    if (_isShowTitle == YES)
-    {
+    if (_isShowTitle == YES) {
         self.contentTitleLabel.hidden = NO;
-    }
-    else
-    {
+    } else {
         self.contentTitleLabel.hidden = YES;
     }
 }
 
-- (void)setAnimationType:(BAKit_PickerViewAnimationType)animationType
-{
+- (void)setAnimationType:(BAKit_PickerViewAnimationType)animationType {
     _animationType = animationType;
 }
 
-- (void)setBa_pickViewFont:(UIFont *)ba_pickViewFont
-{
+- (void)setBa_pickViewFont:(UIFont *)ba_pickViewFont {
     _ba_pickViewFont = ba_pickViewFont;
 }
 
-- (void)setBa_pickViewTextColor:(UIColor *)ba_pickViewTextColor
-{
+- (void)setBa_pickViewTextColor:(UIColor *)ba_pickViewTextColor {
     _ba_pickViewTextColor = ba_pickViewTextColor;
 }
 
-- (void)setIsShowLineView:(BOOL)isShowLineView
-{
+- (void)setIsShowLineView:(BOOL)isShowLineView {
     _isShowLineView = isShowLineView;
 }
 
-- (void)setBa_pickViewLineViewColor:(UIColor *)ba_pickViewLineViewColor
-{
+- (void)setBa_pickViewLineViewColor:(UIColor *)ba_pickViewLineViewColor {
     _ba_pickViewLineViewColor = ba_pickViewLineViewColor;
 }
 
-- (void)setBa_pickViewTitleFont:(UIFont *)ba_pickViewTitleFont
-{
+- (void)setBa_pickViewTitleFont:(UIFont *)ba_pickViewTitleFont {
     _ba_pickViewTitleFont = ba_pickViewTitleFont;
     
     self.contentTitleLabel.font = ba_pickViewTitleFont;
 }
 
-- (void)setBa_pickViewTitleColor:(UIColor *)ba_pickViewTitleColor
-{
+- (void)setBa_pickViewTitleColor:(UIColor *)ba_pickViewTitleColor {
     _ba_pickViewTitleColor = ba_pickViewTitleColor;
     self.contentTitleLabel.textColor = ba_pickViewTitleColor;
 }

@@ -176,7 +176,7 @@
 				ORGANIZATIONNAME = boai;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = A7FRU6ZJRL;
+						DevelopmentTeam = 83U7J454XF;
 					};
 				};
 			};
@@ -185,6 +185,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -388,7 +389,7 @@
 			baseConfigurationReference = 984E78DD695FA66F5333B1BE /* Pods-BAPickView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = A7FRU6ZJRL;
+				DEVELOPMENT_TEAM = 83U7J454XF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BAPickView/BAPickView-Prefix.pch";
 				INFOPLIST_FILE = "BAPickView/BAPickView-Info.plist";
@@ -405,7 +406,7 @@
 			baseConfigurationReference = 7E03A33070174A8C3EB7E709 /* Pods-BAPickView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = A7FRU6ZJRL;
+				DEVELOPMENT_TEAM = 83U7J454XF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BAPickView/BAPickView-Prefix.pch";
 				INFOPLIST_FILE = "BAPickView/BAPickView-Info.plist";
