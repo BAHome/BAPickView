@@ -20,6 +20,12 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 最新更新时间：2019-9-06 【倒叙】 <br>
+ 最新Version：【Version：1.1.9】 <br>
+ 更新内容： <br>
+ 1.1.9.1、优化适配异形屏，优化部分动画性能 <br>
+ 1.1.9.2、`BAKit_PickerView` 系统 `UIDatePicker` 新增 最大最小日期 设置<br>
+ 1.1.9.3、`BAKit_PickerView`、`BAKit_DatePicker` 新增 toolBarView 底部线条，isShowTooBarBottomeLine ，可自定义线条颜色<br>
  
  最新更新时间：2019-8-30 【倒叙】 <br>
  最新Version：【Version：1.1.8】 <br>

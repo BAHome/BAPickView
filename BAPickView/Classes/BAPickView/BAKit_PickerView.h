@@ -71,28 +71,11 @@
  */
 typedef void (^BAKit_PickerViewBlock)(BAKit_CityModel *model);
 
-/**
- 普通数组自定义数据返回，日期选择器返回值
-
- @param resultString resultString
- */
-typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
-
 @interface BAKit_PickerView : UIView
 
 #pragma mark - 自定义属性
 @property (nonatomic, copy) BAKit_PickerViewBlock block;
 @property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
-
-/**
- 是否开启边缘触摸隐藏，默认：YES
- */
-@property (nonatomic, assign) BOOL isTouchEdgeHide;
-
-/**
- 是否关闭选择内容显示在工具栏，默认：YES
- */
-@property (nonatomic, assign) BOOL isShowTitle;
 
 /**
  动画样式
@@ -174,9 +157,43 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property(nonatomic, assign) BOOL isShowLineView;
 
 /**
+ 是否开启边缘触摸隐藏，默认：YES
+ */
+@property (nonatomic, assign) BOOL isTouchEdgeHide;
+
+/**
+ 是否关闭选择内容显示在工具栏，默认：YES
+ */
+@property (nonatomic, assign) BOOL isShowTitle;
+
+
+/**
  pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
  */
 @property(nonatomic, strong) UIColor *ba_pickViewLineViewColor;
+
+#pragma mark - 2019-09-03 新增
+/**
+ pickView：toolbar 中间显示的默认标题，2019-09-03 新增
+ */
+@property(nonatomic, strong) NSString *defaultTitle;
+
+#pragma mark - BAKit_PickerViewDateModeDate
+/**
+ 日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒;最大日期必须大于最小日期，2019-09-03 新增
+ */
+@property(nonatomic, strong) NSDate * ba_maxDate;
+
+/**
+ 日期选择器的最小日期，默认为: 当前时间;最大日期必须大于最小日期，2019-09-03 新增
+ */
+@property(nonatomic, strong) NSDate * ba_minDate;
+
+/**
+ 是否显示 TooBarBottomeLine，默认：不显示，2019-09-03 新增
+ */
+@property(nonatomic, assign) BOOL isShowTooBarBottomeLine;
+@property(nonatomic, strong) UIColor *tooBarBottomeLineColor;
 
 #pragma mark - custom method
 
@@ -257,5 +274,4 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 @property (nonatomic, assign) CLLocationCoordinate2D coordie;
 
 @end
-
 

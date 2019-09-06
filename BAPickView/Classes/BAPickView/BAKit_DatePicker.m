@@ -14,6 +14,7 @@
 #import "NSDateFormatter+BAKit.h"
 #import "BAKit_DefineCurrent.h"
 
+#import "BAKit_PickerToolBarView.h"
 
 static NSString *const BAKit_DatePickerCellID = @"cell";
 
@@ -23,7 +24,50 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 
 @interface BACustomTabelViewCell : UITableViewCell
 
-@property(strong, nonatomic)NSIndexPath *indexPath;
+@property(nonatomic, strong) NSIndexPath *indexPath;
+@property(nonatomic, strong) UILabel *titleLabel;
+
+@end
+
+@implementation BACustomTabelViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self initUI];
+    }
+    return self;
+}
+
+- (void)initUI {
+    [self.contentView addSubview:self.titleLabel];
+}
+
+- (void)initData {
+    
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGRect frame = self.contentView.frame;
+    frame.origin.x = 5;
+    frame.size.width -= 10;
+    self.titleLabel.frame = frame;
+}
+
+#pragma mark - setter, getter
+
+- (void)setIndexPath:(NSIndexPath *)indexPath {
+    _indexPath = indexPath;
+}
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = UILabel.new;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _titleLabel;
+}
 
 @end
 
@@ -52,7 +96,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 @property (assign, nonatomic) CGFloat cellHight;
 @property (nonatomic, strong) UIWindow *alertWindow;
 @property (nonatomic, strong) UIView *backView;
-@property (nonatomic, strong) UIView *toolBarView;
+
+@property (nonatomic, strong) BAKit_PickerToolBarView *toolBarView;
 
 @property (nonatomic, strong) UIView *topLine;
 @property (nonatomic, strong) UIView *bottomLine;
@@ -65,20 +110,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 @property (nonatomic, assign) BAKit_CustomDatePickerDateType pickerViewType;
 @property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
 
-/**
- 取消按钮
- */
-@property (nonatomic, strong) UIButton *cancleButton;
-
-/**
- 确定按钮
- */
-@property (nonatomic, strong) UIButton *sureButton;
-
 @property(nonatomic, assign) BOOL isAnimating;
-
-@property (nonatomic, strong) UILabel * contentTitleLabel;
-
 
 @end
 
@@ -121,16 +153,30 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     [self registCell];
 
     [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [self initData];
+}
 
+- (void)initData {
+    
+    BAKit_WeakSelf;
+    self.toolBarView.onCancleButton = ^{
+        BAKit_StrongSelf;
+        [self ba_pickViewHiddenAnimation];
+    };
+    self.toolBarView.onSureButton = ^{
+        BAKit_StrongSelf;
+        self.resultBlock([self selectedTitmeResults], 0);
+        [self ba_pickViewHiddenAnimation];
+    };
 }
 
 - (void)registCell {
-    [self.yearTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-    [self.monthTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-    [self.dayTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-    [self.hourTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-    [self.minuteTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-    [self.secondTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+//    [self.yearTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+//    [self.monthTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+//    [self.dayTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+//    [self.hourTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+//    [self.minuteTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+//    [self.secondTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
 }
 
 #pragma mark - 通知处理
@@ -328,22 +374,16 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BACustomTabelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:BAKit_DatePickerCellID forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
     
-    UILabel *titleLabel = [cell.contentView viewWithTag:100];
-    if (!titleLabel) {
-        titleLabel = [[UILabel alloc] initWithFrame:cell.bounds];
-        titleLabel.tag = 100;
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        
-        [cell.contentView addSubview:titleLabel];
+    BACustomTabelViewCell *cell = [tableView dequeueReusableCellWithIdentifier:BAKit_DatePickerCellID];
+    if (!cell) {
+        cell = [[BACustomTabelViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BAKit_DatePickerCellID];
     }
-    
-    titleLabel.frame = cell.contentView.bounds;
-    titleLabel.textColor = self.ba_pickViewTextColor;
-    
-    NSArray * dataArray;
+    cell.backgroundColor = [UIColor clearColor];
+
+    UILabel *titleLabel = cell.titleLabel;
+
+    NSArray *dataArray;
     NSString *defaultDateStr;
     switch (tableView.tag) {
         case 0: {
@@ -388,10 +428,15 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     } else {
         titleLabel.text = dataArray[indexPath.row - 2];
     }
-    
+   
+    titleLabel.textColor = self.ba_pickViewTextColor;
+//    titleLabel.backgroundColor = BAKit_Color_RandomRGB_pod();
+
     cell.indexPath = indexPath;
     [self changeLabelWithTabelView:tableView cell:cell];
     cell.selectionStyle  = UITableViewCellSelectionStyleNone;
+    
+    [self refreshSelectDateWith:tableView dataArray:dataArray];
     return cell;
 }
 
@@ -402,7 +447,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         BACustomTabelViewCell *cell = (BACustomTabelViewCell *)obj;
         [self changeLabelWithTabelView:table cell:cell];
     }];
-    
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -413,14 +457,21 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     [self refreshSelectDateWith:scrollView];
 }
 
+- (void)refreshSelectDateWith:(UIScrollView *)scrollView
+                    dataArray:(NSArray *)dataArray {
+    if (dataArray.count == 1) {
+        [self refreshSelectDateWith:scrollView];
+    }
+}
+
 - (void)refreshSelectDateWith:(UIScrollView *)scrollView {
+    
     UITableView *table = (UITableView *)scrollView;
-    NSArray * cells =   table.visibleCells;
+    NSArray * cells = table.visibleCells;
     for (BACustomTabelViewCell *cell in cells) {
-        UILabel *titleLabel = [cell.contentView viewWithTag:100];
+        UILabel *titleLabel = cell.titleLabel;
         if (titleLabel.alpha == 1.0) {
             [table scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-            
             NSString *key = @"";
             switch (scrollView.tag) {
                 case 0:
@@ -477,14 +528,17 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
             }
         }
     }
-    self.contentTitleLabel.text = [self selectedTitmeResults];
+    
+//    if (BAKit_stringIsBlank_pod(self.defaultTitle)) {
+        self.toolBarView.contentTitleLabel.text = [self selectedTitmeResults];
+//    }
 }
 - (void)refreshSelectDateWithTableViewTag:(NSInteger)tag {
     
     UITableView *table = [self.backView viewWithTag:tag];
-    NSArray * cells =   table.visibleCells;
+    NSArray * cells = table.visibleCells;
     for (BACustomTabelViewCell *cell in cells) {
-        UILabel *titleLabel = [cell.contentView viewWithTag:100];
+        UILabel *titleLabel = cell.titleLabel;
         if (titleLabel.alpha == 1.0) {
             [table scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
             
@@ -530,28 +584,27 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     CGFloat minY = tableView.center.y - _cellHight / 2.0 ;
     CGFloat maxY = tableView.center.y + _cellHight / 2.0 ;
     
-    
     CGFloat cellY = viewRect.origin.y + viewRect.size.height / 2.0 ;
-    UILabel *titleLabel = [cell.contentView viewWithTag:100];
-    
+//    UILabel *titleLabel = [cell.contentView viewWithTag:100];
+    UILabel *titleLabel = cell.titleLabel;
+
     if (maxY > cellY && minY < cellY) {
         titleLabel.alpha = 1;
         
-        UIFont *selectFont = [UIFont fontWithName:self.ba_pickViewFont.fontName size:self.ba_pickViewFont.pointSize + 5];
+        UIFont *selectFont = [UIFont fontWithName:self.ba_pickViewFont.fontName size:self.ba_pickViewFont.pointSize + 3];
         titleLabel.font = selectFont;
     } else {
         titleLabel.font = self.ba_pickViewFont;
         titleLabel.alpha = 0.5;
     }
+    
+    if (BAKit_stringIsBlank_pod(self.defaultTitle)) {
+        self.toolBarView.contentTitleLabel.text = [self selectedTitmeResults];
+    }
 }
 
 #pragma mark - customButton
-- (void)handleButtonAction:(UIButton *)button {
-    if (button.tag == 1001) {
-        self.resultBlock([self selectedTitmeResults]);
-    }
-    [self ba_pickViewHiddenAnimation];
-}
+
 - (NSString *)selectedTitmeResults {
     // 确定
     NSString *resoultDateStr = @"";
@@ -627,6 +680,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     }
     return resoultDateStr;
 }
+
 #pragma mark 计算出当月有多少天
 - (void)refreshSecondsIsMaxMinuteState:(BOOL)maxState MinMinute:(BOOL)minState {
     NSInteger min = 0;
@@ -681,6 +735,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     [self setSelectDate:@"hour"];
     [self.hourTableView reloadData];
 }
+
 - (void)refreshDayIsMaxMonthState:(BOOL)maxState MinMonth:(BOOL)minState {
     NSString *year = self.resoultDictionary[@"year"];
     if ([year containsString:@"年"]) {
@@ -1041,38 +1096,13 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     return _bottomLine;
 }
 
-// 添加 取消和确定按钮的背景View
-- (UIView *)toolBarView {
+- (BAKit_PickerToolBarView *)toolBarView {
     if (!_toolBarView) {
-        _toolBarView = [[UIView alloc]init];
+        _toolBarView = BAKit_PickerToolBarView.new;
         _toolBarView.backgroundColor = BAKit_Color_Gray_11_pod;
         [self.backView addSubview:_toolBarView];
     }
     return _toolBarView;
-}
-
-- (UIButton *)cancleButton {
-    if (!_cancleButton) {
-        _cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.cancleButton setTitle:@"取消" forState:UIControlStateNormal];
-        [self.cancleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self.cancleButton addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.cancleButton.tag = 1000;
-        [self.toolBarView addSubview:self.cancleButton];
-    }
-    return _cancleButton;
-}
-
-- (UIButton *)sureButton {
-    if (!_sureButton) {
-        _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.sureButton setTitle:@"确定" forState:UIControlStateNormal];
-        [self.sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self.sureButton addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.sureButton.tag = 1001;
-        [self.toolBarView addSubview:self.sureButton];
-    }
-    return _sureButton;
 }
 
 - (UIWindow *)alertWindow {
@@ -1088,18 +1118,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     return _alertWindow;
 }
 
-- (UILabel *)contentTitleLabel {
-    if (!_contentTitleLabel) {
-        _contentTitleLabel = [[UILabel alloc] init];
-        _contentTitleLabel.font = [UIFont systemFontOfSize:15];
-        _contentTitleLabel.textAlignment = NSTextAlignmentCenter;
-        _contentTitleLabel.textColor = [UIColor blackColor];
-        _contentTitleLabel.text = [self selectedTitmeResults];
-        [self.toolBarView addSubview:_contentTitleLabel];
-    }
-    return _contentTitleLabel;
-}
-
 - (void)setBa_backgroundColor_toolBar:(UIColor *)ba_backgroundColor_toolBar {
     _ba_backgroundColor_toolBar = ba_backgroundColor_toolBar;
     self.toolBarView.backgroundColor = ba_backgroundColor_toolBar;
@@ -1112,12 +1130,12 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 
 - (void)setBa_buttonTitleColor_cancle:(UIColor *)ba_buttonTitleColor_cancle {
     _ba_buttonTitleColor_cancle = ba_buttonTitleColor_cancle;
-    [self.cancleButton setTitleColor:ba_buttonTitleColor_cancle forState:UIControlStateNormal];
+    [self.toolBarView.cancleButton setTitleColor:ba_buttonTitleColor_cancle forState:UIControlStateNormal];
 }
 
 - (void)setBa_buttonTitleColor_sure:(UIColor *)ba_buttonTitleColor_sure {
     _ba_buttonTitleColor_sure = ba_buttonTitleColor_sure;
-    [self.sureButton setTitleColor:ba_buttonTitleColor_sure forState:UIControlStateNormal];
+    [self.toolBarView.sureButton setTitleColor:ba_buttonTitleColor_sure forState:UIControlStateNormal];
 }
 
 - (void)setBa_pickViewFont:(UIFont *)ba_pickViewFont {
@@ -1127,21 +1145,21 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 - (void)setIsShowTitle:(BOOL)isShowTitle {
     _isShowTitle = isShowTitle;
     if (_isShowTitle == YES) {
-        self.contentTitleLabel.hidden = NO;
+        self.toolBarView.contentTitleLabel.hidden = NO;
     } else {
-        self.contentTitleLabel.hidden = YES;
+        self.toolBarView.contentTitleLabel.hidden = YES;
     }
 }
 
 - (void)setBa_pickViewTitleFont:(UIFont *)ba_pickViewTitleFont {
     _ba_pickViewTitleFont = ba_pickViewTitleFont;
     
-    self.contentTitleLabel.font = ba_pickViewTitleFont;
+    self.toolBarView.contentTitleLabel.font = ba_pickViewTitleFont;
 }
 
 - (void)setBa_pickViewTitleColor:(UIColor *)ba_pickViewTitleColor {
     _ba_pickViewTitleColor = ba_pickViewTitleColor;
-    self.contentTitleLabel.textColor = ba_pickViewTitleColor;
+    self.toolBarView.contentTitleLabel.textColor = ba_pickViewTitleColor;
 }
 
 - (void)setBa_bgYearTitleFont:(UIFont *)ba_bgYearTitleFont {
@@ -1168,7 +1186,27 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     }
 }
 
--(void)layoutSubviews{
+#pragma mark - 2019-09-03 新增
+
+- (void)setDefaultTitle:(NSString *)defaultTitle {
+    _defaultTitle = defaultTitle;
+    
+    self.toolBarView.contentTitleLabel.text = defaultTitle;
+}
+
+- (void)setIsShowTooBarBottomeLine:(BOOL)isShowTooBarBottomeLine {
+    _isShowTooBarBottomeLine = isShowTooBarBottomeLine;
+    
+    self.toolBarView.lineView.hidden = !isShowTooBarBottomeLine;
+}
+
+- (void)setTooBarBottomeLineColor:(UIColor *)tooBarBottomeLineColor {
+    _tooBarBottomeLineColor = tooBarBottomeLineColor;
+    
+    self.toolBarView.lineView.backgroundColor = tooBarBottomeLineColor;
+}
+
+- (void)layoutSubviews{
     [super layoutSubviews];
     [self.yearTableView reloadData];
     [self.monthTableView reloadData];
@@ -1226,14 +1264,15 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         min_line_y = min_bgView_h / 2.0 + min_picker_y / 2.0 - _cellHight / 2.0;
     } else {
         min_picker_y = 0;
-        min_line_y = CGRectGetHeight(self.backView.frame)/2.0 - 20 - _cellHight / 2.0;
+        min_line_y = min_bgView_h/2.0 - 20 - _cellHight / 2.0;
         min_y = min_bgView_h - min_h;
     }
     if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeNormal && self.buttonPositionType == BAKit_PickerViewButtonPositionTypeBottom) {
         NSLog(kPickErrorMsg);
+        
         min_y = 0;
         min_picker_y = 40;
-        min_line_y = min_bgView_h / 2.0 + min_picker_y / 2.0 - _cellHight / 2.0;
+        min_line_y = (min_bgView_h + min_picker_y - _cellHight - BAKit_ViewSafeAreaInsets(self).bottom)/2;
     }
     
     self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
@@ -1244,25 +1283,12 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     min_h = 0.5;
     self.topLine.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
-    min_y = min_line_y + self.cellHight;
+    min_y = min_y + self.cellHight;
     self.bottomLine.frame = CGRectMake(min_x, min_y, min_w, min_h);
-    
-    min_x = 20;
-    min_y = 0;
-    min_w = 50;
-    min_h = 40;
-    self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-    
-    min_x = CGRectGetWidth(self.toolBarView.frame) - min_w - 20;
-    self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-    
-    min_x = 20 + min_w + 10;
-    min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 50 - 20;
-    self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = 0;
     min_y = min_picker_y;
-    min_h = min_bgView_h - 40;
+    min_h = min_bgView_h - 40 - BAKit_ViewSafeAreaInsets(self).bottom;
     
     self.bgShowYearLabel.frame = CGRectMake(min_x, min_y, min_bgView_w, min_h);
     
@@ -1368,8 +1394,4 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 
 @end
 
-@implementation BACustomTabelViewCell
 
-@synthesize indexPath;
-
-@end

@@ -1,8 +1,8 @@
 {
   "name": "BAPickView",
-  "version": "0.2.0",
-  "summary": "A short description of BAPickView.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "1.1.8",
+  "summary": "BAPickView 精简高效的选择器！",
+  "description": "优化适配异形屏，优化部分动画性能",
   "homepage": "https://github.com/BAHome/BAPickView",
   "license": {
     "type": "MIT",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/BAHome/BAPickView.git",
-    "tag": "0.2.0"
+    "tag": "1.1.8"
   },
   "platforms": {
     "ios": "8.0"

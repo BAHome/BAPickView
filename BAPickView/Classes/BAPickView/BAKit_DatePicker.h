@@ -67,17 +67,17 @@
 /**
  日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒;最大日期必须大于最小日期
  */
-@property(strong, nonatomic) NSDate * ba_maxDate;
+@property(nonatomic, strong) NSDate * ba_maxDate;
 
 /**
  日期选择器的最小日期，默认为: 当前时间;最大日期必须大于最小日期
  */
-@property(strong, nonatomic) NSDate * ba_minDate;
+@property(nonatomic, strong) NSDate * ba_minDate;
 
 /**
  日期选择器默认选中的日期，默认为：日期选择器弹出时的日期
  */
-@property(strong, nonatomic) NSDate *ba_defautDate;
+@property(nonatomic, strong) NSDate *ba_defautDate;
 
 #pragma mark - 类型选择
 /**
@@ -152,6 +152,18 @@
  bgYearTitle 字体，默认：[UIFont boldSystemFontOfSize:100]
  */
 @property(nonatomic, strong) UIFont *ba_bgYearTitleFont;
+
+#pragma mark - 2019-09-03 新增
+/**
+ pickView：toolbar 中间显示的默认标题，2019-09-03 新增
+ */
+@property(nonatomic, strong) NSString *defaultTitle;
+
+/**
+ 是否显示 TooBarBottomeLine，默认：不显示，2019-09-03 新增
+ */
+@property(nonatomic, assign) BOOL isShowTooBarBottomeLine;
+@property(nonatomic, strong) UIColor *tooBarBottomeLineColor;
 
 
 #pragma mark - public method

@@ -252,7 +252,7 @@
         tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
         tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
         self.pickView = tempView;
-    } block:^(NSString *resultString) {
+    } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
@@ -263,9 +263,18 @@
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDate configuration:^(BAKit_PickerView *tempView) {
         BAKit_StrongSelf
         
+        tempView.defaultTitle = @"请选择日期";
         // 可以自由定制 NSDateFormatter
         tempView.dateMode = BAKit_PickerViewDateModeDate;
-        tempView.dateType = BAKit_PickerViewDateTypeYMDHMS;
+        tempView.dateType = BAKit_PickerViewDateTypeYMD;
+        
+        NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
+        [format setDateFormat:@"yyyy年MM月dd日"];
+
+        // 最小时间，当前时间
+        NSDate *minDate = [format dateFromString:@"1900年01月01日"];
+        tempView.ba_maxDate = BAKit_Current_Date();
+        tempView.ba_minDate = minDate;
         //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         //        formatter.dateFormat = @"yyyy年MM月dd日";
         //        tempView.customDateFormatter = formatter;
@@ -276,7 +285,7 @@
         
         self.pickView = tempView;
         
-    } block:^(NSString *resultString) {
+    } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
@@ -291,7 +300,7 @@
         tempView.customDateFormatter = formatter;
         tempView.animationType = BAKit_PickerViewAnimationTypeRight;
         self.pickView = tempView;
-    } block:^(NSString *resultString) {
+    } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
@@ -303,7 +312,7 @@
         
         BAKit_StrongSelf
         self.pickView = tempView;
-    } block:^(NSString *resultString) {
+    } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
@@ -333,7 +342,7 @@
         tempView.animationType = BAKit_PickerViewAnimationTypeTop;
         tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
         self.pickView = tempView;
-    } block:^(NSString *resultString) {
+    } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
         NSLog(@"%@", resultString);
@@ -344,6 +353,10 @@
 - (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type {
     [BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
         
+        if (type != BAKit_CustomDatePickerDateTypeHMS) {
+            tempView.defaultTitle = @"请选择日期";
+        }
+
         NSDate *maxDate;
         NSDate *minDate;
         // 自定义：最大最小日期格式
@@ -415,8 +428,8 @@
         //            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
         //            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
         
-    } block:^(NSString *resultString) {
-        
+    } block:^(NSString *resultString, NSInteger index) {
+
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
 }
@@ -430,6 +443,7 @@
         self.tableView.dataSource =  self;
         self.tableView.estimatedRowHeight = 44;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
+        
         self.tableView.backgroundColor = BAKit_Color_Gray_11_pod;
         
         [self.view addSubview:self.tableView];

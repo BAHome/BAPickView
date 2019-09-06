@@ -826,6 +826,13 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
+ 最新更新时间：2019-9-03 【倒叙】 <br>
+ 最新Version：【Version：1.1.9】 <br>
+ 更新内容： <br>
+ 1.1.9.1、优化适配异形屏，优化部分动画性能 <br>
+ 1.1.9.2、`BAKit_PickerView` 系统 `UIDatePicker` 新增 最大最小日期 设置<br>
+ 1.1.9.3、`BAKit_PickerView` 新增 toolBarView 底部线条，isShowTooBarBottomeLine ，可自定义线条颜色<br>
+ 
  最新更新时间：2019-8-30 【倒叙】 <br>
  最新Version：【Version：1.1.8】 <br>
  更新内容： <br>

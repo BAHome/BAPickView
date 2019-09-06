@@ -68,10 +68,13 @@
 #import "BAKit_DefineCurrent.h"
 #import "NSBundle+BAPod.h"
 
+#import "BAKit_PickerToolBarView.h"
+
 #define kBAKit_PickerView_H        240
 #define kBAKit_PickerViewToolBar_H 40
 
 #define kDuration 0.2f
+
 
 @interface BAKit_PickerView ()<UIPickerViewDataSource,UIPickerViewDelegate> {
     NSString *m_local2DString;
@@ -93,20 +96,11 @@
 @property (nonatomic, strong) UIDatePicker *datePicker;
 @property (nonatomic, strong) UIView *bgView;
 
-/**
- 取消按钮
- */
-@property (nonatomic, strong) UIButton *cancleButton;
-
-/**
- 确定按钮
- */
-@property (nonatomic, strong) UIButton *sureButton;
 
 /**
  顶部 toolbar 工具栏
  */
-@property (nonatomic, strong) UIView *toolBarView;
+@property (nonatomic, strong) BAKit_PickerToolBarView *toolBarView;
 
 /**
  省，用于保存选择后的数据
@@ -127,6 +121,7 @@
  选择的结果
  */
 @property(nonatomic, strong) NSString *resultString;
+@property(nonatomic, assign) NSInteger selectedIndex;
 
 @property(nonatomic, strong) NSDateFormatter *formatter;
 
@@ -150,7 +145,6 @@
 
 @property (nonatomic, strong) UIWindow *alertWindow;
 @property(nonatomic, assign) BOOL isAnimating;
-@property (nonatomic, strong) UILabel * contentTitleLabel;
 
 @end
 
@@ -248,6 +242,60 @@
     self.ba_pickViewLineViewColor = [UIColor lightGrayColor];
     
     [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    [self initData];
+}
+
+- (void)initData {
+    BAKit_WeakSelf;
+   self.toolBarView.onCancleButton = ^{
+       BAKit_StrongSelf;
+       [self ba_pickViewHidden];
+   };
+   
+   self.toolBarView.onSureButton = ^{
+       BAKit_StrongSelf;
+       if (self.pickerViewType == BAKit_PickerViewTypeCity) {
+          if (self.province.length > 0) {
+              BAKit_CityModel *model = [[BAKit_CityModel alloc] init];
+              model.province = self.province;
+              model.city = self.city;
+              model.area = self.area;
+              
+              CLLocationCoordinate2D coordie;
+              coordie.latitude = 0;
+              coordie.longitude = 0;
+              
+              if (self->m_local2DString.length > 0) {
+                  NSArray *arr = [self->m_local2DString componentsSeparatedByString:NSLocalizedString(@",", nil)];
+                  if([arr count] > 1) {
+                      coordie.latitude = [arr[0] floatValue];
+                      coordie.longitude = [arr[1] floatValue];
+                  }
+              }
+              model.coordie = coordie;
+              if (self.block) {
+                  self.block(model);
+              }
+          }
+      } else if (self.pickerViewType == BAKit_PickerViewTypeArray ||
+               self.pickerViewType == BAKit_PickerViewTypeMultipleArray ||
+               self.pickerViewType == BAKit_PickerViewTypeDate ||
+               self.pickerViewType == BAKit_PickerViewTypeDateYM  ||
+               self.pickerViewType == BAKit_PickerViewTypeDateWeek ) {
+          if (self.pickerViewType == BAKit_PickerViewTypeDate && self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
+              self.resultString = [NSString stringWithFormat:@"%@%@%@ %@%@%@",self.defaultYearString,self.defaultMounthString,self.defaultDayString,self.defaultHoursString,self.defaultMinutesString,self.defaultSecondsString];
+          }
+          if (self.resultString.length > 0) {
+              if (self.resultBlock) {
+                  self.resultBlock(self.resultString, self.selectedIndex);
+              }
+          } else {
+              
+          }
+      }
+      [self ba_pickViewHidden];
+   };
 }
 
 #pragma mark - 通知处理
@@ -309,18 +357,6 @@
         min_h = kBAKit_PickerViewToolBar_H;
         self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
         
-        min_x = 20;
-        min_w = 40;
-        min_h = kBAKit_PickerViewToolBar_H;
-        self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        
-        min_x = CGRectGetWidth(self.toolBarView.frame) - 40 - 20;
-        self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        
-        min_x = 20 + min_w + 10;
-        min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 40 - 20;
-        self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        
     } else if (self.buttonPositionType == BAKit_PickerViewButtonPositionTypeBottom) {
         if (self.pickerViewPositionType == BAKit_PickerViewPositionTypeNormal) {
             NSLog(kPickErrorMsg);
@@ -352,19 +388,6 @@
         min_y = CGRectGetMaxY(self.pickView.frame);
         min_w = CGRectGetWidth(self.bgView.frame) - BAKit_ViewSafeAreaInsets(self).left - BAKit_ViewSafeAreaInsets(self).right;
         self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        
-        min_y = 0;
-        min_x = 20;
-        min_w = 40;
-        min_h = kBAKit_PickerViewToolBar_H;
-        self.cancleButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-
-        min_x = CGRectGetWidth(self.toolBarView.frame) - 40 - 20;
-        self.sureButton.frame = CGRectMake(min_x, min_y, min_w, min_h);
-        
-        min_x = 20 + min_w + 10;
-        min_w = CGRectGetMaxX(self.sureButton.frame) - CGRectGetMaxX(self.cancleButton.frame) - 40 - 20;
-        self.contentTitleLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
     }
     
     [self.pickView reloadAllComponents];
@@ -572,10 +595,9 @@
         self.area = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[area]];
         
         if (!BAKit_stringIsBlank_pod(self.area)) {
-            self.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@,%@", self.province, self.city, self.area];
-        }
-        else {
-            self.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@", self.province, self.city];
+            self.toolBarView.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@,%@", self.province, self.city, self.area];
+        } else {
+            self.toolBarView.contentTitleLabel.text = [NSString stringWithFormat:@"%@,%@", self.province, self.city];
         }
     } else if (self.pickerViewType == BAKit_PickerViewTypeArray) {
         [self resultStringPickerView:pickerView];
@@ -637,8 +659,10 @@
         self.resultString = [NSString stringWithFormat:@"%@年，%@", yearString, self.defaultWeekString];
     }
     if (self.pickerViewType != BAKit_PickerViewTypeCity) {
-        self.contentTitleLabel.text = self.resultString;
+        self.toolBarView.contentTitleLabel.text = self.resultString;
     }
+    
+    self.selectedIndex = row;
 }
 - (void)resultStringPickerView:(UIPickerView *)pickerView {
     NSMutableArray * dateStrArray = [NSMutableArray array];
@@ -825,56 +849,6 @@
     }
     
     if ([view isKindOfClass:[self class]]) {
-        [self ba_pickViewHidden];
-    }
-}
-
-- (void)handleButtonAction:(UIButton *)sender {
-    if (sender.tag == 1000) {
-        [self ba_pickViewHidden];
-    } else if (sender.tag == 1001) {
-        if (self.pickerViewType == BAKit_PickerViewTypeCity) {
-            if (self.province.length > 0) {
-                BAKit_CityModel *model = [[BAKit_CityModel alloc] init];
-                model.province = self.province;
-                model.city = self.city;
-                model.area = self.area;
-                
-                CLLocationCoordinate2D coordie;
-                coordie.latitude = 0;
-                coordie.longitude = 0;
-                
-                if (m_local2DString.length > 0) {
-                    NSArray *arr = [m_local2DString componentsSeparatedByString:NSLocalizedString(@",", nil)];
-                    if([arr count] > 1)
-                    {
-                        coordie.latitude = [arr[0] floatValue];
-                        coordie.longitude = [arr[1] floatValue];
-                    }
-                }
-                model.coordie = coordie;
-                if (self.block) {
-                    self.block(model);
-                }
-            }
-        }
-        else if (self.pickerViewType == BAKit_PickerViewTypeArray ||
-                 self.pickerViewType == BAKit_PickerViewTypeMultipleArray ||
-                 self.pickerViewType == BAKit_PickerViewTypeDate ||
-                 self.pickerViewType == BAKit_PickerViewTypeDateYM  ||
-                 self.pickerViewType == BAKit_PickerViewTypeDateWeek ) {
-            if (self.pickerViewType == BAKit_PickerViewTypeDate && self.dateType == BAKit_PickerViewDateTypeYMDHMS) {
-                self.resultString = [NSString stringWithFormat:@"%@%@%@ %@%@%@",self.defaultYearString,self.defaultMounthString,self.defaultDayString,self.defaultHoursString,self.defaultMinutesString,self.defaultSecondsString];
-            }
-            if (self.resultString.length > 0) {
-                if (self.resultBlock) {
-                    self.resultBlock(self.resultString);
-                }
-            }
-            else {
-                
-            }
-        }
         [self ba_pickViewHidden];
     }
 }
@@ -1128,37 +1102,13 @@
     return _datePicker;
 }
 
-- (UIView *)toolBarView {
+- (BAKit_PickerToolBarView *)toolBarView {
     if (!_toolBarView) {
-        _toolBarView = [UIView new];
+        _toolBarView = BAKit_PickerToolBarView.new;
         
         [self.bgView addSubview:self.toolBarView];
     }
     return _toolBarView;
-}
-
-- (UIButton *)cancleButton {
-    if (!_cancleButton) {
-        _cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.cancleButton setTitle:@"取消" forState:UIControlStateNormal];
-        [self.cancleButton setTitleColor:BAKit_Color_Black_pod forState:UIControlStateNormal];
-        [self.cancleButton addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.cancleButton.tag = 1000;
-        [self.toolBarView addSubview:self.cancleButton];
-    }
-    return _cancleButton;
-}
-
-- (UIButton *)sureButton {
-    if (!_sureButton) {
-        _sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.sureButton setTitle:@"确定" forState:UIControlStateNormal];
-        [self.sureButton setTitleColor:BAKit_Color_Black_pod forState:UIControlStateNormal];
-        [self.sureButton addTarget:self action:@selector(handleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.sureButton.tag = 1001;
-        [self.toolBarView addSubview:self.sureButton];
-    }
-    return _sureButton;
 }
 
 - (UIWindow *)alertWindow {
@@ -1172,17 +1122,6 @@
         self.alertWindow.backgroundColor = BAKit_Color_Translucent_pod;
     }
     return _alertWindow;
-}
-
-- (UILabel *)contentTitleLabel {
-    if (!_contentTitleLabel) {
-        _contentTitleLabel = [[UILabel alloc] init];
-        _contentTitleLabel.font = [UIFont systemFontOfSize:15];
-        _contentTitleLabel.textAlignment = NSTextAlignmentCenter;
-        _contentTitleLabel.textColor = [UIColor blackColor];
-        [self.toolBarView addSubview:_contentTitleLabel];
-    }
-    return _contentTitleLabel;
 }
 
 - (NSMutableArray *)provinceArray {
@@ -1320,12 +1259,12 @@
 
 - (void)setBa_buttonTitleColor_cancle:(UIColor *)ba_buttonTitleColor_cancle {
     _ba_buttonTitleColor_cancle = ba_buttonTitleColor_cancle;
-    [self.cancleButton setTitleColor:ba_buttonTitleColor_cancle forState:UIControlStateNormal];
+    [self.toolBarView.cancleButton setTitleColor:ba_buttonTitleColor_cancle forState:UIControlStateNormal];
 }
 
 - (void)setBa_buttonTitleColor_sure:(UIColor *)ba_buttonTitleColor_sure {
     _ba_buttonTitleColor_sure = ba_buttonTitleColor_sure;
-    [self.sureButton setTitleColor:ba_buttonTitleColor_sure forState:UIControlStateNormal];
+    [self.toolBarView.sureButton setTitleColor:ba_buttonTitleColor_sure forState:UIControlStateNormal];
 }
 
 - (void)setPickerViewType:(BAKit_PickerViewType)pickerViewType {
@@ -1502,9 +1441,9 @@
 - (void)setIsShowTitle:(BOOL)isShowTitle {
     _isShowTitle = isShowTitle;
     if (_isShowTitle == YES) {
-        self.contentTitleLabel.hidden = NO;
+        self.toolBarView.contentTitleLabel.hidden = NO;
     } else {
-        self.contentTitleLabel.hidden = YES;
+        self.toolBarView.contentTitleLabel.hidden = YES;
     }
 }
 
@@ -1531,12 +1470,44 @@
 - (void)setBa_pickViewTitleFont:(UIFont *)ba_pickViewTitleFont {
     _ba_pickViewTitleFont = ba_pickViewTitleFont;
     
-    self.contentTitleLabel.font = ba_pickViewTitleFont;
+    self.toolBarView.contentTitleLabel.font = ba_pickViewTitleFont;
 }
 
 - (void)setBa_pickViewTitleColor:(UIColor *)ba_pickViewTitleColor {
     _ba_pickViewTitleColor = ba_pickViewTitleColor;
-    self.contentTitleLabel.textColor = ba_pickViewTitleColor;
+    self.toolBarView.contentTitleLabel.textColor = ba_pickViewTitleColor;
+}
+
+#pragma mark - 2019-09-03 新增
+
+- (void)setDefaultTitle:(NSString *)defaultTitle {
+    _defaultTitle = defaultTitle;
+    
+    self.toolBarView.contentTitleLabel.text = defaultTitle;
+}
+
+- (void)setBa_maxDate:(NSDate *)ba_maxDate {
+    _ba_maxDate = ba_maxDate;
+    
+    self.datePicker.maximumDate = ba_maxDate;
+}
+
+- (void)setBa_minDate:(NSDate *)ba_minDate {
+    _ba_minDate = ba_minDate;
+    
+    self.datePicker.minimumDate = ba_minDate;
+}
+
+- (void)setIsShowTooBarBottomeLine:(BOOL)isShowTooBarBottomeLine {
+    _isShowTooBarBottomeLine = isShowTooBarBottomeLine;
+    
+    self.toolBarView.lineView.hidden = !isShowTooBarBottomeLine;
+}
+
+- (void)setTooBarBottomeLineColor:(UIColor *)tooBarBottomeLineColor {
+    _tooBarBottomeLineColor = tooBarBottomeLineColor;
+    
+    self.toolBarView.lineView.backgroundColor = tooBarBottomeLineColor;
 }
 
 @end
