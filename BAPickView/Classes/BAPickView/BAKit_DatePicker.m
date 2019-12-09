@@ -150,8 +150,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
     self.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
     
-    [self registCell];
-
     [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
     [self initData];
 }
@@ -168,15 +166,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         self.resultBlock([self selectedTitmeResults], 0);
         [self ba_pickViewHiddenAnimation];
     };
-}
-
-- (void)registCell {
-//    [self.yearTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-//    [self.monthTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-//    [self.dayTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-//    [self.hourTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-//    [self.minuteTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
-//    [self.secondTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
 }
 
 #pragma mark - 通知处理

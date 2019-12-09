@@ -13,8 +13,8 @@
 
 @interface BAViewController ()
 <
-    UITableViewDelegate,
-    UITableViewDataSource
+UITableViewDelegate,
+UITableViewDataSource
 >
 
 @property(nonatomic, strong) UITableView *tableView;
@@ -39,7 +39,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-   
+    
     CGFloat min_x = 0;
     CGFloat min_y = 0;
     CGFloat min_w = 0;
@@ -53,7 +53,7 @@
     min_w = min_view_w - BAKit_ViewSafeAreaInsets(self.view).left - BAKit_ViewSafeAreaInsets(self.view).right;
     
     self.tableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
-
+    
 }
 
 #pragma mark - UITableViewDataSource / UITableViewDelegate
@@ -84,27 +84,27 @@
     
     if ( 0 == indexPath.section ) {
         switch ( indexPath.row ) {
-                case 0: {
+            case 0: {
                 [self pickView1];
             }
                 break;
-                case 1: {
+            case 1: {
                 [self pickView2];
             }
                 break;
-                case 2: {
+            case 2: {
                 [self pickView3];
             }
                 break;
-                case 3: {
+            case 3: {
                 [self pickView4];
             }
                 break;
-                case 4: {
+            case 4: {
                 [self pickView5];
             }
                 break;
-                case 5: {
+            case 5: {
                 [self pickView6];
             }
                 break;
@@ -115,38 +115,38 @@
     } else if (1 == indexPath.section) {
         NSInteger type = 0;
         switch (indexPath.row) {
-                case 0: {
+            case 0: {
                 type = BAKit_CustomDatePickerDateTypeYMDHMS;
             }
                 break;
-                case 1: {
+            case 1: {
                 type = BAKit_CustomDatePickerDateTypeYMDHM;
             }
                 break;
-                case 2: {
+            case 2: {
                 type = BAKit_CustomDatePickerDateTypeYMD;
             }
                 break;
                 
-                case 3: {
+            case 3: {
                 type = BAKit_CustomDatePickerDateTypeHMS;
             }
                 break;
                 
-                case 4: {
+            case 4: {
                 type = BAKit_CustomDatePickerDateTypeYM;
             }
                 break;
                 
-                case 5: {
+            case 5: {
                 type = BAKit_CustomDatePickerDateTypeMD;
             }
                 break;
-                case 6: {
+            case 6: {
                 type = BAKit_CustomDatePickerDateTypeHM;
             }
                 break;
-                case 7: {
+            case 7: {
                 type = BAKit_CustomDatePickerDateTypeYY;
             }
                 break;
@@ -170,15 +170,15 @@
     
     headerTitle.frame = CGRectMake(20, 0, BAKit_SCREEN_WIDTH - 40, 40);
     switch (section) {
-            case 0: {
+        case 0: {
             headerTitle.text = @"BAPickView 的几种日常用法！";
         }
             break;
-            case 1: {
+        case 1: {
             headerTitle.text = @"自定义 DatePicker";
         }
             break;
-            case 2: {
+        case 2: {
             headerTitle.text = @"BAPickView 的特点！";
         }
             break;
@@ -270,7 +270,7 @@
         
         NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
         [format setDateFormat:@"yyyy年MM月dd日"];
-
+        
         // 最小时间，当前时间
         NSDate *minDate = [format dateFromString:@"1900年01月01日"];
         tempView.ba_maxDate = BAKit_Current_Date();
@@ -320,10 +320,10 @@
 
 - (void)pickView6 {
     NSArray *array = @[
-                       @[@"男", @"女"],
-                       @[@"18", @"22"],
-                       @[@"163", @"168"]
-                       ];
+        @[@"男", @"女"],
+        @[@"18", @"22"],
+        @[@"163", @"168"]
+    ];
     NSArray *titleArray = @[@"性别", @"年龄", @"身高"];
     BAKit_WeakSelf
     [BAKit_PickerView ba_creatCustomMultiplePickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
@@ -356,30 +356,38 @@
         if (type != BAKit_CustomDatePickerDateTypeHMS) {
             tempView.defaultTitle = @"请选择日期";
         }
-
+        
+        
         NSDate *maxDate;
         NSDate *minDate;
+        /**
+         注意：如果两个日期都不设置，默认最大时间是当前系统时间，最小时间是 1970年
+         */
+        
+        minDate = [BAKit_Current_Date() ba_dateBySubtractingDays:11];
+        maxDate = [BAKit_Current_Date() ba_dateByAddingDays:61];
+        
         // 自定义：最大最小日期格式
         if (type == BAKit_CustomDatePickerDateTypeYMD) {
             //            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
             //            maxDate = [format dateFromString:@"2018-08-09"];
             //            minDate = [format dateFromString:@"2016-07-20"];
             NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-            NSDate *today = [[NSDate alloc]init];
+            //            NSDate *today = [[NSDate alloc]init];
             [format setDateFormat:@"yyyy-MM-dd"];
             
             // 最小时间，当前时间
-            minDate = [format dateFromString:[format stringFromDate:today]];
+            //            minDate = [format dateFromString:[format stringFromDate:today]];
+//            minDate = [BAKit_Current_Date() ba_dateBySubtractingDays:11];
+//            maxDate = [BAKit_Current_Date() ba_dateByAddingDays:61];
             
             //            NSTimeInterval oneDay = 24 * 60 * 60;
             //            // 最大时间，当前时间+180天
             //            NSDate *theDay = [today initWithTimeIntervalSinceNow:oneDay * 180];
             //            maxDate = [format dateFromString:[format stringFromDate:theDay]];
             
-            maxDate = [format dateFromString:@"2019-01-07"];
             
-        }
-        else if (type == BAKit_CustomDatePickerDateTypeYM) {
+        } else if (type == BAKit_CustomDatePickerDateTypeYM) {
             NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYM];
             maxDate = [format dateFromString:@"2018-08"];
             minDate = [format dateFromString:@"2016-07"];
@@ -393,7 +401,7 @@
             // 自定义：最小日期
             tempView.ba_minDate = minDate;
         }
-        
+       
         /**
          是否显示背景年份水印，默认：NO
          */
@@ -412,9 +420,9 @@
         // 自定义：动画样式
         tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
         // 自定义：pickView 位置
-//                    tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+        //                    tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
         // 自定义：toolBar 位置
-                    tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
+        tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
         // 自定义：pickView 文字颜色
         tempView.ba_pickViewTextColor = [UIColor redColor];
         // 自定义：pickView 文字字体
@@ -429,7 +437,7 @@
         //            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
         
     } block:^(NSString *resultString, NSInteger index) {
-
+        
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
 }
@@ -459,10 +467,10 @@
                                                  @"4、日期选择器：年月，可以完全自定义 NSDateFormatter",
                                                  @"5、日期选择器：年周，如：2017年，第21周",
                                                  @"5、多数组自定义数据",
-                                                 ],
+        ],
                       @[@"1、YYYY-MM-DD HH:mm:ss",@"2、YYYY-MM-DD HH:mm",@"3、YYYY-MM-DD",@"4、HH:mm:ss",@"5、YYYY-MM",@"6、MM-DD",@"7、HH:mm",@"8、YYYY"],
                       @[@"1、城市选择器，三级联动，可返回省市县和精确的经纬度\n2、可以自定义 array 显示，性别选择等【目前只支持单行数据】\n3、日期选择器：年月日，可以完全自定义 NSDateFormatter\n4、日期选择器：年月，可以完全自定义 NSDateFormatter\n5、横竖屏适配完美\n6、可以自定义按钮颜色、背景颜色等\n7、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示\n8、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改\n9、理论完全兼容现有所有 iOS 系统版本"
-                        ], nil];
+                      ], nil];
     }
     return _dataArray;
 }
