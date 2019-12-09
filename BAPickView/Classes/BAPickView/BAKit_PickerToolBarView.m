@@ -29,7 +29,7 @@
 }
 
 - (void)initData {
-    self.lineView.backgroundColor = UIColor.lightGrayColor;
+    self.lineView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
 }
 
 - (void)layoutSubviews {

@@ -228,7 +228,7 @@ UITableViewDataSource
         /**
          pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
          */
-        tempView.ba_pickViewLineViewColor = BAKit_Color_Red_pod;
+        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
         
         self.pickView = tempView;
     } block:^(BAKit_CityModel *model) {
@@ -251,6 +251,11 @@ UITableViewDataSource
         //        tempView.ba_backgroundColor_pickView = [UIColor greenColor];
         tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
         tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
+        /**
+         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+         */
+        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+        
         self.pickView = tempView;
     } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
@@ -282,6 +287,10 @@ UITableViewDataSource
         tempView.ba_buttonTitleColor_sure = [UIColor redColor];
         tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
         tempView.animationType = BAKit_PickerViewAnimationTypeLeft;
+        /**
+         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+         */
+        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
         
         self.pickView = tempView;
         
@@ -299,6 +308,11 @@ UITableViewDataSource
         formatter.dateFormat = @"yyyy-MM";
         tempView.customDateFormatter = formatter;
         tempView.animationType = BAKit_PickerViewAnimationTypeRight;
+        /**
+         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+         */
+        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+        
         self.pickView = tempView;
     } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
@@ -311,6 +325,11 @@ UITableViewDataSource
     [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
         
         BAKit_StrongSelf
+        /**
+         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+         */
+        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+        
         self.pickView = tempView;
     } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
@@ -341,6 +360,11 @@ UITableViewDataSource
         tempView.ba_backgroundColor_pickView = [UIColor greenColor];
         tempView.animationType = BAKit_PickerViewAnimationTypeTop;
         tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
+        /**
+         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+         */
+        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
+        
         self.pickView = tempView;
     } block:^(NSString *resultString, NSInteger index) {
         BAKit_StrongSelf
@@ -378,8 +402,8 @@ UITableViewDataSource
             
             // 最小时间，当前时间
             //            minDate = [format dateFromString:[format stringFromDate:today]];
-//            minDate = [BAKit_Current_Date() ba_dateBySubtractingDays:11];
-//            maxDate = [BAKit_Current_Date() ba_dateByAddingDays:61];
+            //            minDate = [BAKit_Current_Date() ba_dateBySubtractingDays:11];
+            //            maxDate = [BAKit_Current_Date() ba_dateByAddingDays:61];
             
             //            NSTimeInterval oneDay = 24 * 60 * 60;
             //            // 最大时间，当前时间+180天
@@ -401,7 +425,7 @@ UITableViewDataSource
             // 自定义：最小日期
             tempView.ba_minDate = minDate;
         }
-       
+        
         /**
          是否显示背景年份水印，默认：NO
          */
@@ -431,6 +455,11 @@ UITableViewDataSource
         // 可以自由定制按钮颜色
         tempView.ba_buttonTitleColor_sure = [UIColor redColor];
         tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
+        
+        /**
+         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+         */
+        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
         
         // 可以自由定制 toolBar 和 pickView 的背景颜色
         //            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
