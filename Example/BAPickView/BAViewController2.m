@@ -8,6 +8,8 @@
 
 #import "BAViewController2.h"
 
+#import "BAPickerView.h"
+
 #import "BADatePickerView.h"
 #import "BAKit_ConfigurationDefine.h"
 
@@ -71,29 +73,23 @@ UITableViewDataSource
     if ( 0 == indexPath.section ) {
         switch ( indexPath.row ) {
             case 0: {
-                                [self pickView1];
-            }
-                break;
+                [self pickView1];
+            } break;
             case 1: {
-                //                [self pickView2];
-            }
-                break;
+                [self pickView2];
+            } break;
             case 2: {
-                //                [self pickView3];
-            }
-                break;
+                [self pickView3];
+            } break;
             case 3: {
                 //                [self pickView4];
-            }
-                break;
+            } break;
             case 4: {
                 //                [self pickView5];
-            }
-                break;
+            } break;
             case 5: {
                 //                [self pickView6];
-            }
-                break;
+            } break;
                 
             default:
                 break;
@@ -124,16 +120,13 @@ UITableViewDataSource
     switch (section) {
         case 0: {
             headerTitle.text = @"BAPickView 的几种日常用法！";
-        }
-            break;
+        } break;
         case 1: {
             headerTitle.text = @"自定义 DatePicker";
-        }
-            break;
+        } break;
         case 2: {
             headerTitle.text = @"BAPickView 的特点！";
-        }
-            break;
+        } break;
             
         default:
             break;
@@ -159,8 +152,7 @@ UITableViewDataSource
     // DatePicker
     BADatePickerModel *datePickerModel = BADatePickerModel.new;
     datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
-    //formatter.dateFormat = @"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
-    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss";
+    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
 
     // ToolBar
     BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
@@ -169,7 +161,7 @@ UITableViewDataSource
     toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
     toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
     toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-
+    
     
     configModel.datePickerModel = datePickerModel;
     configModel.toolBarModel = toolBarModel;
@@ -182,6 +174,85 @@ UITableViewDataSource
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     };
+    [picker show];
+}
+
+- (void)pickView2 {
+    // 注意：如果项目中有统一 UI 规范的话，可以二次封装后使用，这样就不用每次都写 configModel 了！！！！
+    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
+    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
+    
+    BAPickerModel *pickerModel = BAPickerModel.new;
+    pickerModel.stringsArray = @[@"性别", @"年龄", @"身高"];
+ 
+    // DatePicker
+//    BADatePickerModel *datePickerModel = BADatePickerModel.new;
+//    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
+//    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+    
+    // ToolBar
+    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
+    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
+    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
+    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
+    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
+    
+    
+    configModel.pickerModel = pickerModel;
+    configModel.toolBarModel = toolBarModel;
+    
+    BAPickerView *picker = BAPickerView.new;
+    picker.configModel = configModel;
+    
+    BAKit_WeakSelf
+    picker.onSelectPicker = ^(NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    };
+    
+    [picker show];
+}
+
+- (void)pickView3 {
+    
+    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
+    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
+    
+    BAPickerModel *pickerModel = BAPickerModel.new;
+    pickerModel.multipleTitleArray = @[@"性别", @"年龄", @"身高"];
+    pickerModel.multipleStringsArray =  @[
+        @[@"男", @"女"],
+        @[@"18", @"22", @"25", @"30", @"36", @"42"],
+        @[@"145", @"150", @"160", @"168", @"175"]
+    ];
+
+    // DatePicker
+//    BADatePickerModel *datePickerModel = BADatePickerModel.new;
+//    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
+//    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+    
+    // ToolBar
+    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
+    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
+    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
+    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
+    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
+    
+    
+    configModel.pickerModel = pickerModel;
+    configModel.toolBarModel = toolBarModel;
+    
+    BAPickerView *picker = BAPickerView.new;
+    picker.configModel = configModel;
+    
+    BAKit_WeakSelf
+    picker.onSelectPicker = ^(NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    };
+    
     [picker show];
 }
 

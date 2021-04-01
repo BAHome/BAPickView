@@ -27,6 +27,13 @@ kBAGetAlertWindow() {
     return alertWindow;
 }
 
+CG_INLINE void
+kBARemoveAllSubviews(UIView *view) {
+    while (view.subviews.count) {
+        [view.subviews.lastObject removeFromSuperview];
+    }
+}
+
 #endif /* BAPickerDefine_h */
 
 

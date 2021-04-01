@@ -5,11 +5,16 @@
 //  Created by 博爱 on 2021/4/1.
 //
 
-#import <UIKit/UIKit.h>
+#import "BAPickerBasePopView.h"
+#import "BAPickerConfigModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BAPickerView : UIView
+@interface BAPickerView : BAPickerBasePopView
+
+@property(nonatomic, strong) BAPickerConfigModel *configModel;
+
+@property(nonatomic, copy) void (^onSelectPicker)(NSString *resultString, NSArray *resultArray);
 
 @end
 

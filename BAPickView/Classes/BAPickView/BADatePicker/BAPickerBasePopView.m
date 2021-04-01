@@ -62,14 +62,8 @@
 
 - (void)dismiss {
     self.onDismiss ? self.onDismiss():nil;
-    [self removeAllSubviews];
+    kBARemoveAllSubviews(self);
     [self removeFromSuperview];
-}
-
-- (void)removeAllSubviews {
-    while (self.subviews.count) {
-        [self.subviews.lastObject removeFromSuperview];
-    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

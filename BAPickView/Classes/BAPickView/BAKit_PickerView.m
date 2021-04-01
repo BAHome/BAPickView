@@ -684,7 +684,9 @@
             default:
                 break;
         }
-        dateStrArray.count - 1 < i ? [dateStrArray addObject:strTo] : [dateStrArray setObject:strTo atIndexedSubscript:i];
+        if (strTo.length) {
+            dateStrArray.count - 1 < i ? [dateStrArray addObject:strTo] : [dateStrArray setObject:strTo atIndexedSubscript:i];
+        }
     }
     self.resultString = [dateStrArray componentsJoinedByString:@"-"];
 }

@@ -108,7 +108,7 @@
         self.enableTouchDismiss = configModel.enableTouchDismiss;
         
         self.bgColor = configModel.maskViewBackgroundColor;
-        self.datePicker.backgroundColor = configModel.pickViewBackgroundColor;
+        self.datePicker.backgroundColor = configModel.pickerViewBackgroundColor;
         
         
         

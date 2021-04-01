@@ -15,6 +15,9 @@
         if (!self.datePickerModel) {
             self.datePickerModel = BADatePickerModel.new;
         }
+        if (!self.pickerModel) {
+            self.pickerModel = BAPickerModel.new;
+        }
         if (!self.toolBarModel) {
             self.toolBarModel = BAPickerToolBarModel.new;
         }
@@ -24,9 +27,7 @@
         self.pickerHeight = 240;
         self.toolBarHeight = 44;
         
-        self.enableTouchDismiss = YES;
-        
-        
+        self.enableTouchDismiss = YES;        
     }
     return self;
 }

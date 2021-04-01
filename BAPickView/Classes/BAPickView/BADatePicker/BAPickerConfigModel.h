@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BAKit_PickerViewAnimationType animationType;
 
 @property(nonatomic, strong) UIColor *maskViewBackgroundColor;
-@property(nonatomic, strong) UIColor *pickViewBackgroundColor;
+@property(nonatomic, strong) UIColor *pickerViewBackgroundColor;
 
 @property(nonatomic, assign) CGFloat pickerHeight;
 @property(nonatomic, assign) CGFloat toolBarHeight;
@@ -46,7 +46,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerModel : NSObject
 
+// 单列
+@property(nonatomic, strong) NSArray <NSString *>*stringsArray;
 
+// 多列
+@property(nonatomic, strong) NSArray *multipleTitleArray;
+@property(nonatomic, strong) NSArray *multipleStringsArray;
 
 @end
 
