@@ -10,10 +10,16 @@
 #endif
 #endif
 
+#import "BADatePickerView.h"
+#import "BADatePickerModel.h"
+#import "BAPickerModel.h"
+#import "BAPickerToolBarView.h"
+#import "BAPickerView.h"
 #import "BAKit_ConfigurationDefine.h"
 #import "BAKit_DatePicker.h"
 #import "BAKit_DefineCurrent.h"
 #import "BAKit_DefineFormat.h"
+#import "BAKit_PickerToolBarView.h"
 #import "BAKit_PickerView.h"
 #import "BAKit_PickerViewConfig.h"
 #import "BAPickView_OC.h"

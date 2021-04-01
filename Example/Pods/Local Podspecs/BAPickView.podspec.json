@@ -1,6 +1,6 @@
 {
   "name": "BAPickView",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "summary": "BAPickView 精简高效的选择器！",
   "description": "优化适配异形屏，优化部分动画性能",
   "homepage": "https://github.com/BAHome/BAPickView",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/BAHome/BAPickView.git",
-    "tag": "1.1.8"
+    "tag": "1.1.9"
   },
   "platforms": {
     "ios": "8.0"

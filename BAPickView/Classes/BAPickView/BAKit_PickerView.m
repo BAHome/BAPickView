@@ -1098,6 +1098,11 @@
         
         /*! 9、用 runtime 和 KVC 改变字体颜色 */
 //        [self setTextColor];
+        
+        if (@available(iOS 13.4, *)) {
+            _datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];//新发现这里不会根据系统的语言变了
+            _datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+        }
     }
     return _datePicker;
 }

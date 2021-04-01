@@ -1,5 +1,5 @@
 PODS:
-  - BAPickView (1.1.8)
+  - BAPickView (1.1.9)
 
 DEPENDENCIES:
   - BAPickView (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BAPickView: 266bbdaf509ed8a9cc623b04e21ca8bd2cc7cf55
+  BAPickView: cebe512092193e6ab131c108227d3faa97462f5c
 
 PODFILE CHECKSUM: 6bbb6cfe6b3898b7ae44c317c3b1e8c204dd7822
 
-COCOAPODS: 1.8.0.beta.1
+COCOAPODS: 1.9.3
