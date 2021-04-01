@@ -1,16 +1,23 @@
 PODS:
-  - BAPickView (1.1.9)
+  - BAPickView (1.1.9):
+    - Masonry
+  - Masonry (1.1.0)
 
 DEPENDENCIES:
   - BAPickView (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Masonry
 
 EXTERNAL SOURCES:
   BAPickView:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BAPickView: cebe512092193e6ab131c108227d3faa97462f5c
+  BAPickView: 7954105540795744c0b0776e7d8934176c187a17
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
-PODFILE CHECKSUM: 6bbb6cfe6b3898b7ae44c317c3b1e8c204dd7822
+PODFILE CHECKSUM: 66ec998834369603c88bcac4f5c4bd5bc35661c1
 
 COCOAPODS: 1.9.3

@@ -11,6 +11,8 @@
 #import "BAPickView_OC.h"
 #import "BAKit_DatePicker.h"
 
+#import "BAViewController2.h"
+
 @interface BAViewController ()
 <
 UITableViewDelegate,
@@ -29,12 +31,23 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self setupUI];
+    
+    [self initUI];
+    [self initNavi];
 }
 
-- (void)setupUI {
+- (void)initUI {
     self.title = @"BAPickView-OC";
     self.tableView.hidden = NO;
+}
+
+- (void)initNavi {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"新版" style:UIBarButtonItemStylePlain target:self action:@selector(onRightBarButtonItem)];
+}
+
+- (void)onRightBarButtonItem {
+    BAViewController2 *vc = BAViewController2.new;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewDidLayoutSubviews {

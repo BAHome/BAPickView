@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		330C977A885BDA02C58BB3DD /* libPods-BAPickView_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E727F516F4E8D0A0CAFE9687 /* libPods-BAPickView_Example.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -15,9 +16,9 @@
 		6003F59E195388D20070C39A /* BAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* BAAppDelegate.m */; };
 		6003F5A7195388D20070C39A /* BAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* BAViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
-		8C4B26007993CAACDDAEB5CB /* Pods_BAPickView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E123831FB53F1B393019241B /* Pods_BAPickView_Example.framework */; };
 		9C06560A21AD1E5D00D25525 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C06560821AD1E5D00D25525 /* LaunchScreen.storyboard */; };
 		9C06560B21AD1E5D00D25525 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C06560921AD1E5D00D25525 /* Main.storyboard */; };
+		9C5D1E8026156E16003E23D4 /* BAViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5D1E7F26156E16003E23D4 /* BAViewController2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,9 +44,11 @@
 		984E78DD695FA66F5333B1BE /* Pods-BAPickView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAPickView_Example.debug.xcconfig"; path = "Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9C06560821AD1E5D00D25525 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C06560921AD1E5D00D25525 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9C5D1E7E26156E16003E23D4 /* BAViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAViewController2.h; sourceTree = "<group>"; };
+		9C5D1E7F26156E16003E23D4 /* BAViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAViewController2.m; sourceTree = "<group>"; };
 		AC45869C5ED8D8C0168298FA /* BAPickView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BAPickView.podspec; path = ../BAPickView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B5D926A130DF41A7C4E387DE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		E123831FB53F1B393019241B /* Pods_BAPickView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BAPickView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E727F516F4E8D0A0CAFE9687 /* libPods-BAPickView_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAPickView_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +59,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				8C4B26007993CAACDDAEB5CB /* Pods_BAPickView_Example.framework in Frameworks */,
+				330C977A885BDA02C58BB3DD /* libPods-BAPickView_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +103,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				E123831FB53F1B393019241B /* Pods_BAPickView_Example.framework */,
 				02A75CBE2404908666C3F02F /* Pods_BAPickView_Tests.framework */,
+				E727F516F4E8D0A0CAFE9687 /* libPods-BAPickView_Example.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,6 +116,8 @@
 				6003F59D195388D20070C39A /* BAAppDelegate.m */,
 				6003F5A5195388D20070C39A /* BAViewController.h */,
 				6003F5A6195388D20070C39A /* BAViewController.m */,
+				9C5D1E7E26156E16003E23D4 /* BAViewController2.h */,
+				9C5D1E7F26156E16003E23D4 /* BAViewController2.m */,
 				9C06560821AD1E5D00D25525 /* LaunchScreen.storyboard */,
 				9C06560921AD1E5D00D25525 /* Main.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -154,7 +159,7 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				F52D5FCE85CBA543DA2EB28D /* [CP] Embed Pods Frameworks */,
+				39305A8455030145C4D52BCB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -172,7 +177,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BA;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = boai;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -213,6 +218,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		39305A8455030145C4D52BCB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/BAPickView/BAPickView.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BAPickView.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A174AB7265EFE1BFE6EA0AF2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,24 +258,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F52D5FCE85CBA543DA2EB28D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BAPickView/BAPickView.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BAPickView.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -262,6 +267,7 @@
 			files = (
 				6003F59E195388D20070C39A /* BAAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* BAViewController.m in Sources */,
+				9C5D1E8026156E16003E23D4 /* BAViewController2.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +309,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -327,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -357,6 +364,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -374,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -390,6 +398,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BAPickView/BAPickView-Prefix.pch";
 				INFOPLIST_FILE = "BAPickView/BAPickView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -407,6 +416,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BAPickView/BAPickView-Prefix.pch";
 				INFOPLIST_FILE = "BAPickView/BAPickView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

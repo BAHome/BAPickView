@@ -5,17 +5,18 @@
 //  Created by 博爱 on 2021/4/1.
 //
 
-#import <UIKit/UIKit.h>
+#import "BAPickerBasePopView.h"
+
+#import "BAPickerConfigModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BADatePickerView : UIView
+@interface BADatePickerView : BAPickerBasePopView
 
-@property(nonatomic, strong) NSDateFormatter *formatter;
+
+@property(nonatomic, strong) BAPickerConfigModel *configModel;
 
 @property(nonatomic, copy) void (^onSelectDatePicker)(NSString *resultString, NSDate *resultDate);
-
-
 
 @end
 
