@@ -34,5 +34,16 @@
     "Masonry": [
 
     ]
-  }
+  },
+  "subspecs": [
+    {
+      "name": "BAPickerManager",
+      "source_files": "BAPickView/BAPickerManager/**/*.{h,m}",
+      "public_header_files": "BAPickView/BAPickerManager/**/*.h",
+      "prefix_header_contents": [
+        "#import <UIKit/UIKit.h>",
+        "#import <Foundation/Foundation.h>"
+      ]
+    }
+  ]
 }

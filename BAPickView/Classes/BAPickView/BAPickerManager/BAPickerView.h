@@ -6,6 +6,7 @@
 //
 
 #import "BAPickerBasePopView.h"
+#import "BAPickerDefine.h"
 #import "BAPickerConfigModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -14,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong) BAPickerConfigModel *configModel;
 
-@property(nonatomic, copy) void (^onSelectPicker)(NSString *resultString, NSArray *resultArray);
+@property(nonatomic, copy) onSelectPicker selectPicker;
+@property(nonatomic, copy) onSelectCityPicker selectCityPicker;
 
 @end
 

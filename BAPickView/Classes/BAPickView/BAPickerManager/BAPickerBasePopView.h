@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  BAPickerBasePopView：父类 view，可以在上面加载任意 view
  */
 @property(nonatomic, strong) UIView *contentView;
+/// 默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
 @property(nonatomic, strong) UIColor *bgColor;
 
 /// 默认 yes

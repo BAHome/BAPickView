@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BAPickView'
-  s.version          = '1.1.9'
+  s.version          = '1.2.0'
   s.summary          = 'BAPickView 精简高效的选择器！'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-                      优化适配异形屏，优化部分动画性能
+                      V1.2.0 全新改版，旧版本保留三个版本，后续大版本V2.0.0 将移除旧版本代码
                        DESC
 
   s.homepage         = 'https://github.com/BAHome/BAPickView'
@@ -41,5 +41,16 @@ Pod::Spec.new do |s|
    s.requires_arc = true
 
    s.dependency "Masonry"
+   
+   # BAPickerManager
+   s.subspec 'BAPickerManager' do |scat|
+          
+     scat.source_files  = "BAPickView/BAPickerManager/**/*.{h,m}"
+     scat.public_header_files = "BAPickView/BAPickerManager/**/*.h"
+     scat.prefix_header_contents =
+     '#import <UIKit/UIKit.h>',
+     '#import <Foundation/Foundation.h>'
+     
+   end
 
 end

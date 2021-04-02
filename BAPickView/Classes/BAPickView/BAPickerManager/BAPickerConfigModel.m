@@ -22,12 +22,12 @@
             self.toolBarModel = BAPickerToolBarModel.new;
         }
         
-        self.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];;
+        self.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.3];
         
         self.pickerHeight = 240;
         self.toolBarHeight = 44;
         
-        self.enableTouchDismiss = YES;        
+        self.enableTouchDismiss = YES;
     }
     return self;
 }
@@ -64,5 +64,13 @@
 @end
 
 @implementation BAPickerToolBarModel
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.showResult = YES;
+    }
+    return self;
+}
 
 @end

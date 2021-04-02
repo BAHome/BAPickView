@@ -80,7 +80,9 @@
 - (void)setBgColor:(UIColor *)bgColor {
     _bgColor = bgColor;
     
-    self.backgroundColor = bgColor;
+    if (bgColor) {
+        self.backgroundColor = bgColor;        
+    }
 }
 
 - (UIView *)contentView {

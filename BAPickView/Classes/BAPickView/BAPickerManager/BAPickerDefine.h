@@ -9,11 +9,22 @@
 #define BAPickerDefine_h
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 #import <Masonry/Masonry.h>
+
+#import "BACityModel.h"
 
 #import "BAKit_ConfigurationDefine.h"
 #import "NSDateFormatter+BAKit.h"
+#import "NSBundle+BAPod.h"
 
+// picker 回调
+typedef void (^onSelectPicker)(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray, UIPickerView *pickerView);
+// datePicker 回调
+typedef void (^onSelectDatePicker)(NSString *resultString, NSDate *resultDate);
+// cityPicker 回调
+typedef void (^onSelectCityPicker)(BACityModel *model);
 
 
 // 获取当前最顶部的 window
@@ -33,6 +44,8 @@ kBARemoveAllSubviews(UIView *view) {
         [view.subviews.lastObject removeFromSuperview];
     }
 }
+
+
 
 #endif /* BAPickerDefine_h */
 

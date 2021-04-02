@@ -42,7 +42,8 @@
     [self addSubview:self.sureButton];
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-12);
-        make.centerY.width.height.mas_equalTo(self.cancleButton);
+        make.centerY.offset(0);
+        make.width.height.mas_equalTo(40);
     }];
     
     [self addSubview:self.titleLabel];
@@ -71,7 +72,11 @@
 - (void)setResult:(NSString *)result {
     _result = result;
     
-    self.titleLabel.text = result;
+    self.titleLabel.hidden = !self.toolBarModel.showResult;
+
+    if (self.toolBarModel.showResult) {
+        self.titleLabel.text = result;
+    }
 }
 
 - (void)setToolBarModel:(BAPickerToolBarModel *)toolBarModel {
@@ -104,6 +109,27 @@
             self.sureButton.titleLabel.font = toolBarModel.sureTitleFont;
         }
     }
+    
+#pragma mark - title
+    {
+        if (toolBarModel.cancleTitle.length) {
+            CGFloat name_w = [toolBarModel.cancleTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:toolBarModel.cancleTitleFont ? toolBarModel.cancleTitleFont : self.cancleButton.titleLabel.font} context:nil].size.width;
+            name_w += 10;
+            [self.cancleButton mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(name_w);
+            }];
+            [self.cancleButton setTitle:toolBarModel.cancleTitle forState:UIControlStateNormal];
+        }
+        if (toolBarModel.sureTitle.length) {
+            CGFloat name_w = [toolBarModel.sureTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:toolBarModel.sureTitleFont ? toolBarModel.sureTitleFont : self.sureButton.titleLabel.font} context:nil].size.width;
+            name_w += 10;
+            [self.sureButton mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(name_w);
+            }];
+            [self.sureButton setTitle:toolBarModel.sureTitle forState:UIControlStateNormal];
+        }
+    }
+  
     
 }
 

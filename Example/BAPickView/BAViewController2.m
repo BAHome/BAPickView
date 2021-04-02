@@ -13,6 +13,8 @@
 #import "BADatePickerView.h"
 #import "BAKit_ConfigurationDefine.h"
 
+#import "BAPickerManger.h"
+
 @interface BAViewController2 ()
 <
 UITableViewDelegate,
@@ -146,6 +148,17 @@ UITableViewDataSource
 #pragma mark - custom method
 
 - (void)pickView1 {
+    
+    BAKit_WeakSelf
+    [BAPickerManger initCityPickerWithCallBack:^(BACityModel *model) {
+        BAKit_StrongSelf
+        // 返回 BAKit_CityModel，包含省市县 和 详细的经纬度
+        NSString *msg = [NSString stringWithFormat:@"%@%@%@\n纬度：%f\n经度：%f", model.province, model.city, model.area, model.coordie.latitude, model.coordie.longitude];
+        BAKit_ShowAlertWithMsg_ios8(msg);
+    }];
+    
+    return;
+    
     BAPickerConfigModel *configModel = BAPickerConfigModel.new;
     configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
     
@@ -169,7 +182,7 @@ UITableViewDataSource
     BADatePickerView *picker = BADatePickerView.new;
     picker.configModel = configModel;
     
-    BAKit_WeakSelf
+//    BAKit_WeakSelf
     picker.onSelectDatePicker = ^(NSString * _Nonnull resultString, NSDate * _Nonnull resultDate) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
@@ -178,82 +191,70 @@ UITableViewDataSource
 }
 
 - (void)pickView2 {
-    // 注意：如果项目中有统一 UI 规范的话，可以二次封装后使用，这样就不用每次都写 configModel 了！！！！
-    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
-    
-    BAPickerModel *pickerModel = BAPickerModel.new;
-    pickerModel.stringsArray = @[@"性别", @"年龄", @"身高"];
- 
-    // DatePicker
-//    BADatePickerModel *datePickerModel = BADatePickerModel.new;
-//    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
-//    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
-    
-    // ToolBar
-    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    
-    
-    configModel.pickerModel = pickerModel;
-    configModel.toolBarModel = toolBarModel;
-    
-    BAPickerView *picker = BAPickerView.new;
-    picker.configModel = configModel;
-    
     BAKit_WeakSelf
-    picker.onSelectPicker = ^(NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
+    [BAPickerManger initStringsPicker:@[@"性别", @"年龄", @"身高"] showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray, UIPickerView *pickerView) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
-    };
-    
-    [picker show];
+    }];
 }
 
 - (void)pickView3 {
     
-    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
-    
-    BAPickerModel *pickerModel = BAPickerModel.new;
-    pickerModel.multipleTitleArray = @[@"性别", @"年龄", @"身高"];
-    pickerModel.multipleStringsArray =  @[
+    NSArray *multipleTitleArray = @[@"性别", @"年龄", @"身高"];
+    NSArray *multipleStringsArray =  @[
         @[@"男", @"女"],
         @[@"18", @"22", @"25", @"30", @"36", @"42"],
         @[@"145", @"150", @"160", @"168", @"175"]
     ];
-
-    // DatePicker
-//    BADatePickerModel *datePickerModel = BADatePickerModel.new;
-//    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
-//    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
-    
-    // ToolBar
-    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    
-    
-    configModel.pickerModel = pickerModel;
-    configModel.toolBarModel = toolBarModel;
-    
-    BAPickerView *picker = BAPickerView.new;
-    picker.configModel = configModel;
-    
     BAKit_WeakSelf
-    picker.onSelectPicker = ^(NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
+//    [BAPickerManger initMultipleStringsPicker:multipleStringsArray cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+//        BAKit_StrongSelf
+//        BAKit_ShowAlertWithMsg_ios8(resultString);
+//    }];
+    [BAPickerManger initMultipleStringsPicker:multipleStringsArray multipleTitleArray:multipleTitleArray maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6] cancleTitle:@"cancle1111" cancleTitleColor:UIColor.lightGrayColor sureTitle:@"sure" sureTitleColor:UIColor.redColor titleColor:UIColor.greenColor showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray, UIPickerView *pickerView) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
-    };
+    }];
     
-    [picker show];
+    
+//    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
+//    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
+//    
+//    BAPickerModel *pickerModel = BAPickerModel.new;
+//    pickerModel.multipleTitleArray = @[@"性别", @"年龄", @"身高"];
+//    pickerModel.multipleStringsArray =  @[
+//        @[@"男", @"女"],
+//        @[@"18", @"22", @"25", @"30", @"36", @"42"],
+//        @[@"145", @"150", @"160", @"168", @"175"]
+//    ];
+//
+//    // DatePicker
+////    BADatePickerModel *datePickerModel = BADatePickerModel.new;
+////    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
+////    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+//    
+//    // ToolBar
+//    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+//    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
+//    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
+//    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
+//    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
+//    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
+//    
+//    
+//    configModel.pickerModel = pickerModel;
+//    configModel.toolBarModel = toolBarModel;
+//    
+//    BAPickerView *picker = BAPickerView.new;
+//    picker.configModel = configModel;
+//    
+////    BAKit_WeakSelf
+//    picker.onSelectPicker = ^(NSInteger resultRow, NSInteger resultComponent, NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
+//        BAKit_StrongSelf
+//        BAKit_ShowAlertWithMsg_ios8(resultString);
+//    };
+//    
+//    [picker show];
 }
 
 #pragma mark - setter / getter

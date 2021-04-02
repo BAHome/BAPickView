@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, assign) BAKit_PickerViewAnimationType animationType;
 
+/// 默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
 @property(nonatomic, strong) UIColor *maskViewBackgroundColor;
 @property(nonatomic, strong) UIColor *pickerViewBackgroundColor;
 
@@ -38,10 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, assign) BOOL enableTouchDismiss;
 
-
-@property(nonatomic, copy) void (^onResult)(id result);
-
-
 @end
 
 @interface BAPickerModel : NSObject
@@ -52,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 多列
 @property(nonatomic, strong) NSArray *multipleTitleArray;
 @property(nonatomic, strong) NSArray *multipleStringsArray;
+
+// city
+@property(nonatomic, strong) NSArray *allProvinceCityArray;
 
 @end
 
@@ -77,6 +77,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerToolBarModel : NSObject
 
+#pragma mark - title
+@property(nonatomic, copy) NSString *cancleTitle;
+@property(nonatomic, copy) NSString *sureTitle;
+
 #pragma mark - color
 @property(nonatomic, strong) UIColor *backgroundColor;
 @property(nonatomic, strong) UIColor *titleColor;
@@ -90,6 +94,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, assign) BOOL showBottomeLine;
 @property(nonatomic, strong) UIColor *bottomeLineColor;
+
+/// toolBar 是否显示选中结果，默认：YES
+@property(nonatomic, assign) BOOL showResult;
 
 @end
 
