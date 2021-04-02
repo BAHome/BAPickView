@@ -154,8 +154,8 @@
         _formatter = NSDateFormatter.new;
         //formatter.dateFormat = @"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
         _formatter.dateFormat = @"yyyy-MM-dd";
-        _formatter.locale = [NSLocale currentLocale];
-        _formatter.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+        _formatter.locale = [NSLocale localeWithLocaleIdentifier:@"China"];
+        _formatter.timeZone = [NSTimeZone systemTimeZone];
     }
     return _formatter;
 }

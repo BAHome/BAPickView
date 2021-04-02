@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSString *formatterString;
 
-@property (nonatomic) UIDatePickerMode datePickerMode; // default is UIDatePickerModeDateAndTime
+@property (nonatomic) UIDatePickerMode datePickerMode; // default is UIDatePickerModeDate
 
 /**
  日期选择器的最大日期，默认为：当前时间 +60年

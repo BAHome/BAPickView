@@ -11,9 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger : NSObject
-{
-    NSString *m_local2DString;
-}
 
 /// 快速创建 pickerView  单列：不显示中间选中结果
 /// @param strings 数据源
@@ -154,7 +151,42 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BAPickerManger (Date)
+@interface BAPickerManger (SystemDateDatePicker)
+
++ (void)initSystemDatePicker:(onSelectDatePicker)cb;
+
++ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
+             formatterString:(nullable NSString *)formatterString
+                  showResult:(BOOL)showResult
+                          cb:(onSelectDatePicker)cb;
+
++ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
+             formatterString:(nullable NSString *)formatterString
+                 cancleTitle:(nullable NSString *)cancleTitle
+                   sureTitle:(nullable NSString *)sureTitle
+                  showResult:(BOOL)showResult
+                          cb:(onSelectDatePicker)cb;
+
++ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
+             formatterString:(nullable NSString *)formatterString
+                 cancleTitle:(nullable NSString *)cancleTitle
+            cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                   sureTitle:(nullable NSString *)sureTitle
+              sureTitleColor:(nullable UIColor *)sureTitleColor
+                  titleColor:(nullable UIColor *)titleColor
+                  showResult:(BOOL)showResult
+                          cb:(onSelectDatePicker)cb;
+
++ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
+             formatterString:(nullable NSString *)formatterString
+     maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+                 cancleTitle:(nullable NSString *)cancleTitle
+            cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                   sureTitle:(nullable NSString *)sureTitle
+              sureTitleColor:(nullable UIColor *)sureTitleColor
+                  titleColor:(nullable UIColor *)titleColor
+                  showResult:(BOOL)showResult
+                          cb:(onSelectDatePicker)cb;
 
 @end
 

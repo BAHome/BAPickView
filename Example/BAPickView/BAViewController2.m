@@ -87,7 +87,7 @@ UITableViewDataSource
                 //                [self pickView4];
             } break;
             case 4: {
-                //                [self pickView5];
+                [self pickView5];
             } break;
             case 5: {
                 //                [self pickView6];
@@ -156,38 +156,6 @@ UITableViewDataSource
         NSString *msg = [NSString stringWithFormat:@"%@%@%@\n纬度：%f\n经度：%f", model.province, model.city, model.area, model.coordie.latitude, model.coordie.longitude];
         BAKit_ShowAlertWithMsg_ios8(msg);
     }];
-    
-    return;
-    
-    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
-    
-    // DatePicker
-    BADatePickerModel *datePickerModel = BADatePickerModel.new;
-    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
-    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
-
-    // ToolBar
-    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    
-    
-    configModel.datePickerModel = datePickerModel;
-    configModel.toolBarModel = toolBarModel;
-    
-    BADatePickerView *picker = BADatePickerView.new;
-    picker.configModel = configModel;
-    
-//    BAKit_WeakSelf
-    picker.onSelectDatePicker = ^(NSString * _Nonnull resultString, NSDate * _Nonnull resultDate) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-    };
-    [picker show];
 }
 
 - (void)pickView2 {
@@ -199,6 +167,14 @@ UITableViewDataSource
 }
 
 - (void)pickView3 {
+    BAKit_WeakSelf
+    [BAPickerManger initSystemDatePicker:UIDatePickerModeDate formatterString:@"" showResult:YES cb:^(NSString *resultString, NSDate *resultDate) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(resultString);
+    }];
+}
+
+- (void)pickView5 {
     
     NSArray *multipleTitleArray = @[@"性别", @"年龄", @"身高"];
     NSArray *multipleStringsArray =  @[
