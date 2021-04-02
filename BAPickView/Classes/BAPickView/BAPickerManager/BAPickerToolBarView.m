@@ -52,7 +52,7 @@
         make.left.mas_greaterThanOrEqualTo(self.cancleButton.mas_right).offset(10);
         make.right.mas_lessThanOrEqualTo(self.sureButton.mas_left).offset(-10);
     }];
-    
+    self.titleLabel.hidden = NO;
 }
 
 - (void)initData {
@@ -73,10 +73,7 @@
     _result = result;
     
     self.titleLabel.hidden = !self.toolBarModel.showResult;
-
-    if (self.toolBarModel.showResult) {
-        self.titleLabel.text = result;
-    }
+    self.titleLabel.text = result;
 }
 
 - (void)setToolBarModel:(BAPickerToolBarModel *)toolBarModel {

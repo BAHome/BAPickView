@@ -109,9 +109,7 @@
         
         self.bgColor = configModel.maskViewBackgroundColor;
         self.datePicker.backgroundColor = configModel.pickerViewBackgroundColor;
-        
-        
-        
+                
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             if (@available(iOS 11.0, *)) {
                 make.height.mas_equalTo(self.safeAreaInsets.bottom + configModel.pickerHeight);
@@ -129,6 +127,8 @@
     {
         self.datePickerModel = configModel.datePickerModel;
         self.toolBarView.toolBarModel = configModel.toolBarModel;
+        // 默认数据：
+        self.resultDate = NSDate.date;
     }
 }
 
@@ -147,6 +147,8 @@
     if (datePickerModel.formatterString) {
         self.formatter.dateFormat = datePickerModel.formatterString;
     }
+    
+
 }
 
 - (NSDateFormatter *)formatter {
