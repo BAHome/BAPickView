@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerView : BAPickerBasePopView
 
-@property(nonatomic, strong) BAPickerConfigModel *configModel;
+@property(nonatomic, strong) BAPickerModel *configModel;
 
 @property(nonatomic, copy) onSelectPicker selectPicker;
 @property(nonatomic, copy) onSelectCityPicker selectCityPicker;

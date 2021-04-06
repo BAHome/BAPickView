@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BAKit_PickerViewConfig.h"
+#import "BAPickerDefine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,10 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerConfigModel : NSObject
 
-@property(nonatomic, strong) BAPickerModel *pickerModel;
-@property(nonatomic, strong) BADatePickerModel *datePickerModel;
-@property(nonatomic, strong) BAPickerToolBarModel *toolBarModel;
+@end
 
+@interface BAPickerConfigBaseModel : NSObject
+
+@property(nonatomic, strong) BAPickerToolBarModel *toolBarModel;
 
 #pragma mark - common
 /**
@@ -41,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BAPickerModel : NSObject
+@interface BAPickerModel : BAPickerConfigBaseModel
 
 // 单列
 @property(nonatomic, strong) NSArray <NSString *>*stringsArray;
@@ -55,11 +57,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BADatePickerModel : NSObject
+@interface BADatePickerModel : BAPickerConfigBaseModel
 
 @property (nonatomic, strong) NSString *formatterString;
 
-@property (nonatomic) UIDatePickerMode datePickerMode; // default is UIDatePickerModeDate
+// default is UIDatePickerModeDate
+@property (nonatomic) UIDatePickerMode datePickerMode;
+
+@property(nonatomic, assign) BADatePickerType datePickerType;
 
 /**
  日期选择器的最大日期，默认为：当前时间 +60年
@@ -70,8 +75,6 @@ NS_ASSUME_NONNULL_BEGIN
  日期选择器的最小日期，默认为：当前时间 -60年
  */
 @property(nonatomic, strong) NSDate *minimumDate;
-
-
 
 @end
 

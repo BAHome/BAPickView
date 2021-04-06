@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BADatePickerView : BAPickerBasePopView
 
-@property(nonatomic, strong) BAPickerConfigModel *configModel;
+@property(nonatomic, strong) BADatePickerModel *configModel;
 
 @property(nonatomic, copy) void (^onSelectDatePicker)(NSString *resultString, NSDate *resultDate);
 

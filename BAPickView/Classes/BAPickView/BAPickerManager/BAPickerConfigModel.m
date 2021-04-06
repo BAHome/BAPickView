@@ -9,15 +9,13 @@
 
 @implementation BAPickerConfigModel
 
+@end
+
+@implementation BAPickerConfigBaseModel
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        if (!self.datePickerModel) {
-            self.datePickerModel = BADatePickerModel.new;
-        }
-        if (!self.pickerModel) {
-            self.pickerModel = BAPickerModel.new;
-        }
         if (!self.toolBarModel) {
             self.toolBarModel = BAPickerToolBarModel.new;
         }

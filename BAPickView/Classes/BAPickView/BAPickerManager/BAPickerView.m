@@ -261,7 +261,7 @@
     self.resultString = [self.selectedArray componentsJoinedByString:@","];
 }
 
-- (void)setConfigModel:(BAPickerConfigModel *)configModel {
+- (void)setConfigModel:(BAPickerModel *)configModel {
     _configModel = configModel;
         
     // 公共配置：configModel
@@ -284,9 +284,9 @@
         }];
     }
     
-    // 内容配置：datePickerModel、toolBarModel
+    // 内容配置：pickerModel、toolBarModel
     {
-        self.pickerModel = configModel.pickerModel;
+        self.pickerModel = configModel;
         self.toolBarView.toolBarModel = configModel.toolBarModel;
     }
 }

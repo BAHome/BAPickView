@@ -64,10 +64,8 @@
                showResult:(BOOL)showResult
                        cb:(onSelectPicker)cb {
     // 注意：如果项目中有统一 UI 规范的话，可以二次封装后使用，这样就不用每次都写 configModel 了！！！！
-    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    configModel.maskViewBackgroundColor = maskViewBackgroundColor;
-    
     BAPickerModel *pickerModel = BAPickerModel.new;
+    pickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
     pickerModel.stringsArray = strings;
     
     // ToolBar
@@ -83,11 +81,10 @@
     toolBarModel.sureTitle = sureTitle;
     toolBarModel.showResult = showResult;
     
-    configModel.pickerModel = pickerModel;
-    configModel.toolBarModel = toolBarModel;
+    pickerModel.toolBarModel = toolBarModel;
     
     BAPickerView *picker = BAPickerView.new;
-    picker.configModel = configModel;
+    picker.configModel = pickerModel;
     picker.selectPicker = cb;
     
     [picker show];
@@ -157,12 +154,10 @@
                        titleColor:(nullable UIColor *)titleColor
                        showResult:(BOOL)showResult
                                cb:(onSelectPicker)cb {
-    
-    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    configModel.maskViewBackgroundColor = maskViewBackgroundColor;
-    
+        
     // Picker
     BAPickerModel *pickerModel = BAPickerModel.new;
+    pickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
     pickerModel.multipleTitleArray = multipleTitleArray;
     pickerModel.multipleStringsArray = multipleStringsArray;
     
@@ -179,11 +174,10 @@
     toolBarModel.sureTitle = sureTitle;
     toolBarModel.showResult = showResult;
     
-    configModel.pickerModel = pickerModel;
-    configModel.toolBarModel = toolBarModel;
+    pickerModel.toolBarModel = toolBarModel;
     
     BAPickerView *picker = BAPickerView.new;
-    picker.configModel = configModel;
+    picker.configModel = pickerModel;
     picker.selectPicker = cb;
     
     [picker show];
@@ -194,9 +188,7 @@
 @implementation BAPickerManger (City)
 
 + (void)initCityPickerWithCallBack:(onSelectCityPicker)cb {
-    
-    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    
+        
     // Picker
     BAPickerModel *pickerModel = BAPickerModel.new;
     NSArray *allProvinceCityArray = [[NSArray alloc] initWithContentsOfFile:[self getFilePath]];
@@ -215,11 +207,10 @@
     //    toolBarModel.sureTitle = sureTitle;
     //    toolBarModel.showResult = showResult;
     
-    configModel.pickerModel = pickerModel;
-    configModel.toolBarModel = toolBarModel;
+    pickerModel.toolBarModel = toolBarModel;
     
     BAPickerView *picker = BAPickerView.new;
-    picker.configModel = configModel;
+    picker.configModel = pickerModel;
     picker.selectCityPicker = cb;
     
     [picker show];
@@ -299,11 +290,10 @@
                   titleColor:(nullable UIColor *)titleColor
                   showResult:(BOOL)showResult
                           cb:(onSelectDatePicker)cb {
-    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
     
     // DatePicker
     BADatePickerModel *datePickerModel = BADatePickerModel.new;
+    datePickerModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
     datePickerModel.datePickerMode = datePickerMode ? datePickerMode:UIDatePickerModeDate;
     datePickerModel.formatterString = formatterString.length ? formatterString :@"yyyy-MM-dd HH:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
     
@@ -320,11 +310,10 @@
     toolBarModel.sureTitle = sureTitle;
     toolBarModel.showResult = showResult;
     
-    configModel.datePickerModel = datePickerModel;
-    configModel.toolBarModel = toolBarModel;
+    datePickerModel.toolBarModel = toolBarModel;
     
     BADatePickerView *picker = BADatePickerView.new;
-    picker.configModel = configModel;
+    picker.configModel = datePickerModel;
     
     picker.onSelectDatePicker = cb;
     [picker show];

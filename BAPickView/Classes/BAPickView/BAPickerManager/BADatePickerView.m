@@ -100,7 +100,7 @@
     self.toolBarView.result = resultString;
 }
 
-- (void)setConfigModel:(BAPickerConfigModel *)configModel {
+- (void)setConfigModel:(BADatePickerModel *)configModel {
     _configModel = configModel;
         
     // 公共配置：configModel
@@ -125,7 +125,7 @@
     
     // 内容配置：datePickerModel、toolBarModel
     {
-        self.datePickerModel = configModel.datePickerModel;
+        self.datePickerModel = configModel;
         self.toolBarView.toolBarModel = configModel.toolBarModel;
         // 默认数据：
         self.resultDate = NSDate.date;

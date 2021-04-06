@@ -26,6 +26,16 @@ typedef void (^onSelectDatePicker)(NSString *resultString, NSDate *resultDate);
 // cityPicker 回调
 typedef void (^onSelectCityPicker)(BACityModel *model);
 
+typedef NS_ENUM(NSUInteger, BADatePickerType) {
+    kBADatePickerType_YMD = 0,
+    kBADatePickerType_Y,
+    kBADatePickerType_YM,
+    kBADatePickerType_YMDHM,
+    kBADatePickerType_YMDHMS,
+    // 系统样式：需要设置 UIDatePickerMode，默认为：UIDatePickerModeDate
+    kBADatePickerType_System,
+};
+
 
 // 获取当前最顶部的 window
 CG_INLINE UIWindow *
