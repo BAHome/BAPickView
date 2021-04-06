@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BABasePickerView : UIView
 
+@property(nonatomic, strong) UIPickerView *pickerView;
+
 // 返回需要展示的列（columns）的数目
 @property(nonatomic, copy) NSInteger (^onNumberOfComponentsInPickerView)(UIPickerView *pickerView);
 // 返回每一列的行（rows）数

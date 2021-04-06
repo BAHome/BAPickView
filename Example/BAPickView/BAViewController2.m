@@ -84,13 +84,13 @@ UITableViewDataSource
                 [self pickView3];
             } break;
             case 3: {
-                //                [self pickView4];
+                [self pickView4];
             } break;
             case 4: {
                 [self pickView5];
             } break;
             case 5: {
-                //                [self pickView6];
+                [self pickView6];
             } break;
                 
             default:
@@ -174,7 +174,26 @@ UITableViewDataSource
     }];
 }
 
+- (void)pickView4 {
+    
+    BAKit_WeakSelf
+    [BAPickerManger initCustomDatePickerWithType:kBADatePickerType_YM cb:^(BADateResultModel *dateResultModel) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(dateResultModel.resultString);
+    }];
+    
+}
+
 - (void)pickView5 {
+    BAKit_WeakSelf
+    [BAPickerManger initCustomDatePickerWithType:kBADatePickerType_YearWeek cb:^(BADateResultModel *dateResultModel) {
+        BAKit_StrongSelf
+        BAKit_ShowAlertWithMsg_ios8(dateResultModel.resultString);
+    }];
+
+}
+
+- (void)pickView6 {
     
     NSArray *multipleTitleArray = @[@"性别", @"年龄", @"身高"];
     NSArray *multipleStringsArray =  @[
@@ -183,54 +202,54 @@ UITableViewDataSource
         @[@"145", @"150", @"160", @"168", @"175"]
     ];
     BAKit_WeakSelf
-//    [BAPickerManger initMultipleStringsPicker:multipleStringsArray cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
-//        BAKit_StrongSelf
-//        BAKit_ShowAlertWithMsg_ios8(resultString);
-//    }];
+    //    [BAPickerManger initMultipleStringsPicker:multipleStringsArray cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+    //        BAKit_StrongSelf
+    //        BAKit_ShowAlertWithMsg_ios8(resultString);
+    //    }];
     [BAPickerManger initMultipleStringsPicker:multipleStringsArray multipleTitleArray:multipleTitleArray maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6] cancleTitle:@"cancle1111" cancleTitleColor:UIColor.lightGrayColor sureTitle:@"sure" sureTitleColor:UIColor.redColor titleColor:UIColor.greenColor showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
     
     
-//    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-//    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
-//    
-//    BAPickerModel *pickerModel = BAPickerModel.new;
-//    pickerModel.multipleTitleArray = @[@"性别", @"年龄", @"身高"];
-//    pickerModel.multipleStringsArray =  @[
-//        @[@"男", @"女"],
-//        @[@"18", @"22", @"25", @"30", @"36", @"42"],
-//        @[@"145", @"150", @"160", @"168", @"175"]
-//    ];
-//
-//    // DatePicker
-////    BADatePickerModel *datePickerModel = BADatePickerModel.new;
-////    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
-////    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
-//    
-//    // ToolBar
-//    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-//    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-//    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-//    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-//    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
-//    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-//    
-//    
-//    configModel.pickerModel = pickerModel;
-//    configModel.toolBarModel = toolBarModel;
-//    
-//    BAPickerView *picker = BAPickerView.new;
-//    picker.configModel = configModel;
-//    
-////    BAKit_WeakSelf
-//    picker.onSelectPicker = ^(NSInteger resultRow, NSInteger resultComponent, NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
-//        BAKit_StrongSelf
-//        BAKit_ShowAlertWithMsg_ios8(resultString);
-//    };
-//    
-//    [picker show];
+    //    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
+    //    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
+    //
+    //    BAPickerModel *pickerModel = BAPickerModel.new;
+    //    pickerModel.multipleTitleArray = @[@"性别", @"年龄", @"身高"];
+    //    pickerModel.multipleStringsArray =  @[
+    //        @[@"男", @"女"],
+    //        @[@"18", @"22", @"25", @"30", @"36", @"42"],
+    //        @[@"145", @"150", @"160", @"168", @"175"]
+    //    ];
+    //
+    //    // DatePicker
+    ////    BADatePickerModel *datePickerModel = BADatePickerModel.new;
+    ////    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
+    ////    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+    //
+    //    // ToolBar
+    //    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    //    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
+    //    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
+    //    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
+    //    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
+    //    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
+    //
+    //
+    //    configModel.pickerModel = pickerModel;
+    //    configModel.toolBarModel = toolBarModel;
+    //
+    //    BAPickerView *picker = BAPickerView.new;
+    //    picker.configModel = configModel;
+    //
+    ////    BAKit_WeakSelf
+    //    picker.onSelectPicker = ^(NSInteger resultRow, NSInteger resultComponent, NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
+    //        BAKit_StrongSelf
+    //        BAKit_ShowAlertWithMsg_ios8(resultString);
+    //    };
+    //
+    //    [picker show];
 }
 
 #pragma mark - setter / getter
@@ -255,7 +274,7 @@ UITableViewDataSource
                                                  @"3、日期选择器：年月日，可以完全自定义 NSDateFormatter",
                                                  @"4、日期选择器：年月，可以完全自定义 NSDateFormatter",
                                                  @"5、日期选择器：年周，如：2017年，第21周",
-                                                 @"5、多数组自定义数据",
+                                                 @"6、多数组自定义数据",
         ],
                       @[@"1、YYYY-MM-DD HH:mm:ss",@"2、YYYY-MM-DD HH:mm",@"3、YYYY-MM-DD",@"4、HH:mm:ss",@"5、YYYY-MM",@"6、MM-DD",@"7、HH:mm",@"8、YYYY"],
                       @[@"1、城市选择器，三级联动，可返回省市县和精确的经纬度\n2、可以自定义 array 显示，性别选择等【目前只支持单行数据】\n3、日期选择器：年月日，可以完全自定义 NSDateFormatter\n4、日期选择器：年月，可以完全自定义 NSDateFormatter\n5、横竖屏适配完美\n6、可以自定义按钮颜色、背景颜色等\n7、可以自由设置 pickView 居中或者在底部显示，还可以自由定制 toolbar 居中或者在底部显示\n8、可以自由设置 pickView 字体、字体颜色等内容，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改\n9、理论完全兼容现有所有 iOS 系统版本"

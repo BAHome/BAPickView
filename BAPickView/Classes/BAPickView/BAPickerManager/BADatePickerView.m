@@ -78,7 +78,7 @@
     self.toolBarView.onSureButton = ^{
         BAKit_StrongSelf
         
-        self.onSelectDatePicker ? self.onSelectDatePicker(self.resultString, self.resultDate):nil;
+        self.selectDatePicker2 ? self.selectDatePicker2(self.resultString, self.resultDate):nil;
         [self dismiss];
     };
     
@@ -148,7 +148,6 @@
         self.formatter.dateFormat = datePickerModel.formatterString;
     }
     
-
 }
 
 - (NSDateFormatter *)formatter {

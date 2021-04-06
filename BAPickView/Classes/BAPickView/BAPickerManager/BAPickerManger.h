@@ -153,19 +153,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger (SystemDateDatePicker)
 
-+ (void)initSystemDatePicker:(onSelectDatePicker)cb;
++ (void)initSystemDatePicker:(onSelectDatePicker2)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
                   showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker)cb;
+                          cb:(onSelectDatePicker2)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
                  cancleTitle:(nullable NSString *)cancleTitle
                    sureTitle:(nullable NSString *)sureTitle
                   showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker)cb;
+                          cb:(onSelectDatePicker2)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
@@ -175,7 +175,7 @@ NS_ASSUME_NONNULL_BEGIN
               sureTitleColor:(nullable UIColor *)sureTitleColor
                   titleColor:(nullable UIColor *)titleColor
                   showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker)cb;
+                          cb:(onSelectDatePicker2)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
@@ -186,7 +186,10 @@ NS_ASSUME_NONNULL_BEGIN
               sureTitleColor:(nullable UIColor *)sureTitleColor
                   titleColor:(nullable UIColor *)titleColor
                   showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker)cb;
+                          cb:(onSelectDatePicker2)cb;
+
++ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
+                                  cb:(onSelectDatePicker)cb;
 
 @end
 

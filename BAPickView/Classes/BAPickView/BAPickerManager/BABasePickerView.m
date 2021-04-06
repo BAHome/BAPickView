@@ -9,8 +9,6 @@
 
 @interface BABasePickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property(nonatomic, strong) UIPickerView *pickerView;
-
 @end
 
 @implementation BABasePickerView

@@ -7,222 +7,219 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00A1800C57A25211BFCD80036C9D98EF /* BAKit_DefineCurrent.h in Headers */ = {isa = PBXBuildFile; fileRef = D1A04F94EDB3F3F473253D8CCFD9EE9D /* BAKit_DefineCurrent.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		03AA28C73D18A09D178B91C750A2A932 /* BADatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA212B0EF2F0FD962240E5E6523699F /* BADatePickerView.m */; };
-		048BE39FE017137A6E59DD7D90C5EDD5 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8967E66A2FCB5BA81BFA1E139139A237 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		058E40C5C169D1E6BFADEA24937DA793 /* BAPickerConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD23DE242626B43AC826AF04FE920F9E /* BAPickerConfigModel.m */; };
-		193FA2B1A5E2745E05F389EA3DF54896 /* BAPickView_Version.h in Headers */ = {isa = PBXBuildFile; fileRef = D57AD33621675773543204B0F5F59765 /* BAPickView_Version.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		19826CC7CFFA2FC058CA169ECF91BFF4 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 370F325DDBF27B3EF280D0011A024B35 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1E4FED6E61DCAF1CE4E989E7206D2812 /* BABasePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1C659F19A0C395D88CC7F9CA1F3E1 /* BABasePickerView.m */; };
-		24059BAA733550668D5572B23F66A769 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C5C44599FE7C1C51F94F910C9C3E7827 /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		26908F5C6F3BDEB4A921AFAB9089F300 /* BAKit_PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 801E3FBAAC5BF7D63888999B81D3BFC5 /* BAKit_PickerView.m */; };
-		2AEB1DA89E2E25DF906B7DD83713F364 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DA097256D24886D70E33FBA786911 /* ViewController+MASAdditions.m */; };
-		2E8242D7A382C5083B29E438EA5DA65C /* BAKit_PickerToolBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 454CFDD5AAD611A1E3157DA106E50372 /* BAKit_PickerToolBarView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		39DA03566B412861AE6CAFE236BFBBA5 /* BACityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2E3DA6EB643F0081AEB8B9BAACA69 /* BACityModel.m */; };
-		3B4E07E7D9EC7114845A5B553D9CD5A8 /* BAKit_PickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = AE01ACC6F7C811EA622265C19F863611 /* BAKit_PickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3F3B63A213AA82893C19D929B2F91F93 /* BAPickerDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 65060D69FAE77081F1F66E800153EFBF /* BAPickerDefine.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4257AB198900688D87F8188EC33AC8AD /* NSBundle+BAPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 68692D28DF9232EA50A5AC42B10D2530 /* NSBundle+BAPod.m */; };
-		426C76913BE172CB1B46A42E6774D689 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AC5D4983C8BEF841BBE185811C5FB0 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		478E00F472BE0729237C10C1A5AE43CD /* BAPickerToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EB2545922A5EEF45BF80F5664C9FE6 /* BAPickerToolBarView.m */; };
-		47AE87DA0A47889A559ACB4D009A7F74 /* BAPickerBasePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDFE5A7162FA5BE6C9D8789BE5F6DB34 /* BAPickerBasePopView.m */; };
-		489E5E28556ABA6E65D6BBA19B304F48 /* BAPickerManger.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A53A3DF8421966A3E6980F5C084066 /* BAPickerManger.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		4EEAEB472F8558FC458A409AD561EC94 /* BAPickView_OC.h in Headers */ = {isa = PBXBuildFile; fileRef = 060C06FEFACC28B4F31EC8566DC57D8F /* BAPickView_OC.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5A1CA44CD67AABDCE10570CF9EA19B96 /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 64C2B405D244ABC4F0728546D75B2D86 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		64070C7CDB6FCE0A438631EAD1C71E15 /* UIView+BARectCorner_pick.m in Sources */ = {isa = PBXBuildFile; fileRef = 628392BDB4C921B17C26D536D00BE417 /* UIView+BARectCorner_pick.m */; };
-		645392B175CF73A4FE26953F6DD20689 /* BAPickerBasePopView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2EFD32CFABFA33C4B8971A0EA694253 /* BAPickerBasePopView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6532FAF779328AD94B54B8C201BEA93C /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D5BA9F847C587E22F8DD9250EDEC7CDA /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6BC0443D6BC68107D3AC5BD960BE0585 /* NSBundle+BAPod.h in Headers */ = {isa = PBXBuildFile; fileRef = 459950855184A98B016EF75890558B20 /* NSBundle+BAPod.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6CF6C95824D2D6B7BE30ED525A0E3B55 /* BAKit_ConfigurationDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = E48E9F3760271D2D2E0F61453AEBC42D /* BAKit_ConfigurationDefine.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6E286A6FB51A0C8BA781BF0A3307214E /* BAPickerConfigModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 656FB2E6C26C7481912128F4D0B49D44 /* BAPickerConfigModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7250D387553C7792FD883327BF648BD3 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 411CCCE6A707DDA02AF236A6F4DD8B74 /* MASConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		73E4DE98BC81F758ED56F575D666C8F6 /* UIView+BAAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = B5D7476183F119A69C82CD7152C0AD78 /* UIView+BAAnimation.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		776E11A34F8701AE81E61BDAB56CF6A2 /* BACityModel.h in Headers */ = {isa = PBXBuildFile; fileRef = B7B79618A30FAC66494CB1FAC6160505 /* BACityModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7A0D45D2EE7A3B68E9D859579FBA9D8D /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A301E9D7640CAAE872D2257184D64010 /* MASConstraint.m */; };
-		7AB7AC71280829ED43EA6044788726AC /* BAKit_PickerViewConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = E351E598CAFA8A06EEE0770EC0C4957F /* BAKit_PickerViewConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7C71730E098D4A6043FFFE79DF007146 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 587E0B8E883D6AD4B29DA2365B8C2EFA /* View+MASAdditions.m */; };
-		81348E7B81CBAD62944E1F5B9F066F16 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558B2763E324B8D237D904287AE7A690 /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		87CEFB5FA8DF38B0769B778830F81FA7 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 72A1A97E52C283A47BA4E8F48BC313FB /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8854AEE269641231C6237388429BAC92 /* NSDate+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA03ACDD5FEC1EDB3C0197E4B3F8E06 /* NSDate+BAKit.m */; };
-		8A1ABFAC1B05EEBD0490F8BF23C88237 /* NSDate+BAKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B05443E0B7C68F4FDE699B6651B55CA /* NSDate+BAKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8A468B62951573FA69620209A70440A4 /* BAPickView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 839C09BDBD6B8524EE54738FBF0CF637 /* BAPickView-dummy.m */; };
-		8AD9C619479AA56CABBE351512609385 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB3725D2C0052C8143BF229622340A /* NSArray+MASAdditions.m */; };
-		8E79424C62E5002DC8DCE7F34B32C37C /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AEBAAA2225352CFA3BA703D5C21510 /* Masonry-dummy.m */; };
-		9298BB9BBEC0DEE2436F449D47731F1F /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 935171CB319C057FAEE8F843F46825FE /* MASConstraintMaker.m */; };
+		0450B56855F6238FBB74B62F260B0DF7 /* NSDateFormatter+BAKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2CAC1A0BF2B1784484FAA7C8E25884 /* NSDateFormatter+BAKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0673619C6B87C97CC6931260AD8687C9 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA56AA7AF365E444271F9F4BE178D5A0 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0CEED49C670D2ADC7C364E549D793800 /* BAKit_PickerToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C47A887CCEB76B9AFD07B135E845291B /* BAKit_PickerToolBarView.m */; };
+		0D5CEB32D37951FFEC8DC020F35FD383 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8160CD72114EFF3597CD4BF6F7F1F7 /* MASViewConstraint.m */; };
+		1056309F955281E421B61B83425AC9CB /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 411CCCE6A707DDA02AF236A6F4DD8B74 /* MASConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		13A42E4B945E3781A9F6B93481C00530 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 370F325DDBF27B3EF280D0011A024B35 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		146486015F598650DC208D9AADE45DFD /* BAPickerDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F82A2A0BCFF3532989977C99A42A2A0 /* BAPickerDefine.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		14672B831E6CE8F9EA11792134FC3E47 /* BAKit_DefineFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = B159FBB4E011B9326E4E321F722EFC33 /* BAKit_DefineFormat.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		15B68FACE1BB82543120133455A60319 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EFED6E52B374EE53B8B532C8A65A293 /* MASUtilities.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1857776FCCB18DCA1A06B2BCEEBF23A7 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DB032F0BEDBBDDF91030E59ACA7DC98 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		1B6CAF8868805B589406EBFB87B95C21 /* UIView+BARectCorner_pick.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C78CD95F1208E8F9FD406D94C4035A4 /* UIView+BARectCorner_pick.m */; };
+		1B6D3283CB44CC538FC47C3159145BA6 /* BAPickerBasePopView.h in Headers */ = {isa = PBXBuildFile; fileRef = 661F5DBDD33E30BE20F409E79F05D118 /* BAPickerBasePopView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		26CA997115A83B17348352D031EAD070 /* BADatePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD491D1E8CAD2E8ED91FCB0FA2BEEDA /* BADatePickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2C50783F8C13C0D3C1A72C77CC4E0C11 /* BAKit_PickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = D32C49A8615BEC553E7485A81BA7D537 /* BAKit_PickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2EE4597561F684E85434E38D23F579D0 /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 64C2B405D244ABC4F0728546D75B2D86 /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2F2F4FCD69BAA9FBADC8C6E3453DCF5D /* BAKit_DefineCurrent.h in Headers */ = {isa = PBXBuildFile; fileRef = 59FD1EFD5840E18173903E303CFC13F6 /* BAKit_DefineCurrent.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		319866925A2D4710C8F04A7297F73310 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = C8E52D0D54D9FDA8B5EE9BC43560E445 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		39BB319B429E8E185B4D953E2793CCF1 /* BAKit_DatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6411D020C97B8C27A190D2058C02F381 /* BAKit_DatePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3F24521653D2F091F3EC84CB0070AF28 /* NSDateFormatter+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A60CC36D87F451151FE5A6F24467D3FE /* NSDateFormatter+BAKit.m */; };
+		42C57706D33C80D587B3BC0CF11F8B64 /* BAPickView_Version.h in Headers */ = {isa = PBXBuildFile; fileRef = B0B635C280D827BB9F6986B32BB30409 /* BAPickView_Version.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4939F08EE6E223EB249715FA738BD754 /* BAKit_ConfigurationDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = F19356F218F74EE4C6C34A6157AA8ED6 /* BAKit_ConfigurationDefine.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		51468A7A102C0B9A7CF063C9D07D625A /* BAPickerToolBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1C829AC99CEB38A16494054B1685EA /* BAPickerToolBarView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		55747A1D2DB4DE12EC79C45235B08930 /* BACityModel.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D9119E778DA4DE9B4B9A3D77032020 /* BACityModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		562D5FE7936F099F79DED3F27A86982E /* UIView+BARectCorner_pick.h in Headers */ = {isa = PBXBuildFile; fileRef = A0BBAC4B53F68518F311BC9515886B04 /* UIView+BARectCorner_pick.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		573D36B451A242B3A57851D3930E9264 /* BAPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = AD6B3A3074FEAB82FEF31B56A4798290 /* BAPickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		58405280142A9E4CE8735334689ABCDD /* BAPickView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4BBB13FDFDACE2D31F437FD0F54655 /* BAPickView-dummy.m */; };
+		58BA851414AAE97E31D35D552EB15844 /* BAPickerConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B649593062013357AECF7C520F3B1A6E /* BAPickerConfigModel.m */; };
+		62462E73AF14CF7CD522A261C30F3426 /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 558B2763E324B8D237D904287AE7A690 /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		63E5E91BC9A377FE09556D73A75C1F28 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A301E9D7640CAAE872D2257184D64010 /* MASConstraint.m */; };
+		641E691D7082038F16EE8FCA75BF2594 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE1660D370806B3EFD74C49D3471C1C /* MASViewAttribute.m */; };
+		65FF6C2FAE826A124FF665AB797268EE /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A9244EA17B6E04FACE497603F0088190 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6BB8F67917CF53DE423E0DF003A02233 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01142B191C535B620A7D90F8B79380 /* MASLayoutConstraint.m */; };
+		6C0843C88A58ECDA6272563E1E189E03 /* BAPickerManger.h in Headers */ = {isa = PBXBuildFile; fileRef = 917F4C1F42A09C3B98FBAF9F78104A30 /* BAPickerManger.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6DA00305B7BFA29BA4DD9A3F9DC72AA6 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 587E0B8E883D6AD4B29DA2365B8C2EFA /* View+MASAdditions.m */; };
+		70293111ABD3A039B610A28DDE36BDA3 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 72A1A97E52C283A47BA4E8F48BC313FB /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7104ED59F0E98DDD463D8F7A88DCA78A /* BAKit_PickerViewConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D8DB23C60D6B7D913339E70EEC0C73E /* BAKit_PickerViewConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		730BF5E4F6C2B5D61E3B31749EED0A8A /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BA0898FAC44183744D557073E2F8AA5 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		740796AE88EEC831363AB064F1045D3C /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0AEA8F34CAE43AA76247FF577BAA68 /* MASCompositeConstraint.m */; };
+		8049F846C651AA173D4AEC4EF5673417 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8967E66A2FCB5BA81BFA1E139139A237 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		809E53CB77227B44985F7D4573FDC02C /* BAKit_DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 00A388B1367C389487754BD418699C7F /* BAKit_DatePicker.m */; };
+		8DE2E7B6F1557999E624E1F8895FAC85 /* BABasePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3431A18AD1D60069513C21D7B3A5849 /* BABasePickerView.m */; };
+		8F5FFE1702C1FD7F8C947804204F5111 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 935171CB319C057FAEE8F843F46825FE /* MASConstraintMaker.m */; };
+		901C3E18701F1E902A248E017B036DCC /* BADateResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68914CE45AC1D2C052C980F3A73620C1 /* BADateResultModel.m */; };
 		93D4BEFE47B90D27FD5380A9B919BB42 /* Pods-BAPickView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 057BE43C4D81592F9AE8AB3BB3307352 /* Pods-BAPickView_Example-dummy.m */; };
-		9E9B983012D44B549A0525ACCE3631E8 /* BAKit_DefineFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A3DFF3655734778F28FD075DD8CB6C5 /* BAKit_DefineFormat.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A03BAEA982773C777DA714DDF03A05AE /* BAKit_DatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC01FDFD469C8616AC35EC4DEC9CBAA /* BAKit_DatePicker.m */; };
-		A158F905A3C3E696327BB73B9EA3524B /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE1660D370806B3EFD74C49D3471C1C /* MASViewAttribute.m */; };
-		A2C55538D58D1ED0F4BB36BB564580BC /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = A9244EA17B6E04FACE497603F0088190 /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A3DF41A56EE643F89C81944661FB847F /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA56AA7AF365E444271F9F4BE178D5A0 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A437A2AD72785330AB06C434370E395F /* BAPickerManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B5836DF57E44AB2663AC662034A163 /* BAPickerManger.m */; };
-		A6847E9DA0CFDD2EEB37639336314D20 /* BAKit_DatePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E3B18A1CFFB3EC48FD77557FEB14E62 /* BAKit_DatePicker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A864A644C55614EA7BD5CC1BF8E99028 /* BAPickerToolBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A20D51BD0F7E1952259D365DFE7FF80 /* BAPickerToolBarView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A9330209F8279CFF1FA6147B60BF11A4 /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = FA931443CD22C31724E765B9B2002867 /* UIView+BAAnimation.m */; };
-		AADC673A6E7C160644DC95904845DC68 /* UIView+BARectCorner_pick.h in Headers */ = {isa = PBXBuildFile; fileRef = BB4DB92978B5C34F6FF1EA5B84AB38DC /* UIView+BARectCorner_pick.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		AAE0185865A241A9306F57A0C36E6440 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0AEA8F34CAE43AA76247FF577BAA68 /* MASCompositeConstraint.m */; };
-		AD352B6085C38A4179021C3D9374B6B8 /* BAPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = A529B5ABA168AACCB086834D2E59C258 /* BAPickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B0A1D9AFE0905E412D10113B0197056A /* BACustomDatePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C0C6B4C233A05672D65A94A3B783763 /* BACustomDatePickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B8DE04EF4DF29417A08395A3CBBAD244 /* NSString+BATime.h in Headers */ = {isa = PBXBuildFile; fileRef = EDC96ABDDD3EA8C0EC255F345CBF0B37 /* NSString+BATime.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		BF7FE6F2FF677E0ED7FB4B5C53927751 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = AA01142B191C535B620A7D90F8B79380 /* MASLayoutConstraint.m */; };
-		C245FE96E2652074D205D75444D59F00 /* BABasePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = BBCB567F440FF25CB0664536EC267761 /* BABasePickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C6A06996D16DBDF91B52EEF2A6DDCACE /* BACustomDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 100BBD00D3AFBADB9E18D581D6F26BB7 /* BACustomDatePickerView.m */; };
-		C7FB212219EF4F2041C9DCB49F842374 /* NSString+BATime.m in Sources */ = {isa = PBXBuildFile; fileRef = F499252F2D93C8E55E801BEF80939650 /* NSString+BATime.m */; };
-		CAA49400337442F74C0A2CA4EEBCBED2 /* BAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 54855FCA53BFBFFF935CF2A3D58ECFBE /* BAPickerView.m */; };
-		D4A476EE13A1D4A53838389EF35B20EF /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BA0898FAC44183744D557073E2F8AA5 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D7F12302862EA0706C407C81C855C9C6 /* NSDateFormatter+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 637F59B45E58783D07CE434AE97A9CB0 /* NSDateFormatter+BAKit.m */; };
-		D8EC18798B3FFCDF5723E2633514F617 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = C8E52D0D54D9FDA8B5EE9BC43560E445 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		DBA554D48727C0D91F71898099BED781 /* NSDateFormatter+BAKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C67F5419479E7E4AF472C0B5ADA1D679 /* NSDateFormatter+BAKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		DC4E7B2E6FF7532A6DDDD234A5FA89C2 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EFED6E52B374EE53B8B532C8A65A293 /* MASUtilities.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E5911BCF85AC31E5A6762A780ADF813D /* BAKit_PickerToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF794CFABC7964D89294FB08006417E /* BAKit_PickerToolBarView.m */; };
-		EAB257004FD7870CCF164C9023F171D6 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8160CD72114EFF3597CD4BF6F7F1F7 /* MASViewConstraint.m */; };
-		F4F639D0E0D6AB2D5152D4518A797950 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = 45892546416F43C43E8AA0E2AA27BC95 /* Masonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F7FBEDE92F7E0378C1829B7AE6A9CF4D /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DB032F0BEDBBDDF91030E59ACA7DC98 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		F9447B61327207EB1B7A1CE1894CE779 /* BADatePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 319E484D6469FFFAB2B9D11AA92C101F /* BADatePickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FF604987DDED89FCA5211E3412A692E3 /* BAPickView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37E176BDA54894243B4F79773C79A7DA /* BAPickView.bundle */; };
+		94F704B01237A7E71CA20882E19737EF /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = D5BA9F847C587E22F8DD9250EDEC7CDA /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9BD2C89D4572EAE49EB116F51292BCA9 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AC5D4983C8BEF841BBE185811C5FB0 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9C0CB322A014917FBC9FB0D72F268C71 /* BADatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F59D60229E243CBB4F16436B9673E7 /* BADatePickerView.m */; };
+		9D90F9E44D04FFBC04B1A07D615E54AF /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB3725D2C0052C8143BF229622340A /* NSArray+MASAdditions.m */; };
+		A1A6F5D8F15F65B8AB8BFB8519221EE8 /* UIView+BAAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3084D0A562D0F7C39526E16F060A1924 /* UIView+BAAnimation.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A53D3CCBECFB16AB7054C3AF705F2534 /* BAPickerManger.m in Sources */ = {isa = PBXBuildFile; fileRef = EF95FAE7ED8FB594B945739C2BFC7A66 /* BAPickerManger.m */; };
+		A854E4577E81A4CF467D5FE0B22A0790 /* BADateResultModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EECED02F568B64FF7268F50F613549FB /* BADateResultModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AA265E54E7A9527004C1081243B0D0B7 /* BAPickerConfigModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C8E15B6F5481730A1A3ECD646C46BFF /* BAPickerConfigModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		ABB7BC42254A0CB0251C161B58A30A02 /* NSBundle+BAPod.h in Headers */ = {isa = PBXBuildFile; fileRef = 469E2F2922732F740877FA6EAE5EF2E5 /* NSBundle+BAPod.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AEF6A6ABB562C601957D02F2245D1F62 /* NSString+BATime.h in Headers */ = {isa = PBXBuildFile; fileRef = 873AA6C82306F6FEA3661E3493BC31DF /* NSString+BATime.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B692802CD6D0D0C1702C92EEA47B3301 /* BAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CBB2E56FE0E27E0368E80B8EE380AB /* BAPickerView.m */; };
+		C582F0695AEF47796DA5D3E91C78EE7E /* UIView+BAAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0074D99BE9133FE238B823C20CEAEF0F /* UIView+BAAnimation.m */; };
+		C890259C7AA5EF6CF0731CA6EB05F3B2 /* BACityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B695470EBA932F24E934738B30CECF /* BACityModel.m */; };
+		C955B16F2F0605D92AC51C91F5737F80 /* BAPickerBasePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7148B6D29DEA9ECDB392FA04AC4554 /* BAPickerBasePopView.m */; };
+		CCADFA56C0FBCB82ACFDF2FCA37E035B /* BACustomDatePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 32BFA07994E211BB4E150F55BC141E6B /* BACustomDatePickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CF4DFCD45F50246BF9F42BF87D573627 /* NSDate+BAKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D816F6B810777DE9CB933BAB96B5F1D /* NSDate+BAKit.m */; };
+		D0244B08983F58009418BAEF5315AA7F /* BAPickView_OC.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD156E7ABF52A43F3ABFC76C6060657 /* BAPickView_OC.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D2028936CA2F4DF41DCD2052FBDA096F /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = 45892546416F43C43E8AA0E2AA27BC95 /* Masonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D393631E2CFE72984F4F3453BFEB8A07 /* NSDate+BAKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B8B16C83EC60C153F58E271F803D75FF /* NSDate+BAKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D6E843677D655DFEFCCD699A475638F8 /* BAPickView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BF8E8779E9E4AB33C71DB7831C2FDE55 /* BAPickView.bundle */; };
+		DB6753B48CB0E6D7A78BA5ECCABD6A64 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C5C44599FE7C1C51F94F910C9C3E7827 /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DE073B426AFE2E688AD6C04D5C8A4D04 /* BAKit_PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9810003CACD65445C2EC1F03EFE600C9 /* BAKit_PickerView.m */; };
+		E4047D6B2B6B03E9A444723C97A3A742 /* NSString+BATime.m in Sources */ = {isa = PBXBuildFile; fileRef = 59B2F03CF0D6D17DAF2A322E9C109EE0 /* NSString+BATime.m */; };
+		E5F99986F972C143BC5C83707A7272F3 /* BABasePickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B746B41E89A510588073768CA219504 /* BABasePickerView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E67079739FCED4BAD7932A366899CB79 /* NSBundle+BAPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBB0F9597E9DC8B3EDE0E310ECDC851 /* NSBundle+BAPod.m */; };
+		ED7A622FE2B368852BFF4F9FF4892EE4 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DA097256D24886D70E33FBA786911 /* ViewController+MASAdditions.m */; };
+		F5B14041D5368FF7245ACAD5B5582E79 /* BACustomDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B267F7B3A61D62144381634D413B834D /* BACustomDatePickerView.m */; };
+		F78D3164E54CE8E77634FD4FB32236AB /* BAPickerToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C72DEB40D9CA9C4E616E65FF95EA8E0 /* BAPickerToolBarView.m */; };
+		F82DBE733A82817164217CD2614E337F /* BAKit_PickerToolBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B223F77D32F8A90EAE61ED53448B90 /* BAKit_PickerToolBarView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FF9F9B423AD50FA16D14BAC5196040AF /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 16AEBAAA2225352CFA3BA703D5C21510 /* Masonry-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		574C971B5D29C0510D9E5F169F2067BB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 249C013DE06B493CA1DE0A04B24A52D1;
-			remoteInfo = BAPickView;
-		};
-		8943A92BADE07F24F968B6F5D5ED16F6 /* PBXContainerItemProxy */ = {
+		149CA267D94347513FD6294DBC38EB43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
 			remoteInfo = Masonry;
 		};
-		A19D2D378B7D12DEF0E0E257FEA9CAB1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
-			remoteInfo = Masonry;
-		};
-		F7EE4B938E94C01550FBB5440E2E09D2 /* PBXContainerItemProxy */ = {
+		A7F64F3B1E04A0CDF87EA3C362E2694F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 886AE25184C72CAF3A07CC54342B50D9;
 			remoteInfo = "BAPickView-BAPickView";
 		};
+		B275B60D360D841404D5AA7E7C0A03DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
+			remoteInfo = Masonry;
+		};
+		BB75F9F1E2661F152B3861D42A37CB88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 249C013DE06B493CA1DE0A04B24A52D1;
+			remoteInfo = BAPickView;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0074D99BE9133FE238B823C20CEAEF0F /* UIView+BAAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+BAAnimation.m"; path = "BAPickView/Classes/BAPickView/UIView+BAAnimation.m"; sourceTree = "<group>"; };
+		00A388B1367C389487754BD418699C7F /* BAKit_DatePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_DatePicker.m; path = BAPickView/Classes/BAPickView/BAKit_DatePicker.m; sourceTree = "<group>"; };
 		057BE43C4D81592F9AE8AB3BB3307352 /* Pods-BAPickView_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BAPickView_Example-dummy.m"; sourceTree = "<group>"; };
-		060C06FEFACC28B4F31EC8566DC57D8F /* BAPickView_OC.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAPickView_OC.h; path = BAPickView/Classes/BAPickView/BAPickView_OC.h; sourceTree = "<group>"; };
-		0BE2E3DA6EB643F0081AEB8B9BAACA69 /* BACityModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BACityModel.m; sourceTree = "<group>"; };
+		05B695470EBA932F24E934738B30CECF /* BACityModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BACityModel.m; sourceTree = "<group>"; };
 		0D0AEA8F34CAE43AA76247FF577BAA68 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
-		100BBD00D3AFBADB9E18D581D6F26BB7 /* BACustomDatePickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BACustomDatePickerView.m; sourceTree = "<group>"; };
+		0D1C829AC99CEB38A16494054B1685EA /* BAPickerToolBarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerToolBarView.h; sourceTree = "<group>"; };
+		0EF84F163B186BAA76A95860B6D3DB97 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		0F82A2A0BCFF3532989977C99A42A2A0 /* BAPickerDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerDefine.h; sourceTree = "<group>"; };
 		16AEBAAA2225352CFA3BA703D5C21510 /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
 		1FFED36A657123030ABB700256D73F15 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libMasonry.a; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		21BDB9CDB4426D9D53C0767CDD11172D /* libPods-BAPickView_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-BAPickView_Example.a"; path = "libPods-BAPickView_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23B05B44BAE7D56478E3207E96E30FB5 /* BAPickView.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = BAPickView.bundle; path = "BAPickView-BAPickView.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E5B3781BBE3F02B58FD793602CFC18E /* BAPickView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BAPickView.debug.xcconfig; sourceTree = "<group>"; };
+		28CBB2E56FE0E27E0368E80B8EE380AB /* BAPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerView.m; sourceTree = "<group>"; };
+		2C72DEB40D9CA9C4E616E65FF95EA8E0 /* BAPickerToolBarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerToolBarView.m; sourceTree = "<group>"; };
 		2F8160CD72114EFF3597CD4BF6F7F1F7 /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
-		319E484D6469FFFAB2B9D11AA92C101F /* BADatePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BADatePickerView.h; sourceTree = "<group>"; };
+		3084D0A562D0F7C39526E16F060A1924 /* UIView+BAAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+BAAnimation.h"; path = "BAPickView/Classes/BAPickView/UIView+BAAnimation.h"; sourceTree = "<group>"; };
+		32BFA07994E211BB4E150F55BC141E6B /* BACustomDatePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BACustomDatePickerView.h; sourceTree = "<group>"; };
+		3411ADCEB2539E9D042371276E52B187 /* BAPickView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BAPickView.debug.xcconfig; sourceTree = "<group>"; };
 		35D3AC1EFF1CF46A2476DC2E1A4C9C90 /* libBAPickView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libBAPickView.a; path = libBAPickView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		370F325DDBF27B3EF280D0011A024B35 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		37E176BDA54894243B4F79773C79A7DA /* BAPickView.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = BAPickView.bundle; path = BAPickView/Resources/BAPickView.bundle; sourceTree = "<group>"; };
-		3E3B18A1CFFB3EC48FD77557FEB14E62 /* BAKit_DatePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DatePicker.h; path = BAPickView/Classes/BAPickView/BAKit_DatePicker.h; sourceTree = "<group>"; };
+		3C8E15B6F5481730A1A3ECD646C46BFF /* BAPickerConfigModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerConfigModel.h; sourceTree = "<group>"; };
+		3D8DB23C60D6B7D913339E70EEC0C73E /* BAKit_PickerViewConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerViewConfig.h; path = BAPickView/Classes/BAPickView/BAKit_PickerViewConfig.h; sourceTree = "<group>"; };
 		411CCCE6A707DDA02AF236A6F4DD8B74 /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
 		44AEC6462659DC0098D6E58E0470E73F /* Masonry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.release.xcconfig; sourceTree = "<group>"; };
-		454CFDD5AAD611A1E3157DA106E50372 /* BAKit_PickerToolBarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerToolBarView.h; path = BAPickView/Classes/BAPickView/BAKit_PickerToolBarView.h; sourceTree = "<group>"; };
 		45892546416F43C43E8AA0E2AA27BC95 /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
-		459950855184A98B016EF75890558B20 /* NSBundle+BAPod.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+BAPod.h"; path = "BAPickView/Classes/BAPickView/NSBundle+BAPod.h"; sourceTree = "<group>"; };
+		469E2F2922732F740877FA6EAE5EF2E5 /* NSBundle+BAPod.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+BAPod.h"; path = "BAPickView/Classes/BAPickView/NSBundle+BAPod.h"; sourceTree = "<group>"; };
 		49AC5D4983C8BEF841BBE185811C5FB0 /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
+		4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BAPickView.release.xcconfig; sourceTree = "<group>"; };
+		4C4BBB13FDFDACE2D31F437FD0F54655 /* BAPickView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BAPickView-dummy.m"; sourceTree = "<group>"; };
+		4D816F6B810777DE9CB933BAB96B5F1D /* NSDate+BAKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+BAKit.m"; path = "BAPickView/Classes/BAPickView/NSDate+BAKit.m"; sourceTree = "<group>"; };
 		52331EC54012EA6FCE1A848CA632838F /* Pods-BAPickView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BAPickView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		54855FCA53BFBFFF935CF2A3D58ECFBE /* BAPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerView.m; sourceTree = "<group>"; };
 		553DA097256D24886D70E33FBA786911 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		558B2763E324B8D237D904287AE7A690 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
-		57A53A3DF8421966A3E6980F5C084066 /* BAPickerManger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerManger.h; sourceTree = "<group>"; };
 		587E0B8E883D6AD4B29DA2365B8C2EFA /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
-		5A3DFF3655734778F28FD075DD8CB6C5 /* BAKit_DefineFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DefineFormat.h; path = BAPickView/Classes/BAPickView/BAKit_DefineFormat.h; sourceTree = "<group>"; };
+		59B2F03CF0D6D17DAF2A322E9C109EE0 /* NSString+BATime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+BATime.m"; path = "BAPickView/Classes/BAPickView/NSString+BATime.m"; sourceTree = "<group>"; };
+		59FD1EFD5840E18173903E303CFC13F6 /* BAKit_DefineCurrent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DefineCurrent.h; path = BAPickView/Classes/BAPickView/BAKit_DefineCurrent.h; sourceTree = "<group>"; };
+		5C78CD95F1208E8F9FD406D94C4035A4 /* UIView+BARectCorner_pick.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+BARectCorner_pick.m"; path = "BAPickView/Classes/BAPickView/UIView+BARectCorner_pick.m"; sourceTree = "<group>"; };
 		5DB032F0BEDBBDDF91030E59ACA7DC98 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		5EFED6E52B374EE53B8B532C8A65A293 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
-		628392BDB4C921B17C26D536D00BE417 /* UIView+BARectCorner_pick.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+BARectCorner_pick.m"; path = "BAPickView/Classes/BAPickView/UIView+BARectCorner_pick.m"; sourceTree = "<group>"; };
-		637F59B45E58783D07CE434AE97A9CB0 /* NSDateFormatter+BAKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+BAKit.m"; path = "BAPickView/Classes/BAPickView/NSDateFormatter+BAKit.m"; sourceTree = "<group>"; };
-		64640AB50BFD737ECBAA603D1F296C64 /* ResourceBundle-BAPickView-BAPickView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-BAPickView-BAPickView-Info.plist"; sourceTree = "<group>"; };
+		6411D020C97B8C27A190D2058C02F381 /* BAKit_DatePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DatePicker.h; path = BAPickView/Classes/BAPickView/BAKit_DatePicker.h; sourceTree = "<group>"; };
 		64C2B405D244ABC4F0728546D75B2D86 /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
-		65060D69FAE77081F1F66E800153EFBF /* BAPickerDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerDefine.h; sourceTree = "<group>"; };
-		656FB2E6C26C7481912128F4D0B49D44 /* BAPickerConfigModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerConfigModel.h; sourceTree = "<group>"; };
-		67B5836DF57E44AB2663AC662034A163 /* BAPickerManger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerManger.m; sourceTree = "<group>"; };
+		661F5DBDD33E30BE20F409E79F05D118 /* BAPickerBasePopView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerBasePopView.h; sourceTree = "<group>"; };
 		68362A57FE62017865ABCD6DEA7838EC /* Pods-BAPickView_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BAPickView_Example-resources.sh"; sourceTree = "<group>"; };
-		68692D28DF9232EA50A5AC42B10D2530 /* NSBundle+BAPod.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+BAPod.m"; path = "BAPickView/Classes/BAPickView/NSBundle+BAPod.m"; sourceTree = "<group>"; };
-		6C0C6B4C233A05672D65A94A3B783763 /* BACustomDatePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BACustomDatePickerView.h; sourceTree = "<group>"; };
+		68914CE45AC1D2C052C980F3A73620C1 /* BADateResultModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BADateResultModel.m; sourceTree = "<group>"; };
+		6B746B41E89A510588073768CA219504 /* BABasePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BABasePickerView.h; sourceTree = "<group>"; };
 		6FBB3725D2C0052C8143BF229622340A /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
 		72A1A97E52C283A47BA4E8F48BC313FB /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
 		72D98643BA30A79011275CBE433EF86F /* Masonry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Masonry.debug.xcconfig; sourceTree = "<group>"; };
-		771C45CEC399366CF29BB5C6DD710A4D /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		7A983FC20E0D88D29BDCE122BB7646A7 /* Pods-BAPickView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BAPickView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7B05443E0B7C68F4FDE699B6651B55CA /* NSDate+BAKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+BAKit.h"; path = "BAPickView/Classes/BAPickView/NSDate+BAKit.h"; sourceTree = "<group>"; };
+		7AD156E7ABF52A43F3ABFC76C6060657 /* BAPickView_OC.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAPickView_OC.h; path = BAPickView/Classes/BAPickView/BAPickView_OC.h; sourceTree = "<group>"; };
+		7CBB0F9597E9DC8B3EDE0E310ECDC851 /* NSBundle+BAPod.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+BAPod.m"; path = "BAPickView/Classes/BAPickView/NSBundle+BAPod.m"; sourceTree = "<group>"; };
+		7E2CAC1A0BF2B1784484FAA7C8E25884 /* NSDateFormatter+BAKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+BAKit.h"; path = "BAPickView/Classes/BAPickView/NSDateFormatter+BAKit.h"; sourceTree = "<group>"; };
 		7EE1660D370806B3EFD74C49D3471C1C /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
-		801E3FBAAC5BF7D63888999B81D3BFC5 /* BAKit_PickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_PickerView.m; path = BAPickView/Classes/BAPickView/BAKit_PickerView.m; sourceTree = "<group>"; };
 		80EE0C1B3B21EC4014497F66D1DAB537 /* Pods-BAPickView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BAPickView_Example.release.xcconfig"; sourceTree = "<group>"; };
-		82CD7B99780068AFB28D38922312AB8B /* BAPickView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BAPickView.release.xcconfig; sourceTree = "<group>"; };
-		839C09BDBD6B8524EE54738FBF0CF637 /* BAPickView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BAPickView-dummy.m"; sourceTree = "<group>"; };
-		85EB2545922A5EEF45BF80F5664C9FE6 /* BAPickerToolBarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerToolBarView.m; sourceTree = "<group>"; };
+		873AA6C82306F6FEA3661E3493BC31DF /* NSString+BATime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+BATime.h"; path = "BAPickView/Classes/BAPickView/NSString+BATime.h"; sourceTree = "<group>"; };
 		8967E66A2FCB5BA81BFA1E139139A237 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
 		8BA0898FAC44183744D557073E2F8AA5 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
-		8EA212B0EF2F0FD962240E5E6523699F /* BADatePickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BADatePickerView.m; sourceTree = "<group>"; };
+		917F4C1F42A09C3B98FBAF9F78104A30 /* BAPickerManger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerManger.h; sourceTree = "<group>"; };
 		91F10A7E4BAA437E4DF7B3CED9B560B4 /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
 		935171CB319C057FAEE8F843F46825FE /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
-		9A20D51BD0F7E1952259D365DFE7FF80 /* BAPickerToolBarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerToolBarView.h; sourceTree = "<group>"; };
+		9810003CACD65445C2EC1F03EFE600C9 /* BAKit_PickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_PickerView.m; path = BAPickView/Classes/BAPickView/BAKit_PickerView.m; sourceTree = "<group>"; };
+		9CD3CFE2C320579CF7622F4E7C69DA06 /* BAPickView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BAPickView-prefix.pch"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A0BBAC4B53F68518F311BC9515886B04 /* UIView+BARectCorner_pick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+BARectCorner_pick.h"; path = "BAPickView/Classes/BAPickView/UIView+BARectCorner_pick.h"; sourceTree = "<group>"; };
 		A301E9D7640CAAE872D2257184D64010 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
-		A529B5ABA168AACCB086834D2E59C258 /* BAPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerView.h; sourceTree = "<group>"; };
+		A60CC36D87F451151FE5A6F24467D3FE /* NSDateFormatter+BAKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDateFormatter+BAKit.m"; path = "BAPickView/Classes/BAPickView/NSDateFormatter+BAKit.m"; sourceTree = "<group>"; };
+		A6D9119E778DA4DE9B4B9A3D77032020 /* BACityModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BACityModel.h; sourceTree = "<group>"; };
+		A7B223F77D32F8A90EAE61ED53448B90 /* BAKit_PickerToolBarView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerToolBarView.h; path = BAPickView/Classes/BAPickView/BAKit_PickerToolBarView.h; sourceTree = "<group>"; };
 		A9244EA17B6E04FACE497603F0088190 /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
-		A9FC0E0F058622A12CD0FA33CDB56366 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		AA01142B191C535B620A7D90F8B79380 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
 		AA56AA7AF365E444271F9F4BE178D5A0 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		AD23DE242626B43AC826AF04FE920F9E /* BAPickerConfigModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerConfigModel.m; sourceTree = "<group>"; };
-		AE01ACC6F7C811EA622265C19F863611 /* BAKit_PickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerView.h; path = BAPickView/Classes/BAPickView/BAKit_PickerView.h; sourceTree = "<group>"; };
-		B5D7476183F119A69C82CD7152C0AD78 /* UIView+BAAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+BAAnimation.h"; path = "BAPickView/Classes/BAPickView/UIView+BAAnimation.h"; sourceTree = "<group>"; };
-		B7B79618A30FAC66494CB1FAC6160505 /* BACityModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BACityModel.h; sourceTree = "<group>"; };
-		BAF794CFABC7964D89294FB08006417E /* BAKit_PickerToolBarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_PickerToolBarView.m; path = BAPickView/Classes/BAPickView/BAKit_PickerToolBarView.m; sourceTree = "<group>"; };
-		BB4DB92978B5C34F6FF1EA5B84AB38DC /* UIView+BARectCorner_pick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+BARectCorner_pick.h"; path = "BAPickView/Classes/BAPickView/UIView+BARectCorner_pick.h"; sourceTree = "<group>"; };
-		BBCB567F440FF25CB0664536EC267761 /* BABasePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BABasePickerView.h; sourceTree = "<group>"; };
-		BFF78D474671336D94FDC24C13CF3ABF /* BAPickView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = BAPickView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AD6B3A3074FEAB82FEF31B56A4798290 /* BAPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerView.h; sourceTree = "<group>"; };
+		B0B635C280D827BB9F6986B32BB30409 /* BAPickView_Version.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAPickView_Version.h; path = BAPickView/Classes/BAPickView/BAPickView_Version.h; sourceTree = "<group>"; };
+		B159FBB4E011B9326E4E321F722EFC33 /* BAKit_DefineFormat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DefineFormat.h; path = BAPickView/Classes/BAPickView/BAKit_DefineFormat.h; sourceTree = "<group>"; };
+		B267F7B3A61D62144381634D413B834D /* BACustomDatePickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BACustomDatePickerView.m; sourceTree = "<group>"; };
+		B649593062013357AECF7C520F3B1A6E /* BAPickerConfigModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerConfigModel.m; sourceTree = "<group>"; };
+		B8B16C83EC60C153F58E271F803D75FF /* NSDate+BAKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+BAKit.h"; path = "BAPickView/Classes/BAPickView/NSDate+BAKit.h"; sourceTree = "<group>"; };
+		BF8E8779E9E4AB33C71DB7831C2FDE55 /* BAPickView.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = BAPickView.bundle; path = BAPickView/Resources/BAPickView.bundle; sourceTree = "<group>"; };
+		C47A887CCEB76B9AFD07B135E845291B /* BAKit_PickerToolBarView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_PickerToolBarView.m; path = BAPickView/Classes/BAPickView/BAKit_PickerToolBarView.m; sourceTree = "<group>"; };
 		C5C44599FE7C1C51F94F910C9C3E7827 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		C67F5419479E7E4AF472C0B5ADA1D679 /* NSDateFormatter+BAKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDateFormatter+BAKit.h"; path = "BAPickView/Classes/BAPickView/NSDateFormatter+BAKit.h"; sourceTree = "<group>"; };
 		C8E52D0D54D9FDA8B5EE9BC43560E445 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
-		CBA03ACDD5FEC1EDB3C0197E4B3F8E06 /* NSDate+BAKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+BAKit.m"; path = "BAPickView/Classes/BAPickView/NSDate+BAKit.m"; sourceTree = "<group>"; };
 		CD3E6407BB6F4DD5D3C1233905389616 /* Pods-BAPickView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BAPickView_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		D1A04F94EDB3F3F473253D8CCFD9EE9D /* BAKit_DefineCurrent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_DefineCurrent.h; path = BAPickView/Classes/BAPickView/BAKit_DefineCurrent.h; sourceTree = "<group>"; };
-		D2EFD32CFABFA33C4B8971A0EA694253 /* BAPickerBasePopView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BAPickerBasePopView.h; sourceTree = "<group>"; };
-		D57AD33621675773543204B0F5F59765 /* BAPickView_Version.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAPickView_Version.h; path = BAPickView/Classes/BAPickView/BAPickView_Version.h; sourceTree = "<group>"; };
+		CDD491D1E8CAD2E8ED91FCB0FA2BEEDA /* BADatePickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BADatePickerView.h; sourceTree = "<group>"; };
+		D03558A643A6F48BE56E9B4FA36C1A82 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		D12838F52182F0254FAD6BFBAF3FED10 /* BAPickView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = BAPickView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		D32C49A8615BEC553E7485A81BA7D537 /* BAKit_PickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerView.h; path = BAPickView/Classes/BAPickView/BAKit_PickerView.h; sourceTree = "<group>"; };
+		D3431A18AD1D60069513C21D7B3A5849 /* BABasePickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BABasePickerView.m; sourceTree = "<group>"; };
 		D5BA9F847C587E22F8DD9250EDEC7CDA /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
-		D73DB7C1D8D00000C25D58FE8F571362 /* BAPickView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BAPickView-prefix.pch"; sourceTree = "<group>"; };
-		DEA1C659F19A0C395D88CC7F9CA1F3E1 /* BABasePickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BABasePickerView.m; sourceTree = "<group>"; };
-		E351E598CAFA8A06EEE0770EC0C4957F /* BAKit_PickerViewConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_PickerViewConfig.h; path = BAPickView/Classes/BAPickView/BAKit_PickerViewConfig.h; sourceTree = "<group>"; };
-		E48E9F3760271D2D2E0F61453AEBC42D /* BAKit_ConfigurationDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_ConfigurationDefine.h; path = BAPickView/Classes/BAPickView/BAKit_ConfigurationDefine.h; sourceTree = "<group>"; };
-		EDC01FDFD469C8616AC35EC4DEC9CBAA /* BAKit_DatePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = BAKit_DatePicker.m; path = BAPickView/Classes/BAPickView/BAKit_DatePicker.m; sourceTree = "<group>"; };
-		EDC96ABDDD3EA8C0EC255F345CBF0B37 /* NSString+BATime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+BATime.h"; path = "BAPickView/Classes/BAPickView/NSString+BATime.h"; sourceTree = "<group>"; };
-		EDFE5A7162FA5BE6C9D8789BE5F6DB34 /* BAPickerBasePopView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerBasePopView.m; sourceTree = "<group>"; };
-		F499252F2D93C8E55E801BEF80939650 /* NSString+BATime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+BATime.m"; path = "BAPickView/Classes/BAPickView/NSString+BATime.m"; sourceTree = "<group>"; };
-		FA931443CD22C31724E765B9B2002867 /* UIView+BAAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+BAAnimation.m"; path = "BAPickView/Classes/BAPickView/UIView+BAAnimation.m"; sourceTree = "<group>"; };
+		E5F59D60229E243CBB4F16436B9673E7 /* BADatePickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BADatePickerView.m; sourceTree = "<group>"; };
+		EECED02F568B64FF7268F50F613549FB /* BADateResultModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = BADateResultModel.h; sourceTree = "<group>"; };
+		EF95FAE7ED8FB594B945739C2BFC7A66 /* BAPickerManger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerManger.m; sourceTree = "<group>"; };
+		F19356F218F74EE4C6C34A6157AA8ED6 /* BAKit_ConfigurationDefine.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BAKit_ConfigurationDefine.h; path = BAPickView/Classes/BAPickView/BAKit_ConfigurationDefine.h; sourceTree = "<group>"; };
+		FD9D5667ADBD069E08931DD90B49899A /* ResourceBundle-BAPickView-BAPickView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-BAPickView-BAPickView-Info.plist"; sourceTree = "<group>"; };
+		FF7148B6D29DEA9ECDB392FA04AC4554 /* BAPickerBasePopView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BAPickerBasePopView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		33237CCE8843FBD33C2D3728947302F2 /* Frameworks */ = {
+		0ED61E68F17E391DCDAB27F3194B7281 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9619DBE86AC9ED883B3CBB029C2E5002 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9DFBF7F096802A16CB8B84CE5A057EEB /* Frameworks */ = {
+		7BAA095C18A220B27388F6801E786176 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -230,6 +227,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B494B5D8DF9BDC5FD5E66FBD9D26D44E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA3B4144E3E6F5114535C1182EA2BCCD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -259,6 +263,16 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		6193C3096E8F2F60242340B907D35136 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				D12838F52182F0254FAD6BFBAF3FED10 /* BAPickView.podspec */,
+				D03558A643A6F48BE56E9B4FA36C1A82 /* LICENSE */,
+				0EF84F163B186BAA76A95860B6D3DB97 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 		7529FD53BCE26816CCD46658378AAF1B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,23 +281,10 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		7615E38F2B48DF4279E052D8DB3CB878 /* Support Files */ = {
+		A8ECAEA53CA701F979FD2532BA934611 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				839C09BDBD6B8524EE54738FBF0CF637 /* BAPickView-dummy.m */,
-				D73DB7C1D8D00000C25D58FE8F571362 /* BAPickView-prefix.pch */,
-				2E5B3781BBE3F02B58FD793602CFC18E /* BAPickView.debug.xcconfig */,
-				82CD7B99780068AFB28D38922312AB8B /* BAPickView.release.xcconfig */,
-				64640AB50BFD737ECBAA603D1F296C64 /* ResourceBundle-BAPickView-BAPickView-Info.plist */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/BAPickView";
-			sourceTree = "<group>";
-		};
-		B47F984E4D1CC6F297AB5A28F001700D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				37E176BDA54894243B4F79773C79A7DA /* BAPickView.bundle */,
+				BF8E8779E9E4AB33C71DB7831C2FDE55 /* BAPickView.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -316,7 +317,7 @@
 		BD6F3DA3E5000889DE0FC867D1D3592F /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D7711F91BD195197C28C385766D144AD /* BAPickView */,
+				D6981CE0F225FCB5B58956B9628113CE /* BAPickView */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -333,37 +334,50 @@
 			);
 			sourceTree = "<group>";
 		};
-		D7711F91BD195197C28C385766D144AD /* BAPickView */ = {
+		D2D5FA2206033F5B0E2918D01A510F25 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E48E9F3760271D2D2E0F61453AEBC42D /* BAKit_ConfigurationDefine.h */,
-				3E3B18A1CFFB3EC48FD77557FEB14E62 /* BAKit_DatePicker.h */,
-				EDC01FDFD469C8616AC35EC4DEC9CBAA /* BAKit_DatePicker.m */,
-				D1A04F94EDB3F3F473253D8CCFD9EE9D /* BAKit_DefineCurrent.h */,
-				5A3DFF3655734778F28FD075DD8CB6C5 /* BAKit_DefineFormat.h */,
-				454CFDD5AAD611A1E3157DA106E50372 /* BAKit_PickerToolBarView.h */,
-				BAF794CFABC7964D89294FB08006417E /* BAKit_PickerToolBarView.m */,
-				AE01ACC6F7C811EA622265C19F863611 /* BAKit_PickerView.h */,
-				801E3FBAAC5BF7D63888999B81D3BFC5 /* BAKit_PickerView.m */,
-				E351E598CAFA8A06EEE0770EC0C4957F /* BAKit_PickerViewConfig.h */,
-				060C06FEFACC28B4F31EC8566DC57D8F /* BAPickView_OC.h */,
-				D57AD33621675773543204B0F5F59765 /* BAPickView_Version.h */,
-				459950855184A98B016EF75890558B20 /* NSBundle+BAPod.h */,
-				68692D28DF9232EA50A5AC42B10D2530 /* NSBundle+BAPod.m */,
-				7B05443E0B7C68F4FDE699B6651B55CA /* NSDate+BAKit.h */,
-				CBA03ACDD5FEC1EDB3C0197E4B3F8E06 /* NSDate+BAKit.m */,
-				C67F5419479E7E4AF472C0B5ADA1D679 /* NSDateFormatter+BAKit.h */,
-				637F59B45E58783D07CE434AE97A9CB0 /* NSDateFormatter+BAKit.m */,
-				EDC96ABDDD3EA8C0EC255F345CBF0B37 /* NSString+BATime.h */,
-				F499252F2D93C8E55E801BEF80939650 /* NSString+BATime.m */,
-				B5D7476183F119A69C82CD7152C0AD78 /* UIView+BAAnimation.h */,
-				FA931443CD22C31724E765B9B2002867 /* UIView+BAAnimation.m */,
-				BB4DB92978B5C34F6FF1EA5B84AB38DC /* UIView+BARectCorner_pick.h */,
-				628392BDB4C921B17C26D536D00BE417 /* UIView+BARectCorner_pick.m */,
-				E41E1E4EEF804B4F8E839358FB0E76B9 /* BAPickerManager */,
-				F22A19B115AA059BCF32B01DD5CC384B /* Pod */,
-				B47F984E4D1CC6F297AB5A28F001700D /* Resources */,
-				7615E38F2B48DF4279E052D8DB3CB878 /* Support Files */,
+				4C4BBB13FDFDACE2D31F437FD0F54655 /* BAPickView-dummy.m */,
+				9CD3CFE2C320579CF7622F4E7C69DA06 /* BAPickView-prefix.pch */,
+				3411ADCEB2539E9D042371276E52B187 /* BAPickView.debug.xcconfig */,
+				4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */,
+				FD9D5667ADBD069E08931DD90B49899A /* ResourceBundle-BAPickView-BAPickView-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/BAPickView";
+			sourceTree = "<group>";
+		};
+		D6981CE0F225FCB5B58956B9628113CE /* BAPickView */ = {
+			isa = PBXGroup;
+			children = (
+				F19356F218F74EE4C6C34A6157AA8ED6 /* BAKit_ConfigurationDefine.h */,
+				6411D020C97B8C27A190D2058C02F381 /* BAKit_DatePicker.h */,
+				00A388B1367C389487754BD418699C7F /* BAKit_DatePicker.m */,
+				59FD1EFD5840E18173903E303CFC13F6 /* BAKit_DefineCurrent.h */,
+				B159FBB4E011B9326E4E321F722EFC33 /* BAKit_DefineFormat.h */,
+				A7B223F77D32F8A90EAE61ED53448B90 /* BAKit_PickerToolBarView.h */,
+				C47A887CCEB76B9AFD07B135E845291B /* BAKit_PickerToolBarView.m */,
+				D32C49A8615BEC553E7485A81BA7D537 /* BAKit_PickerView.h */,
+				9810003CACD65445C2EC1F03EFE600C9 /* BAKit_PickerView.m */,
+				3D8DB23C60D6B7D913339E70EEC0C73E /* BAKit_PickerViewConfig.h */,
+				7AD156E7ABF52A43F3ABFC76C6060657 /* BAPickView_OC.h */,
+				B0B635C280D827BB9F6986B32BB30409 /* BAPickView_Version.h */,
+				469E2F2922732F740877FA6EAE5EF2E5 /* NSBundle+BAPod.h */,
+				7CBB0F9597E9DC8B3EDE0E310ECDC851 /* NSBundle+BAPod.m */,
+				B8B16C83EC60C153F58E271F803D75FF /* NSDate+BAKit.h */,
+				4D816F6B810777DE9CB933BAB96B5F1D /* NSDate+BAKit.m */,
+				7E2CAC1A0BF2B1784484FAA7C8E25884 /* NSDateFormatter+BAKit.h */,
+				A60CC36D87F451151FE5A6F24467D3FE /* NSDateFormatter+BAKit.m */,
+				873AA6C82306F6FEA3661E3493BC31DF /* NSString+BATime.h */,
+				59B2F03CF0D6D17DAF2A322E9C109EE0 /* NSString+BATime.m */,
+				3084D0A562D0F7C39526E16F060A1924 /* UIView+BAAnimation.h */,
+				0074D99BE9133FE238B823C20CEAEF0F /* UIView+BAAnimation.m */,
+				A0BBAC4B53F68518F311BC9515886B04 /* UIView+BARectCorner_pick.h */,
+				5C78CD95F1208E8F9FD406D94C4035A4 /* UIView+BARectCorner_pick.m */,
+				FF04EB7BB7AB0389559FE93B2ADA57EB /* BAPickerManager */,
+				6193C3096E8F2F60242340B907D35136 /* Pod */,
+				A8ECAEA53CA701F979FD2532BA934611 /* Resources */,
+				D2D5FA2206033F5B0E2918D01A510F25 /* Support Files */,
 			);
 			name = BAPickView;
 			path = ../..;
@@ -374,43 +388,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E41E1E4EEF804B4F8E839358FB0E76B9 /* BAPickerManager */ = {
-			isa = PBXGroup;
-			children = (
-				BBCB567F440FF25CB0664536EC267761 /* BABasePickerView.h */,
-				DEA1C659F19A0C395D88CC7F9CA1F3E1 /* BABasePickerView.m */,
-				B7B79618A30FAC66494CB1FAC6160505 /* BACityModel.h */,
-				0BE2E3DA6EB643F0081AEB8B9BAACA69 /* BACityModel.m */,
-				6C0C6B4C233A05672D65A94A3B783763 /* BACustomDatePickerView.h */,
-				100BBD00D3AFBADB9E18D581D6F26BB7 /* BACustomDatePickerView.m */,
-				319E484D6469FFFAB2B9D11AA92C101F /* BADatePickerView.h */,
-				8EA212B0EF2F0FD962240E5E6523699F /* BADatePickerView.m */,
-				D2EFD32CFABFA33C4B8971A0EA694253 /* BAPickerBasePopView.h */,
-				EDFE5A7162FA5BE6C9D8789BE5F6DB34 /* BAPickerBasePopView.m */,
-				656FB2E6C26C7481912128F4D0B49D44 /* BAPickerConfigModel.h */,
-				AD23DE242626B43AC826AF04FE920F9E /* BAPickerConfigModel.m */,
-				65060D69FAE77081F1F66E800153EFBF /* BAPickerDefine.h */,
-				57A53A3DF8421966A3E6980F5C084066 /* BAPickerManger.h */,
-				67B5836DF57E44AB2663AC662034A163 /* BAPickerManger.m */,
-				9A20D51BD0F7E1952259D365DFE7FF80 /* BAPickerToolBarView.h */,
-				85EB2545922A5EEF45BF80F5664C9FE6 /* BAPickerToolBarView.m */,
-				A529B5ABA168AACCB086834D2E59C258 /* BAPickerView.h */,
-				54855FCA53BFBFFF935CF2A3D58ECFBE /* BAPickerView.m */,
-			);
-			name = BAPickerManager;
-			path = BAPickView/Classes/BAPickView/BAPickerManager;
-			sourceTree = "<group>";
-		};
-		F22A19B115AA059BCF32B01DD5CC384B /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				BFF78D474671336D94FDC24C13CF3ABF /* BAPickView.podspec */,
-				A9FC0E0F058622A12CD0FA33CDB56366 /* LICENSE */,
-				771C45CEC399366CF29BB5C6DD710A4D /* README.md */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		F47FDAAE8298DEBC98D156CFA4146C99 /* Masonry */ = {
@@ -447,41 +424,38 @@
 			path = Masonry;
 			sourceTree = "<group>";
 		};
+		FF04EB7BB7AB0389559FE93B2ADA57EB /* BAPickerManager */ = {
+			isa = PBXGroup;
+			children = (
+				6B746B41E89A510588073768CA219504 /* BABasePickerView.h */,
+				D3431A18AD1D60069513C21D7B3A5849 /* BABasePickerView.m */,
+				A6D9119E778DA4DE9B4B9A3D77032020 /* BACityModel.h */,
+				05B695470EBA932F24E934738B30CECF /* BACityModel.m */,
+				32BFA07994E211BB4E150F55BC141E6B /* BACustomDatePickerView.h */,
+				B267F7B3A61D62144381634D413B834D /* BACustomDatePickerView.m */,
+				CDD491D1E8CAD2E8ED91FCB0FA2BEEDA /* BADatePickerView.h */,
+				E5F59D60229E243CBB4F16436B9673E7 /* BADatePickerView.m */,
+				EECED02F568B64FF7268F50F613549FB /* BADateResultModel.h */,
+				68914CE45AC1D2C052C980F3A73620C1 /* BADateResultModel.m */,
+				661F5DBDD33E30BE20F409E79F05D118 /* BAPickerBasePopView.h */,
+				FF7148B6D29DEA9ECDB392FA04AC4554 /* BAPickerBasePopView.m */,
+				3C8E15B6F5481730A1A3ECD646C46BFF /* BAPickerConfigModel.h */,
+				B649593062013357AECF7C520F3B1A6E /* BAPickerConfigModel.m */,
+				0F82A2A0BCFF3532989977C99A42A2A0 /* BAPickerDefine.h */,
+				917F4C1F42A09C3B98FBAF9F78104A30 /* BAPickerManger.h */,
+				EF95FAE7ED8FB594B945739C2BFC7A66 /* BAPickerManger.m */,
+				0D1C829AC99CEB38A16494054B1685EA /* BAPickerToolBarView.h */,
+				2C72DEB40D9CA9C4E616E65FF95EA8E0 /* BAPickerToolBarView.m */,
+				AD6B3A3074FEAB82FEF31B56A4798290 /* BAPickerView.h */,
+				28CBB2E56FE0E27E0368E80B8EE380AB /* BAPickerView.m */,
+			);
+			name = BAPickerManager;
+			path = BAPickView/Classes/BAPickView/BAPickerManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		20BACA51572C14A29A15EDB2F0499238 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C245FE96E2652074D205D75444D59F00 /* BABasePickerView.h in Headers */,
-				776E11A34F8701AE81E61BDAB56CF6A2 /* BACityModel.h in Headers */,
-				B0A1D9AFE0905E412D10113B0197056A /* BACustomDatePickerView.h in Headers */,
-				F9447B61327207EB1B7A1CE1894CE779 /* BADatePickerView.h in Headers */,
-				6CF6C95824D2D6B7BE30ED525A0E3B55 /* BAKit_ConfigurationDefine.h in Headers */,
-				A6847E9DA0CFDD2EEB37639336314D20 /* BAKit_DatePicker.h in Headers */,
-				00A1800C57A25211BFCD80036C9D98EF /* BAKit_DefineCurrent.h in Headers */,
-				9E9B983012D44B549A0525ACCE3631E8 /* BAKit_DefineFormat.h in Headers */,
-				2E8242D7A382C5083B29E438EA5DA65C /* BAKit_PickerToolBarView.h in Headers */,
-				3B4E07E7D9EC7114845A5B553D9CD5A8 /* BAKit_PickerView.h in Headers */,
-				7AB7AC71280829ED43EA6044788726AC /* BAKit_PickerViewConfig.h in Headers */,
-				645392B175CF73A4FE26953F6DD20689 /* BAPickerBasePopView.h in Headers */,
-				6E286A6FB51A0C8BA781BF0A3307214E /* BAPickerConfigModel.h in Headers */,
-				3F3B63A213AA82893C19D929B2F91F93 /* BAPickerDefine.h in Headers */,
-				489E5E28556ABA6E65D6BBA19B304F48 /* BAPickerManger.h in Headers */,
-				A864A644C55614EA7BD5CC1BF8E99028 /* BAPickerToolBarView.h in Headers */,
-				AD352B6085C38A4179021C3D9374B6B8 /* BAPickerView.h in Headers */,
-				4EEAEB472F8558FC458A409AD561EC94 /* BAPickView_OC.h in Headers */,
-				193FA2B1A5E2745E05F389EA3DF54896 /* BAPickView_Version.h in Headers */,
-				6BC0443D6BC68107D3AC5BD960BE0585 /* NSBundle+BAPod.h in Headers */,
-				8A1ABFAC1B05EEBD0490F8BF23C88237 /* NSDate+BAKit.h in Headers */,
-				DBA554D48727C0D91F71898099BED781 /* NSDateFormatter+BAKit.h in Headers */,
-				B8DE04EF4DF29417A08395A3CBBAD244 /* NSString+BATime.h in Headers */,
-				73E4DE98BC81F758ED56F575D666C8F6 /* UIView+BAAnimation.h in Headers */,
-				AADC673A6E7C160644DC95904845DC68 /* UIView+BARectCorner_pick.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9B18EB0F78348C7D18143F1FF1BDD8A2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -489,25 +463,58 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F46BF03974DD53D69A437DDE220F9216 /* Headers */ = {
+		A26F509B31C7DAFE958200F86DEFCBE4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81348E7B81CBAD62944E1F5B9F066F16 /* MASCompositeConstraint.h in Headers */,
-				6532FAF779328AD94B54B8C201BEA93C /* MASConstraint+Private.h in Headers */,
-				7250D387553C7792FD883327BF648BD3 /* MASConstraint.h in Headers */,
-				87CEFB5FA8DF38B0769B778830F81FA7 /* MASConstraintMaker.h in Headers */,
-				D8EC18798B3FFCDF5723E2633514F617 /* MASLayoutConstraint.h in Headers */,
-				F4F639D0E0D6AB2D5152D4518A797950 /* Masonry.h in Headers */,
-				DC4E7B2E6FF7532A6DDDD234A5FA89C2 /* MASUtilities.h in Headers */,
-				426C76913BE172CB1B46A42E6774D689 /* MASViewAttribute.h in Headers */,
-				A2C55538D58D1ED0F4BB36BB564580BC /* MASViewConstraint.h in Headers */,
-				048BE39FE017137A6E59DD7D90C5EDD5 /* NSArray+MASAdditions.h in Headers */,
-				24059BAA733550668D5572B23F66A769 /* NSArray+MASShorthandAdditions.h in Headers */,
-				A3DF41A56EE643F89C81944661FB847F /* NSLayoutConstraint+MASDebugAdditions.h in Headers */,
-				5A1CA44CD67AABDCE10570CF9EA19B96 /* View+MASAdditions.h in Headers */,
-				19826CC7CFFA2FC058CA169ECF91BFF4 /* View+MASShorthandAdditions.h in Headers */,
-				D4A476EE13A1D4A53838389EF35B20EF /* ViewController+MASAdditions.h in Headers */,
+				62462E73AF14CF7CD522A261C30F3426 /* MASCompositeConstraint.h in Headers */,
+				94F704B01237A7E71CA20882E19737EF /* MASConstraint+Private.h in Headers */,
+				1056309F955281E421B61B83425AC9CB /* MASConstraint.h in Headers */,
+				70293111ABD3A039B610A28DDE36BDA3 /* MASConstraintMaker.h in Headers */,
+				319866925A2D4710C8F04A7297F73310 /* MASLayoutConstraint.h in Headers */,
+				D2028936CA2F4DF41DCD2052FBDA096F /* Masonry.h in Headers */,
+				15B68FACE1BB82543120133455A60319 /* MASUtilities.h in Headers */,
+				9BD2C89D4572EAE49EB116F51292BCA9 /* MASViewAttribute.h in Headers */,
+				65FF6C2FAE826A124FF665AB797268EE /* MASViewConstraint.h in Headers */,
+				8049F846C651AA173D4AEC4EF5673417 /* NSArray+MASAdditions.h in Headers */,
+				DB6753B48CB0E6D7A78BA5ECCABD6A64 /* NSArray+MASShorthandAdditions.h in Headers */,
+				0673619C6B87C97CC6931260AD8687C9 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */,
+				2EE4597561F684E85434E38D23F579D0 /* View+MASAdditions.h in Headers */,
+				13A42E4B945E3781A9F6B93481C00530 /* View+MASShorthandAdditions.h in Headers */,
+				730BF5E4F6C2B5D61E3B31749EED0A8A /* ViewController+MASAdditions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A354AE56856024C883647B66AAD6A6AB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5F99986F972C143BC5C83707A7272F3 /* BABasePickerView.h in Headers */,
+				55747A1D2DB4DE12EC79C45235B08930 /* BACityModel.h in Headers */,
+				CCADFA56C0FBCB82ACFDF2FCA37E035B /* BACustomDatePickerView.h in Headers */,
+				26CA997115A83B17348352D031EAD070 /* BADatePickerView.h in Headers */,
+				A854E4577E81A4CF467D5FE0B22A0790 /* BADateResultModel.h in Headers */,
+				4939F08EE6E223EB249715FA738BD754 /* BAKit_ConfigurationDefine.h in Headers */,
+				39BB319B429E8E185B4D953E2793CCF1 /* BAKit_DatePicker.h in Headers */,
+				2F2F4FCD69BAA9FBADC8C6E3453DCF5D /* BAKit_DefineCurrent.h in Headers */,
+				14672B831E6CE8F9EA11792134FC3E47 /* BAKit_DefineFormat.h in Headers */,
+				F82DBE733A82817164217CD2614E337F /* BAKit_PickerToolBarView.h in Headers */,
+				2C50783F8C13C0D3C1A72C77CC4E0C11 /* BAKit_PickerView.h in Headers */,
+				7104ED59F0E98DDD463D8F7A88DCA78A /* BAKit_PickerViewConfig.h in Headers */,
+				1B6D3283CB44CC538FC47C3159145BA6 /* BAPickerBasePopView.h in Headers */,
+				AA265E54E7A9527004C1081243B0D0B7 /* BAPickerConfigModel.h in Headers */,
+				146486015F598650DC208D9AADE45DFD /* BAPickerDefine.h in Headers */,
+				6C0843C88A58ECDA6272563E1E189E03 /* BAPickerManger.h in Headers */,
+				51468A7A102C0B9A7CF063C9D07D625A /* BAPickerToolBarView.h in Headers */,
+				573D36B451A242B3A57851D3930E9264 /* BAPickerView.h in Headers */,
+				D0244B08983F58009418BAEF5315AA7F /* BAPickView_OC.h in Headers */,
+				42C57706D33C80D587B3BC0CF11F8B64 /* BAPickView_Version.h in Headers */,
+				ABB7BC42254A0CB0251C161B58A30A02 /* NSBundle+BAPod.h in Headers */,
+				D393631E2CFE72984F4F3453BFEB8A07 /* NSDate+BAKit.h in Headers */,
+				0450B56855F6238FBB74B62F260B0DF7 /* NSDateFormatter+BAKit.h in Headers */,
+				AEF6A6ABB562C601957D02F2245D1F62 /* NSString+BATime.h in Headers */,
+				A1A6F5D8F15F65B8AB8BFB8519221EE8 /* UIView+BAAnimation.h in Headers */,
+				562D5FE7936F099F79DED3F27A86982E /* UIView+BARectCorner_pick.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,17 +523,17 @@
 /* Begin PBXNativeTarget section */
 		249C013DE06B493CA1DE0A04B24A52D1 /* BAPickView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 47AB00DACEA02072052E4B04F3A03939 /* Build configuration list for PBXNativeTarget "BAPickView" */;
+			buildConfigurationList = 48251F8A5771E2E7DE3DE8E4446C5BDE /* Build configuration list for PBXNativeTarget "BAPickView" */;
 			buildPhases = (
-				20BACA51572C14A29A15EDB2F0499238 /* Headers */,
-				353BF0D1A0DAB7E4FAC19F3CE7F89A24 /* Sources */,
-				9619DBE86AC9ED883B3CBB029C2E5002 /* Frameworks */,
+				A354AE56856024C883647B66AAD6A6AB /* Headers */,
+				5FC1E0E73E002DD41B2640A77E5BCB2B /* Sources */,
+				7BAA095C18A220B27388F6801E786176 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				ECF87F954CFA169CAC2E7D0690DF6CF7 /* PBXTargetDependency */,
-				3366DF37DDF099E5F8A67ED018C09C05 /* PBXTargetDependency */,
+				8F5B4EC90461EA08750B3470AD9E046F /* PBXTargetDependency */,
+				E598EDBE2729CEB6B27609D2DD573C20 /* PBXTargetDependency */,
 			);
 			name = BAPickView;
 			productName = BAPickView;
@@ -535,11 +542,11 @@
 		};
 		55AF53E6C77A10ED4985E04D74A8878E /* Masonry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BB5D57CBAA40E8106D64359F32475AB6 /* Build configuration list for PBXNativeTarget "Masonry" */;
+			buildConfigurationList = 03A29378C25950B94D3EB02EC771B3E5 /* Build configuration list for PBXNativeTarget "Masonry" */;
 			buildPhases = (
-				F46BF03974DD53D69A437DDE220F9216 /* Headers */,
-				EE7849A788A42AF8CE4A4AB6F1021E09 /* Sources */,
-				9DFBF7F096802A16CB8B84CE5A057EEB /* Frameworks */,
+				A26F509B31C7DAFE958200F86DEFCBE4 /* Headers */,
+				659D49AAF6270441AC5BB672B8E6C806 /* Sources */,
+				0ED61E68F17E391DCDAB27F3194B7281 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -561,8 +568,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				576C96FA31CA721BFDF3FA13A15CB81E /* PBXTargetDependency */,
-				4117E0F00C22F61416DD5C30EF459A65 /* PBXTargetDependency */,
+				2F0824D4132EC0F42CD1D967DC240F6C /* PBXTargetDependency */,
+				971C5D3A818FE7BCC6F517F512D9E344 /* PBXTargetDependency */,
 			);
 			name = "Pods-BAPickView_Example";
 			productName = "Pods-BAPickView_Example";
@@ -571,11 +578,11 @@
 		};
 		886AE25184C72CAF3A07CC54342B50D9 /* BAPickView-BAPickView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F55B7660F62949DB829ECD438C36A6B0 /* Build configuration list for PBXNativeTarget "BAPickView-BAPickView" */;
+			buildConfigurationList = D9C35601BB7025EB97753412BAD58938 /* Build configuration list for PBXNativeTarget "BAPickView-BAPickView" */;
 			buildPhases = (
-				D289EF690A7987AE3852333E719EE1DC /* Sources */,
-				33237CCE8843FBD33C2D3728947302F2 /* Frameworks */,
-				FA05461DD43F63DF7CAD6E1B29D4D9C5 /* Resources */,
+				566D48C777338F44E2F21AD77636852F /* Sources */,
+				BA3B4144E3E6F5114535C1182EA2BCCD /* Frameworks */,
+				365407205CF4D06ABE6622AF5464B77E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -617,65 +624,66 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		FA05461DD43F63DF7CAD6E1B29D4D9C5 /* Resources */ = {
+		365407205CF4D06ABE6622AF5464B77E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF604987DDED89FCA5211E3412A692E3 /* BAPickView.bundle in Resources */,
+				D6E843677D655DFEFCCD699A475638F8 /* BAPickView.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		353BF0D1A0DAB7E4FAC19F3CE7F89A24 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1E4FED6E61DCAF1CE4E989E7206D2812 /* BABasePickerView.m in Sources */,
-				39DA03566B412861AE6CAFE236BFBBA5 /* BACityModel.m in Sources */,
-				C6A06996D16DBDF91B52EEF2A6DDCACE /* BACustomDatePickerView.m in Sources */,
-				03AA28C73D18A09D178B91C750A2A932 /* BADatePickerView.m in Sources */,
-				A03BAEA982773C777DA714DDF03A05AE /* BAKit_DatePicker.m in Sources */,
-				E5911BCF85AC31E5A6762A780ADF813D /* BAKit_PickerToolBarView.m in Sources */,
-				26908F5C6F3BDEB4A921AFAB9089F300 /* BAKit_PickerView.m in Sources */,
-				47AE87DA0A47889A559ACB4D009A7F74 /* BAPickerBasePopView.m in Sources */,
-				058E40C5C169D1E6BFADEA24937DA793 /* BAPickerConfigModel.m in Sources */,
-				A437A2AD72785330AB06C434370E395F /* BAPickerManger.m in Sources */,
-				478E00F472BE0729237C10C1A5AE43CD /* BAPickerToolBarView.m in Sources */,
-				CAA49400337442F74C0A2CA4EEBCBED2 /* BAPickerView.m in Sources */,
-				8A468B62951573FA69620209A70440A4 /* BAPickView-dummy.m in Sources */,
-				4257AB198900688D87F8188EC33AC8AD /* NSBundle+BAPod.m in Sources */,
-				8854AEE269641231C6237388429BAC92 /* NSDate+BAKit.m in Sources */,
-				D7F12302862EA0706C407C81C855C9C6 /* NSDateFormatter+BAKit.m in Sources */,
-				C7FB212219EF4F2041C9DCB49F842374 /* NSString+BATime.m in Sources */,
-				A9330209F8279CFF1FA6147B60BF11A4 /* UIView+BAAnimation.m in Sources */,
-				64070C7CDB6FCE0A438631EAD1C71E15 /* UIView+BARectCorner_pick.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D289EF690A7987AE3852333E719EE1DC /* Sources */ = {
+		566D48C777338F44E2F21AD77636852F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EE7849A788A42AF8CE4A4AB6F1021E09 /* Sources */ = {
+		5FC1E0E73E002DD41B2640A77E5BCB2B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAE0185865A241A9306F57A0C36E6440 /* MASCompositeConstraint.m in Sources */,
-				7A0D45D2EE7A3B68E9D859579FBA9D8D /* MASConstraint.m in Sources */,
-				9298BB9BBEC0DEE2436F449D47731F1F /* MASConstraintMaker.m in Sources */,
-				BF7FE6F2FF677E0ED7FB4B5C53927751 /* MASLayoutConstraint.m in Sources */,
-				8E79424C62E5002DC8DCE7F34B32C37C /* Masonry-dummy.m in Sources */,
-				A158F905A3C3E696327BB73B9EA3524B /* MASViewAttribute.m in Sources */,
-				EAB257004FD7870CCF164C9023F171D6 /* MASViewConstraint.m in Sources */,
-				8AD9C619479AA56CABBE351512609385 /* NSArray+MASAdditions.m in Sources */,
-				F7FBEDE92F7E0378C1829B7AE6A9CF4D /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				7C71730E098D4A6043FFFE79DF007146 /* View+MASAdditions.m in Sources */,
-				2AEB1DA89E2E25DF906B7DD83713F364 /* ViewController+MASAdditions.m in Sources */,
+				8DE2E7B6F1557999E624E1F8895FAC85 /* BABasePickerView.m in Sources */,
+				C890259C7AA5EF6CF0731CA6EB05F3B2 /* BACityModel.m in Sources */,
+				F5B14041D5368FF7245ACAD5B5582E79 /* BACustomDatePickerView.m in Sources */,
+				9C0CB322A014917FBC9FB0D72F268C71 /* BADatePickerView.m in Sources */,
+				901C3E18701F1E902A248E017B036DCC /* BADateResultModel.m in Sources */,
+				809E53CB77227B44985F7D4573FDC02C /* BAKit_DatePicker.m in Sources */,
+				0CEED49C670D2ADC7C364E549D793800 /* BAKit_PickerToolBarView.m in Sources */,
+				DE073B426AFE2E688AD6C04D5C8A4D04 /* BAKit_PickerView.m in Sources */,
+				C955B16F2F0605D92AC51C91F5737F80 /* BAPickerBasePopView.m in Sources */,
+				58BA851414AAE97E31D35D552EB15844 /* BAPickerConfigModel.m in Sources */,
+				A53D3CCBECFB16AB7054C3AF705F2534 /* BAPickerManger.m in Sources */,
+				F78D3164E54CE8E77634FD4FB32236AB /* BAPickerToolBarView.m in Sources */,
+				B692802CD6D0D0C1702C92EEA47B3301 /* BAPickerView.m in Sources */,
+				58405280142A9E4CE8735334689ABCDD /* BAPickView-dummy.m in Sources */,
+				E67079739FCED4BAD7932A366899CB79 /* NSBundle+BAPod.m in Sources */,
+				CF4DFCD45F50246BF9F42BF87D573627 /* NSDate+BAKit.m in Sources */,
+				3F24521653D2F091F3EC84CB0070AF28 /* NSDateFormatter+BAKit.m in Sources */,
+				E4047D6B2B6B03E9A444723C97A3A742 /* NSString+BATime.m in Sources */,
+				C582F0695AEF47796DA5D3E91C78EE7E /* UIView+BAAnimation.m in Sources */,
+				1B6CAF8868805B589406EBFB87B95C21 /* UIView+BARectCorner_pick.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		659D49AAF6270441AC5BB672B8E6C806 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				740796AE88EEC831363AB064F1045D3C /* MASCompositeConstraint.m in Sources */,
+				63E5E91BC9A377FE09556D73A75C1F28 /* MASConstraint.m in Sources */,
+				8F5FFE1702C1FD7F8C947804204F5111 /* MASConstraintMaker.m in Sources */,
+				6BB8F67917CF53DE423E0DF003A02233 /* MASLayoutConstraint.m in Sources */,
+				FF9F9B423AD50FA16D14BAC5196040AF /* Masonry-dummy.m in Sources */,
+				641E691D7082038F16EE8FCA75BF2594 /* MASViewAttribute.m in Sources */,
+				0D5CEB32D37951FFEC8DC020F35FD383 /* MASViewConstraint.m in Sources */,
+				9D90F9E44D04FFBC04B1A07D615E54AF /* NSArray+MASAdditions.m in Sources */,
+				1857776FCCB18DCA1A06B2BCEEBF23A7 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				6DA00305B7BFA29BA4DD9A3F9DC72AA6 /* View+MASAdditions.m in Sources */,
+				ED7A622FE2B368852BFF4F9FF4892EE4 /* ViewController+MASAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,55 +698,33 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3366DF37DDF099E5F8A67ED018C09C05 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Masonry;
-			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = A19D2D378B7D12DEF0E0E257FEA9CAB1 /* PBXContainerItemProxy */;
-		};
-		4117E0F00C22F61416DD5C30EF459A65 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Masonry;
-			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = 8943A92BADE07F24F968B6F5D5ED16F6 /* PBXContainerItemProxy */;
-		};
-		576C96FA31CA721BFDF3FA13A15CB81E /* PBXTargetDependency */ = {
+		2F0824D4132EC0F42CD1D967DC240F6C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BAPickView;
 			target = 249C013DE06B493CA1DE0A04B24A52D1 /* BAPickView */;
-			targetProxy = 574C971B5D29C0510D9E5F169F2067BB /* PBXContainerItemProxy */;
+			targetProxy = BB75F9F1E2661F152B3861D42A37CB88 /* PBXContainerItemProxy */;
 		};
-		ECF87F954CFA169CAC2E7D0690DF6CF7 /* PBXTargetDependency */ = {
+		8F5B4EC90461EA08750B3470AD9E046F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "BAPickView-BAPickView";
 			target = 886AE25184C72CAF3A07CC54342B50D9 /* BAPickView-BAPickView */;
-			targetProxy = F7EE4B938E94C01550FBB5440E2E09D2 /* PBXContainerItemProxy */;
+			targetProxy = A7F64F3B1E04A0CDF87EA3C362E2694F /* PBXContainerItemProxy */;
+		};
+		971C5D3A818FE7BCC6F517F512D9E344 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Masonry;
+			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
+			targetProxy = B275B60D360D841404D5AA7E7C0A03DE /* PBXContainerItemProxy */;
+		};
+		E598EDBE2729CEB6B27609D2DD573C20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Masonry;
+			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
+			targetProxy = 149CA267D94347513FD6294DBC38EB43 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		01CF73110362B8C0A7625FF7690DE0D4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72D98643BA30A79011275CBE433EF86F /* Masonry.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = Masonry;
-				PRODUCT_NAME = Masonry;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		1712A4FA2998F2BF0815C4CEE3D4B7F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80EE0C1B3B21EC4014497F66D1DAB537 /* Pods-BAPickView_Example.release.xcconfig */;
@@ -760,48 +746,9 @@
 			};
 			name = Release;
 		};
-		3C7046B70C47BC2D8C99536F450B98DB /* Release */ = {
+		23C5A0E863C6C72E5EA66B2C651B3EF9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82CD7B99780068AFB28D38922312AB8B /* BAPickView.release.xcconfig */;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
-				IBSC_MODULE = BAPickView;
-				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = BAPickView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		478F5464BC07F07C9223C4897E94F22F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82CD7B99780068AFB28D38922312AB8B /* BAPickView.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = BAPickView;
-				PRODUCT_NAME = BAPickView;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		9F6A6881728F76A90DC92EF4186B1423 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E5B3781BBE3F02B58FD793602CFC18E /* BAPickView.debug.xcconfig */;
+			baseConfigurationReference = 3411ADCEB2539E9D042371276E52B187 /* BAPickView.debug.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
 				IBSC_MODULE = BAPickView;
@@ -831,6 +778,28 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BEBD11DBA4929411C2857C20EDF0EA24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3411ADCEB2539E9D042371276E52B187 /* BAPickView.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = BAPickView;
+				PRODUCT_NAME = BAPickView;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -896,7 +865,7 @@
 			};
 			name = Release;
 		};
-		D8D549C5D9579A1A3DE3F18A25EB0521 /* Release */ = {
+		D25FDED9C60DC92CB34711482C40F7C4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 44AEC6462659DC0098D6E58E0470E73F /* Masonry.release.xcconfig */;
 			buildSettings = {
@@ -919,9 +888,9 @@
 			};
 			name = Release;
 		};
-		EDC32DD934E773754E36BA80ECE28E85 /* Debug */ = {
+		D7AC963F5DC1DC3ADEB59F65880CBD34 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E5B3781BBE3F02B58FD793602CFC18E /* BAPickView.debug.xcconfig */;
+			baseConfigurationReference = 4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -938,8 +907,25 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
+		};
+		DFC01789CD927650FEECE57577E0C60E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
+				IBSC_MODULE = BAPickView;
+				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = BAPickView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
 		};
 		EF3BAAA889B17377BE8F3254633FA0A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1006,14 +992,36 @@
 			};
 			name = Debug;
 		};
+		F4A3BCAE7306D76B536871C07A6F422B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72D98643BA30A79011275CBE433EF86F /* Masonry.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = Masonry;
+				PRODUCT_NAME = Masonry;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		47AB00DACEA02072052E4B04F3A03939 /* Build configuration list for PBXNativeTarget "BAPickView" */ = {
+		03A29378C25950B94D3EB02EC771B3E5 /* Build configuration list for PBXNativeTarget "Masonry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EDC32DD934E773754E36BA80ECE28E85 /* Debug */,
-				478F5464BC07F07C9223C4897E94F22F /* Release */,
+				F4A3BCAE7306D76B536871C07A6F422B /* Debug */,
+				D25FDED9C60DC92CB34711482C40F7C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1027,11 +1035,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BB5D57CBAA40E8106D64359F32475AB6 /* Build configuration list for PBXNativeTarget "Masonry" */ = {
+		48251F8A5771E2E7DE3DE8E4446C5BDE /* Build configuration list for PBXNativeTarget "BAPickView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				01CF73110362B8C0A7625FF7690DE0D4 /* Debug */,
-				D8D549C5D9579A1A3DE3F18A25EB0521 /* Release */,
+				BEBD11DBA4929411C2857C20EDF0EA24 /* Debug */,
+				D7AC963F5DC1DC3ADEB59F65880CBD34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1045,11 +1053,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F55B7660F62949DB829ECD438C36A6B0 /* Build configuration list for PBXNativeTarget "BAPickView-BAPickView" */ = {
+		D9C35601BB7025EB97753412BAD58938 /* Build configuration list for PBXNativeTarget "BAPickView-BAPickView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9F6A6881728F76A90DC92EF4186B1423 /* Debug */,
-				3C7046B70C47BC2D8C99536F450B98DB /* Release */,
+				23C5A0E863C6C72E5EA66B2C651B3EF9 /* Debug */,
+				DFC01789CD927650FEECE57577E0C60E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
