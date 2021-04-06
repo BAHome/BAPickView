@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 返回需要展示的列（columns）的数目
 @property(nonatomic, copy) NSInteger (^onNumberOfComponentsInPickerView)(UIPickerView *pickerView);
 // 返回每一列的行（rows）数
-@property(nonatomic, copy) NSInteger (^onNumberOfRowsInComponent)(UIPickerView *pickerView);
+@property(nonatomic, copy) NSInteger (^onNumberOfRowsInComponent)(NSInteger component, UIPickerView *pickerView);
 // 返回每一行的标题
 @property(nonatomic, copy) NSString *(^onTitleForRowAndComponent)(NSInteger row, NSInteger component, UIPickerView *pickerView);
 // 选中每一行的标题

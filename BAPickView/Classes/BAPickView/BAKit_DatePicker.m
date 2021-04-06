@@ -150,6 +150,8 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     self.buttonPositionType = BAKit_PickerViewButtonPositionTypeNormal;
     self.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
     
+    [self registCell];
+
     [BAKit_NotiCenter addObserver:self selector:@selector(handleDeviceOrientationRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
     [self initData];
 }
@@ -166,6 +168,15 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         self.resultBlock([self selectedTitmeResults], 0);
         [self ba_pickViewHiddenAnimation];
     };
+}
+
+- (void)registCell {
+    [self.yearTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+    [self.monthTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+    [self.dayTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+    [self.hourTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+    [self.minuteTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
+    [self.secondTableView registerClass:[BACustomTabelViewCell class] forCellReuseIdentifier:BAKit_DatePickerCellID];
 }
 
 #pragma mark - 通知处理
@@ -460,7 +471,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     for (BACustomTabelViewCell *cell in cells) {
         UILabel *titleLabel = cell.titleLabel;
         if (titleLabel.alpha == 1.0) {
-            [table scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            [self ba_scrollToIndexPath:cell.indexPath tableView:table];
             NSString *key = @"";
             switch (scrollView.tag) {
                 case 0:
@@ -529,8 +540,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     for (BACustomTabelViewCell *cell in cells) {
         UILabel *titleLabel = cell.titleLabel;
         if (titleLabel.alpha == 1.0) {
-            [table scrollToRowAtIndexPath:cell.indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-            
+            [self ba_scrollToIndexPath:cell.indexPath tableView:table];
             NSString *key = @"";
             switch (table.tag) {
                 case 0:
@@ -827,11 +837,17 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         
         NSInteger index = [dataArray indexOfObject:defaultDateStr];
         
-        if (index < dataArray.count && index > 0) {
+        if (index < dataArray.count && index >= 0) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index + 2 inSection:0];
-            [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+            [self ba_scrollToIndexPath:indexPath tableView:tableView];
         }
     });
+}
+
+- (void)ba_scrollToIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
+//    [tableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+//    [tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (NSInteger)ba_totaldaysInMonth:(NSDate *)date {
@@ -909,7 +925,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 }
 
 - (UITableView *)ba_creatTableView {
-    UITableView *tableView = [[UITableView alloc] init];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.backgroundColor = [UIColor clearColor];
@@ -918,7 +934,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
     tableView.estimatedRowHeight = 0;
     tableView.estimatedSectionHeaderHeight = 0;
     tableView.estimatedSectionFooterHeight = 0;
-    tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, 0, tableView.separatorInset.bottom, 0);
+//    tableView.separatorInset = UIEdgeInsetsMake(tableView.separatorInset.top, 0, tableView.separatorInset.bottom, 0);
     
     return tableView;
 }
@@ -1261,7 +1277,7 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
         
         min_y = 0;
         min_picker_y = 40;
-        min_line_y = (min_bgView_h + min_picker_y - _cellHight - BAKit_ViewSafeAreaInsets(self).bottom)/2;
+        min_line_y = (min_bgView_h + min_picker_y - _cellHight - BAKit_ViewSafeAreaInsets(self).bottom)/2.0;
     }
     
     self.toolBarView.frame = CGRectMake(min_x, min_y, min_w, min_h);
@@ -1317,7 +1333,6 @@ static NSString *const BAKit_DatePickerCellID = @"cell";
 
             min_x = min_w * 4;
             self.minuteTableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
-
         }
             break;
         case BAKit_CustomDatePickerDateTypeYMDHMS: {

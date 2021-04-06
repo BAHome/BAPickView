@@ -44,7 +44,7 @@
 
 // 返回每一列的行（rows）数
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    NSInteger num = self.onNumberOfRowsInComponent ? self.onNumberOfRowsInComponent(pickerView):0;
+    NSInteger num = self.onNumberOfRowsInComponent ? self.onNumberOfRowsInComponent(component, pickerView):0;
     return num;
 }
 

@@ -20,7 +20,7 @@
 #import "NSBundle+BAPod.h"
 
 // picker 回调
-typedef void (^onSelectPicker)(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray, UIPickerView *pickerView);
+typedef void (^onSelectPicker)(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray);
 // datePicker 回调
 typedef void (^onSelectDatePicker)(NSString *resultString, NSDate *resultDate);
 // cityPicker 回调

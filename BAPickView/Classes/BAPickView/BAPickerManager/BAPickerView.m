@@ -7,8 +7,9 @@
 
 #import "BAPickerView.h"
 #import "BAPickerToolBarView.h"
+#import "BABasePickerView.h"
 
-@interface BAPickerView () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface BAPickerView ()
 {
    NSString *m_local2DString;
 }
@@ -17,7 +18,7 @@
 @property(nonatomic, strong) UIView *titleBgView;
 @property(nonatomic, strong) NSMutableArray <UILabel *>*titleLabelArray;
 
-@property(nonatomic, strong) UIPickerView *pickerView;
+@property(nonatomic, strong) BABasePickerView *pickerView;
 @property(nonatomic, strong) BAPickerModel *pickerModel;
 
 @property(nonatomic, strong) BAPickerToolBarView *toolBarView;
@@ -135,7 +136,7 @@
                 self.selectCityPicker ? self.selectCityPicker(model):nil;
             }
         } else {
-            self.selectPicker ? self.selectPicker(self.resultRow, self.resultComponent, self.resultString, self.resultArray, self.pickerView):nil;
+            self.selectPicker ? self.selectPicker(self.resultRow, self.resultComponent, self.resultString, self.resultArray):nil;
         }
         [self dismiss];
     };
@@ -154,97 +155,6 @@
     if([arr count] < 2) return iStr;
     m_local2DString = arr[1];
     return arr[0];
-}
-
-#pragma mark - UIPickerViewDataSource
-// 返回需要展示的列（columns）的数目
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    NSInteger num = 0;
-    if (self.isCityPicker) {
-        num = 3;
-    } else if (self.pickerModel.multipleStringsArray.count > 0) {
-        num = self.pickerModel.multipleStringsArray.count;
-    } else {
-        num = 1;
-    }
-    return num;
-}
-
-// 返回每一列的行（rows）数
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    NSInteger num = 0;
-    if (self.isCityPicker) {
-        num = 0 == component ? self.provinceArray.count : 1 == component ? self.cityArray.count : self.areaArray.count;
-    } else if (self.pickerModel.multipleStringsArray.count > 0) {
-        num = [self.pickerModel.multipleStringsArray[component] count];
-    } else {
-        num = self.pickerModel.stringsArray.count;
-    }
-    return num;
-}
-
-#pragma mark - UIPickerViewDelegate
-// 返回每一行的标题
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (self.isCityPicker) {
-        return 0 == component ? [self cutLocalStringForShow:self.provinceArray[row]] : 1 == component ? [self cutLocalStringForShow:self.cityArray[row]] : 0 == self.areaArray.count ? nil : [self cutLocalStringForShow:self.areaArray[row]];
-    } else {
-        return self.pickerModel.multipleStringsArray.count > 0 ? self.pickerModel.multipleStringsArray[component][row] : self.pickerModel.stringsArray[row];
-    }
-}
-
-// 某一行被选择时调用
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (self.isCityPicker) {
-       
-        NSArray *allProvinceCityArray = self.pickerModel.allProvinceCityArray;
-        
-        if (0 == component) {
-            self.selectedArray = allProvinceCityArray[row][@"cities"];
-            [self.cityArray removeAllObjects];
-            
-            [self.selectedArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [self.cityArray addObject:obj[@"city"]];
-            }];
-            
-            self.areaArray = [NSMutableArray arrayWithArray:self.selectedArray[0][@"areas"]];
-            [pickerView reloadComponent:1];
-            [pickerView selectRow:0 inComponent:1 animated:YES];
-            
-            [pickerView reloadComponent:2];
-            [pickerView selectRow:0 inComponent:2 animated:YES];
-        } else if (1 == component) {
-            if (0 == self.selectedArray.count) {
-                self.selectedArray = allProvinceCityArray[0][@"cities"];
-            }
-            
-            self.areaArray = self.selectedArray[row][@"areas"];
-            [pickerView reloadComponent:2];
-            [pickerView selectRow:0 inComponent:2 animated:YES];
-        }
-        
-        NSInteger provinces = [pickerView selectedRowInComponent:0];
-        NSInteger city = [pickerView selectedRowInComponent:1];
-        NSInteger area = [pickerView selectedRowInComponent:2];
-        
-        self.selectedProvince = [self cutLocalString:self.provinceArray[provinces]];
-        self.selectedCity = [self cutLocalString:self.cityArray[city]];
-        self.selectedArea = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[area]];
-        
-        if (self.selectedArea.length) {
-            self.resultString = [NSString stringWithFormat:@"%@,%@,%@", self.selectedProvince, self.selectedCity, self.selectedArea];
-        } else {
-            self.resultString = [NSString stringWithFormat:@"%@,%@", self.selectedProvince, self.selectedCity];
-        }
-    } else if (self.pickerModel.multipleStringsArray.count > 0) {
-        [self.selectedArray replaceObjectAtIndex:component withObject:self.pickerModel.multipleStringsArray[component][row]];
-        self.resultArray = self.selectedArray;
-    } else {
-        NSString *resultString = self.pickerModel.stringsArray[row];
-        self.resultString = resultString;
-    }
-    self.resultRow = row;
-    self.resultComponent = component;
 }
 
 #pragma mark - setter, getter
@@ -403,11 +313,103 @@
     return _toolBarView;
 }
 
-- (UIPickerView *)pickerView {
+- (BABasePickerView *)pickerView {
     if (!_pickerView) {
-        _pickerView = UIPickerView.new;
-        _pickerView.delegate = self;
-        _pickerView.dataSource = self;
+        _pickerView = BABasePickerView.new;
+      
+        BAKit_WeakSelf
+        // 返回需要展示的列（columns）的数目
+        _pickerView.onNumberOfComponentsInPickerView = ^NSInteger(UIPickerView * _Nonnull pickerView) {
+            BAKit_StrongSelf
+            NSInteger num = 0;
+            if (self.isCityPicker) {
+                num = 3;
+            } else if (self.pickerModel.multipleStringsArray.count > 0) {
+                num = self.pickerModel.multipleStringsArray.count;
+            } else {
+                num = 1;
+            }
+            return num;
+        };
+        
+        // 返回每一列的行（rows）数
+        _pickerView.onNumberOfRowsInComponent = ^NSInteger(NSInteger component, UIPickerView * _Nonnull pickerView) {
+            BAKit_StrongSelf
+            NSInteger num = 0;
+            if (self.isCityPicker) {
+                num = 0 == component ? self.provinceArray.count : 1 == component ? self.cityArray.count : self.areaArray.count;
+            } else if (self.pickerModel.multipleStringsArray.count > 0) {
+                num = [self.pickerModel.multipleStringsArray[component] count];
+            } else {
+                num = self.pickerModel.stringsArray.count;
+            }
+            return num;
+        };
+        
+        // 返回每一行的标题
+        _pickerView.onTitleForRowAndComponent = ^NSString * _Nonnull(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
+            BAKit_StrongSelf
+            if (self.isCityPicker) {
+                return 0 == component ? [self cutLocalStringForShow:self.provinceArray[row]] : 1 == component ? [self cutLocalStringForShow:self.cityArray[row]] : 0 == self.areaArray.count ? nil : [self cutLocalStringForShow:self.areaArray[row]];
+            } else {
+                return self.pickerModel.multipleStringsArray.count > 0 ? self.pickerModel.multipleStringsArray[component][row] : self.pickerModel.stringsArray[row];
+            }
+        };
+        
+        // 选中每一行的标题
+        _pickerView.onDidSelectRowAndComponent = ^(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
+            BAKit_StrongSelf
+            if (self.isCityPicker) {
+               
+                NSArray *allProvinceCityArray = self.pickerModel.allProvinceCityArray;
+                
+                if (0 == component) {
+                    self.selectedArray = allProvinceCityArray[row][@"cities"];
+                    [self.cityArray removeAllObjects];
+                    
+                    [self.selectedArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [self.cityArray addObject:obj[@"city"]];
+                    }];
+                    
+                    self.areaArray = [NSMutableArray arrayWithArray:self.selectedArray[0][@"areas"]];
+                    [pickerView reloadComponent:1];
+                    [pickerView selectRow:0 inComponent:1 animated:YES];
+                    
+                    [pickerView reloadComponent:2];
+                    [pickerView selectRow:0 inComponent:2 animated:YES];
+                } else if (1 == component) {
+                    if (0 == self.selectedArray.count) {
+                        self.selectedArray = allProvinceCityArray[0][@"cities"];
+                    }
+                    
+                    self.areaArray = self.selectedArray[row][@"areas"];
+                    [pickerView reloadComponent:2];
+                    [pickerView selectRow:0 inComponent:2 animated:YES];
+                }
+                
+                NSInteger provinces = [pickerView selectedRowInComponent:0];
+                NSInteger city = [pickerView selectedRowInComponent:1];
+                NSInteger area = [pickerView selectedRowInComponent:2];
+                
+                self.selectedProvince = [self cutLocalString:self.provinceArray[provinces]];
+                self.selectedCity = [self cutLocalString:self.cityArray[city]];
+                self.selectedArea = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[area]];
+                
+                if (self.selectedArea.length) {
+                    self.resultString = [NSString stringWithFormat:@"%@,%@,%@", self.selectedProvince, self.selectedCity, self.selectedArea];
+                } else {
+                    self.resultString = [NSString stringWithFormat:@"%@,%@", self.selectedProvince, self.selectedCity];
+                }
+            } else if (self.pickerModel.multipleStringsArray.count > 0) {
+                [self.selectedArray replaceObjectAtIndex:component withObject:self.pickerModel.multipleStringsArray[component][row]];
+                self.resultArray = self.selectedArray;
+            } else {
+                NSString *resultString = self.pickerModel.stringsArray[row];
+                self.resultString = resultString;
+            }
+            self.resultRow = row;
+            self.resultComponent = component;
+        };
     }
     return _pickerView;
 }

@@ -160,7 +160,7 @@ UITableViewDataSource
 
 - (void)pickView2 {
     BAKit_WeakSelf
-    [BAPickerManger initStringsPicker:@[@"性别", @"年龄", @"身高"] showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray, UIPickerView *pickerView) {
+    [BAPickerManger initStringsPicker:@[@"性别", @"年龄", @"身高"] showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
@@ -187,7 +187,7 @@ UITableViewDataSource
 //        BAKit_StrongSelf
 //        BAKit_ShowAlertWithMsg_ios8(resultString);
 //    }];
-    [BAPickerManger initMultipleStringsPicker:multipleStringsArray multipleTitleArray:multipleTitleArray maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6] cancleTitle:@"cancle1111" cancleTitleColor:UIColor.lightGrayColor sureTitle:@"sure" sureTitleColor:UIColor.redColor titleColor:UIColor.greenColor showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray, UIPickerView *pickerView) {
+    [BAPickerManger initMultipleStringsPicker:multipleStringsArray multipleTitleArray:multipleTitleArray maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6] cancleTitle:@"cancle1111" cancleTitleColor:UIColor.lightGrayColor sureTitle:@"sure" sureTitleColor:UIColor.redColor titleColor:UIColor.greenColor showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
