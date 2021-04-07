@@ -1,5 +1,5 @@
 //
-//  BADateResultModel.h
+//  BAPickerResultModel.h
 //  BAPickView
 //
 //  Created by 博爱 on 2021/4/6.
@@ -9,10 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BADateResultModel : NSObject
+@interface BAPickerResultModel : NSObject
 
 // 选中结果保存
 @property(nonatomic, copy) NSString *resultString;
+
 @property(nonatomic, strong) NSDate *resultDate;
 
 @property(nonatomic, copy) NSString *selectedYear;

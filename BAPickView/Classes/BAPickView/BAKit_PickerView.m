@@ -970,18 +970,13 @@
     NSString * dateStr = [NSString stringWithFormat:@"%@-%@",year,mounth];
     NSDateFormatter *formatter = [NSDateFormatter ba_setupDateFormatterWithYM];
     NSDate * date = [formatter dateFromString:dateStr];
-    NSInteger count =  [self ba_totaldaysInMonth:date];
+    NSInteger count =  [NSDate ba_dateTotaldaysInMonth:date];
     for (int i = 1; i < count + 1; i++) {
         NSString *str = [NSString stringWithFormat:@"%02i日",i];
         [_dayArray addObject:str];
     }
     [self.pickView reloadComponent:2];
 
-}
-#pragma mark 计算出当月有多少天
-- (NSInteger)ba_totaldaysInMonth:(NSDate *)date {
-    NSRange daysInOfMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
-    return daysInOfMonth.length;
 }
 
 - (void)ba_removeSelf {

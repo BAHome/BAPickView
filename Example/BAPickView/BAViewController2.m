@@ -84,10 +84,10 @@ UITableViewDataSource
                 [self pickView3];
             } break;
             case 3: {
-                [self pickView4];
+                [self datePickerViewWithType:kBADatePickerType_YM];
             } break;
             case 4: {
-                [self pickView5];
+                [self datePickerViewWithType:kBADatePickerType_YearWeek];
             } break;
             case 5: {
                 [self pickView6];
@@ -97,15 +97,37 @@ UITableViewDataSource
                 break;
         }
     } else if (1 == indexPath.section) {
-        //        NSInteger type = 0;
+        BADatePickerType type = kBADatePickerType_YMD;
         switch (indexPath.row) {
             case 0: {
-                //                type = BAKit_CustomDatePickerDateTypeYMDHMS;
+                type = kBADatePickerType_YMDHMS;
+            } break;
+            case 1: {
+                type = kBADatePickerType_YMDHM;
+            } break;
+            case 2: {
+                type = kBADatePickerType_YMD;
+            } break;
+            case 3: {
+                type = kBADatePickerType_HMS;
+            } break;
+            case 4: {
+                type = kBADatePickerType_YM;
+            } break;
+            case 5: {
+                type = kBADatePickerType_MD;
+            } break;
+            case 6: {
+                type = kBADatePickerType_HM;
+            } break;
+            case 7: {
+                type = kBADatePickerType_YY;
             } break;
                 
             default:
                 break;
         }
+        [self datePickerViewWithType:type];
     }
 }
 
@@ -168,25 +190,15 @@ UITableViewDataSource
 
 - (void)pickView3 {
     BAKit_WeakSelf
-    [BAPickerManger initSystemDatePicker:UIDatePickerModeDate formatterString:@"" showResult:YES cb:^(NSString *resultString, NSDate *resultDate) {
+    [BAPickerManger initSystemDatePicker:UIDatePickerModeDateAndTime formatterString:@"" showResult:YES cb:^(NSString *resultString, NSDate *resultDate) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
 }
 
-- (void)pickView4 {
-    
+- (void)datePickerViewWithType:(BADatePickerType)type {
     BAKit_WeakSelf
-    [BAPickerManger initCustomDatePickerWithType:kBADatePickerType_YM cb:^(BADateResultModel *dateResultModel) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(dateResultModel.resultString);
-    }];
-    
-}
-
-- (void)pickView5 {
-    BAKit_WeakSelf
-    [BAPickerManger initCustomDatePickerWithType:kBADatePickerType_YearWeek cb:^(BADateResultModel *dateResultModel) {
+    [BAPickerManger initCustomDatePickerWithType:type cb:^(BAPickerResultModel *dateResultModel) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(dateResultModel.resultString);
     }];

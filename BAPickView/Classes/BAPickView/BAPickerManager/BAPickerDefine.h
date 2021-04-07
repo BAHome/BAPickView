@@ -14,7 +14,7 @@
 #import <Masonry/Masonry.h>
 
 #import "BACityModel.h"
-#import "BADateResultModel.h"
+#import "BAPickerResultModel.h"
 
 #import "BAKit_ConfigurationDefine.h"
 #import "NSDateFormatter+BAKit.h"
@@ -23,7 +23,7 @@
 // picker 回调
 typedef void (^onSelectPicker)(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray);
 // datePicker 回调
-typedef void (^onSelectDatePicker)(BADateResultModel *dateResultModel);
+typedef void (^onSelectDatePicker)(BAPickerResultModel *dateResultModel);
 typedef void (^onSelectDatePicker2)(NSString *resultString, NSDate *resultDate);
 // cityPicker 回调
 typedef void (^onSelectCityPicker)(BACityModel *model);
@@ -35,6 +35,8 @@ typedef NS_ENUM(NSUInteger, BADatePickerType) {
     kBADatePickerType_YY,
     // 2020-08
     kBADatePickerType_YM,
+    // 08-28
+    kBADatePickerType_MD,
     // 2020-08-28 15:33
     kBADatePickerType_YMDHM,
     // 2020-08-28 15:33:58
@@ -48,6 +50,7 @@ typedef NS_ENUM(NSUInteger, BADatePickerType) {
     // 2021年，第21周
     kBADatePickerType_YearWeek,
 };
+
 
 // 获取当前最顶部的 window
 CG_INLINE UIWindow *

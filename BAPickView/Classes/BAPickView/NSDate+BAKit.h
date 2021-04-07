@@ -258,6 +258,8 @@
 // 2015、2009、004、1998 这四年是 53 周（目前已知），其余均是52周
 + (NSInteger)ba_dateGetWeekNumbersOfYear:(NSInteger)year;
 
+#pragma mark - 当月有多少天
++ (NSInteger)ba_dateTotaldaysInMonth:(NSDate *)date;
 
 + (NSInteger)ba_dateGetDifferenceBySmallDate:(NSDate *)smallDate bigDate:(NSDate *)bigDate;
 

@@ -773,6 +773,12 @@
     return maxNum;
 }
 
+#pragma mark - 当月有多少天
++ (NSInteger)ba_dateTotaldaysInMonth:(NSDate *)date {
+    NSRange daysInOfMonth = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
+    return daysInOfMonth.length;
+}
+
 + (NSInteger)ba_dateGetDifferenceBySmallDate:(NSDate *)smallDate bigDate:(NSDate *)bigDate {
     //获得当前时间
     //    NSDate *now = [NSDate date];
