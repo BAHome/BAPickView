@@ -530,6 +530,24 @@
                 break;
         }
     };
+    self.basePickerView.onViewForRowAndComponent = ^(NSInteger row, NSInteger component, UIView * _Nonnull reusingView, UIPickerView * _Nonnull pickerView) {
+        BAKit_StrongSelf
+        UILabel *pickerLabel = (UILabel *)reusingView;
+        if (!pickerLabel){
+            pickerLabel = UILabel.new;
+            pickerLabel.adjustsFontSizeToFitWidth = YES;
+            pickerLabel.textAlignment = NSTextAlignmentCenter;
+            pickerLabel.backgroundColor = [UIColor clearColor];
+            UIFont *font = [UIFont boldSystemFontOfSize:15];
+            if (self.datePickerModel.titleFont) {
+                font = self.datePickerModel.titleFont;
+            }
+            pickerLabel.font = font;
+        }
+        pickerLabel.text = self.basePickerView.onTitleForRowAndComponent(row, component, pickerView);
+        
+        return pickerLabel;
+    };
 }
 
 #pragma mark 获取 title
@@ -597,7 +615,7 @@
     NSString *year = self.resultModel.selectedYear;
     NSString *mounth = self.resultModel.selectedMounth;
     NSString *day = self.resultModel.selectedDay;
-
+    
     NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@", year, mounth, day];
     self.formatter.dateFormat = @"yyyy-MM-dd";
     NSDate *date = [self.formatter dateFromString:dateStr];
@@ -643,7 +661,7 @@
         self.enableTouchDismiss = configModel.enableTouchDismiss;
         
         self.bgColor = configModel.maskViewBackgroundColor;
-        self.pickerView.backgroundColor = configModel.pickerViewBackgroundColor;
+        self.basePickerView.backgroundColor = configModel.pickerViewBackgroundColor;
         
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             if (@available(iOS 11.0, *)) {
@@ -668,18 +686,33 @@
 - (void)setDatePickerModel:(BADatePickerModel *)datePickerModel {
     _datePickerModel = datePickerModel;
     
+    NSInteger maxYear = datePickerModel.maximumDate.year;
+    maxYear = maxYear > 0 ? maxYear:1900;
+    NSInteger minYear = datePickerModel.minimumDate.year;
+    minYear = minYear > 0 ? minYear:NSDate.date.year + 60;
+    
+    if (maxYear > 0 && minYear > 0) {
+        [self.yearArray removeAllObjects];
+        for (NSInteger i = minYear; i <= maxYear; i++) {
+            NSString *str = [NSString stringWithFormat:@"%04li",(long)i];
+            [self.yearArray addObject:str];
+        }
+    }
+    
     self.datePickerType = datePickerModel.datePickerType;
     // kBADatePickerType_YMDHMS 样式需要特殊处理默认数据
     if (self.datePickerType == kBADatePickerType_YMDHMS) {
-        self.basePickerView.normalFont = [UIFont systemFontOfSize:14];
+        self.datePickerModel.titleFont = [UIFont boldSystemFontOfSize:14];
         // kBADatePickerType_YMDHMS 样式内容过长显示不全，因此省去后缀
         self.showSuffix = NO;
     } else {
         self.showSuffix = YES;
     }
-    // 默认数据
+    
+    
+    // 默认数据，要在设置完数据后再初始化 picker
     [self initPickerData];
-        
+    
     switch (self.datePickerType) {
             // 2020-08-28
         case kBADatePickerType_YMD : {
@@ -767,7 +800,9 @@
                 component = 0;
             }
             [self.pickerView selectRow:[self.mounthArray indexOfObject:self.resultModel.selectedMounth] inComponent:component animated:NO];
-            [self refreshDay];
+            if (self.datePickerType != kBADatePickerType_YM) {
+                [self refreshDay];
+            }
         }
     }
 }

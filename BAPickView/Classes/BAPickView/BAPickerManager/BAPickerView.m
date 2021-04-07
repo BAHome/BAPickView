@@ -18,7 +18,9 @@
 @property(nonatomic, strong) UIView *titleBgView;
 @property(nonatomic, strong) NSMutableArray <UILabel *>*titleLabelArray;
 
-@property(nonatomic, strong) BABasePickerView *pickerView;
+@property(nonatomic, strong) BABasePickerView *basePickerView;
+@property(nonatomic, strong) UIPickerView *pickerView;
+
 @property(nonatomic, strong) BAPickerModel *pickerModel;
 
 @property(nonatomic, strong) BAPickerToolBarView *toolBarView;
@@ -89,8 +91,8 @@
         make.height.mas_equalTo(30);
     }];
     
-    [self.bgView addSubview:self.pickerView];
-    [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bgView addSubview:self.basePickerView];
+    [self.basePickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleBgView.mas_bottom);
         make.left.right.offset(0);
         if (@available(iOS 11.0, *)) {
@@ -140,6 +142,7 @@
         }
         [self dismiss];
     };
+    
 }
 
 - (NSString *)cutLocalStringForShow:(NSString *)iStr {
@@ -179,7 +182,7 @@
         self.enableTouchDismiss = configModel.enableTouchDismiss;
         
         self.bgColor = configModel.maskViewBackgroundColor;
-        self.pickerView.backgroundColor = configModel.pickerViewBackgroundColor;
+        self.basePickerView.backgroundColor = configModel.pickerViewBackgroundColor;
                 
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             if (@available(iOS 11.0, *)) {
@@ -245,7 +248,7 @@
             }];
             
         } else {
-            [self.pickerView mas_updateConstraints:^(MASConstraintMaker *make) {
+            [self.basePickerView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(self.toolBarView.mas_bottom);
             }];
         }
@@ -276,13 +279,13 @@
             self.selectedArea = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[0]];
         }
         
-        [self.pickerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.basePickerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.toolBarView.mas_bottom);
         }];
     } else {
         // 初始默认显示第一个数据
         self.resultString = self.pickerModel.stringsArray.firstObject;
-        [self.pickerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.basePickerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.toolBarView.mas_bottom);
         }];
     }
@@ -313,13 +316,13 @@
     return _toolBarView;
 }
 
-- (BABasePickerView *)pickerView {
-    if (!_pickerView) {
-        _pickerView = BABasePickerView.new;
+- (BABasePickerView *)basePickerView {
+    if (!_basePickerView) {
+        _basePickerView = BABasePickerView.new;
       
         BAKit_WeakSelf
         // 返回需要展示的列（columns）的数目
-        _pickerView.onNumberOfComponentsInPickerView = ^NSInteger(UIPickerView * _Nonnull pickerView) {
+        _basePickerView.onNumberOfComponentsInPickerView = ^NSInteger(UIPickerView * _Nonnull pickerView) {
             BAKit_StrongSelf
             NSInteger num = 0;
             if (self.isCityPicker) {
@@ -333,7 +336,7 @@
         };
         
         // 返回每一列的行（rows）数
-        _pickerView.onNumberOfRowsInComponent = ^NSInteger(NSInteger component, UIPickerView * _Nonnull pickerView) {
+        _basePickerView.onNumberOfRowsInComponent = ^NSInteger(NSInteger component, UIPickerView * _Nonnull pickerView) {
             BAKit_StrongSelf
             NSInteger num = 0;
             if (self.isCityPicker) {
@@ -347,7 +350,7 @@
         };
         
         // 返回每一行的标题
-        _pickerView.onTitleForRowAndComponent = ^NSString * _Nonnull(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
+        _basePickerView.onTitleForRowAndComponent = ^NSString * _Nonnull(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
             BAKit_StrongSelf
             if (self.isCityPicker) {
                 return 0 == component ? [self cutLocalStringForShow:self.provinceArray[row]] : 1 == component ? [self cutLocalStringForShow:self.cityArray[row]] : 0 == self.areaArray.count ? nil : [self cutLocalStringForShow:self.areaArray[row]];
@@ -357,7 +360,7 @@
         };
         
         // 选中每一行的标题
-        _pickerView.onDidSelectRowAndComponent = ^(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
+        _basePickerView.onDidSelectRowAndComponent = ^(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
             BAKit_StrongSelf
             if (self.isCityPicker) {
                
@@ -410,8 +413,27 @@
             self.resultRow = row;
             self.resultComponent = component;
         };
+        
+        _basePickerView.onViewForRowAndComponent = ^(NSInteger row, NSInteger component, UIView * _Nonnull reusingView, UIPickerView * _Nonnull pickerView) {
+            BAKit_StrongSelf
+            UILabel *pickerLabel = (UILabel *)reusingView;
+            if (!pickerLabel){
+                pickerLabel = UILabel.new;
+                pickerLabel.adjustsFontSizeToFitWidth = YES;
+                pickerLabel.textAlignment = NSTextAlignmentCenter;
+                pickerLabel.backgroundColor = [UIColor clearColor];
+                UIFont *font = [UIFont boldSystemFontOfSize:15];
+                if (self.pickerModel.titleFont) {
+                    font = self.pickerModel.titleFont;
+                }
+                pickerLabel.font = font;
+            }
+            pickerLabel.text = self.basePickerView.onTitleForRowAndComponent(row, component, pickerView);
+            
+            return pickerLabel;
+        };
     }
-    return _pickerView;
+    return _basePickerView;
 }
 
 - (NSMutableArray *)selectedArray {

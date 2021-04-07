@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, assign) BOOL enableTouchDismiss;
 
+@property(nonatomic, strong) UIFont *titleFont;
+
 @end
 
 @interface BAPickerModel : BAPickerConfigBaseModel

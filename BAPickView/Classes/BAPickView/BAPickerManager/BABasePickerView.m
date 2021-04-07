@@ -59,28 +59,7 @@
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-    UILabel *pickerLabel = (UILabel *)view;
-    if (!pickerLabel){
-        pickerLabel = [[UILabel alloc] init];
-        pickerLabel.adjustsFontSizeToFitWidth = YES;
-        pickerLabel.textAlignment = NSTextAlignmentCenter;
-        pickerLabel.backgroundColor = [UIColor clearColor];
-        if (self.normalFont) {
-            pickerLabel.font = self.normalFont;
-        }
-//        pickerLabel.textColor = self.ba_pickViewTextColor;
-    }
-    pickerLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
-    
-//    if (self.isShowLineView) {
-//        for (UIView *lineView in pickerView.subviews) {
-//            if (lineView.frame.size.height < 1) {
-//                lineView.backgroundColor = self.ba_pickViewLineViewColor;
-//            }
-//        }
-//    }
-    
-    return pickerLabel;
+    return self.onViewForRowAndComponent ? self.onViewForRowAndComponent(row, component, view, pickerView):nil;
 }
 
 #pragma mark - setter, getter

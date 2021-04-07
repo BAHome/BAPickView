@@ -17,6 +17,7 @@
 #import "BAPickerResultModel.h"
 
 #import "BAKit_ConfigurationDefine.h"
+#import "NSDate+BAKit.h"
 #import "NSDateFormatter+BAKit.h"
 #import "NSBundle+BAPod.h"
 
@@ -41,7 +42,7 @@ typedef NS_ENUM(NSUInteger, BADatePickerType) {
     kBADatePickerType_YMDHM,
     // 2020-08-28 15:33:58
     kBADatePickerType_YMDHMS,
-    // 2020-08-28，周二, 15:33:58
+    // 2020-08-28，周二, 15:33:58 使用系统 datePicker
     kBADatePickerType_YMDEHMS,
     // 15:33
     kBADatePickerType_HM,

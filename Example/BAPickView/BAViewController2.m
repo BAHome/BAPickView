@@ -182,7 +182,7 @@ UITableViewDataSource
 
 - (void)pickView2 {
     BAKit_WeakSelf
-    [BAPickerManger initStringsPicker:@[@"性别", @"年龄", @"身高"] showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+    [BAPickerManger initStringsPicker:@[@"性别", @"年龄", @"身高"] cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
@@ -190,15 +190,22 @@ UITableViewDataSource
 
 - (void)pickView3 {
     BAKit_WeakSelf
-    [BAPickerManger initSystemDatePicker:UIDatePickerModeDateAndTime formatterString:@"" showResult:YES cb:^(NSString *resultString, NSDate *resultDate) {
+    [BAPickerManger initSystemDatePicker:UIDatePickerModeDateAndTime formatterString:@"" cb:^(NSString *resultString, NSDate *resultDate) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
 }
 
 - (void)datePickerViewWithType:(BADatePickerType)type {
+    NSDate *maxDate = nil;
+    NSDate *minDate = nil;
+    if (type == kBADatePickerType_YMD) {
+        maxDate = [NSDate ba_dateAfterYears:1];
+        minDate = [NSDate ba_dateAfterYears:-5];
+    }
+    
     BAKit_WeakSelf
-    [BAPickerManger initCustomDatePickerWithType:type cb:^(BAPickerResultModel *dateResultModel) {
+    [BAPickerManger initCustomDatePickerWithType:type maskViewBackgroundColor:nil maximumDate:maxDate minimumDate:minDate showResult:YES cb:^(BAPickerResultModel *dateResultModel) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(dateResultModel.resultString);
     }];
@@ -214,54 +221,19 @@ UITableViewDataSource
         @[@"145", @"150", @"160", @"168", @"175"]
     ];
     BAKit_WeakSelf
-    //    [BAPickerManger initMultipleStringsPicker:multipleStringsArray cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
-    //        BAKit_StrongSelf
-    //        BAKit_ShowAlertWithMsg_ios8(resultString);
-    //    }];
-    [BAPickerManger initMultipleStringsPicker:multipleStringsArray multipleTitleArray:multipleTitleArray maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6] cancleTitle:@"cancle1111" cancleTitleColor:UIColor.lightGrayColor sureTitle:@"sure" sureTitleColor:UIColor.redColor titleColor:UIColor.greenColor showResult:YES cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+    [BAPickerManger initMultipleStringsPicker:multipleStringsArray
+                           multipleTitleArray:multipleTitleArray
+                      maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6]
+                                  cancleTitle:@"cancle1111"
+                             cancleTitleColor:UIColor.greenColor
+                              cancleTitleFont:[UIFont systemFontOfSize:16]
+                                    sureTitle:@"sure"
+                               sureTitleColor:UIColor.redColor
+                                sureTitleFont:[UIFont systemFontOfSize:16]
+                                           cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
-    
-    
-    //    BAPickerConfigModel *configModel = BAPickerConfigModel.new;
-    //    configModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
-    //
-    //    BAPickerModel *pickerModel = BAPickerModel.new;
-    //    pickerModel.multipleTitleArray = @[@"性别", @"年龄", @"身高"];
-    //    pickerModel.multipleStringsArray =  @[
-    //        @[@"男", @"女"],
-    //        @[@"18", @"22", @"25", @"30", @"36", @"42"],
-    //        @[@"145", @"150", @"160", @"168", @"175"]
-    //    ];
-    //
-    //    // DatePicker
-    ////    BADatePickerModel *datePickerModel = BADatePickerModel.new;
-    ////    datePickerModel.datePickerMode = UIDatePickerModeDateAndTime;
-    ////    datePickerModel.formatterString = @"yyyy-MM-dd KK:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
-    //
-    //    // ToolBar
-    //    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    //    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    //    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    //    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    //    toolBarModel.titleColor = BAKit_Color_RandomRGB_pod();
-    //    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    //
-    //
-    //    configModel.pickerModel = pickerModel;
-    //    configModel.toolBarModel = toolBarModel;
-    //
-    //    BAPickerView *picker = BAPickerView.new;
-    //    picker.configModel = configModel;
-    //
-    ////    BAKit_WeakSelf
-    //    picker.onSelectPicker = ^(NSInteger resultRow, NSInteger resultComponent, NSString * _Nonnull resultString, NSArray * _Nonnull resultArray) {
-    //        BAKit_StrongSelf
-    //        BAKit_ShowAlertWithMsg_ios8(resultString);
-    //    };
-    //
-    //    [picker show];
 }
 
 #pragma mark - setter / getter

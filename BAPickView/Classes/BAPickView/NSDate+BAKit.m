@@ -310,15 +310,20 @@
     }
 }
 
-+ (NSString *)ba_dateAfterYears:(NSInteger)count {
-    NSDate *date = BAKit_Current_Date();
-    NSTimeInterval time = count * 365 * 24 * 60 * 60;
-    date = [date dateByAddingTimeInterval:time];
++ (NSString *)ba_dateStringAfterYears:(NSInteger)count {
+    NSDate *date = [self ba_dateAfterYears:count];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.locale = [NSLocale localeWithLocaleIdentifier:@"China"];
     formatter.dateFormat = BAKit_FormatString_YMD;
     NSString *selfStr = [formatter stringFromDate:date];
     return selfStr;
+}
+
++ (NSDate *)ba_dateAfterYears:(NSInteger)count {
+    NSDate *date = [self ba_dateWorldTimeToChinaTime:NSDate.date];
+    NSTimeInterval time = count * 365 * 24 * 60 * 60;
+    date = [date dateByAddingTimeInterval:time];
+    return date;
 }
 
 - (NSDate *)ba_dateWithYMD {
@@ -364,9 +369,10 @@
  @return NSDate
  */
 + (NSDate *)ba_dateWorldTimeToChinaTime:(NSDate *)date {
-    NSTimeZone *timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+//    NSTimeZone *timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
     NSInteger interval = [timeZone secondsFromGMTForDate:date];
-    NSDate *localeDate = [date  dateByAddingTimeInterval:interval];
+    NSDate *localeDate = [date dateByAddingTimeInterval:interval];
     return localeDate;
 }
 

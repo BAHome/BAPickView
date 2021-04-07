@@ -7,10 +7,14 @@
 
 #import <Foundation/Foundation.h>
 #import "BAPickerDefine.h"
+#import "BAPickerConfigModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger : NSObject
+
++ (void)initStringsPickerWithModel:(BAPickerModel *)pickerModel
+                                cb:(onSelectPicker)cb;
 
 /// 快速创建 pickerView  单列：不显示中间选中结果
 /// @param strings 数据源
@@ -20,105 +24,33 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 快速创建 pickerView  单列
 /// @param strings 数据源
-/// @param showResult 是否显示中间选中结果
-/// @param cb 返回
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-               showResult:(BOOL)showResult
-                       cb:(onSelectPicker)cb;
-/// 快速创建 pickerView  单列
-/// @param strings 数据源
-/// @param cancleTitle 取消按钮文字
-/// @param sureTitle 确定按钮文字
-/// @param showResult 是否显示中间选中结果
-/// @param cb 返回
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-              cancleTitle:(nullable NSString *)cancleTitle
-                sureTitle:(nullable NSString *)sureTitle
-               showResult:(BOOL)showResult
-                       cb:(onSelectPicker)cb;
-
-/// 快速创建 pickerView  单列
-/// @param strings 数据源
-/// @param cancleTitle 取消按钮文字
-/// @param cancleTitleColor 取消按钮文字颜色
-/// @param sureTitle 确定按钮文字
-/// @param sureTitleColor 确定按钮颜色
-/// @param showResult 是否显示中间选中结果
-/// @param cb 返回
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-              cancleTitle:(nullable NSString *)cancleTitle
-         cancleTitleColor:(nullable UIColor *)cancleTitleColor
-                sureTitle:(nullable NSString *)sureTitle
-           sureTitleColor:(nullable UIColor *)sureTitleColor
-               showResult:(BOOL)showResult
-                       cb:(onSelectPicker)cb;
-
-/// 快速创建 pickerView  单列
-/// @param strings 数据源
 /// @param maskViewBackgroundColor 遮罩背景颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
 /// @param cancleTitle 取消按钮文字
 /// @param cancleTitleColor 取消按钮文字颜色
 /// @param sureTitle 确定按钮文字
 /// @param sureTitleColor 确定按钮颜色
-/// @param titleColor 中间选中结果字体颜色
-/// @param showResult 是否显示中间选中结果
 /// @param cb 返回
 + (void)initStringsPicker:(NSArray <NSString *>*)strings
   maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
               cancleTitle:(nullable NSString *)cancleTitle
          cancleTitleColor:(nullable UIColor *)cancleTitleColor
+         cancleTitleFont:(nullable UIFont *)cancleTitleFont
                 sureTitle:(nullable NSString *)sureTitle
            sureTitleColor:(nullable UIColor *)sureTitleColor
-               titleColor:(nullable UIColor *)titleColor
-               showResult:(BOOL)showResult
+            sureTitleFont:(nullable UIFont *)sureTitleFont
                        cb:(onSelectPicker)cb;
 
 @end
 
 @interface BAPickerManger (MultipleStrings)
 
++ (void)initMultipleStringsPickerWithPickerModle:(BAPickerModel *)pickerModel
+                                              cb:(onSelectPicker)cb;
+
 /// 快速创建 pickerView 多列：不显示中间选中结果
 /// @param multipleStringsArray 数据源
 /// @param cb 返回
 + (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                               cb:(onSelectPicker)cb;
-
-/// 快速创建 pickerView 多列
-/// @param multipleStringsArray 数据源
-/// @param showResult 是否显示中间选中结果
-/// @param cb 返回
-+ (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                       showResult:(BOOL)showResult
-                               cb:(onSelectPicker)cb;
-
-/// 快速创建 pickerView 多列
-/// @param multipleStringsArray 数据源
-/// @param cancleTitle 取消按钮文字
-/// @param sureTitle 确定按钮文字
-/// @param showResult 是否显示中间选中结果
-/// @param cb 返回
-+ (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                      cancleTitle:(nullable NSString *)cancleTitle
-                        sureTitle:(nullable NSString *)sureTitle
-                       showResult:(BOOL)showResult
-                               cb:(onSelectPicker)cb;
-
-/// 快速创建 pickerView 多列
-/// @param multipleStringsArray 数据源
-/// @param cancleTitle 取消按钮文字
-/// @param cancleTitleColor 取消按钮文字颜色
-/// @param sureTitle 确定按钮文字
-/// @param sureTitleColor 确定按钮颜色
-/// @param titleColor 中间选中结果字体颜色
-/// @param showResult 是否显示中间选中结果
-/// @param cb 返回
-+ (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                      cancleTitle:(nullable NSString *)cancleTitle
-                 cancleTitleColor:(nullable UIColor *)cancleTitleColor
-                        sureTitle:(nullable NSString *)sureTitle
-                   sureTitleColor:(nullable UIColor *)sureTitleColor
-                       titleColor:(nullable UIColor *)titleColor
-                       showResult:(BOOL)showResult
                                cb:(onSelectPicker)cb;
 
 /// 快速创建 pickerView 多列
@@ -129,19 +61,19 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param cancleTitleColor 取消按钮文字颜色
 /// @param sureTitle 确定按钮文字
 /// @param sureTitleColor 确定按钮颜色
-/// @param titleColor 中间选中结果字体颜色
-/// @param showResult 是否显示中间选中结果
 /// @param cb 返回
 + (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
                multipleTitleArray:(nullable NSArray <NSString *>*)multipleTitleArray
           maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
                       cancleTitle:(nullable NSString *)cancleTitle
                  cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                 cancleTitleFont:(nullable UIFont *)cancleTitleFont
                         sureTitle:(nullable NSString *)sureTitle
                    sureTitleColor:(nullable UIColor *)sureTitleColor
-                       titleColor:(nullable UIColor *)titleColor
-                       showResult:(BOOL)showResult
+                    sureTitleFont:(nullable UIFont *)sureTitleFont
                                cb:(onSelectPicker)cb;
+
+
 
 @end
 
@@ -153,28 +85,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger (SystemDateDatePicker)
 
++ (void)initSystemDatePickerWithModel:(BADatePickerModel *)datePickerModel
+                                   cb:(onSelectDatePicker2)cb;
+
 + (void)initSystemDatePicker:(onSelectDatePicker2)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
-                  showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker2)cb;
-
-+ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
-             formatterString:(nullable NSString *)formatterString
-                 cancleTitle:(nullable NSString *)cancleTitle
-                   sureTitle:(nullable NSString *)sureTitle
-                  showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker2)cb;
-
-+ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
-             formatterString:(nullable NSString *)formatterString
-                 cancleTitle:(nullable NSString *)cancleTitle
-            cancleTitleColor:(nullable UIColor *)cancleTitleColor
-                   sureTitle:(nullable NSString *)sureTitle
-              sureTitleColor:(nullable UIColor *)sureTitleColor
-                  titleColor:(nullable UIColor *)titleColor
-                  showResult:(BOOL)showResult
                           cb:(onSelectDatePicker2)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
@@ -182,16 +99,34 @@ NS_ASSUME_NONNULL_BEGIN
      maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
                  cancleTitle:(nullable NSString *)cancleTitle
             cancleTitleColor:(nullable UIColor *)cancleTitleColor
+            cancleTitleFont:(nullable UIFont *)cancleTitleFont
                    sureTitle:(nullable NSString *)sureTitle
               sureTitleColor:(nullable UIColor *)sureTitleColor
-                  titleColor:(nullable UIColor *)titleColor
-                  showResult:(BOOL)showResult
+               sureTitleFont:(nullable UIFont *)sureTitleFont
                           cb:(onSelectDatePicker2)cb;
+
+
+@end
+
+@interface BAPickerManger (CustomDateDatePicker)
+
++ (void)initCustomDatePickerWithModel:(BADatePickerModel *)datePickerModel
+                                   cb:(onSelectDatePicker)cb;
 
 + (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
                                   cb:(onSelectDatePicker)cb;
 
-@end
++ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
+                          showResult:(BOOL)showResult
+                                  cb:(onSelectDatePicker)cb;
 
++ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
+             maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+                         maximumDate:(nullable NSDate *)maximumDate
+                         minimumDate:(nullable NSDate *)minimumDate
+                          showResult:(BOOL)showResult
+                                  cb:(onSelectDatePicker)cb;
+
+@end
 
 NS_ASSUME_NONNULL_END

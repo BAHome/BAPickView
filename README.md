@@ -496,7 +496,7 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 /*!
  *  获得一个比当前时间大n年的时间，格式为 yyyy-MM-dd
  */
-+ (NSString *)ba_dateAfterYears:(NSInteger)count;
++ (NSDate *)ba_dateAfterYears:(NSInteger)count;
 
 /*!
  *  返回一个只有年月日的时间

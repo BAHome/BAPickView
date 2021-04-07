@@ -9,81 +9,12 @@
 #import "BAPickerView.h"
 #import "BADatePickerView.h"
 #import "BACustomDatePickerView.h"
+#import "NSDate+BAKit.h"
 
 @implementation BAPickerManger
 
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-                       cb:(onSelectPicker)cb {
-    [self initStringsPicker:strings showResult:NO cb:cb];
-}
-
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-               showResult:(BOOL)showResult
-                       cb:(onSelectPicker)cb {
-    [self initStringsPicker:strings cancleTitle:nil sureTitle:nil showResult:showResult cb:cb];
-}
-
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-              cancleTitle:(nullable NSString *)cancleTitle
-                sureTitle:(nullable NSString *)sureTitle
-               showResult:(BOOL)showResult
-                       cb:(onSelectPicker)cb {
-    [self initStringsPicker:strings
-                cancleTitle:cancleTitle
-           cancleTitleColor:nil
-                  sureTitle:sureTitle
-             sureTitleColor:nil
-                 showResult:showResult
-                         cb:cb];
-}
-
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-              cancleTitle:(nullable NSString *)cancleTitle
-         cancleTitleColor:(nullable UIColor *)cancleTitleColor
-                sureTitle:(nullable NSString *)sureTitle
-           sureTitleColor:(nullable UIColor *)sureTitleColor
-               showResult:(BOOL)showResult
-                       cb:(onSelectPicker)cb {
-    [self initStringsPicker:strings
-    maskViewBackgroundColor:nil
-                cancleTitle:cancleTitle
-           cancleTitleColor:cancleTitleColor
-                  sureTitle:sureTitle
-             sureTitleColor:sureTitleColor
-                 titleColor:nil
-                 showResult:showResult
-                         cb:cb];
-}
-
-+ (void)initStringsPicker:(NSArray <NSString *>*)strings
-  maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
-              cancleTitle:(nullable NSString *)cancleTitle
-         cancleTitleColor:(nullable UIColor *)cancleTitleColor
-                sureTitle:(nullable NSString *)sureTitle
-           sureTitleColor:(nullable UIColor *)sureTitleColor
-               titleColor:(nullable UIColor *)titleColor
-               showResult:(BOOL)showResult
-                       cb:(onSelectPicker)cb {
-    // 注意：如果项目中有统一 UI 规范的话，可以二次封装后使用，这样就不用每次都写 configModel 了！！！！
-    BAPickerModel *pickerModel = BAPickerModel.new;
-    pickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
-    pickerModel.stringsArray = strings;
-    
-    // ToolBar
-    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    //    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    toolBarModel.titleColor = titleColor;
-    toolBarModel.cancleTitleColor = cancleTitleColor;
-    toolBarModel.sureTitleColor = sureTitleColor;
-    toolBarModel.cancleTitle = cancleTitle;
-    toolBarModel.sureTitle = sureTitle;
-    toolBarModel.showResult = showResult;
-    
-    pickerModel.toolBarModel = toolBarModel;
-    
++ (void)initStringsPickerWithModel:(BAPickerModel *)pickerModel
+                                cb:(onSelectPicker)cb {
     BAPickerView *picker = BAPickerView.new;
     picker.configModel = pickerModel;
     picker.selectPicker = cb;
@@ -91,57 +22,89 @@
     [picker show];
 }
 
++ (void)initStringsPicker:(NSArray <NSString *>*)strings
+                       cb:(onSelectPicker)cb {
+    [self initStringsPicker:strings
+    maskViewBackgroundColor:nil
+                cancleTitle:nil
+           cancleTitleColor:nil
+            cancleTitleFont:nil
+                  sureTitle:nil
+             sureTitleColor:nil
+              sureTitleFont:nil
+                         cb:cb];
+}
+
++ (void)initStringsPicker:(NSArray <NSString *>*)strings
+  maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+              cancleTitle:(nullable NSString *)cancleTitle
+         cancleTitleColor:(nullable UIColor *)cancleTitleColor
+         cancleTitleFont:(nullable UIFont *)cancleTitleFont
+                sureTitle:(nullable NSString *)sureTitle
+           sureTitleColor:(nullable UIColor *)sureTitleColor
+            sureTitleFont:(nullable UIFont *)sureTitleFont
+                       cb:(onSelectPicker)cb {
+    // 注意：如果项目中有统一 UI 规范的话，可以二次封装后使用，这样就不用每次都写 configModel 了！！！！
+    // Picker
+    BAPickerModel *pickerModel = BAPickerModel.new;
+    if (strings) {
+        pickerModel.stringsArray = strings;
+    }
+    if (maskViewBackgroundColor) {
+        pickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
+    }
+    
+    // ToolBar
+    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    if (cancleTitle) {
+        toolBarModel.cancleTitle = cancleTitle;
+    }
+    if (cancleTitleFont) {
+        toolBarModel.cancleTitleFont = cancleTitleFont;
+    }
+    if (cancleTitleColor) {
+        toolBarModel.cancleTitleColor = cancleTitleColor;
+    }
+    
+    if (sureTitle) {
+        toolBarModel.sureTitle = sureTitle;
+    }
+    if (sureTitleFont) {
+        toolBarModel.sureTitleFont = sureTitleFont;
+    }
+    if (sureTitleColor) {
+        toolBarModel.sureTitleColor = sureTitleColor;
+    }
+    
+    pickerModel.toolBarModel = toolBarModel;
+    
+    [self initStringsPickerWithModel:pickerModel cb:cb];
+}
+
 @end
 
 @implementation BAPickerManger (MultipleStrings)
 
-+ (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                               cb:(onSelectPicker)cb {
-    [self initMultipleStringsPicker:multipleStringsArray showResult:NO cb:cb];
++ (void)initMultipleStringsPickerWithPickerModle:(BAPickerModel *)pickerModel
+                                              cb:(onSelectPicker)cb {
+    BAPickerView *picker = BAPickerView.new;
+    picker.configModel = pickerModel;
+    picker.selectPicker = cb;
+    
+    [picker show];
 }
 
 + (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                       showResult:(BOOL)showResult
-                               cb:(onSelectPicker)cb {
-    [self initMultipleStringsPicker:multipleStringsArray
-                        cancleTitle:nil
-                          sureTitle:nil
-                         showResult:showResult
-                                 cb:cb];
-}
-
-+ (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                      cancleTitle:(nullable NSString *)cancleTitle
-                        sureTitle:(nullable NSString *)sureTitle
-                       showResult:(BOOL)showResult
-                               cb:(onSelectPicker)cb {
-    [self initMultipleStringsPicker:multipleStringsArray
-                        cancleTitle:cancleTitle
-                   cancleTitleColor:nil
-                          sureTitle:sureTitle
-                     sureTitleColor:nil
-                         titleColor:nil
-                         showResult:showResult
-                                 cb:cb];
-}
-
-+ (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                      cancleTitle:(nullable NSString *)cancleTitle
-                 cancleTitleColor:(nullable UIColor *)cancleTitleColor
-                        sureTitle:(nullable NSString *)sureTitle
-                   sureTitleColor:(nullable UIColor *)sureTitleColor
-                       titleColor:(nullable UIColor *)titleColor
-                       showResult:(BOOL)showResult
                                cb:(onSelectPicker)cb {
     [self initMultipleStringsPicker:multipleStringsArray
                  multipleTitleArray:nil
             maskViewBackgroundColor:nil
-                        cancleTitle:cancleTitle
-                   cancleTitleColor:cancleTitleColor
-                          sureTitle:sureTitle
-                     sureTitleColor:sureTitleColor
-                         titleColor:titleColor
-                         showResult:showResult
+                        cancleTitle:nil
+                   cancleTitleColor:nil
+                    cancleTitleFont:nil
+                          sureTitle:nil
+                     sureTitleColor:nil
+                      sureTitleFont:nil
                                  cb:cb];
 }
 
@@ -150,38 +113,49 @@
           maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
                       cancleTitle:(nullable NSString *)cancleTitle
                  cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                 cancleTitleFont:(nullable UIFont *)cancleTitleFont
                         sureTitle:(nullable NSString *)sureTitle
                    sureTitleColor:(nullable UIColor *)sureTitleColor
-                       titleColor:(nullable UIColor *)titleColor
-                       showResult:(BOOL)showResult
+                    sureTitleFont:(nullable UIFont *)sureTitleFont
                                cb:(onSelectPicker)cb {
-        
+    
     // Picker
     BAPickerModel *pickerModel = BAPickerModel.new;
-    pickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
-    pickerModel.multipleTitleArray = multipleTitleArray;
-    pickerModel.multipleStringsArray = multipleStringsArray;
+    if (multipleTitleArray) {
+        pickerModel.multipleTitleArray = multipleTitleArray;
+    }
+    if (multipleStringsArray) {
+        pickerModel.multipleStringsArray = multipleStringsArray;
+    }
+    if (maskViewBackgroundColor) {
+        pickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
+    }
     
     // ToolBar
     BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    //    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    toolBarModel.titleColor = titleColor;
-    toolBarModel.cancleTitleColor = cancleTitleColor;
-    toolBarModel.sureTitleColor = sureTitleColor;
-    toolBarModel.cancleTitle = cancleTitle;
-    toolBarModel.sureTitle = sureTitle;
-    toolBarModel.showResult = showResult;
+    if (cancleTitle) {
+        toolBarModel.cancleTitle = cancleTitle;
+    }
+    if (cancleTitleFont) {
+        toolBarModel.cancleTitleFont = cancleTitleFont;
+    }
+    if (cancleTitleColor) {
+        toolBarModel.cancleTitleColor = cancleTitleColor;
+    }
+    
+    if (sureTitle) {
+        toolBarModel.sureTitle = sureTitle;
+    }
+    if (sureTitleFont) {
+        toolBarModel.sureTitleFont = sureTitleFont;
+    }
+    if (sureTitleColor) {
+        toolBarModel.sureTitleColor = sureTitleColor;
+    }
     
     pickerModel.toolBarModel = toolBarModel;
     
-    BAPickerView *picker = BAPickerView.new;
-    picker.configModel = pickerModel;
-    picker.selectPicker = cb;
-    
-    [picker show];
+    [self initMultipleStringsPickerWithPickerModle:pickerModel cb:cb];
 }
 
 @end
@@ -189,7 +163,6 @@
 @implementation BAPickerManger (City)
 
 + (void)initCityPickerWithCallBack:(onSelectCityPicker)cb {
-        
     // Picker
     BAPickerModel *pickerModel = BAPickerModel.new;
     NSArray *allProvinceCityArray = [[NSArray alloc] initWithContentsOfFile:[self getFilePath]];
@@ -197,17 +170,6 @@
     
     // ToolBar
     BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    //    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    //    toolBarModel.titleColor = titleColor;
-    //    toolBarModel.cancleTitleColor = cancleTitleColor;
-    //    toolBarModel.sureTitleColor = sureTitleColor;
-    //    toolBarModel.cancleTitle = cancleTitle;
-    //    toolBarModel.sureTitle = sureTitle;
-    //    toolBarModel.showResult = showResult;
-    
     pickerModel.toolBarModel = toolBarModel;
     
     BAPickerView *picker = BAPickerView.new;
@@ -232,52 +194,31 @@
 
 @implementation BAPickerManger (SystemDateDatePicker)
 
++ (void)initSystemDatePickerWithModel:(BADatePickerModel *)datePickerModel
+                                   cb:(onSelectDatePicker2)cb {
+    BADatePickerView *picker = BADatePickerView.new;
+    picker.configModel = datePickerModel;
+    
+    picker.selectDatePicker2 = cb;
+    [picker show];
+}
+
 + (void)initSystemDatePicker:(onSelectDatePicker2)cb {
-    [self initSystemDatePicker:UIDatePickerModeDate formatterString:nil showResult:NO cb:cb];
+    [self initSystemDatePicker:UIDatePickerModeDate formatterString:nil cb:cb];
 }
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
-                  showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker2)cb {
-    [self initSystemDatePicker:datePickerMode formatterString:formatterString cancleTitle:nil sureTitle:nil showResult:showResult cb:cb];
-}
-
-+ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
-             formatterString:(nullable NSString *)formatterString
-                 cancleTitle:(nullable NSString *)cancleTitle
-                   sureTitle:(nullable NSString *)sureTitle
-                  showResult:(BOOL)showResult
-                          cb:(onSelectDatePicker2)cb {
-    [self initSystemDatePicker:datePickerMode
-               formatterString:formatterString
-                   cancleTitle:cancleTitle
-              cancleTitleColor:nil
-                     sureTitle:sureTitle
-                sureTitleColor:nil
-                    titleColor:nil
-                    showResult:showResult
-                            cb:cb];
-}
-
-+ (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
-             formatterString:(nullable NSString *)formatterString
-                 cancleTitle:(nullable NSString *)cancleTitle
-            cancleTitleColor:(nullable UIColor *)cancleTitleColor
-                   sureTitle:(nullable NSString *)sureTitle
-              sureTitleColor:(nullable UIColor *)sureTitleColor
-                  titleColor:(nullable UIColor *)titleColor
-                  showResult:(BOOL)showResult
                           cb:(onSelectDatePicker2)cb {
     [self initSystemDatePicker:datePickerMode
                formatterString:formatterString
        maskViewBackgroundColor:nil
-                   cancleTitle:cancleTitle
-              cancleTitleColor:cancleTitleColor
-                     sureTitle:sureTitle
-                sureTitleColor:sureTitleColor
-                    titleColor:titleColor
-                    showResult:showResult
+                   cancleTitle:nil
+              cancleTitleColor:nil
+               cancleTitleFont:nil
+                     sureTitle:nil
+                sureTitleColor:nil
+                 sureTitleFont:nil
                             cb:cb];
 }
 
@@ -286,71 +227,103 @@
      maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
                  cancleTitle:(nullable NSString *)cancleTitle
             cancleTitleColor:(nullable UIColor *)cancleTitleColor
+            cancleTitleFont:(nullable UIFont *)cancleTitleFont
                    sureTitle:(nullable NSString *)sureTitle
               sureTitleColor:(nullable UIColor *)sureTitleColor
-                  titleColor:(nullable UIColor *)titleColor
-                  showResult:(BOOL)showResult
+               sureTitleFont:(nullable UIFont *)sureTitleFont
                           cb:(onSelectDatePicker2)cb {
     
     // DatePicker
     BADatePickerModel *datePickerModel = BADatePickerModel.new;
-    datePickerModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
-    datePickerModel.datePickerMode = datePickerMode ? datePickerMode:UIDatePickerModeDate;
-    datePickerModel.formatterString = formatterString.length ? formatterString :@"yyyy-MM-dd HH:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+    if (datePickerMode) {
+        datePickerModel.datePickerMode = datePickerMode;
+    }
+    if (formatterString.length > 0) {
+        datePickerModel.formatterString = formatterString; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
+    }
+    if (maskViewBackgroundColor) {
+        datePickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
+    }
     
     // ToolBar
     BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    //    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-    toolBarModel.titleColor = titleColor;
-    toolBarModel.cancleTitleColor = cancleTitleColor;
-    toolBarModel.sureTitleColor = sureTitleColor;
-    toolBarModel.cancleTitle = cancleTitle;
-    toolBarModel.sureTitle = sureTitle;
-    toolBarModel.showResult = showResult;
+    if (cancleTitle) {
+        toolBarModel.cancleTitle = cancleTitle;
+    }
+    if (cancleTitleFont) {
+        toolBarModel.cancleTitleFont = cancleTitleFont;
+    }
+    if (cancleTitleColor) {
+        toolBarModel.cancleTitleColor = cancleTitleColor;
+    }
+    
+    if (sureTitle) {
+        toolBarModel.sureTitle = sureTitle;
+    }
+    if (sureTitleFont) {
+        toolBarModel.sureTitleFont = sureTitleFont;
+    }
+    if (sureTitleColor) {
+        toolBarModel.sureTitleColor = sureTitleColor;
+    }
     
     datePickerModel.toolBarModel = toolBarModel;
     
-    BADatePickerView *picker = BADatePickerView.new;
-    picker.configModel = datePickerModel;
-    
-    picker.selectDatePicker2 = cb;
-    [picker show];
+    [self initSystemDatePickerWithModel:datePickerModel cb:cb];
 }
 
-+ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
-                                  cb:(onSelectDatePicker)cb {
-    
-    // DatePicker
-    BADatePickerModel *datePickerModel = BADatePickerModel.new;
-    datePickerModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.6];
-    datePickerModel.datePickerType = datePickerType;
-    datePickerModel.enableTouchDismiss = NO;
-//    datePickerModel.datePickerMode = datePickerMode ? datePickerMode:UIDatePickerModeDate;
-//    datePickerModel.formatterString = formatterString.length ? formatterString :@"yyyy-MM-dd HH:mm:ss"; //@"EEE',' dd MMM yyyy HH':'mm':'ss 'GMT'";
-    
-    // ToolBar
-    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    //    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-    toolBarModel.cancleTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.sureTitleFont = [UIFont systemFontOfSize:14];
-    toolBarModel.titleFont = [UIFont boldSystemFontOfSize:16];
-//    toolBarModel.titleColor = titleColor;
-//    toolBarModel.cancleTitleColor = cancleTitleColor;
-//    toolBarModel.sureTitleColor = sureTitleColor;
-//    toolBarModel.cancleTitle = cancleTitle;
-//    toolBarModel.sureTitle = sureTitle;
-//    toolBarModel.showResult = showResult;
-    
-    datePickerModel.toolBarModel = toolBarModel;
+@end
+
+@implementation BAPickerManger (CustomDateDatePicker)
+
++ (void)initCustomDatePickerWithModel:(BADatePickerModel *)datePickerModel
+                                   cb:(onSelectDatePicker)cb {
     
     BACustomDatePickerView *picker = BACustomDatePickerView.new;
     picker.configModel = datePickerModel;
     
     picker.selectDatePicker = cb;
     [picker show];
+}
+
++ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
+                                  cb:(onSelectDatePicker)cb {
+    [self initCustomDatePickerWithType:datePickerType showResult:NO cb:cb];
+}
+
++ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
+                          showResult:(BOOL)showResult
+                                  cb:(onSelectDatePicker)cb {
+    [self initCustomDatePickerWithType:datePickerType maskViewBackgroundColor:nil maximumDate:nil minimumDate:nil showResult:showResult cb:cb];
+}
+
++ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
+             maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+                         maximumDate:(nullable NSDate *)maximumDate
+                         minimumDate:(nullable NSDate *)minimumDate
+                          showResult:(BOOL)showResult
+                                  cb:(onSelectDatePicker)cb {
+    
+    // DatePicker
+    BADatePickerModel *datePickerModel = BADatePickerModel.new;
+    datePickerModel.datePickerType = datePickerType;
+    if (maskViewBackgroundColor) {
+        datePickerModel.maskViewBackgroundColor = maskViewBackgroundColor;
+    }
+    if (maximumDate) {
+        datePickerModel.maximumDate = maximumDate;// [NSDate ba_dateAfterYears:1]
+    }
+    if (minimumDate) {
+        datePickerModel.minimumDate = minimumDate;
+    }
+    
+    // ToolBar
+    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    toolBarModel.showResult = showResult;
+    
+    datePickerModel.toolBarModel = toolBarModel;
+    
+    [self initCustomDatePickerWithModel:datePickerModel cb:cb];
 }
 
 @end
