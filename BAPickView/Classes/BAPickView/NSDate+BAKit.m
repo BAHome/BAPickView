@@ -364,7 +364,7 @@
  @return NSDate
  */
 + (NSDate *)ba_dateWorldTimeToChinaTime:(NSDate *)date {
-    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     NSInteger interval = [timeZone secondsFromGMTForDate:date];
     NSDate *localeDate = [date  dateByAddingTimeInterval:interval];
     return localeDate;
