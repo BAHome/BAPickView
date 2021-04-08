@@ -750,12 +750,13 @@
     [greCalendar setMinimumDaysInFirstWeek:3];
     
     NSDateComponents *dateComponents = [greCalendar components:NSCalendarUnitWeekOfYear | NSCalendarUnitWeekOfMonth fromDate:date];
-    
+    NSString *result = @"";
     if (inYear) {
-        return [NSString stringWithFormat:@"第%li周",(long)dateComponents.weekOfYear];
+        result = [NSString stringWithFormat:@"第%li周",(long)dateComponents.weekOfYear];
     } else {
-        return [NSString stringWithFormat:@"第%li周",(long)dateComponents.weekOfMonth];
+        result = [NSString stringWithFormat:@"第%li周",(long)dateComponents.weekOfMonth];
     }
+    return result;
 }
 
 + (NSInteger)ba_dateGetWeekNumbersOfYear:(NSInteger)year {
@@ -771,7 +772,7 @@
         NSString *sub = [beforeWeek substringFromIndex:1];
         sub = [sub substringToIndex:sub.length - 1];
         maxNum = [sub floatValue];
-    }else{
+    } else {
         NSString *sub = [lastDayWeek substringFromIndex:1];
         sub = [sub substringToIndex:sub.length - 1];
         maxNum = [sub floatValue];

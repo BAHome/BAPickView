@@ -88,7 +88,7 @@
     [self.titleBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.toolBarView.mas_bottom);
         make.left.right.offset(0);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(0);
     }];
     
     [self.bgView addSubview:self.basePickerView];
@@ -101,8 +101,6 @@
             make.bottom.offset(0);
         }
     }];
-    
-    self.titleBgView.hidden = YES;
 }
 
 - (void)initData {
@@ -181,20 +179,32 @@
     {
         self.enableTouchDismiss = configModel.enableTouchDismiss;
         
-        self.bgColor = configModel.maskViewBackgroundColor;
-        self.basePickerView.backgroundColor = configModel.pickerViewBackgroundColor;
-                
-        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            if (@available(iOS 11.0, *)) {
-                make.height.mas_equalTo(self.safeAreaInsets.bottom + configModel.pickerHeight);
-            } else {
-                make.height.mas_equalTo(configModel.pickerHeight);
-            }
-        }];
+        if (configModel.maskViewBackgroundColor) {
+            self.maskViewBackgroundColor = configModel.maskViewBackgroundColor;
+        }
+        if (configModel.contentViewBackgroundColor) {
+            self.bgView.backgroundColor = configModel.contentViewBackgroundColor;
+        }
+        if (configModel.pickerViewBackgroundColor) {
+            self.basePickerView.backgroundColor = configModel.pickerViewBackgroundColor;
+        }
+         
+        if (configModel.pickerHeight > 0) {
+            [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                if (@available(iOS 11.0, *)) {
+                    make.height.mas_equalTo(self.safeAreaInsets.bottom + configModel.pickerHeight);
+                } else {
+                    make.height.mas_equalTo(configModel.pickerHeight);
+                }
+            }];
+        }
         
-        [self.toolBarView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(configModel.toolBarHeight);
-        }];
+        if (configModel.toolBarHeight > 0) {
+            [self.toolBarView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(configModel.toolBarHeight);
+            }];
+        }
+       
     }
     
     // 内容配置：pickerModel、toolBarModel
@@ -216,7 +226,10 @@
         self.resultArray = self.selectedArray;
         
         if (pickerModel.multipleTitleArray.count == pickerModel.multipleStringsArray.count) {
-            self.titleBgView.hidden = NO;
+            [self.titleBgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(30);
+            }];
+            
             kBAPickerRemoveAllSubviews(self.titleBgView);
             [self.titleLabelArray removeAllObjects];
             
@@ -245,8 +258,8 @@
                         make.left.mas_equalTo(self.titleLabelArray[idx-1].mas_right).offset(0);
                     }
                 }];
+                
             }];
-            
         } else {
             [self.basePickerView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.top.mas_equalTo(self.toolBarView.mas_bottom);
@@ -311,7 +324,7 @@
 - (BAPickerToolBarView *)toolBarView {
     if (!_toolBarView) {
         _toolBarView = BAPickerToolBarView.new;
-        _toolBarView.backgroundColor = UIColor.whiteColor;
+        _toolBarView.backgroundColor = UIColor.clearColor;
     }
     return _toolBarView;
 }
@@ -319,7 +332,7 @@
 - (BABasePickerView *)basePickerView {
     if (!_basePickerView) {
         _basePickerView = BABasePickerView.new;
-      
+        _basePickerView.backgroundColor = UIColor.clearColor;
         BAKit_WeakSelf
         // 返回需要展示的列（columns）的数目
         _basePickerView.onNumberOfComponentsInPickerView = ^NSInteger(UIPickerView * _Nonnull pickerView) {

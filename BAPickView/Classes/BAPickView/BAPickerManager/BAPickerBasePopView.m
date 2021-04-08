@@ -57,7 +57,7 @@
     
     [view addSubview:self];
     self.frame = view.bounds;
-    self.backgroundColor = self.bgColor ? self.bgColor:[UIColor.blackColor colorWithAlphaComponent:0.3];
+    self.backgroundColor = self.maskViewBackgroundColor ? self.maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.3];
 }
 
 - (void)dismiss {
@@ -77,11 +77,11 @@
 
 #pragma mark - setter, getter
 
-- (void)setBgColor:(UIColor *)bgColor {
-    _bgColor = bgColor;
+- (void)setMaskViewBackgroundColor:(UIColor *)maskViewBackgroundColor {
+    _maskViewBackgroundColor = maskViewBackgroundColor;
     
-    if (bgColor) {
-        self.backgroundColor = bgColor;        
+    if (maskViewBackgroundColor) {
+        self.backgroundColor = maskViewBackgroundColor;
     }
 }
 

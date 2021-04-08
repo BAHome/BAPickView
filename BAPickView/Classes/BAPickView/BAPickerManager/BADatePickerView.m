@@ -110,8 +110,15 @@
     {
         self.enableTouchDismiss = configModel.enableTouchDismiss;
         
-        self.bgColor = configModel.maskViewBackgroundColor;
-        self.datePicker.backgroundColor = configModel.pickerViewBackgroundColor;
+        if (configModel.maskViewBackgroundColor) {
+            self.maskViewBackgroundColor = configModel.maskViewBackgroundColor;
+        }
+        if (configModel.contentViewBackgroundColor) {
+            self.bgView.backgroundColor = configModel.contentViewBackgroundColor;
+        }
+        if (configModel.pickerViewBackgroundColor) {
+            self.datePicker.backgroundColor = configModel.pickerViewBackgroundColor;
+        }
                 
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             if (@available(iOS 11.0, *)) {

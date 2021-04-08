@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - common
 /// 背景遮罩颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
 @property(nonatomic, strong) UIColor *maskViewBackgroundColor;
+/// contentView 的背景颜色
+@property(nonatomic, strong) UIColor *contentViewBackgroundColor;
 /// picker 的背景颜色
 @property(nonatomic, strong) UIColor *pickerViewBackgroundColor;
 /// picker 的高度
@@ -78,13 +80,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - common
 /// ToolBar：是否显示选中结果，默认：YES
 @property(nonatomic, assign) BOOL showResult;
-/// ToolBar：默认标题，例如：请选择出生日期
-@property(nonatomic, copy) NSString *defaultTitle;
 
 @property(nonatomic, assign) BOOL showBottomeLine;
 @property(nonatomic, strong) UIColor *bottomeLineColor;
 
 #pragma mark - title
+/// ToolBar：默认标题，例如：请选择出生日期
+@property(nonatomic, copy) NSString *title;
 /// ToolBar：左边按钮 title
 @property(nonatomic, copy) NSString *cancleTitle;
 /// ToolBar：右边按钮 title

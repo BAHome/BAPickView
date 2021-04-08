@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property(nonatomic, strong) UIView *contentView;
 /// 默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
-@property(nonatomic, strong) UIColor *bgColor;
+@property(nonatomic, strong) UIColor *maskViewBackgroundColor;
 
 /// 默认 yes
 @property(nonatomic, assign) BOOL enableTouchDismiss;

@@ -182,7 +182,7 @@ UITableViewDataSource
 
 - (void)pickView2 {
     BAKit_WeakSelf
-    [BAPickerManger initStringsPicker:@[@"性别", @"年龄", @"身高"] cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+    [BAPickerManger initStringsPickerWithTitle:@"请选择结果" strings:@[@"性别", @"年龄", @"身高"] showResult:NO cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];
@@ -190,26 +190,54 @@ UITableViewDataSource
 
 - (void)pickView3 {
     BAKit_WeakSelf
-    [BAPickerManger initSystemDatePicker:UIDatePickerModeDateAndTime formatterString:@"" cb:^(BAPickerResultModel *resultModel) {
+    [BAPickerManger initSystemDatePickerTitle:nil datePickerMode:UIDatePickerModeDateAndTime showResult:NO cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 
 - (void)datePickerViewWithType:(BADatePickerType)type {
-    NSDate *maxDate = nil;
-    NSDate *minDate = nil;
+    NSDate *maximumDate = nil;
+    NSDate *minimumDate = nil;
     if (type == kBADatePickerType_YMD) {
-        maxDate = [NSDate ba_dateAfterYears:1];
-        minDate = [NSDate ba_dateAfterYears:-5];
+        maximumDate = [NSDate ba_dateAfterYears:1];
+        minimumDate = [NSDate ba_dateAfterYears:-5];
     }
     
     BAKit_WeakSelf
-    [BAPickerManger initCustomDatePickerWithType:type maskViewBackgroundColor:nil maximumDate:maxDate minimumDate:minDate showResult:YES cb:^(BAPickerResultModel *resultModel) {
+    // DatePicker
+    BADatePickerModel *datePickerModel = BADatePickerModel.new;
+    datePickerModel.datePickerType = type;
+    datePickerModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.7];
+    datePickerModel.contentViewBackgroundColor = BAKit_Color_RandomRGB_pod();
+    datePickerModel.pickerViewBackgroundColor = BAKit_Color_RandomRGB_pod();
+    
+    if (maximumDate) {
+        datePickerModel.maximumDate = maximumDate;// [NSDate ba_dateAfterYears:1]
+    }
+    if (minimumDate) {
+        datePickerModel.minimumDate = minimumDate;
+    }
+    
+    // ToolBar
+    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    toolBarModel.title = @"请选择时间";
+    //    toolBarModel.titleFont = titleFont;
+    toolBarModel.cancleTitle = @"cancle888";
+    //    toolBarModel.cancleTitleFont = cancleTitleFont;
+    toolBarModel.cancleTitleColor = UIColor.greenColor;
+    toolBarModel.sureTitle = @"sure";
+    //    toolBarModel.sureTitleFont = sureTitleFont;
+    toolBarModel.sureTitleColor = UIColor.redColor;
+    toolBarModel.showResult = YES;
+    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
+    datePickerModel.toolBarModel = toolBarModel;
+    
+    [BAPickerManger initCustomDatePickerWithModel:datePickerModel cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
+        // 打印结果 看 resultModel
         BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
-
 }
 
 - (void)pickView6 {
@@ -221,16 +249,19 @@ UITableViewDataSource
         @[@"145", @"150", @"160", @"168", @"175"]
     ];
     BAKit_WeakSelf
-    [BAPickerManger initMultipleStringsPicker:multipleStringsArray
-                           multipleTitleArray:multipleTitleArray
-                      maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6]
-                                  cancleTitle:@"cancle1111"
-                             cancleTitleColor:UIColor.greenColor
-                              cancleTitleFont:[UIFont systemFontOfSize:16]
-                                    sureTitle:@"sure"
-                               sureTitleColor:UIColor.redColor
-                                sureTitleFont:[UIFont systemFontOfSize:16]
-                                           cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+    [BAPickerManger initMultipleStringsPickerWithTitle:@"请选择"
+                                             titleFont:nil
+                                  multipleStringsArray:multipleStringsArray
+                                    multipleTitleArray:multipleTitleArray
+                               maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6]
+                                           cancleTitle:@"cancle1111"
+                                      cancleTitleColor:UIColor.greenColor
+                                       cancleTitleFont:[UIFont systemFontOfSize:16]
+                                             sureTitle:@"sure"
+                                        sureTitleColor:UIColor.redColor
+                                         sureTitleFont:[UIFont systemFontOfSize:16]
+                                            showResult:YES
+                                                    cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultString);
     }];

@@ -31,7 +31,6 @@
 }
 
 - (void)initUI {
-    
     [self addSubview:self.cancleButton];
     [self.cancleButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(12);
@@ -48,9 +47,9 @@
     
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.offset(0);
-        make.left.mas_greaterThanOrEqualTo(self.cancleButton.mas_right).offset(10);
-        make.right.mas_lessThanOrEqualTo(self.sureButton.mas_left).offset(-10);
+        make.centerY.offset(0);
+        make.left.mas_equalTo(self.cancleButton.mas_right).offset(10);
+        make.right.mas_greaterThanOrEqualTo(self.sureButton.mas_left).offset(-10);
     }];
     self.titleLabel.hidden = NO;
 }
@@ -78,6 +77,10 @@
 
 - (void)setToolBarModel:(BAPickerToolBarModel *)toolBarModel {
     _toolBarModel = toolBarModel;
+    
+    if (toolBarModel.title.length) {
+        self.titleLabel.text = toolBarModel.title;
+    }
     
 #pragma mark - color
     {
@@ -116,6 +119,7 @@
                 make.width.mas_equalTo(name_w);
             }];
             [self.cancleButton setTitle:toolBarModel.cancleTitle forState:UIControlStateNormal];
+           
         }
         if (toolBarModel.sureTitle.length) {
             CGFloat name_w = [toolBarModel.sureTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:toolBarModel.sureTitleFont ? toolBarModel.sureTitleFont : self.sureButton.titleLabel.font} context:nil].size.width;
@@ -127,7 +131,6 @@
         }
     }
   
-    
 }
 
 - (UIView *)lineView {

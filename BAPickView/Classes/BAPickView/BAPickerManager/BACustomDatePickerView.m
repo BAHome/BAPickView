@@ -661,9 +661,15 @@
     {
         self.enableTouchDismiss = configModel.enableTouchDismiss;
         
-        self.bgColor = configModel.maskViewBackgroundColor;
-        self.basePickerView.backgroundColor = configModel.pickerViewBackgroundColor;
-        
+        if (configModel.maskViewBackgroundColor) {
+            self.maskViewBackgroundColor = configModel.maskViewBackgroundColor;
+        }
+        if (configModel.contentViewBackgroundColor) {
+            self.bgView.backgroundColor = configModel.contentViewBackgroundColor;
+        }
+        if (configModel.pickerViewBackgroundColor) {
+            self.basePickerView.backgroundColor = configModel.pickerViewBackgroundColor;
+        }
         [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
             if (@available(iOS 11.0, *)) {
                 make.height.mas_equalTo(self.safeAreaInsets.bottom + configModel.pickerHeight);
