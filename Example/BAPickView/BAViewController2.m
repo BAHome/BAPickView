@@ -190,9 +190,9 @@ UITableViewDataSource
 
 - (void)pickView3 {
     BAKit_WeakSelf
-    [BAPickerManger initSystemDatePicker:UIDatePickerModeDateAndTime formatterString:@"" cb:^(NSString *resultString, NSDate *resultDate) {
+    [BAPickerManger initSystemDatePicker:UIDatePickerModeDateAndTime formatterString:@"" cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 
@@ -205,9 +205,9 @@ UITableViewDataSource
     }
     
     BAKit_WeakSelf
-    [BAPickerManger initCustomDatePickerWithType:type maskViewBackgroundColor:nil maximumDate:maxDate minimumDate:minDate showResult:YES cb:^(BAPickerResultModel *dateResultModel) {
+    [BAPickerManger initCustomDatePickerWithType:type maskViewBackgroundColor:nil maximumDate:maxDate minimumDate:minDate showResult:YES cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(dateResultModel.resultString);
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 
 }

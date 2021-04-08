@@ -17,8 +17,10 @@
 
 @property(nonatomic, strong) BAPickerToolBarView *toolBarView;
 
+// 选中结果保存
 @property(nonatomic, copy) NSString *resultString;
 @property(nonatomic, strong) NSDate *resultDate;
+@property(nonatomic, strong) BAPickerResultModel *resultModel;
 
 @end
 
@@ -77,8 +79,7 @@
     };
     self.toolBarView.onSureButton = ^{
         BAKit_StrongSelf
-        
-        self.selectDatePicker2 ? self.selectDatePicker2(self.resultString, self.resultDate):nil;
+        self.selectDatePicker ? self.selectDatePicker(self.resultModel):nil;
         [self dismiss];
     };
     
@@ -88,6 +89,7 @@
 #pragma mark 日期选择器数据更新
 - (void)datePickValueChanged:(UIDatePicker *)sender {
     self.resultDate = sender.date;
+    self.resultModel.resultDate = sender.date;
 }
 
 #pragma mark - setter, getter
@@ -97,6 +99,7 @@
     
     NSString *resultString = [self.formatter stringFromDate:resultDate];
     self.resultString = resultString;
+    self.resultModel.resultString = resultString;
     self.toolBarView.result = resultString;
 }
 
@@ -203,6 +206,13 @@
         }
     }
     return _datePicker;
+}
+
+- (BAPickerResultModel *)resultModel {
+    if (!_resultModel) {
+        _resultModel = BAPickerResultModel.new;
+    }
+    return _resultModel;
 }
 
 @end

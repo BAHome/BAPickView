@@ -22,12 +22,11 @@
 #import "NSBundle+BAPod.h"
 
 // picker 回调
-typedef void (^onSelectPicker)(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray);
+typedef void (^BASelectPickerBlock)(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray);
 // datePicker 回调
-typedef void (^onSelectDatePicker)(BAPickerResultModel *dateResultModel);
-typedef void (^onSelectDatePicker2)(NSString *resultString, NSDate *resultDate);
+typedef void (^BASelectDatePickerBlock)(BAPickerResultModel *resultModel);
 // cityPicker 回调
-typedef void (^onSelectCityPicker)(BACityModel *model);
+typedef void (^BASelectCityPickerBlock)(BACityModel *model);
 
 typedef NS_ENUM(NSUInteger, BADatePickerType) {
     // 2020-08-28
@@ -42,7 +41,7 @@ typedef NS_ENUM(NSUInteger, BADatePickerType) {
     kBADatePickerType_YMDHM,
     // 2020-08-28 15:33:58
     kBADatePickerType_YMDHMS,
-    // 2020-08-28，周二, 15:33:58 使用系统 datePicker
+    // 2020-08-28，周二, 15:33:58 请使用系统 [BAPickerManger initSystemDatePickerWithModel:]
     kBADatePickerType_YMDEHMS,
     // 15:33
     kBADatePickerType_HM,
@@ -55,7 +54,7 @@ typedef NS_ENUM(NSUInteger, BADatePickerType) {
 
 // 获取当前最顶部的 window
 CG_INLINE UIWindow *
-kBAGetAlertWindow() {
+kBAPickerGetAlertWindow() {
     UIWindow *alertWindow = [UIApplication sharedApplication].keyWindow;
     if (alertWindow.windowLevel != UIWindowLevelNormal) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"windowLevel == %ld AND hidden == 0 " , UIWindowLevelNormal];
@@ -64,16 +63,12 @@ kBAGetAlertWindow() {
     return alertWindow;
 }
 
+// 移除 view 所有 subviews
 CG_INLINE void
-kBARemoveAllSubviews(UIView *view) {
+kBAPickerRemoveAllSubviews(UIView *view) {
     while (view.subviews.count) {
         [view.subviews.lastObject removeFromSuperview];
     }
 }
 
-
-
 #endif /* BAPickerDefine_h */
-
-
-

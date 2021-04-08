@@ -217,7 +217,7 @@
         
         if (pickerModel.multipleTitleArray.count == pickerModel.multipleStringsArray.count) {
             self.titleBgView.hidden = NO;
-            kBARemoveAllSubviews(self.titleBgView);
+            kBAPickerRemoveAllSubviews(self.titleBgView);
             [self.titleLabelArray removeAllObjects];
             
             BAKit_WeakSelf

@@ -14,13 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BAPickerManger : NSObject
 
 + (void)initStringsPickerWithModel:(BAPickerModel *)pickerModel
-                                cb:(onSelectPicker)cb;
+                                cb:(BASelectPickerBlock)cb;
 
 /// 快速创建 pickerView  单列：不显示中间选中结果
 /// @param strings 数据源
 /// @param cb 返回
 + (void)initStringsPicker:(NSArray <NSString *>*)strings
-                       cb:(onSelectPicker)cb;
+                       cb:(BASelectPickerBlock)cb;
 
 /// 快速创建 pickerView  单列
 /// @param strings 数据源
@@ -38,20 +38,20 @@ NS_ASSUME_NONNULL_BEGIN
                 sureTitle:(nullable NSString *)sureTitle
            sureTitleColor:(nullable UIColor *)sureTitleColor
             sureTitleFont:(nullable UIFont *)sureTitleFont
-                       cb:(onSelectPicker)cb;
+                       cb:(BASelectPickerBlock)cb;
 
 @end
 
 @interface BAPickerManger (MultipleStrings)
 
 + (void)initMultipleStringsPickerWithPickerModle:(BAPickerModel *)pickerModel
-                                              cb:(onSelectPicker)cb;
+                                              cb:(BASelectPickerBlock)cb;
 
 /// 快速创建 pickerView 多列：不显示中间选中结果
 /// @param multipleStringsArray 数据源
 /// @param cb 返回
 + (void)initMultipleStringsPicker:(NSArray <NSArray *>*)multipleStringsArray
-                               cb:(onSelectPicker)cb;
+                               cb:(BASelectPickerBlock)cb;
 
 /// 快速创建 pickerView 多列
 /// @param multipleStringsArray 数据源
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
                         sureTitle:(nullable NSString *)sureTitle
                    sureTitleColor:(nullable UIColor *)sureTitleColor
                     sureTitleFont:(nullable UIFont *)sureTitleFont
-                               cb:(onSelectPicker)cb;
+                               cb:(BASelectPickerBlock)cb;
 
 
 
@@ -79,20 +79,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger (City)
 
-+ (void)initCityPickerWithCallBack:(onSelectCityPicker)cb;
++ (void)initCityPickerWithCallBack:(BASelectCityPickerBlock)cb;
 
 @end
 
 @interface BAPickerManger (SystemDateDatePicker)
 
 + (void)initSystemDatePickerWithModel:(BADatePickerModel *)datePickerModel
-                                   cb:(onSelectDatePicker2)cb;
+                                   cb:(BASelectDatePickerBlock)cb;
 
-+ (void)initSystemDatePicker:(onSelectDatePicker2)cb;
++ (void)initSystemDatePicker:(BASelectDatePickerBlock)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
-                          cb:(onSelectDatePicker2)cb;
+                          cb:(BASelectDatePickerBlock)cb;
 
 + (void)initSystemDatePicker:(UIDatePickerMode)datePickerMode
              formatterString:(nullable NSString *)formatterString
@@ -103,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
                    sureTitle:(nullable NSString *)sureTitle
               sureTitleColor:(nullable UIColor *)sureTitleColor
                sureTitleFont:(nullable UIFont *)sureTitleFont
-                          cb:(onSelectDatePicker2)cb;
+                          cb:(BASelectDatePickerBlock)cb;
 
 
 @end
@@ -111,21 +111,21 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BAPickerManger (CustomDateDatePicker)
 
 + (void)initCustomDatePickerWithModel:(BADatePickerModel *)datePickerModel
-                                   cb:(onSelectDatePicker)cb;
+                                   cb:(BASelectDatePickerBlock)cb;
 
 + (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
-                                  cb:(onSelectDatePicker)cb;
+                                  cb:(BASelectDatePickerBlock)cb;
 
 + (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
                           showResult:(BOOL)showResult
-                                  cb:(onSelectDatePicker)cb;
+                                  cb:(BASelectDatePickerBlock)cb;
 
 + (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
              maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
                          maximumDate:(nullable NSDate *)maximumDate
                          minimumDate:(nullable NSDate *)minimumDate
                           showResult:(BOOL)showResult
-                                  cb:(onSelectDatePicker)cb;
+                                  cb:(BASelectDatePickerBlock)cb;
 
 @end
 

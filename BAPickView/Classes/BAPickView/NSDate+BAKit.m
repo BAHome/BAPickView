@@ -753,7 +753,7 @@
     
     if (inYear) {
         return [NSString stringWithFormat:@"第%li周",(long)dateComponents.weekOfYear];
-    }else{
+    } else {
         return [NSString stringWithFormat:@"第%li周",(long)dateComponents.weekOfMonth];
     }
 }

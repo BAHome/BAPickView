@@ -47,7 +47,7 @@
     if (self.superview) {
         return;
     }
-    [self showOnView:kBAGetAlertWindow()];
+    [self showOnView:kBAPickerGetAlertWindow()];
 }
 
 - (void)showOnView:(UIView *)view {
@@ -62,7 +62,7 @@
 
 - (void)dismiss {
     self.onDismiss ? self.onDismiss():nil;
-    kBARemoveAllSubviews(self);
+    kBAPickerRemoveAllSubviews(self);
     [self removeFromSuperview];
 }
 

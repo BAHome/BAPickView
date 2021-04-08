@@ -517,6 +517,7 @@
                     [pickerView reloadComponent:1];
                     //                    [pickerView selectRow:0 inComponent:1 animated:YES];
                     year = self.yearArray[row];
+                    
                 } else {
                     week = self.weekArray[row];
                 }

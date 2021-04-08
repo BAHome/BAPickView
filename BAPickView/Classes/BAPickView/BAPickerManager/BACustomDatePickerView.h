@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong) BADatePickerModel *configModel;
 
-@property(nonatomic, copy) onSelectDatePicker selectDatePicker;
+@property(nonatomic, copy) BASelectDatePickerBlock selectDatePicker;
 
 @end
 

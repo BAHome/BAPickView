@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong) BAPickerModel *configModel;
 
-@property(nonatomic, copy) onSelectPicker selectPicker;
-@property(nonatomic, copy) onSelectCityPicker selectCityPicker;
+@property(nonatomic, copy) BASelectPickerBlock selectPicker;
+@property(nonatomic, copy) BASelectCityPickerBlock selectCityPicker;
 
 @end
 
