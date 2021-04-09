@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIColor *bottomeLineColor;
 
 #pragma mark - title
-/// ToolBar：默认标题，例如：请选择出生日期
+/// ToolBar：默认标题，例如：请选择出生日期，注：若 showResult = YES && title 不为空，会优先显示 title，若 showResult = YES && title 为空，会优先显示 默认选中结果，
 @property(nonatomic, copy) NSString *title;
 /// ToolBar：左边按钮 title
 @property(nonatomic, copy) NSString *cancleTitle;
@@ -103,12 +103,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIColor *sureTitleColor;
 
 #pragma mark - font
-/// ToolBar：中间标题文字字体
+/// ToolBar：中间标题文字字体，默认：[UIFont boldSystemFontOfSize:15]
 @property(nonatomic, strong) UIFont *titleFont;
 /// ToolBar：左边按钮文字字体
 @property(nonatomic, strong) UIFont *cancleTitleFont;
 /// ToolBar：右边按钮文字字体
 @property(nonatomic, strong) UIFont *sureTitleFont;
+
+#pragma mark - temp
+/// 是否显示默认选中结果
+@property(nonatomic, assign) BOOL temp_showDefaultResult;
 
 @end
 

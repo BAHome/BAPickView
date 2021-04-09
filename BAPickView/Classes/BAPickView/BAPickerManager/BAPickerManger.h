@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param pickerModel 自定义 model
 /// @param cb 返回
 + (void)initStringsPickerWithModel:(BAPickerModel *)pickerModel
-                                cb:(BASelectPickerBlock)cb;
+                                cb:(BAPickerResultBlock)cb;
 
 /// 快速创建 pickerView  单列
 /// @param title 中间标题，例如：请选择日期
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)initStringsPickerWithTitle:(nullable NSString *)title
                            strings:(NSArray <NSString *>*)strings
                         showResult:(BOOL)showResult
-                                cb:(BASelectPickerBlock)cb ;
+                                cb:(BAPickerResultBlock)cb ;
 
 /// 快速创建 pickerView  单列
 /// @param title 中间标题，例如：请选择日期
@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
                     sureTitleColor:(nullable UIColor *)sureTitleColor
                      sureTitleFont:(nullable UIFont *)sureTitleFont
                         showResult:(BOOL)showResult
-                                cb:(BASelectPickerBlock)cb;
+                                cb:(BAPickerResultBlock)cb;
 
 @end
 
@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param pickerModel 自定义 model
 /// @param cb 返回
 + (void)initMultipleStringsPickerWithPickerModle:(BAPickerModel *)pickerModel
-                                              cb:(BASelectPickerBlock)cb;
+                                              cb:(BAPickerResultBlock)cb;
 
 /// 快速创建 pickerView 多列
 /// @param title 中间标题，例如：请选择日期 
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)initMultipleStringsPickerWithTitle:(nullable NSString *)title
                       multipleStringsArray:(NSArray <NSArray *>*)multipleStringsArray
                                 showResult:(BOOL)showResult
-                                        cb:(BASelectPickerBlock)cb;
+                                        cb:(BAPickerResultBlock)cb;
 
 /// 快速创建 pickerView 多列
 /// @param title 中间标题，例如：请选择日期
@@ -101,27 +101,31 @@ NS_ASSUME_NONNULL_BEGIN
                             sureTitleColor:(nullable UIColor *)sureTitleColor
                              sureTitleFont:(nullable UIFont *)sureTitleFont
                                 showResult:(BOOL)showResult
-                                        cb:(BASelectPickerBlock)cb;
+                                        cb:(BAPickerResultBlock)cb;
 
 @end
 
 @interface BAPickerManger (City)
 
-+ (void)initCityPickerWithCallBack:(BASelectCityPickerBlock)cb;
++ (void)initCityPickerWithCallBack:(BAPickerCityResultBlock)cb;
+
++ (void)initCityPickerWithTitle:(nullable NSString *)title
+                     showResult:(BOOL)showResult
+                             cb:(BAPickerCityResultBlock)cb;
 
 @end
 
 @interface BAPickerManger (SystemDateDatePicker)
 
 + (void)initSystemDatePickerWithModel:(BADatePickerModel *)datePickerModel
-                                   cb:(BASelectDatePickerBlock)cb;
+                                   cb:(BAPickerResultBlock)cb;
 
-+ (void)initSystemDatePicker:(BASelectDatePickerBlock)cb;
++ (void)initSystemDatePicker:(BAPickerResultBlock)cb;
 
 + (void)initSystemDatePickerTitle:(nullable NSString *)title
                    datePickerMode:(UIDatePickerMode)datePickerMode
                        showResult:(BOOL)showResult
-                               cb:(BASelectDatePickerBlock)cb;
+                               cb:(BAPickerResultBlock)cb;
 
 + (void)initSystemDatePickerTitle:(nullable NSString *)title
                         titleFont:(nullable UIFont *)titleFont
@@ -135,22 +139,22 @@ NS_ASSUME_NONNULL_BEGIN
                    sureTitleColor:(nullable UIColor *)sureTitleColor
                     sureTitleFont:(nullable UIFont *)sureTitleFont
                        showResult:(BOOL)showResult
-                               cb:(BASelectDatePickerBlock)cb;
+                               cb:(BAPickerResultBlock)cb;
 
 @end
 
 @interface BAPickerManger (CustomDateDatePicker)
 
 + (void)initCustomDatePickerWithModel:(BADatePickerModel *)datePickerModel
-                                   cb:(BASelectDatePickerBlock)cb;
+                                   cb:(BAPickerResultBlock)cb;
 
 + (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
-                                  cb:(BASelectDatePickerBlock)cb;
+                                  cb:(BAPickerResultBlock)cb;
 
 + (void)initCustomDatePickerWithTitle:(nullable NSString *)title
                        datePickerType:(BADatePickerType)datePickerType
                            showResult:(BOOL)showResult
-                                   cb:(BASelectDatePickerBlock)cb;
+                                   cb:(BAPickerResultBlock)cb;
 
 + (void)initCustomDatePickerWithTitle:(nullable NSString *)title
                             titleFont:(nullable UIFont *)titleFont
@@ -165,7 +169,7 @@ NS_ASSUME_NONNULL_BEGIN
                        sureTitleColor:(nullable UIColor *)sureTitleColor
                         sureTitleFont:(nullable UIFont *)sureTitleFont
                            showResult:(BOOL)showResult
-                                   cb:(BASelectDatePickerBlock)cb;
+                                   cb:(BAPickerResultBlock)cb;
 
 @end
 

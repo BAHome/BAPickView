@@ -76,18 +76,19 @@
 - (void)setResult:(NSString *)result {
     _result = result;
     
-    self.titleLabel.hidden = !self.toolBarModel.showResult;
-
-    if (self.toolBarModel.showResult && [self.titleLabel.text isEqualToString:self.toolBarModel.title]) {
+    if (self.toolBarModel.showResult) {
         self.titleLabel.text = result;
+    } else if (self.toolBarModel.title.length > 0) {
+        self.titleLabel.text = self.toolBarModel.title;
+    } else {
+        self.titleLabel.text = @"";
     }
-    
 }
 
 - (void)setToolBarModel:(BAPickerToolBarModel *)toolBarModel {
     _toolBarModel = toolBarModel;
     
-    if (toolBarModel.title.length) {
+    if (toolBarModel.title.length > 0) {
         self.titleLabel.text = toolBarModel.title;
     }
     
@@ -172,9 +173,9 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:16];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.textColor = UIColor.blackColor;
     }
     return _titleLabel;
 }

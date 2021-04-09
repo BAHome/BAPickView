@@ -171,8 +171,9 @@ UITableViewDataSource
 
 - (void)pickView1 {
     
+    // 请选择地区
     BAKit_WeakSelf
-    [BAPickerManger initCityPickerWithCallBack:^(BACityModel *model) {
+    [BAPickerManger initCityPickerWithTitle:nil showResult:YES cb:^(BACityModel *model) {
         BAKit_StrongSelf
         // 返回 BAKit_CityModel，包含省市县 和 详细的经纬度
         NSString *msg = [NSString stringWithFormat:@"%@%@%@\n纬度：%f\n经度：%f", model.province, model.city, model.area, model.coordie.latitude, model.coordie.longitude];
@@ -182,15 +183,15 @@ UITableViewDataSource
 
 - (void)pickView2 {
     BAKit_WeakSelf
-    [BAPickerManger initStringsPickerWithTitle:@"请选择结果" strings:@[@"性别", @"年龄", @"身高"] showResult:NO cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+    [BAPickerManger initStringsPickerWithTitle:@"请选择结果" strings:@[@"性别", @"年龄", @"身高"] showResult:NO cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 
 - (void)pickView3 {
     BAKit_WeakSelf
-    [BAPickerManger initSystemDatePickerTitle:nil datePickerMode:UIDatePickerModeDateAndTime showResult:NO cb:^(BAPickerResultModel *resultModel) {
+    [BAPickerManger initSystemDatePickerTitle:nil datePickerMode:UIDatePickerModeDateAndTime showResult:YES cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
         BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
@@ -221,7 +222,7 @@ UITableViewDataSource
     
     // ToolBar
     BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
-    toolBarModel.title = @"请选择时间";
+    toolBarModel.title = @"请选择时间"; 
     //    toolBarModel.titleFont = titleFont;
     toolBarModel.cancleTitle = @"cancle888";
     //    toolBarModel.cancleTitleFont = cancleTitleFont;
@@ -261,9 +262,9 @@ UITableViewDataSource
                                         sureTitleColor:UIColor.redColor
                                          sureTitleFont:[UIFont systemFontOfSize:16]
                                             showResult:YES
-                                                    cb:^(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray) {
+                                                    cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 

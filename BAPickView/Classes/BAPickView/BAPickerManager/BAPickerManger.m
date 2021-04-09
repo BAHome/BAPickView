@@ -14,7 +14,7 @@
 @implementation BAPickerManger
 
 + (void)initStringsPickerWithModel:(BAPickerModel *)pickerModel
-                                cb:(BASelectPickerBlock)cb {
+                                cb:(BAPickerResultBlock)cb {
     BAPickerView *picker = BAPickerView.new;
     picker.configModel = pickerModel;
     picker.selectPicker = cb;
@@ -25,7 +25,7 @@
 + (void)initStringsPickerWithTitle:(nullable NSString *)title
                            strings:(NSArray <NSString *>*)strings
                         showResult:(BOOL)showResult
-                                cb:(BASelectPickerBlock)cb {
+                                cb:(BAPickerResultBlock)cb {
     [self initStringsPickerWithTitle:title
                            titleFont:nil
                              strings:strings
@@ -51,7 +51,7 @@
                     sureTitleColor:(nullable UIColor *)sureTitleColor
                      sureTitleFont:(nullable UIFont *)sureTitleFont
                         showResult:(BOOL)showResult
-                                cb:(BASelectPickerBlock)cb {
+                                cb:(BAPickerResultBlock)cb {
     // 注意：如果项目中有统一 UI 规范的话，可以二次封装后使用，这样就不用每次都写 configModel 了！！！！
     // Picker
     BAPickerModel *pickerModel = BAPickerModel.new;
@@ -122,7 +122,7 @@
 @implementation BAPickerManger (MultipleStrings)
 
 + (void)initMultipleStringsPickerWithPickerModle:(BAPickerModel *)pickerModel
-                                              cb:(BASelectPickerBlock)cb {
+                                              cb:(BAPickerResultBlock)cb {
     BAPickerView *picker = BAPickerView.new;
     picker.configModel = pickerModel;
     picker.selectPicker = cb;
@@ -133,7 +133,7 @@
 + (void)initMultipleStringsPickerWithTitle:(nullable NSString *)title
                       multipleStringsArray:(NSArray <NSArray *>*)multipleStringsArray
                                 showResult:(BOOL)showResult
-                                        cb:(BASelectPickerBlock)cb {
+                                        cb:(BAPickerResultBlock)cb {
     [self initMultipleStringsPickerWithTitle:title
                                    titleFont:nil
                         multipleStringsArray:multipleStringsArray
@@ -161,7 +161,7 @@
                             sureTitleColor:(nullable UIColor *)sureTitleColor
                              sureTitleFont:(nullable UIFont *)sureTitleFont
                                 showResult:(BOOL)showResult
-                                        cb:(BASelectPickerBlock)cb {
+                                        cb:(BAPickerResultBlock)cb {
     
     // Picker
     BAPickerModel *pickerModel = BAPickerModel.new;
@@ -194,14 +194,28 @@
 
 @implementation BAPickerManger (City)
 
-+ (void)initCityPickerWithCallBack:(BASelectCityPickerBlock)cb {
++ (void)initCityPickerWithCallBack:(BAPickerCityResultBlock)cb {
+    [self initCityPickerWithTitle:nil showResult:NO cb:cb];
+}
+
++ (void)initCityPickerWithTitle:(nullable NSString *)title
+                     showResult:(BOOL)showResult
+                             cb:(BAPickerCityResultBlock)cb {
     // Picker
     BAPickerModel *pickerModel = BAPickerModel.new;
     NSArray *allProvinceCityArray = [[NSArray alloc] initWithContentsOfFile:[self getFilePath]];
     pickerModel.allProvinceCityArray = allProvinceCityArray;
     
     // ToolBar
-    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    BAPickerToolBarModel *toolBarModel = [self initToolBarModelWithTitle:title
+                                                               titleFont:nil
+                                                             cancleTitle:nil
+                                                        cancleTitleColor:nil
+                                                         cancleTitleFont:nil
+                                                               sureTitle:nil
+                                                          sureTitleColor:nil
+                                                           sureTitleFont:nil
+                                                              showResult:showResult];
     pickerModel.toolBarModel = toolBarModel;
     
     BAPickerView *picker = BAPickerView.new;
@@ -227,7 +241,7 @@
 @implementation BAPickerManger (SystemDateDatePicker)
 
 + (void)initSystemDatePickerWithModel:(BADatePickerModel *)datePickerModel
-                                   cb:(BASelectDatePickerBlock)cb {
+                                   cb:(BAPickerResultBlock)cb {
     BADatePickerView *picker = BADatePickerView.new;
     picker.configModel = datePickerModel;
     
@@ -235,14 +249,14 @@
     [picker show];
 }
 
-+ (void)initSystemDatePicker:(BASelectDatePickerBlock)cb {
++ (void)initSystemDatePicker:(BAPickerResultBlock)cb {
     [self initSystemDatePickerTitle:nil datePickerMode:UIDatePickerModeDate showResult:NO cb:cb];
 }
 
 + (void)initSystemDatePickerTitle:(nullable NSString *)title
                    datePickerMode:(UIDatePickerMode)datePickerMode
                        showResult:(BOOL)showResult
-                               cb:(BASelectDatePickerBlock)cb {
+                               cb:(BAPickerResultBlock)cb {
     [self initSystemDatePickerTitle:title
                           titleFont:nil
                      datePickerMode:datePickerMode
@@ -270,7 +284,7 @@
                    sureTitleColor:(nullable UIColor *)sureTitleColor
                     sureTitleFont:(nullable UIFont *)sureTitleFont
                        showResult:(BOOL)showResult
-                               cb:(BASelectDatePickerBlock)cb {
+                               cb:(BAPickerResultBlock)cb {
     
     // DatePicker
     BADatePickerModel *datePickerModel = BADatePickerModel.new;
@@ -304,7 +318,7 @@
 @implementation BAPickerManger (CustomDateDatePicker)
 
 + (void)initCustomDatePickerWithModel:(BADatePickerModel *)datePickerModel
-                                   cb:(BASelectDatePickerBlock)cb {
+                                   cb:(BAPickerResultBlock)cb {
     
     BACustomDatePickerView *picker = BACustomDatePickerView.new;
     picker.configModel = datePickerModel;
@@ -314,14 +328,14 @@
 }
 
 + (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
-                                  cb:(BASelectDatePickerBlock)cb {
+                                  cb:(BAPickerResultBlock)cb {
     [self initCustomDatePickerWithTitle:nil datePickerType:datePickerType showResult:NO cb:cb];
 }
 
 + (void)initCustomDatePickerWithTitle:(nullable NSString *)title
                        datePickerType:(BADatePickerType)datePickerType
                            showResult:(BOOL)showResult
-                                   cb:(BASelectDatePickerBlock)cb {
+                                   cb:(BAPickerResultBlock)cb {
     [self initCustomDatePickerWithTitle:title
                               titleFont:nil
                          datePickerType:datePickerType
@@ -351,7 +365,7 @@
                        sureTitleColor:(nullable UIColor *)sureTitleColor
                         sureTitleFont:(nullable UIFont *)sureTitleFont
                            showResult:(BOOL)showResult
-                                   cb:(BASelectDatePickerBlock)cb {
+                                   cb:(BAPickerResultBlock)cb {
     // DatePicker
     BADatePickerModel *datePickerModel = BADatePickerModel.new;
     datePickerModel.datePickerType = datePickerType;

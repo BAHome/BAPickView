@@ -75,4 +75,9 @@
     return self;
 }
 
+- (BOOL)temp_showDefaultResult {
+    BOOL isShowDefaultResult = self.title.length <= 0 && self.showResult;
+    return isShowDefaultResult;
+}
+
 @end

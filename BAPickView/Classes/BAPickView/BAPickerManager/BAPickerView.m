@@ -26,6 +26,8 @@
 @property(nonatomic, strong) BAPickerToolBarView *toolBarView;
 
 @property(nonatomic, copy) NSString *resultString;
+@property(nonatomic, strong) BAPickerResultModel *resultModel;
+
 @property(nonatomic, assign) NSInteger resultRow;
 @property(nonatomic, assign) NSInteger resultComponent;
 @property(nonatomic, strong) NSArray *resultArray;
@@ -136,7 +138,7 @@
                 self.selectCityPicker ? self.selectCityPicker(model):nil;
             }
         } else {
-            self.selectPicker ? self.selectPicker(self.resultRow, self.resultComponent, self.resultString, self.resultArray):nil;
+            self.selectPicker ? self.selectPicker(self.resultModel):nil;
         }
         [self dismiss];
     };
@@ -163,13 +165,18 @@
 - (void)setResultString:(NSString *)resultString {
     _resultString = resultString;
     
-    self.toolBarView.result = resultString;
+    // 等 configModel 有值有再赋值
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.resultModel.resultString = resultString;
+        self.toolBarView.result = resultString;
+    });
 }
 
 - (void)setResultArray:(NSArray *)resultArray {
     _resultArray = resultArray;
     
     self.resultString = [self.selectedArray componentsJoinedByString:@","];
+    self.resultModel.resultArray = resultArray;
 }
 
 - (void)setConfigModel:(BAPickerModel *)configModel {
@@ -217,13 +224,19 @@
 - (void)setPickerModel:(BAPickerModel *)pickerModel {
     _pickerModel = pickerModel;
     
+    /// 是否显示默认选中结果
+    BOOL isShowDefaultResult = pickerModel.toolBarModel.temp_showDefaultResult;
+    
     if (pickerModel.multipleStringsArray.count > 0) {
         [self.selectedArray removeAllObjects];
 
         for (NSArray *arry in pickerModel.multipleStringsArray) {
             [self.selectedArray addObject:arry[0]];
         }
-        self.resultArray = self.selectedArray;
+        self.resultModel.resultArray = self.selectedArray;
+        if (isShowDefaultResult) {
+            self.resultArray = self.selectedArray;
+        }
         
         if (pickerModel.multipleTitleArray.count == pickerModel.multipleStringsArray.count) {
             [self.titleBgView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -290,6 +303,14 @@
             self.selectedProvince = [self cutLocalString:self.provinceArray[0]];
             self.selectedCity = [self cutLocalString:self.cityArray[0]];
             self.selectedArea = 0 == self.areaArray.count ? @"" : [self cutLocalString:self.areaArray[0]];
+            
+            if (isShowDefaultResult) {
+                if (self.selectedArea.length) {
+                    self.resultString = [NSString stringWithFormat:@"%@,%@,%@", self.selectedProvince, self.selectedCity, self.selectedArea];
+                } else {
+                    self.resultString = [NSString stringWithFormat:@"%@,%@", self.selectedProvince, self.selectedCity];
+                }
+            }
         }
         
         [self.basePickerView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -297,7 +318,10 @@
         }];
     } else {
         // 初始默认显示第一个数据
-        self.resultString = self.pickerModel.stringsArray.firstObject;
+        self.resultModel.resultString = self.pickerModel.stringsArray.firstObject;
+        if (isShowDefaultResult) {
+            self.resultString = self.pickerModel.stringsArray.firstObject;
+        }
         [self.basePickerView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.toolBarView.mas_bottom);
         }];
@@ -447,6 +471,13 @@
         };
     }
     return _basePickerView;
+}
+
+- (BAPickerResultModel *)resultModel {
+    if (!_resultModel) {
+        _resultModel = BAPickerResultModel.new;
+    }
+    return _resultModel;
 }
 
 - (NSMutableArray *)selectedArray {

@@ -21,12 +21,10 @@
 #import "NSDateFormatter+BAKit.h"
 #import "NSBundle+BAPod.h"
 
-// picker 回调
-typedef void (^BASelectPickerBlock)(NSInteger selectRow, NSInteger selectComponent, NSString *resultString, NSArray *resultArray);
-// datePicker 回调
-typedef void (^BASelectDatePickerBlock)(BAPickerResultModel *resultModel);
+// picker、datePicker 回调
+typedef void (^BAPickerResultBlock)(BAPickerResultModel *resultModel);
 // cityPicker 回调
-typedef void (^BASelectCityPickerBlock)(BACityModel *model);
+typedef void (^BAPickerCityResultBlock)(BACityModel *model);
 
 typedef NS_ENUM(NSUInteger, BADatePickerType) {
     // 2020-08-28
@@ -41,8 +39,6 @@ typedef NS_ENUM(NSUInteger, BADatePickerType) {
     kBADatePickerType_YMDHM,
     // 2020-08-28 15:33:58
     kBADatePickerType_YMDHMS,
-    // 2020-08-28，周二, 15:33:58 请使用系统 [BAPickerManger initSystemDatePickerWithModel:]
-    kBADatePickerType_YMDEHMS,
     // 15:33
     kBADatePickerType_HM,
     // 15:33:58
