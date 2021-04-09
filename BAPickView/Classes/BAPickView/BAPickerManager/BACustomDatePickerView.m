@@ -126,39 +126,39 @@
         NSInteger num = 0;
         switch (self.datePickerType) {
                 // 2020-08-28
-            case kBADatePickerType_YMD : {
+            case BADatePickerTypeYMD : {
                 num = 3;
             } break;
                 // 2020
-            case kBADatePickerType_YY : {
+            case BADatePickerTypeYY : {
                 num = 1;
             } break;
                 // 2020-08
-            case kBADatePickerType_YM : {
+            case BADatePickerTypeYM : {
                 num = 2;
             } break;
                 // 08-28
-            case kBADatePickerType_MD : {
+            case BADatePickerTypeMD : {
                 num = 2;
             } break;
                 // 2020-08-28 15:33
-            case kBADatePickerType_YMDHM : {
+            case BADatePickerTypeYMDHM : {
                 num = 5;
             } break;
                 // 2020-08-28 15:33:58
-            case kBADatePickerType_YMDHMS : {
+            case BADatePickerTypeYMDHMS : {
                 num = 6;
             } break;
                 // 15:33
-            case kBADatePickerType_HM : {
+            case BADatePickerTypeHM : {
                 num = 2;
             } break;
                 // 15:33:58
-            case kBADatePickerType_HMS : {
+            case BADatePickerTypeHMS : {
                 num = 3;
             } break;
                 // 2021年，第21周
-            case kBADatePickerType_YearWeek : {
+            case BADatePickerTypeYearWeek : {
                 num = 2;
             } break;
                 
@@ -174,7 +174,7 @@
         NSInteger num = 0;
         switch (self.datePickerType) {
                 // 2020-08-28
-            case kBADatePickerType_YMD : {
+            case BADatePickerTypeYMD : {
                 switch (component) {
                     case 0: {
                         num = self.yearArray.count;
@@ -191,21 +191,21 @@
                 }
             } break;
                 // 2020
-            case kBADatePickerType_YY : {
+            case BADatePickerTypeYY : {
                 num = self.yearArray.count;
             } break;
                 // 2020-08
-            case kBADatePickerType_YM : {
+            case BADatePickerTypeYM : {
                 num = (component == 0) ? self.yearArray.count : self.mounthArray.count;
             } break;
                 // 08-28
-            case kBADatePickerType_MD : {
+            case BADatePickerTypeMD : {
                 num = (component == 0) ? self.mounthArray.count : self.dayArray.count;
             } break;
                 // 2020-08-28 15:33
-            case kBADatePickerType_YMDHM :
+            case BADatePickerTypeYMDHM :
                 // 2020-08-28 15:33:58
-            case kBADatePickerType_YMDHMS : {
+            case BADatePickerTypeYMDHMS : {
                 switch (component) {
                     case 0: {
                         num = self.yearArray.count;
@@ -231,9 +231,9 @@
                 }
             } break;
                 // 15:33
-            case kBADatePickerType_HM :
+            case BADatePickerTypeHM :
                 // 15:33:58
-            case kBADatePickerType_HMS : {
+            case BADatePickerTypeHMS : {
                 switch (component) {
                     case 0: {
                         num = self.hoursArray.count;
@@ -250,7 +250,7 @@
                 }
             } break;
                 // 2021年，第21周
-            case kBADatePickerType_YearWeek : {
+            case BADatePickerTypeYearWeek : {
                 num = (component == 0) ? self.yearArray.count : self.weekArray.count;;
             } break;
                 
@@ -267,7 +267,7 @@
         NSString *title = @"";
         switch (self.datePickerType) {
                 // 2020-08-28
-            case kBADatePickerType_YMD : {
+            case BADatePickerTypeYMD : {
                 switch (component) {
                     case 0: {
                         title = [self getTitleForYearWithRow:row];
@@ -283,11 +283,11 @@
                 }
             } break;
                 // 2020
-            case kBADatePickerType_YY : {
+            case BADatePickerTypeYY : {
                 title = [self getTitleForYearWithRow:row];
             } break;
                 // 2020-08
-            case kBADatePickerType_YM : {
+            case BADatePickerTypeYM : {
                 switch (component) {
                     case 0: {
                         title = [self getTitleForYearWithRow:row];
@@ -300,7 +300,7 @@
                 }
             } break;
                 // 08-28
-            case kBADatePickerType_MD : {
+            case BADatePickerTypeMD : {
                 switch (component) {
                     case 0: {
                         title = [self getTitleForMounthWithRow:row];
@@ -313,9 +313,9 @@
                 }
             } break;
                 // 2020-08-28 15:33
-            case kBADatePickerType_YMDHM :
+            case BADatePickerTypeYMDHM :
                 // 2020-08-28 15:33:58
-            case kBADatePickerType_YMDHMS : {
+            case BADatePickerTypeYMDHMS : {
                 switch (component) {
                     case 0: {
                         title = [self getTitleForYearWithRow:row];
@@ -340,7 +340,7 @@
                 }
             } break;
                 // 15:33
-            case kBADatePickerType_HM : {
+            case BADatePickerTypeHM : {
                 switch (component) {
                     case 0: {
                         title = [self getTitleForHourWithRow:row];
@@ -353,7 +353,7 @@
                 }
             } break;
                 // 15:33:58
-            case kBADatePickerType_HMS : {
+            case BADatePickerTypeHMS : {
                 switch (component) {
                     case 0: {
                         title = [self getTitleForHourWithRow:row];
@@ -369,7 +369,7 @@
                 }
             } break;
                 // 2021年，第21周
-            case kBADatePickerType_YearWeek : {
+            case BADatePickerTypeYearWeek : {
                 title = (component == 0) ? [self getTitleForYearWithRow:row] : [self getTitleForWeekWithRow:row];
             } break;
                 
@@ -384,7 +384,7 @@
         BAKit_StrongSelf        
         switch (self.datePickerType) {
                 // 2020-08-28
-            case kBADatePickerType_YMD : {
+            case BADatePickerTypeYMD : {
                 switch (component) {
                     case 0: {
                         self.resultModel.selectedYear = self.yearArray[row];
@@ -402,12 +402,12 @@
                 self.resultString = [NSString stringWithFormat:@"%@年-%@月-%@日", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay];
             } break;
                 // 2020
-            case kBADatePickerType_YY : {
+            case BADatePickerTypeYY : {
                 self.resultModel.selectedYear = self.yearArray[row];
                 self.resultString = [NSString stringWithFormat:@"%@年", self.resultModel.selectedYear];
             } break;
                 // 2020-08
-            case kBADatePickerType_YM : {
+            case BADatePickerTypeYM : {
                 switch (component) {
                     case 0: {
                         self.resultModel.selectedYear = self.yearArray[row];
@@ -421,7 +421,7 @@
                 self.resultString = [NSString stringWithFormat:@"%@年-%@月", self.resultModel.selectedYear, self.resultModel.selectedMounth];
             } break;
                 // 08-28
-            case kBADatePickerType_MD : {
+            case BADatePickerTypeMD : {
                 switch (component) {
                     case 0: {
                         self.resultModel.selectedMounth = self.mounthArray[row];
@@ -436,9 +436,9 @@
                 self.resultString = [NSString stringWithFormat:@"%@月-%@日", self.resultModel.selectedMounth, self.resultModel.selectedDay];
             } break;
                 // 2020-08-28 15:33
-            case kBADatePickerType_YMDHM :
+            case BADatePickerTypeYMDHM :
                 // 2020-08-28 15:33:58
-            case kBADatePickerType_YMDHMS : {
+            case BADatePickerTypeYMDHMS : {
                 switch (component) {
                     case 0: {
                         self.resultModel.selectedYear = self.yearArray[row];
@@ -464,12 +464,12 @@
                 }
                 
                 self.resultString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
-                if (self.datePickerType == kBADatePickerType_YMDHMS) {
+                if (self.datePickerType == BADatePickerTypeYMDHMS) {
                     self.resultString = [self.resultString stringByAppendingFormat:@":%@", self.resultModel.selectedSeconds];
                 }
             } break;
                 // 15:33
-            case kBADatePickerType_HM : {
+            case BADatePickerTypeHM : {
                 switch (component) {
                     case 0: {
                         self.resultModel.selectedHours = self.hoursArray[row];
@@ -483,7 +483,7 @@
                 self.resultString = [NSString stringWithFormat:@"%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
             } break;
                 // 15:33:58
-            case kBADatePickerType_HMS : {
+            case BADatePickerTypeHMS : {
                 switch (component) {
                     case 0: {
                         self.resultModel.selectedHours = self.hoursArray[row];
@@ -501,7 +501,7 @@
                 self.resultString = [NSString stringWithFormat:@"%@:%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes, self.resultModel.selectedSeconds];
             } break;
                 // 2021年，第21周
-            case kBADatePickerType_YearWeek : {
+            case BADatePickerTypeYearWeek : {
                 NSString *year = self.resultModel.selectedYear;
                 NSString *week = self.resultModel.selectedWeek;
                 
@@ -622,7 +622,7 @@
     NSInteger dayIndex = [self.dayArray indexOfObject:self.resultModel.selectedDay];
     if (dayIndex < self.dayArray.count) {
         NSInteger component = 2;
-        if (self.datePickerType == kBADatePickerType_MD) {
+        if (self.datePickerType == BADatePickerTypeMD) {
             component = 1;
         }
         //        [self.pickerView reloadComponent:component];
@@ -706,10 +706,10 @@
     
     self.datePickerType = datePickerModel.datePickerType;
     
-    // kBADatePickerType_YMDHMS 样式需要特殊处理默认数据
-    if (self.datePickerType == kBADatePickerType_YMDHMS) {
+    // BADatePickerTypeYMDHMS 样式需要特殊处理默认数据
+    if (self.datePickerType == BADatePickerTypeYMDHMS) {
         self.datePickerModel.titleFont = [UIFont boldSystemFontOfSize:14];
-        // kBADatePickerType_YMDHMS 样式内容过长显示不全，因此省去后缀
+        // BADatePickerTypeYMDHMS 样式内容过长显示不全，因此省去后缀
         self.showSuffix = NO;
     } else {
         self.showSuffix = YES;
@@ -723,33 +723,33 @@
     
     switch (self.datePickerType) {
             // 2020-08-28
-        case kBADatePickerType_YMD : {
+        case BADatePickerTypeYMD : {
             self.showYear = YES;
             self.showMounth = YES;
             self.showDay = YES;
             resultString = [NSString stringWithFormat:@"%@年-%@月-%@日", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay];
         } break;
             // 2020
-        case kBADatePickerType_YY : {
+        case BADatePickerTypeYY : {
             self.showYear = YES;
             resultString = [NSString stringWithFormat:@"%@年", self.resultModel.selectedYear];
         } break;
             // 2020-08
-        case kBADatePickerType_YM : {
+        case BADatePickerTypeYM : {
             self.showYear = YES;
             self.showMounth = YES;
             resultString = [NSString stringWithFormat:@"%@年-%@月", self.resultModel.selectedYear, self.resultModel.selectedMounth];
         } break;
             // 08-28
-        case kBADatePickerType_MD : {
+        case BADatePickerTypeMD : {
             self.showMounth = YES;
             self.showDay = YES;
             resultString = [NSString stringWithFormat:@"%@月-%@日", self.resultModel.selectedMounth, self.resultModel.selectedDay];
         } break;
             // 2020-08-28 15:33
-        case kBADatePickerType_YMDHM :
+        case BADatePickerTypeYMDHM :
             // 2020-08-28 15:33:58
-        case kBADatePickerType_YMDHMS : {
+        case BADatePickerTypeYMDHMS : {
             self.showYear = YES;
             self.showMounth = YES;
             self.showDay = YES;
@@ -757,28 +757,28 @@
             self.showMinutes = YES;
             
             resultString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
-            // kBADatePickerType_YMDHMS 样式需要特殊处理默认数据
-            if (self.datePickerType == kBADatePickerType_YMDHMS) {
-                // kBADatePickerType_YMDHMS 样式内容过长显示不全，因此省去后缀
+            // BADatePickerTypeYMDHMS 样式需要特殊处理默认数据
+            if (self.datePickerType == BADatePickerTypeYMDHMS) {
+                // BADatePickerTypeYMDHMS 样式内容过长显示不全，因此省去后缀
                 self.showSeconds = YES;
                 resultString = [self.resultModel.resultString stringByAppendingFormat:@":%@", self.resultModel.selectedSeconds];
             }
         } break;
             // 15:33
-        case kBADatePickerType_HM : {
+        case BADatePickerTypeHM : {
             self.showHours = YES;
             self.showMinutes = YES;
             resultString = [NSString stringWithFormat:@"%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
         } break;
             // 15:33:58
-        case kBADatePickerType_HMS : {
+        case BADatePickerTypeHMS : {
             self.showHours = YES;
             self.showMinutes = YES;
             self.showSeconds = YES;
             resultString = [NSString stringWithFormat:@"%@:%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes, self.resultModel.selectedSeconds];
         } break;
             // 2021年，第21周
-        case kBADatePickerType_YearWeek : {
+        case BADatePickerTypeYearWeek : {
             self.showYear = YES;
             self.showWeek = YES;
             resultString = [NSString stringWithFormat:@"%@年-第%@周", self.resultModel.selectedYear, self.resultModel.selectedWeek];
@@ -817,11 +817,11 @@
         NSInteger mounthIndex = [self.mounthArray indexOfObject:self.resultModel.selectedMounth];
         if (mounthIndex < self.mounthArray.count) {
             NSInteger component = 1;
-            if (self.datePickerType == kBADatePickerType_MD) {
+            if (self.datePickerType == BADatePickerTypeMD) {
                 component = 0;
             }
             [self.pickerView selectRow:[self.mounthArray indexOfObject:self.resultModel.selectedMounth] inComponent:component animated:NO];
-            if (self.datePickerType != kBADatePickerType_YM) {
+            if (self.datePickerType != BADatePickerTypeYM) {
                 [self refreshDay];
             }
         }
@@ -836,7 +836,7 @@
         NSInteger dayIndex = [self.dayArray indexOfObject:self.resultModel.selectedDay];
         if (dayIndex < self.dayArray.count) {
             NSInteger component = 2;
-            if (self.datePickerType == kBADatePickerType_MD) {
+            if (self.datePickerType == BADatePickerTypeMD) {
                 component = 1;
             }
             [self.pickerView selectRow:[self.dayArray indexOfObject:self.resultModel.selectedDay] inComponent:component animated:NO];
@@ -852,7 +852,7 @@
         NSInteger hourIndex = [self.hoursArray indexOfObject:self.resultModel.selectedHours];
         if (hourIndex < self.hoursArray.count) {
             NSInteger component = 3;
-            if (self.datePickerType == kBADatePickerType_HM || self.datePickerType == kBADatePickerType_HMS) {
+            if (self.datePickerType == BADatePickerTypeHM || self.datePickerType == BADatePickerTypeHMS) {
                 component = 0;
             }
             [self.pickerView selectRow:[self.hoursArray indexOfObject:self.resultModel.selectedHours] inComponent:component animated:NO];
@@ -868,7 +868,7 @@
         NSInteger minutesIndex = [self.minutesArray indexOfObject:self.resultModel.selectedMinutes];
         if (minutesIndex < self.minutesArray.count) {
             NSInteger component = 4;
-            if (self.datePickerType == kBADatePickerType_HM || self.datePickerType == kBADatePickerType_HMS) {
+            if (self.datePickerType == BADatePickerTypeHM || self.datePickerType == BADatePickerTypeHMS) {
                 component = 1;
             }
             [self.pickerView selectRow:[self.minutesArray indexOfObject:self.resultModel.selectedMinutes] inComponent:component animated:NO];
@@ -884,7 +884,7 @@
         NSInteger secondsIndex = [self.secondsArray indexOfObject:self.resultModel.selectedSeconds];
         if (secondsIndex < self.secondsArray.count) {
             NSInteger component = 5;
-            if (self.datePickerType == kBADatePickerType_HMS) {
+            if (self.datePickerType == BADatePickerTypeHMS) {
                 component = 2;
             }
             [self.pickerView selectRow:[self.secondsArray indexOfObject:self.resultModel.selectedSeconds] inComponent:component animated:NO];

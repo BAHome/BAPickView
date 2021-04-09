@@ -84,10 +84,10 @@ UITableViewDataSource
                 [self pickView3];
             } break;
             case 3: {
-                [self datePickerViewWithType:kBADatePickerType_YM];
+                [self datePickerViewWithType:BADatePickerTypeYM];
             } break;
             case 4: {
-                [self datePickerViewWithType:kBADatePickerType_YearWeek];
+                [self datePickerViewWithType:BADatePickerTypeYearWeek];
             } break;
             case 5: {
                 [self pickView6];
@@ -97,31 +97,31 @@ UITableViewDataSource
                 break;
         }
     } else if (1 == indexPath.section) {
-        BADatePickerType type = kBADatePickerType_YMD;
+        BADatePickerType type = BADatePickerTypeYMD;
         switch (indexPath.row) {
             case 0: {
-                type = kBADatePickerType_YMDHMS;
+                type = BADatePickerTypeYMDHMS;
             } break;
             case 1: {
-                type = kBADatePickerType_YMDHM;
+                type = BADatePickerTypeYMDHM;
             } break;
             case 2: {
-                type = kBADatePickerType_YMD;
+                type = BADatePickerTypeYMD;
             } break;
             case 3: {
-                type = kBADatePickerType_HMS;
+                type = BADatePickerTypeHMS;
             } break;
             case 4: {
-                type = kBADatePickerType_YM;
+                type = BADatePickerTypeYM;
             } break;
             case 5: {
-                type = kBADatePickerType_MD;
+                type = BADatePickerTypeMD;
             } break;
             case 6: {
-                type = kBADatePickerType_HM;
+                type = BADatePickerTypeHM;
             } break;
             case 7: {
-                type = kBADatePickerType_YY;
+                type = BADatePickerTypeYY;
             } break;
                 
             default:
@@ -200,7 +200,7 @@ UITableViewDataSource
 - (void)datePickerViewWithType:(BADatePickerType)type {
     NSDate *maximumDate = nil;
     NSDate *minimumDate = nil;
-    if (type == kBADatePickerType_YMD) {
+    if (type == BADatePickerTypeYMD) {
         maximumDate = [NSDate ba_dateAfterYears:1];
         minimumDate = [NSDate ba_dateAfterYears:-5];
     }

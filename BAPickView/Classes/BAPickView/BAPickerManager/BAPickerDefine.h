@@ -28,23 +28,23 @@ typedef void (^BAPickerCityResultBlock)(BACityModel *model);
 
 typedef NS_ENUM(NSUInteger, BADatePickerType) {
     // 2020-08-28
-    kBADatePickerType_YMD = 0,
+    BADatePickerTypeYMD = 0,
     // 2020
-    kBADatePickerType_YY,
+    BADatePickerTypeYY,
     // 2020-08
-    kBADatePickerType_YM,
+    BADatePickerTypeYM,
     // 08-28
-    kBADatePickerType_MD,
+    BADatePickerTypeMD,
     // 2020-08-28 15:33
-    kBADatePickerType_YMDHM,
+    BADatePickerTypeYMDHM,
     // 2020-08-28 15:33:58
-    kBADatePickerType_YMDHMS,
+    BADatePickerTypeYMDHMS,
     // 15:33
-    kBADatePickerType_HM,
+    BADatePickerTypeHM,
     // 15:33:58
-    kBADatePickerType_HMS,
+    BADatePickerTypeHMS,
     // 2021年，第21周
-    kBADatePickerType_YearWeek,
+    BADatePickerTypeYearWeek,
 };
 
 
