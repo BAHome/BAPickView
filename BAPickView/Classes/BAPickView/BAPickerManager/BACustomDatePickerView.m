@@ -393,9 +393,7 @@
     
     // 选中每一行的标题
     self.basePickerView.onDidSelectRowAndComponent = ^(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
-        BAKit_StrongSelf
-        row = row;
-        
+        BAKit_StrongSelf        
         switch (self.datePickerType) {
                 // 2020-08-28
             case kBADatePickerType_YMD : {
@@ -413,10 +411,12 @@
                     default:
                         break;
                 }
+                self.resultString = [NSString stringWithFormat:@"%@年-%@月-%@日", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay];
             } break;
                 // 2020
             case kBADatePickerType_YY : {
                 self.resultModel.selectedYear = self.yearArray[row];
+                self.resultString = [NSString stringWithFormat:@"%@年", self.resultModel.selectedYear];
             } break;
                 // 2020-08
             case kBADatePickerType_YM : {
@@ -430,6 +430,7 @@
                     default:
                         break;
                 }
+                self.resultString = [NSString stringWithFormat:@"%@年-%@月", self.resultModel.selectedYear, self.resultModel.selectedMounth];
             } break;
                 // 08-28
             case kBADatePickerType_MD : {
@@ -444,6 +445,7 @@
                     default:
                         break;
                 }
+                self.resultString = [NSString stringWithFormat:@"%@月-%@日", self.resultModel.selectedMounth, self.resultModel.selectedDay];
             } break;
                 // 2020-08-28 15:33
             case kBADatePickerType_YMDHM :
@@ -472,6 +474,11 @@
                     default:
                         break;
                 }
+                
+                self.resultString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
+                if (self.datePickerType == kBADatePickerType_YMDHMS) {
+                    self.resultString = [self.resultString stringByAppendingFormat:@":%@", self.resultModel.selectedSeconds];
+                }
             } break;
                 // 2020-08-28，周二，15:33:58
             case kBADatePickerType_YMDEHMS : {
@@ -489,6 +496,7 @@
                     default:
                         break;
                 }
+                self.resultString = [NSString stringWithFormat:@"%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
             } break;
                 // 15:33:58
             case kBADatePickerType_HMS : {
@@ -506,6 +514,7 @@
                     default:
                         break;
                 }
+                self.resultString = [NSString stringWithFormat:@"%@:%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes, self.resultModel.selectedSeconds];
             } break;
                 // 2021年，第21周
             case kBADatePickerType_YearWeek : {
@@ -524,7 +533,7 @@
                 self.resultModel.selectedYear = year;
                 self.resultModel.selectedWeek = week;
                 
-                self.resultString = [NSString stringWithFormat:@"%@-%@",year, week];
+                self.resultString = [NSString stringWithFormat:@"%@年-第%@周",year, week];
             } break;
                 
             default:
@@ -623,7 +632,7 @@
     NSInteger count =  [NSDate ba_dateTotaldaysInMonth:date];
     for (int i = 1; i < count + 1; ++i) {
         NSString *str = [NSString stringWithFormat:@"%02i",i];
-        [_dayArray addObject:str];
+        [self.dayArray addObject:str];
     }
     
     NSInteger dayIndex = [self.dayArray indexOfObject:self.resultModel.selectedDay];
@@ -632,7 +641,8 @@
         if (self.datePickerType == kBADatePickerType_MD) {
             component = 1;
         }
-        [self.pickerView reloadComponent:component];
+        //        [self.pickerView reloadComponent:component];
+        [self.pickerView reloadAllComponents];
     }
 }
 
@@ -650,8 +660,11 @@
 - (void)setResultString:(NSString *)resultString {
     _resultString = resultString;
     
-    self.resultModel.resultString = resultString;
-    self.toolBarView.result = resultString;
+    // 等 configModel 有值有再赋值
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.resultModel.resultString = resultString;
+        self.toolBarView.result = resultString;
+    });
 }
 
 - (void)setConfigModel:(BADatePickerModel *)configModel {
@@ -694,9 +707,9 @@
     _datePickerModel = datePickerModel;
     
     NSInteger maxYear = datePickerModel.maximumDate.year;
-    maxYear = maxYear > 0 ? maxYear:1900;
+    maxYear = maxYear > 0 ? maxYear:NSDate.date.year + 60;
     NSInteger minYear = datePickerModel.minimumDate.year;
-    minYear = minYear > 0 ? minYear:NSDate.date.year + 60;
+    minYear = minYear > 0 ? minYear:NSDate.date.year - 60;
     
     if (maxYear > 0 && minYear > 0) {
         [self.yearArray removeAllObjects];
@@ -720,26 +733,35 @@
     // 默认数据，要在设置完数据后再初始化 picker
     [self initPickerData];
     
+    BOOL isFirstLoadShowResult = NO;
+    if (self.configModel.toolBarModel.title.length > 0 && self.configModel.toolBarModel.showResult) {
+        isFirstLoadShowResult = YES;
+    }
+    
     switch (self.datePickerType) {
             // 2020-08-28
         case kBADatePickerType_YMD : {
             self.showYear = YES;
             self.showMounth = YES;
             self.showDay = YES;
+            self.resultString = [NSString stringWithFormat:@"%@年-%@月-%@日", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay];
         } break;
             // 2020
         case kBADatePickerType_YY : {
             self.showYear = YES;
+            self.resultString = [NSString stringWithFormat:@"%@年", self.resultModel.selectedYear];
         } break;
             // 2020-08
         case kBADatePickerType_YM : {
             self.showYear = YES;
             self.showMounth = YES;
+            self.resultString = [NSString stringWithFormat:@"%@年-%@月", self.resultModel.selectedYear, self.resultModel.selectedMounth];
         } break;
             // 08-28
         case kBADatePickerType_MD : {
             self.showMounth = YES;
             self.showDay = YES;
+            self.resultString = [NSString stringWithFormat:@"%@月-%@日", self.resultModel.selectedMounth, self.resultModel.selectedDay];
         } break;
             // 2020-08-28 15:33
         case kBADatePickerType_YMDHM :
@@ -750,10 +772,13 @@
             self.showDay = YES;
             self.showHours = YES;
             self.showMinutes = YES;
+            
+            self.resultString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
             // kBADatePickerType_YMDHMS 样式需要特殊处理默认数据
             if (self.datePickerType == kBADatePickerType_YMDHMS) {
                 // kBADatePickerType_YMDHMS 样式内容过长显示不全，因此省去后缀
                 self.showSeconds = YES;
+                self.resultString = [self.resultString stringByAppendingFormat:@":%@", self.resultModel.selectedSeconds];
             }
         } break;
             // 2020-08-28，周二，15:33:58
@@ -764,17 +789,21 @@
         case kBADatePickerType_HM : {
             self.showHours = YES;
             self.showMinutes = YES;
+            self.resultString = [NSString stringWithFormat:@"%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
         } break;
             // 15:33:58
         case kBADatePickerType_HMS : {
             self.showHours = YES;
             self.showMinutes = YES;
             self.showSeconds = YES;
+            self.resultString = [NSString stringWithFormat:@"%@:%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes, self.resultModel.selectedSeconds];
         } break;
             // 2021年，第21周
         case kBADatePickerType_YearWeek : {
             self.showYear = YES;
             self.showWeek = YES;
+            
+            self.resultString = [NSString stringWithFormat:@"%@年-第%@周", self.resultModel.selectedYear, self.resultModel.selectedWeek];
         } break;
             
         default:
@@ -882,12 +911,12 @@
     _showWeek = showWeek;
     
     if (showWeek) {
+        self.resultModel.selectedWeek = [NSString stringWithFormat:@"%ld", (long)NSDate.date.weekOfYear];
         [self refreshWeeksByYear:self.resultModel.selectedYear];
-        [self.pickerView reloadComponent:1];
+        [self.pickerView reloadAllComponents];
         
         NSInteger index_week = [self.resultModel.selectedWeek integerValue];
         [self.pickerView selectRow:(index_week - 1) inComponent:1 animated:YES];
-        self.resultString = [NSString stringWithFormat:@"%@年，第 %@ 周", self.resultModel.selectedYear, self.resultModel.selectedWeek];
     }
 }
 
@@ -1004,6 +1033,5 @@
     }
     return _weekArray;
 }
-
 
 @end

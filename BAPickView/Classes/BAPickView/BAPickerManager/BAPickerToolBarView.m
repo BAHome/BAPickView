@@ -8,6 +8,9 @@
 #import "BAPickerToolBarView.h"
 #import <Masonry/Masonry.h>
 
+#define kMargin 12
+#define kButton_w 40
+
 @interface BAPickerToolBarView ()
 
 @property (nonatomic, strong) UIButton *cancleButton;
@@ -16,6 +19,8 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 
 @property(nonatomic, strong) UIView *lineView;
+
+@property(nonatomic, assign) BOOL isFirstLoad;
 
 @end
 
@@ -33,16 +38,16 @@
 - (void)initUI {
     [self addSubview:self.cancleButton];
     [self.cancleButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(12);
+        make.left.offset(kMargin);
         make.centerY.offset(0);
-        make.width.height.mas_equalTo(40);
+        make.width.height.mas_equalTo(kButton_w);
     }];
     
     [self addSubview:self.sureButton];
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.offset(-12);
+        make.right.offset(-kMargin);
         make.centerY.offset(0);
-        make.width.height.mas_equalTo(40);
+        make.width.height.mas_equalTo(kButton_w);
     }];
     
     [self addSubview:self.titleLabel];
@@ -55,7 +60,7 @@
 }
 
 - (void)initData {
-    
+    self.isFirstLoad = YES;
 }
 
 - (void)clickCancleButton {
@@ -72,7 +77,11 @@
     _result = result;
     
     self.titleLabel.hidden = !self.toolBarModel.showResult;
-    self.titleLabel.text = result;
+
+    if (self.toolBarModel.showResult && [self.titleLabel.text isEqualToString:self.toolBarModel.title]) {
+        self.titleLabel.text = result;
+    }
+    
 }
 
 - (void)setToolBarModel:(BAPickerToolBarModel *)toolBarModel {
@@ -112,23 +121,43 @@
     
 #pragma mark - title
     {
+        CGFloat cancleTitle_w = kButton_w;
+        CGFloat sureTitle_w = kButton_w;
         if (toolBarModel.cancleTitle.length) {
-            CGFloat name_w = [toolBarModel.cancleTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:toolBarModel.cancleTitleFont ? toolBarModel.cancleTitleFont : self.cancleButton.titleLabel.font} context:nil].size.width;
-            name_w += 10;
-            [self.cancleButton mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(name_w);
-            }];
+            cancleTitle_w = [toolBarModel.cancleTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, kButton_w) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:toolBarModel.cancleTitleFont ? toolBarModel.cancleTitleFont : self.cancleButton.titleLabel.font} context:nil].size.width;
+            cancleTitle_w += 10;
+            cancleTitle_w = MAX(cancleTitle_w, 40);
             [self.cancleButton setTitle:toolBarModel.cancleTitle forState:UIControlStateNormal];
-           
+            
+            [self.cancleButton mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(cancleTitle_w);
+            }];
+            self.cancleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+
         }
         if (toolBarModel.sureTitle.length) {
-            CGFloat name_w = [toolBarModel.sureTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:toolBarModel.sureTitleFont ? toolBarModel.sureTitleFont : self.sureButton.titleLabel.font} context:nil].size.width;
-            name_w += 10;
-            [self.sureButton mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(name_w);
-            }];
+            sureTitle_w = [toolBarModel.sureTitle boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, kButton_w) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:toolBarModel.sureTitleFont ? toolBarModel.sureTitleFont : self.sureButton.titleLabel.font} context:nil].size.width;
+            sureTitle_w += 10;
+            sureTitle_w = MAX(sureTitle_w, kButton_w);
             [self.sureButton setTitle:toolBarModel.sureTitle forState:UIControlStateNormal];
+            
+            [self.sureButton mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(sureTitle_w);
+            }];
+            self.sureButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         }
+        
+        // 保证 title 居中显示
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.frame.size.width > 0) {
+                CGFloat max_w = MAX(cancleTitle_w, sureTitle_w);
+                CGFloat titleLabel_w = self.frame.size.width - kMargin*2 - max_w*2;
+                [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.center.offset(0);
+                    make.width.mas_equalTo(titleLabel_w);
+                }];
+            }
+        });
     }
   
 }
