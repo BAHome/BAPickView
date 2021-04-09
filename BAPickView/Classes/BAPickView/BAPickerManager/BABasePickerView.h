@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 // 自定义文本
 @property(nonatomic, copy) UIView *(^onViewForRowAndComponent)(NSInteger row, NSInteger component, UIView *reusingView, UIPickerView *pickerView);
 
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -107,8 +107,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger (City)
 
+/// 快速创建 pickerView 城市选择
+/// @param cb 返回
 + (void)initCityPickerWithCallBack:(BAPickerCityResultBlock)cb;
 
+/// 快速创建 pickerView 城市选择
+/// @param title 中间标题，例如：请选择日期
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
 + (void)initCityPickerWithTitle:(nullable NSString *)title
                      showResult:(BOOL)showResult
                              cb:(BAPickerCityResultBlock)cb;
@@ -117,16 +123,40 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger (SystemDateDatePicker)
 
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param datePickerModel 自定义 model
+/// @param cb 返回
 + (void)initSystemDatePickerWithModel:(BADatePickerModel *)datePickerModel
                                    cb:(BAPickerResultBlock)cb;
 
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param cb 返回
 + (void)initSystemDatePicker:(BAPickerResultBlock)cb;
 
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param title 中间标题，例如：请选择日期
+/// @param datePickerMode datePickerMode description
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
 + (void)initSystemDatePickerTitle:(nullable NSString *)title
                    datePickerMode:(UIDatePickerMode)datePickerMode
                        showResult:(BOOL)showResult
                                cb:(BAPickerResultBlock)cb;
 
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param title 中间标题，例如：请选择日期
+/// @param titleFont 中间标题文字字体
+/// @param datePickerMode datePickerMode description
+/// @param formatterString formatterString description
+/// @param maskViewBackgroundColor 遮罩背景颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
+/// @param cancleTitle 取消按钮文字
+/// @param cancleTitleColor 取消按钮文字颜色
+/// @param cancleTitleFont 取消按钮文字字体
+/// @param sureTitle 确定按钮文字
+/// @param sureTitleColor 确定按钮文字颜色
+/// @param sureTitleFont 确定按钮文字字体
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
 + (void)initSystemDatePickerTitle:(nullable NSString *)title
                         titleFont:(nullable UIFont *)titleFont
                    datePickerMode:(UIDatePickerMode)datePickerMode
@@ -145,17 +175,43 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BAPickerManger (CustomDateDatePicker)
 
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param datePickerModel 自定义 model
+/// @param cb 返回
 + (void)initCustomDatePickerWithModel:(BADatePickerModel *)datePickerModel
                                    cb:(BAPickerResultBlock)cb;
 
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param datePickerType datePickerType description
+/// @param cb 返回
 + (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
                                   cb:(BAPickerResultBlock)cb;
 
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param title 中间标题，例如：请选择日期
+/// @param datePickerType datePickerType description
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
 + (void)initCustomDatePickerWithTitle:(nullable NSString *)title
                        datePickerType:(BADatePickerType)datePickerType
                            showResult:(BOOL)showResult
                                    cb:(BAPickerResultBlock)cb;
 
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param title 中间标题，例如：请选择日期
+/// @param titleFont 中间标题文字字体
+/// @param datePickerType datePickerType description
+/// @param maskViewBackgroundColor 遮罩背景颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
+/// @param maximumDate 最大日期
+/// @param minimumDate 最小日期
+/// @param cancleTitle 取消按钮文字
+/// @param cancleTitleColor 取消按钮文字颜色
+/// @param cancleTitleFont 取消按钮文字字体
+/// @param sureTitle 确定按钮文字
+/// @param sureTitleColor 确定按钮文字颜色
+/// @param sureTitleFont 确定按钮文字字体
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
 + (void)initCustomDatePickerWithTitle:(nullable NSString *)title
                             titleFont:(nullable UIFont *)titleFont
                        datePickerType:(BADatePickerType)datePickerType
