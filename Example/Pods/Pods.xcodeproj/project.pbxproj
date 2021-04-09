@@ -746,21 +746,50 @@
 			};
 			name = Release;
 		};
-		23C5A0E863C6C72E5EA66B2C651B3EF9 /* Debug */ = {
+		4843D89D973A4923AB8B2C8ABBD5CBB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3411ADCEB2539E9D042371276E52B187 /* BAPickView.debug.xcconfig */;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
-				IBSC_MODULE = BAPickView;
-				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = BAPickView;
 				PRODUCT_NAME = BAPickView;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
+		};
+		6ABA765B5AFAB01A9762470B6D9F584C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = BAPickView;
+				PRODUCT_NAME = BAPickView;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
 		};
 		AF27532F31D759C07D506FC8B685D08A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -782,27 +811,21 @@
 			};
 			name = Debug;
 		};
-		BEBD11DBA4929411C2857C20EDF0EA24 /* Debug */ = {
+		AFFEDC9ED01B1D3A688753CDF19D0A8C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3411ADCEB2539E9D042371276E52B187 /* BAPickView.debug.xcconfig */;
+			baseConfigurationReference = 4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = BAPickView;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
+				IBSC_MODULE = BAPickView;
+				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = BAPickView;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
+			name = Release;
 		};
 		C14E932D4C3EFCC589F7DEABCEC18F22 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -885,45 +908,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		D7AC963F5DC1DC3ADEB59F65880CBD34 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/BAPickView/BAPickView-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = BAPickView;
-				PRODUCT_NAME = BAPickView;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		DFC01789CD927650FEECE57577E0C60E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A679C008353C20ABED338FDAC34A33F /* BAPickView.release.xcconfig */;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
-				IBSC_MODULE = BAPickView;
-				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = BAPickView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -1014,6 +998,22 @@
 			};
 			name = Debug;
 		};
+		FA02178E54D98846CB4D36B87513D165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3411ADCEB2539E9D042371276E52B187 /* BAPickView.debug.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BAPickView";
+				IBSC_MODULE = BAPickView;
+				INFOPLIST_FILE = "Target Support Files/BAPickView/ResourceBundle-BAPickView-BAPickView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = BAPickView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1038,8 +1038,8 @@
 		48251F8A5771E2E7DE3DE8E4446C5BDE /* Build configuration list for PBXNativeTarget "BAPickView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BEBD11DBA4929411C2857C20EDF0EA24 /* Debug */,
-				D7AC963F5DC1DC3ADEB59F65880CBD34 /* Release */,
+				4843D89D973A4923AB8B2C8ABBD5CBB3 /* Debug */,
+				6ABA765B5AFAB01A9762470B6D9F584C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1056,8 +1056,8 @@
 		D9C35601BB7025EB97753412BAD58938 /* Build configuration list for PBXNativeTarget "BAPickView-BAPickView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23C5A0E863C6C72E5EA66B2C651B3EF9 /* Debug */,
-				DFC01789CD927650FEECE57577E0C60E /* Release */,
+				FA02178E54D98846CB4D36B87513D165 /* Debug */,
+				AFFEDC9ED01B1D3A688753CDF19D0A8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

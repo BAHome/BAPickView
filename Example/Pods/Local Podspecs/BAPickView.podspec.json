@@ -2,7 +2,7 @@
   "name": "BAPickView",
   "version": "1.2.0",
   "summary": "BAPickView 精简高效的选择器！",
-  "description": "V1.2.0 全新改版，旧版本保留三个版本，后续大版本V2.0.0 将移除旧版本代码",
+  "description": "V1.2.0 全新改版，后续版本将移除旧版本代码",
   "homepage": "https://github.com/BAHome/BAPickView",
   "license": {
     "type": "MIT",
@@ -16,7 +16,7 @@
     "tag": "1.2.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "source_files": "BAPickView/Classes/**/*.{h,m}",
   "resource_bundles": {
@@ -38,8 +38,8 @@
   "subspecs": [
     {
       "name": "BAPickerManager",
-      "source_files": "BAPickView/BAPickerManager/**/*.{h,m}",
-      "public_header_files": "BAPickView/BAPickerManager/**/*.h",
+      "source_files": "BAPickView/Classes/BAPickView/**/*.{h,m}",
+      "public_header_files": "BAPickView/Classes/BAPickView/**/*.h",
       "prefix_header_contents": [
         "#import <UIKit/UIKit.h>",
         "#import <Foundation/Foundation.h>"
