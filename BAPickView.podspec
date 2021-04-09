@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-                      V1.2.0 全新改版，旧版本保留三个版本，后续大版本V2.0.0 将移除旧版本代码
+                      V1.2.0 全新改版，后续版本将移除旧版本代码
                        DESC
 
   s.homepage         = 'https://github.com/BAHome/BAPickView'
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/BAHome/BAPickView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-   s.ios.deployment_target = '8.0'
+   s.ios.deployment_target = '9.0'
 
    s.source_files = 'BAPickView/Classes/**/*.{h,m}'
   
@@ -45,8 +45,8 @@ Pod::Spec.new do |s|
    # BAPickerManager
    s.subspec 'BAPickerManager' do |scat|
           
-     scat.source_files  = "BAPickView/BAPickerManager/**/*.{h,m}"
-     scat.public_header_files = "BAPickView/BAPickerManager/**/*.h"
+     scat.source_files  = "BAPickView/Classes/BAPickView/**/*.{h,m}"
+     scat.public_header_files = "BAPickView/Classes/BAPickView/**/*.h"
      scat.prefix_header_contents =
      '#import <UIKit/UIKit.h>',
      '#import <Foundation/Foundation.h>'

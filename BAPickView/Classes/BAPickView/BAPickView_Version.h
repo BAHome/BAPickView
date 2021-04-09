@@ -20,6 +20,12 @@
  项目源码地址：
  OC 版 ：https://github.com/BAHome/BAPickView
  
+ 最新更新时间：2021-04-09 【倒叙】 <br>
+ 最新Version：【Version：1.2.0】 <br>
+ 更新内容： <br>
+ 1.2.0.1、优化适配 iOS 14 及 修复 自定义日期选择器 已知问题 <br>
+ 1.2.0.2、`BAPickerManger`  全新封装组件开发完成，注意：如需使用旧版本，请固定版本号为 V1.2.0，<br>
+ 
  最新更新时间：2019-9-06 【倒叙】 <br>
  最新Version：【Version：1.1.9】 <br>
  更新内容： <br>

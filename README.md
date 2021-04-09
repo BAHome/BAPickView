@@ -73,751 +73,240 @@ BAPickView is available under the MIT license. See the LICENSE file for more inf
 ## 4、BAPickView 的类结构及 demo 示例
 ![BAPickView.png](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.png)
 
-### BAPickView_OC.h
+### 简单封装效果 及 demo 示例
 ```
-#ifndef BAPickView_OC_h
-#define BAPickView_OC_h
+//
+//  BAPickerManger.h
+//  BAPickView
+//
+//  Created by 博爱 on 2021/4/2.
+//  此类是简单的二次封装，如有其他自定义选项可以自行单独二次封装
 
-#import "BAKit_PickerView.h"
-#import "BAKit_DatePicker.h"
-#import "BAKit_ConfigurationDefine.h"
-#import "NSDate+BAKit.h"
-#import "UIView+BARectCorner.h"
-#import "NSDateFormatter+BAKit.h"
-#import "UIView+BAAnimation.h"
-
-#import "BAKit_PickerViewConfig.h"
-
-#endif /* BAPickView_OC_h */
-```
-
-### BAKit_PickerView.h
-```
-#import <UIKit/UIKit.h>
-#import <CoreLocation/CLLocation.h>
-#import "BAKit_PickerViewConfig.h"
-
-@class BAKit_CityModel;
-
-/**
- 城市选择器的返回值
-
- @param model BAKit_CityModel
- */
-typedef void (^BAKit_PickerViewBlock)(BAKit_CityModel *model);
-
-/**
- 普通数组自定义数据返回，日期选择器返回值
-
- @param resultString resultString
- */
-typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
-
-@interface BAKit_PickerView : UIView
-
-#pragma mark - 自定义属性
-@property (nonatomic, copy) BAKit_PickerViewBlock block;
-@property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
-
-/**
- 是否开启边缘触摸隐藏，默认：YES
- */
-@property (nonatomic, assign) BOOL isTouchEdgeHide;
-
-/**
- 是否关闭选择内容显示在工具栏，默认：YES
- */
-@property (nonatomic, assign) BOOL isShowTitle;
-
-/**
- 动画样式
- */
-@property(nonatomic, assign) BAKit_PickerViewAnimationType animationType;
-
-/**
- 选择器样式，默认为城市选择器
- */
-@property(nonatomic, assign) BAKit_PickerViewType pickerViewType;
-@property(nonatomic, assign) BAKit_PickerViewDateType dateType;
-@property(nonatomic, assign) BAKit_PickerViewDateMode dateMode;
-@property(nonatomic, assign) BAKit_PickerViewButtonPositionType buttonPositionType;
-@property(nonatomic, assign) BAKit_PickerViewPositionType pickerViewPositionType;
-
-/**
- 自定义 NSDateFormatter，返回的日期格式，注意：如果同时设置 BAKit_PickerViewDateType 和 customDateFormatter，以 customDateFormatter 为主
- */
-@property(nonatomic, strong) NSDateFormatter *customDateFormatter;
-
-/**
- 自定义数据的数组，如：@[@"男", @"女"]
- */
-@property(nonatomic, strong) NSArray *dataArray;
-
-/**
- 自定义多列数据的数组，如：@[@[@"男", @"女"],@[@"21", @"22"],@[@"39", @"40"]]
- */
-@property(nonatomic, strong) NSArray *multipleDataArray;
-
-/**
- 自定义多列数据的标题,如  @[@"性别",@"名字",@"年龄"] 此属性配合multipleDataArray属性使用 , 此处 count 应与多列数据 count 一致否者不管用
- */
-@property(nonatomic, strong) NSArray *multipleTitleArray;
-
-/**
- toolBar 背景颜色，默认：白色
- */
-@property(nonatomic, strong) UIColor *ba_backgroundColor_toolBar;
-
-/**
- pickView 背景颜色，默认：白色
- */
-@property(nonatomic, strong) UIColor *ba_backgroundColor_pickView;
-
-/**
- cancleButton title颜色，默认：黑色
- */
-@property(nonatomic, strong) UIColor *ba_buttonTitleColor_cancle;
-
-/**
- sureButton title颜色，默认：黑色
- */
-@property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
-
-/**
- title 颜色，默认：黑色
- */
-@property(nonatomic, strong) UIColor *ba_pickViewTitleColor;
-
-/**
- pickView 字体，默认：[UIFont boldSystemFontOfSize:17]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
- */
-@property(nonatomic, strong) UIFont *ba_pickViewFont;
-
-/**
- pickView title 字体，默认：[UIFont boldSystemFontOfSize:15]
- */
-@property(nonatomic, strong) UIFont *ba_pickViewTitleFont;
-
-/**
- pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
- */
-@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
-
-/**
- 是否显示分割线，默认：NO，不显示，注意：iOS 10 开始，pickerView 默认没有分割线，这里是自己添加的分割线
- */
-@property(nonatomic, assign) BOOL isShowLineView;
-
-/**
- pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
- */
-@property(nonatomic, strong) UIColor *ba_pickViewLineViewColor;
-
-#pragma mark - custom method
-
-/**
- 快速创建一个 pickerView
- 
- @param pickerViewType type 类型
- @param configuration 可以设置 BAKit_PickerView 的自定义内容
- @param block 回调
- */
-+ (void)ba_creatPickerViewWithType:(BAKit_PickerViewType)pickerViewType
-                     configuration:(void (^)(BAKit_PickerView *tempView))configuration
-                             block:(BAKit_PickerViewResultBlock)block;
-
-/**
- 快速创建一个 城市选择器
-
- @param configuration 可以设置BAKit_PickerView 的自定义内容
- @param block 回调
- */
-+ (void)ba_creatCityPickerViewWithConfiguration:(void (^)(BAKit_PickerView *tempView)) configuration
-                                          block:(BAKit_PickerViewBlock)block;
-
-/**
- 快速创建一个 自定义单列 pickerView
-
- @param dataArray 数组
- @param configuration 可以设置BAKit_PickerView 的自定义内容
- @param block 回调
- */
-+ (void)ba_creatCustomPickerViewWithDataArray:(NSArray *)dataArray
-                                configuration:(void (^)(BAKit_PickerView *tempView)) configuration
-                                        block:(BAKit_PickerViewResultBlock)block;
-
-/**
- 快速创建一个 自定义多列 pickerView
- 
- @param dataArray 数组 @[@[@"男", @"女"],@[@"21", @"22"],@[@"39", @"40"]]
- @param configuration 可以设置 BAKit_PickerView 的自定义内容
- @param block 回调
- */
-+ (void)ba_creatCustomMultiplePickerViewWithDataArray:(NSArray *)dataArray
-                                        configuration:(void (^)(BAKit_PickerView *tempView)) configuration
-                                                block:(BAKit_PickerViewResultBlock)block;
-
-/**
- 显示 pick
- */
-- (void)ba_pickViewShow;
-
-/**
- 隐藏 pick
- */
-- (void)ba_pickViewHidden;
-
-@end
-
-@interface BAKit_CityModel : NSObject
-
-/**
- 省
- */
-@property (nonatomic, copy) NSString *province;
-
-/**
- 市
- */
-@property (nonatomic, copy) NSString *city;
-
-/**
- 区
- */
-@property (nonatomic, copy) NSString *area;
-
-/**
- 经纬度
- */
-@property (nonatomic, assign) CLLocationCoordinate2D coordie;
-
-@end
-
-```
-
-### BAKit_DatePicker.h
-```
-#import <UIKit/UIKit.h>
-#import "BAKit_PickerViewConfig.h"
-
-@interface BAKit_DatePicker : UIView
-
-#pragma mark - 默认配置
-/**
- 日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒
- */
-@property(strong, nonatomic) NSDate * ba_maxDate;
-
-/**
- 日期选择器的最小日期，默认为: 当前时间
- */
-@property(strong, nonatomic) NSDate * ba_minDate;
-
-/**
- 日期选择器默认选中的日期，默认为：日期选择器弹出时的日期
- */
-@property(strong, nonatomic) NSDate *ba_defautDate;
-
-#pragma mark - 类型选择
-/**
- 日期选择器 添加弹出动画，默认为：如果不设置该属性将不会显示动画
- */
-@property(assign, nonatomic) BAKit_PickerViewAnimationType animationType;
-@property(nonatomic, assign) BAKit_PickerViewButtonPositionType buttonPositionType;
-@property(nonatomic, assign) BAKit_PickerViewPositionType pickerViewPositionType;
-
-#pragma mark - 开关
-/*! 是否开启边缘触摸隐藏 默认：YES */
-@property (nonatomic, assign) BOOL isTouchEdgeHide;
-
-/**
- 是否显示选择结果显示在工具栏，默认：YES
- */
-@property (nonatomic, assign) BOOL isShowTitle;
-
-/**
- 是否显示背景年份水印，默认：NO
- */
-@property (nonatomic, assign) BOOL isShowBackgroundYearLabel;
-
-#pragma mark - color
-/**
- toolBar 背景颜色，默认：白色
- */
-@property(nonatomic, strong) UIColor *ba_backgroundColor_toolBar;
-
-/**
- pickView 背景颜色，默认：白色
- */
-@property(nonatomic, strong) UIColor *ba_backgroundColor_pickView;
-
-/**
- cancleButton title颜色，默认：黑色
- */
-@property(nonatomic, strong) UIColor *ba_buttonTitleColor_cancle;
-
-/**
- sureButton title颜色，默认：黑色
- */
-@property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
-
-/**
- title 颜色，默认：黑色
- */
-@property(nonatomic, strong) UIColor *ba_pickViewTitleColor;
-
-/**
- bgYearTitle 颜色，默认：[UIColor colorWithRed:237.0/255.0 green:240.0/255.0 blue:244.0/255.0 alpha:1]
- */
-@property(nonatomic, strong) UIColor *ba_bgYearTitleColor;
-
-/**
- pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
- */
-@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
-
-#pragma mark - font
-/**
- pickView 字体，默认：非选中状态 [UIFont systemFontOfSize:10]，选中状态比非选中状态大5，即 15
- */
-@property(nonatomic, strong) UIFont *ba_pickViewFont;
-
-/**
- pickView title 字体，默认：[UIFont boldSystemFontOfSize:15]
- */
-@property(nonatomic, strong) UIFont *ba_pickViewTitleFont;
-
-/**
- bgYearTitle 字体，默认：[UIFont boldSystemFontOfSize:100]
- */
-@property(nonatomic, strong) UIFont *ba_bgYearTitleFont;
-
-
-#pragma mark - public method
-/**
- 快速创建 BAKit_DatePicker
- 
- @param pickerViewType pickerViewType
- @param configuration configuration
- @param block block
- */
-+ (void)ba_creatPickerViewWithType:(BAKit_CustomDatePickerDateType)pickerViewType
-                     configuration:(void (^)(BAKit_DatePicker *tempView))configuration
-                             block:(BAKit_PickerViewResultBlock)block;
-
-/**
- 显示 pick
- */
-- (void)ba_pickViewShow;
-
-/**
- 隐藏 pick
- */
-- (void)ba_pickViewHidden;
-
-@end
-```
-
-### NSDate+BAKit.h
-```
 #import <Foundation/Foundation.h>
+#import "BAPickerDefine.h"
+#import "BAPickerConfigModel.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
-#define BAKit_Current_Calendar [NSCalendar currentCalendar]
-#define BAKit_Current_Date     [NSDate date]
+@interface BAPickerManger : NSObject
 
-@interface NSDate (BAKit)
+/// 快速创建 pickerView 单列
+/// @param pickerModel 自定义 model
+/// @param cb 返回
++ (void)initStringsPickerWithModel:(BAPickerModel *)pickerModel
+                                cb:(BAPickerResultBlock)cb;
 
-@property (nonatomic, readonly) NSInteger year;
-@property (nonatomic, readonly) NSInteger month;
-@property (nonatomic, readonly) NSInteger day;
-@property (nonatomic, readonly) NSInteger nearestHour;
-@property (nonatomic, readonly) NSInteger hour;
-@property (nonatomic, readonly) NSInteger minute;
-@property (nonatomic, readonly) NSInteger second;
-@property (nonatomic, readonly) NSInteger nanosecond;
-@property (nonatomic, readonly) NSInteger weekday;
-//PRC 中国
-@property (nonatomic, readonly) NSInteger weekdayPRC;
-@property (nonatomic, readonly) NSInteger weekdayOrdinal;
-@property (nonatomic, readonly) NSInteger weekOfMonth;
-@property (nonatomic, readonly) NSInteger weekOfYear;
-@property (nonatomic, readonly) NSInteger yearForWeekOfYear;
-@property (nonatomic, readonly) NSInteger quarter;
+/// 快速创建 pickerView  单列
+/// @param title 中间标题，例如：请选择日期
+/// @param strings 数据源
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initStringsPickerWithTitle:(nullable NSString *)title
+                           strings:(NSArray <NSString *>*)strings
+                        showResult:(BOOL)showResult
+                                cb:(BAPickerResultBlock)cb ;
 
-/**
- 确定每个月是否为闰月
- */
-@property (nonatomic, readonly) BOOL isLeapMonth;
-
-/**
- 确定每个月是否为闰年
- */
-@property (nonatomic, readonly) BOOL isLeapYear;
-
-/**
- 是否是今天
- */
-@property (nonatomic, readonly) BOOL isToday;
-
-/**
- 是否是昨天
- */
-@property (nonatomic, readonly) BOOL isYesterday;
-@property (nonatomic, readonly) BOOL isTomorrow;
-@property (nonatomic, readonly) BOOL isThisWeek;
-@property (nonatomic, readonly) BOOL isNextWeek;
-@property (nonatomic, readonly) BOOL isLastWeek;
-@property (nonatomic, readonly) BOOL isThisMonth;
-@property (nonatomic, readonly) BOOL isThisYear;
-@property (nonatomic, readonly) BOOL isNextYear;
-@property (nonatomic, readonly) BOOL isLastYear;
-@property (nonatomic, readonly) BOOL isInFuture;
-@property (nonatomic, readonly) BOOL isInPast;
-
-@property (nonatomic, readonly) BOOL isTypicallyWorkday;
-@property (nonatomic, readonly) BOOL isTypicallyWeekend;
-
-
-/*!
- *  计算上报时间差: 几分钟前，几天前，传入 NSDate，自动解析
- *
- *  @return 计算上报时间差: 几分钟前，几天前
- */
-- (NSString *)ba_dateFormattedWithDate;
-
-/*!
- *  计算上报时间差: 几分钟前，几天前，传入 NSString 类型的 date，如：@"2017-04-25 11:18:01"，自动解析
- *
- *  @return 计算上报时间差: 几分钟前，几天前
- */
-+ (NSString *)ba_dateCreated_at:(NSString *)date;
-
-/*!
- *  获得一个比当前时间大n年的时间，格式为 yyyy-MM-dd
- */
-+ (NSDate *)ba_dateAfterYears:(NSInteger)count;
-
-/*!
- *  返回一个只有年月日的时间
- */
-- (NSDate *)ba_dateWithYMD;
-
-- (NSDate *)ba_dateWithYM;
-
-/*!
- *  获得与当前时间的差距
- */
-- (NSDateComponents *)ba_dateDeltaWithNow;
-
-/**
- 距离当前的时间间隔描述
-
- @return 时间间隔描述
- */
-- (NSString *)ba_dateTimeIntervalDescription;
-
-/**
- 精确到分钟的日期描述
-
- @return 日期描述
- */
-- (NSString *)ba_dateMinuteDescription;
-
-/**
- 标准时间日期描述
-
- @return 标准时间日期描述
- */
-- (NSString *)ba_dateFormattedTime;
-
-/**
- 当前日期 距离 1970 时间间隔毫秒
-
- @return 当前日期 距离 1970 时间间隔毫秒
- */
-- (double)ba_dateTimeIntervalSince1970InMilliSecond;
-
-/**
- 距离 时间间隔毫秒 后的日期
-
- @param timeIntervalInMilliSecond 时间间隔毫秒
- @return 距离 时间间隔毫秒 后的日期
- */
-+ (NSDate *)ba_dateWithTimeIntervalInMilliSecondSince1970:(double)timeIntervalInMilliSecond;
-
-/**
- 时间间隔格式化
-
- @param time 时间间隔
- @return 时间格式化
- */
-+ (NSString *)ba_dateFormattedTimeFromTimeInterval:(long long)time;
-
-#pragma mark UTC
-//UTC世界统一时间
-- (NSNumber *)ba_dateGetUtcTimeIntervalSince1970;
-- (NSNumber *)ba_dateGetUtcTimeIntervalIntSince1970;
-- (NSString *)ba_dateTimeIntervalStringSince1970;
-
-#pragma mark - 距离当前日期最近的日期
-+ (NSDate *)ba_dateTomorrow;
-+ (NSDate *)ba_dateYesterday;
-+ (NSDate *)ba_dateWithDaysFromNow:(NSInteger)days;
-+ (NSDate *)ba_dateWithDaysBeforeNow:(NSInteger)days;
-+ (NSDate *)ba_dateWithHoursFromNow:(NSInteger)dHours;
-+ (NSDate *)ba_dateWithHoursBeforeNow:(NSInteger)dHours;
-+ (NSDate *)ba_dateWithMinutesFromNow:(NSInteger)dMinutes;
-+ (NSDate *)ba_dateWithMinutesBeforeNow:(NSInteger)dMinutes;
-
-#pragma mark - 比较日期
-- (BOOL)ba_dateIsEqualToDateIgnoringTime:(NSDate *)aDate;
-- (BOOL)ba_dateIsSameWeekAsDate:(NSDate *)aDate;
-- (BOOL)ba_dateIsSameMonthAsDate:(NSDate *)aDate;
-- (BOOL)ba_dateIsSameYearAsDate:(NSDate *)aDate;
-- (BOOL)ba_dateIsEarlierThanDate:(NSDate *)aDate;
-- (BOOL)ba_dateIsLaterThanDate:(NSDate *)aDate;
-
-#pragma mark - 调整日期
-- (NSDate *)ba_dateByAddingDays:(NSInteger)dDays;
-- (NSDate *)ba_dateBySubtractingDays:(NSInteger)dDays;
-- (NSDate *)ba_dateByAddingHours:(NSInteger)dHours;
-- (NSDate *)ba_dateBySubtractingHours:(NSInteger)dHours;
-- (NSDate *)ba_dateByAddingMinutes:(NSInteger)dMinutes;
-- (NSDate *)ba_dateBySubtractingMinutes:(NSInteger)dMinutes;
-- (NSDate *)ba_dateAtStartOfDay;
-- (NSDateComponents *)ba_dateComponentsWithOffsetFromDate:(NSDate *)aDate;
-
-#pragma mark - 时间间隔
-- (NSInteger)ba_dateMinutesAfterDate:(NSDate *)aDate;
-- (NSInteger)ba_dateMinutesBeforeDate:(NSDate *)aDate;
-- (NSInteger)ba_dateHoursAfterDate:(NSDate *)aDate;
-- (NSInteger)ba_dateHoursBeforeDate:(NSDate *)aDate;
-- (NSInteger)ba_dateDaysAfterDate:(NSDate *)aDate;
-- (NSInteger)ba_dateDaysBeforeDate:(NSDate *)aDate;
-- (NSInteger)ba_dateDistanceInDaysToDate:(NSDate *)anotherDate;
-/**
- 多少天之后
- */
-- (NSDate *)ba_dateGetAfterYear:(int)year OrMonth:(int)month OrDay:(int)day;
-
-#pragma mark - 一年有多少周
-+ (NSString *)ba_dateGetWeekInyearOrMouth:(BOOL)inYear WithDate:(NSDate *)date;
-// 2015、2009、004、1998 这四年是 53 周（目前已知），其余均是52周
-+ (NSInteger)ba_dateGetWeekNumbersOfYear:(NSInteger)year;
+/// 快速创建 pickerView  单列
+/// @param title 中间标题，例如：请选择日期
+/// @param titleFont 中间标题文字字体
+/// @param strings 数据源
+/// @param maskViewBackgroundColor 遮罩背景颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
+/// @param cancleTitle 取消按钮文字
+/// @param cancleTitleColor 取消按钮文字颜色
+/// @param cancleTitleFont 取消按钮文字字体
+/// @param sureTitle 确定按钮文字
+/// @param sureTitleColor 确定按钮文字颜色
+/// @param sureTitleFont 确定按钮文字字体
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initStringsPickerWithTitle:(nullable NSString *)title
+                         titleFont:(nullable UIFont *)titleFont
+                           strings:(NSArray <NSString *>*)strings
+           maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+                       cancleTitle:(nullable NSString *)cancleTitle
+                  cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                   cancleTitleFont:(nullable UIFont *)cancleTitleFont
+                         sureTitle:(nullable NSString *)sureTitle
+                    sureTitleColor:(nullable UIColor *)sureTitleColor
+                     sureTitleFont:(nullable UIFont *)sureTitleFont
+                        showResult:(BOOL)showResult
+                                cb:(BAPickerResultBlock)cb;
 
 @end
 
-/**
- *  中国农历
- */
+@interface BAPickerManger (MultipleStrings)
 
-@interface NSDate (LunarCalendar)
+/// 快速创建 pickerView 多列
+/// @param pickerModel 自定义 model
+/// @param cb 返回
++ (void)initMultipleStringsPickerWithPickerModle:(BAPickerModel *)pickerModel
+                                              cb:(BAPickerResultBlock)cb;
 
-/**
- * 例如 : 2016丙申年四月初一
- */
+/// 快速创建 pickerView 多列
+/// @param title 中间标题，例如：请选择日期 
+/// @param multipleStringsArray 数据源
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initMultipleStringsPickerWithTitle:(nullable NSString *)title
+                      multipleStringsArray:(NSArray <NSArray *>*)multipleStringsArray
+                                showResult:(BOOL)showResult
+                                        cb:(BAPickerResultBlock)cb;
 
-- (NSInteger)lunarShortYear;  // 农历年份,数字表示  2016
-
-- (NSString *)lunarLongYear;  // 农历年份,干支表示  丙申年
-
-- (NSInteger)lunarShortMonth; // 农历月份,数字表示  4
-
-- (NSString *)lunarLongMonth; // 农历月份,汉字表示  四月
-
-- (NSInteger)lunarShortDay;   // 农历日期,数字表示  1
-
-- (NSString *)lunarLongDay;   // 农历日期,汉字表示  初一
-
-- (NSString *)lunarSolarTerms;// 农历节气 (立春 雨水 惊蛰 春分...)
-
-/** 传入阳历的年月日返回当天的农历节气 */
-+ (NSString *)getLunarSolarTermsWithYear:(int)iYear Month:(int)iMonth Day:(int)iDay;
+/// 快速创建 pickerView 多列
+/// @param title 中间标题，例如：请选择日期
+/// @param titleFont 中间标题文字字体
+/// @param multipleStringsArray 数据源
+/// @param multipleTitleArray 顶部标题注释，详见 demo
+/// @param maskViewBackgroundColor 遮罩背景颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
+/// @param cancleTitle 取消按钮文字
+/// @param cancleTitleColor 取消按钮文字颜色
+/// @param cancleTitleFont 取消按钮文字字体
+/// @param sureTitle 确定按钮文字
+/// @param sureTitleColor 确定按钮文字颜色
+/// @param sureTitleFont 确定按钮文字字体
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initMultipleStringsPickerWithTitle:(nullable NSString *)title
+                                 titleFont:(nullable UIFont *)titleFont
+                      multipleStringsArray:(NSArray <NSArray *>*)multipleStringsArray
+                        multipleTitleArray:(nullable NSArray <NSString *>*)multipleTitleArray
+                   maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+                               cancleTitle:(nullable NSString *)cancleTitle
+                          cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                           cancleTitleFont:(nullable UIFont *)cancleTitleFont
+                                 sureTitle:(nullable NSString *)sureTitle
+                            sureTitleColor:(nullable UIColor *)sureTitleColor
+                             sureTitleFont:(nullable UIFont *)sureTitleFont
+                                showResult:(BOOL)showResult
+                                        cb:(BAPickerResultBlock)cb;
 
 @end
-```
-### demo 示例
-```
-- (void)pickView1 {
-    BAKit_WeakSelf
-    [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
-        BAKit_StrongSelf
-        // 设置“取消“和”确定“ button 在 pickerView 的底部
-        tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
-        // 设置 pickerView 在屏幕中的位置
-        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
-        // 是否开启边缘触摸隐藏 默认：YES
-        tempView.isTouchEdgeHide = NO;
-        // 动画样式
-        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
-        /**
-         pickView 字体，默认：[UIFont boldSystemFontOfSize:17]
-         */
-        tempView.ba_pickViewFont = [UIFont systemFontOfSize:17];
-        /**
-         pickView 字体颜色，默认：[UIColor blackColor]
-         */
-        tempView.ba_pickViewTextColor = [UIColor orangeColor];
-        
-        self.pickView = tempView;
-    } block:^(BAKit_CityModel *model) {
-        BAKit_StrongSelf
-        // 返回 BAKit_CityModel，包含省市县 和 详细的经纬度
-        NSString *msg = [NSString stringWithFormat:@"%@%@%@\n纬度：%f\n经度：%f", model.province, model.city, model.area, model.coordie.latitude, model.coordie.longitude];
-        NSLog(@"%@", msg);
-        BAKit_ShowAlertWithMsg_ios8(msg);
-    }];
-}
 
-- (void)pickView2 {
-    NSArray *array = @[@"男", @"女"];
-    
-    BAKit_WeakSelf
-    [BAKit_PickerView ba_creatCustomPickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
-        BAKit_StrongSelf
-        // 可以自由定制 toolBar 和 pickView 的背景颜色
-        tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
-        tempView.ba_backgroundColor_pickView = [UIColor greenColor];
-        tempView.animationType = BAKit_PickerViewAnimationTypeTop;
-        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
-        self.pickView = tempView;
-    } block:^(NSString *resultString) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-    }];
-}
+@interface BAPickerManger (City)
 
-- (void)pickView3 {
-    BAKit_WeakSelf
-    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDate configuration:^(BAKit_PickerView *tempView) {
-        BAKit_StrongSelf
-        
-        // 可以自由定制 NSDateFormatter
-        tempView.dateMode = BAKit_PickerViewDateModeDate;
-        tempView.dateType = BAKit_PickerViewDateTypeYMDHMS;
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        formatter.dateFormat = @"yyyy年MM月dd日";
-//        tempView.customDateFormatter = formatter;
-        // 可以自由定制按钮颜色
-        tempView.ba_buttonTitleColor_sure = [UIColor redColor];
-        tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
-        tempView.animationType = BAKit_PickerViewAnimationTypeLeft;
+/// 快速创建 pickerView 城市选择
+/// @param cb 返回
++ (void)initCityPickerWithCallBack:(BAPickerCityResultBlock)cb;
 
-        self.pickView = tempView;
-        
-    } block:^(NSString *resultString) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-    }];
-}
+/// 快速创建 pickerView 城市选择
+/// @param title 中间标题，例如：请选择日期
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initCityPickerWithTitle:(nullable NSString *)title
+                     showResult:(BOOL)showResult
+                             cb:(BAPickerCityResultBlock)cb;
 
-- (void)pickView4 {
-    BAKit_WeakSelf
-    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateYM configuration:^(BAKit_PickerView *tempView) {
-        BAKit_StrongSelf
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyy-MM";
-        tempView.customDateFormatter = formatter;
-        tempView.animationType = BAKit_PickerViewAnimationTypeRight;
-        self.pickView = tempView;
-    } block:^(NSString *resultString) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-    }];
-}
+@end
 
-- (void)pickView5 {
-    BAKit_WeakSelf
-    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
-        
-        BAKit_StrongSelf
-        self.pickView = tempView;
-    } block:^(NSString *resultString) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-    }];
-}
+@interface BAPickerManger (SystemDateDatePicker)
 
-// 示例2：自定义日期选择器
-#pragma mark 自定义日期选择器
-- (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type {
-    [BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
-        
-        NSDate *maxdDate;
-        NSDate *mindDate;
-        // 自定义：最大最小日期格式
-        if (type == BAKit_CustomDatePickerDateTypeYMD) {
-//            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-//            maxdDate = [format dateFromString:@"2018-08-09"];
-//            mindDate = [format dateFromString:@"2016-07-20"];
-            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-            NSDate *today = [[NSDate alloc]init];
-            [format setDateFormat:@"yyyy-MM-dd"];
-            
-            // 最小时间，当前时间
-            mindDate = [format dateFromString:[format stringFromDate:today]];
-            
-            NSTimeInterval oneDay = 24 * 60 * 60;
-            // 最大时间，当前时间+180天
-            NSDate *theDay = [today initWithTimeIntervalSinceNow:oneDay * 180];
-            maxdDate = [format dateFromString:[format stringFromDate:theDay]];
-            
-        }
-        else if (type == BAKit_CustomDatePickerDateTypeYM) {
-            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYM];
-            maxdDate = [format dateFromString:@"2018-08"];
-            mindDate = [format dateFromString:@"2016-07"];
-        }
-        
-        if (maxdDate) {
-            // 自定义：最大日期
-            tempView.ba_maxDate = maxdDate;
-        }
-        if (mindDate) {
-            // 自定义：最小日期
-            tempView.ba_minDate = mindDate;
-        }
-        
-        /**
-         是否显示背景年份水印，默认：NO
-         */
-        tempView.isShowBackgroundYearLabel = YES;
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param datePickerModel 自定义 model
+/// @param cb 返回
++ (void)initSystemDatePickerWithModel:(BADatePickerModel *)datePickerModel
+                                   cb:(BAPickerResultBlock)cb;
 
-        // 是否显示 pickview title
-        //        tempView.isShowTitle = NO;
-        // 自定义 pickview title 的字体颜色
-        tempView.ba_pickViewTitleColor = BAKit_Color_Red_pod;
-        // 自定义 pickview title 的字体
-        tempView.ba_pickViewTitleFont = [UIFont boldSystemFontOfSize:15];
-        // 自定义 pickview背景 title 的字体颜色
-//        tempView.ba_bgYearTitleColor = [UIColor orangeColor];
-//        // 自定义 pickview背景 title 的字体
-//        tempView.ba_bgYearTitleFont = [UIFont systemFontOfSize:50];
-        // 自定义：动画样式
-        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
-        // 自定义：pickView 位置
-        //            tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
-        // 自定义：toolBar 位置
-        //            tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
-        // 自定义：pickView 文字颜色
-        tempView.ba_pickViewTextColor = [UIColor redColor];
-        // 自定义：pickView 文字字体
-        tempView.ba_pickViewFont = [UIFont systemFontOfSize:13];
-        
-        // 可以自由定制按钮颜色
-        tempView.ba_buttonTitleColor_sure = [UIColor redColor];
-        tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
-        
-        // 可以自由定制 toolBar 和 pickView 的背景颜色
-        //            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
-        //            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
-        
-    } block:^(NSString *resultString) {
-        
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-    }];
-}
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param cb 返回
++ (void)initSystemDatePicker:(BAPickerResultBlock)cb;
+
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param title 中间标题，例如：请选择日期
+/// @param datePickerMode datePickerMode description
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initSystemDatePickerTitle:(nullable NSString *)title
+                   datePickerMode:(UIDatePickerMode)datePickerMode
+                       showResult:(BOOL)showResult
+                               cb:(BAPickerResultBlock)cb;
+
+/// 快速创建 pickerView 日期选择器-系统样式
+/// @param title 中间标题，例如：请选择日期
+/// @param titleFont 中间标题文字字体
+/// @param datePickerMode datePickerMode description
+/// @param formatterString formatterString description
+/// @param maskViewBackgroundColor 遮罩背景颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
+/// @param cancleTitle 取消按钮文字
+/// @param cancleTitleColor 取消按钮文字颜色
+/// @param cancleTitleFont 取消按钮文字字体
+/// @param sureTitle 确定按钮文字
+/// @param sureTitleColor 确定按钮文字颜色
+/// @param sureTitleFont 确定按钮文字字体
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initSystemDatePickerTitle:(nullable NSString *)title
+                        titleFont:(nullable UIFont *)titleFont
+                   datePickerMode:(UIDatePickerMode)datePickerMode
+                  formatterString:(nullable NSString *)formatterString
+          maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+                      cancleTitle:(nullable NSString *)cancleTitle
+                 cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                  cancleTitleFont:(nullable UIFont *)cancleTitleFont
+                        sureTitle:(nullable NSString *)sureTitle
+                   sureTitleColor:(nullable UIColor *)sureTitleColor
+                    sureTitleFont:(nullable UIFont *)sureTitleFont
+                       showResult:(BOOL)showResult
+                               cb:(BAPickerResultBlock)cb;
+
+@end
+
+@interface BAPickerManger (CustomDateDatePicker)
+
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param datePickerModel 自定义 model
+/// @param cb 返回
++ (void)initCustomDatePickerWithModel:(BADatePickerModel *)datePickerModel
+                                   cb:(BAPickerResultBlock)cb;
+
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param datePickerType datePickerType description
+/// @param cb 返回
++ (void)initCustomDatePickerWithType:(BADatePickerType)datePickerType
+                                  cb:(BAPickerResultBlock)cb;
+
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param title 中间标题，例如：请选择日期
+/// @param datePickerType datePickerType description
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initCustomDatePickerWithTitle:(nullable NSString *)title
+                       datePickerType:(BADatePickerType)datePickerType
+                           showResult:(BOOL)showResult
+                                   cb:(BAPickerResultBlock)cb;
+
+/// 快速创建 pickerView 日期选择器-自定义样式
+/// @param title 中间标题，例如：请选择日期
+/// @param titleFont 中间标题文字字体
+/// @param datePickerType datePickerType description
+/// @param maskViewBackgroundColor 遮罩背景颜色，默认：[UIColor.blackColor colorWithAlphaComponent:0.3]
+/// @param maximumDate 最大日期
+/// @param minimumDate 最小日期
+/// @param cancleTitle 取消按钮文字
+/// @param cancleTitleColor 取消按钮文字颜色
+/// @param cancleTitleFont 取消按钮文字字体
+/// @param sureTitle 确定按钮文字
+/// @param sureTitleColor 确定按钮文字颜色
+/// @param sureTitleFont 确定按钮文字字体
+/// @param showResult 是否显示选中结果
+/// @param cb 返回
++ (void)initCustomDatePickerWithTitle:(nullable NSString *)title
+                            titleFont:(nullable UIFont *)titleFont
+                       datePickerType:(BADatePickerType)datePickerType
+              maskViewBackgroundColor:(nullable UIColor *)maskViewBackgroundColor
+                          maximumDate:(nullable NSDate *)maximumDate
+                          minimumDate:(nullable NSDate *)minimumDate
+                          cancleTitle:(nullable NSString *)cancleTitle
+                     cancleTitleColor:(nullable UIColor *)cancleTitleColor
+                      cancleTitleFont:(nullable UIFont *)cancleTitleFont
+                            sureTitle:(nullable NSString *)sureTitle
+                       sureTitleColor:(nullable UIColor *)sureTitleColor
+                        sureTitleFont:(nullable UIFont *)sureTitleFont
+                           showResult:(BOOL)showResult
+                                   cb:(BAPickerResultBlock)cb;
+
+@end
+
+NS_ASSUME_NONNULL_END
 
 其他示例可下载demo查看源码！
 ```
@@ -825,6 +314,12 @@ typedef void (^BAKit_PickerViewResultBlock)(NSString *resultString);
 ## 5、更新记录：【倒叙】
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
+ 
+ 最新更新时间：2021-04-09 【倒叙】 <br>
+ 最新Version：【Version：1.2.0】 <br>
+ 更新内容： <br>
+ 1.2.0.1、优化适配 iOS 14 及 修复 自定义日期选择器 已知问题 <br>
+ 1.2.0.2、`BAPickerManger`  全新封装组件开发完成，注意：如需使用旧版本，请固定版本号为 V1.2.0，<br>
  
  最新更新时间：2019-9-03 【倒叙】 <br>
  最新Version：【Version：1.1.9】 <br>

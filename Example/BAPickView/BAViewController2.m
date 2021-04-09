@@ -37,7 +37,7 @@ UITableViewDataSource
 }
 
 - (void)initUI {
-    self.title = @"BAPickView-新版";
+    self.title = @"BAPickView-New";
     
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
