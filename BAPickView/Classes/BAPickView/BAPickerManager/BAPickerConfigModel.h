@@ -79,10 +79,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - common
 /// ToolBar：是否显示选中结果，默认：YES
-@property(nonatomic, assign) BOOL showResult;
-
-@property(nonatomic, assign) BOOL showBottomeLine;
-@property(nonatomic, strong) UIColor *bottomeLineColor;
+@property(nonatomic, assign, getter=isShowResult) BOOL showResult;
+/// ToolBar：是否显示底部分割线，默认：YES
+@property(nonatomic, assign, getter=isShowBottomLine) BOOL showBottomLine;
 
 #pragma mark - title
 /// ToolBar：默认标题，例如：请选择出生日期，注：若 showResult = YES && title 不为空，会优先显示 title，若 showResult = YES && title 为空，会优先显示 默认选中结果，
@@ -93,21 +92,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *sureTitle;
 
 #pragma mark - color
-/// ToolBar：背景颜色
+/// ToolBar：背景颜色，默认：白色
 @property(nonatomic, strong) UIColor *backgroundColor;
-/// ToolBar：中间标题文字颜色
+/// ToolBar：中间标题文字颜色，默认：黑色
 @property(nonatomic, strong) UIColor *titleColor;
-/// ToolBar：左边按钮文字颜色
+/// ToolBar：左边按钮文字颜色，默认：黑色
 @property(nonatomic, strong) UIColor *cancleTitleColor;
-/// ToolBar：右边按钮文字颜色
+/// ToolBar：右边按钮文字颜色，默认：黑色
 @property(nonatomic, strong) UIColor *sureTitleColor;
+/// ToolBar：底部分割线颜色，默认：0xCCCCCC
+@property(nonatomic, strong) UIColor *lineColor;
 
 #pragma mark - font
-/// ToolBar：中间标题文字字体，默认：[UIFont boldSystemFontOfSize:15]
+/// ToolBar：中间标题文字字体，默认：[UIFont boldSystemFontOfSize:16]
 @property(nonatomic, strong) UIFont *titleFont;
-/// ToolBar：左边按钮文字字体
+/// ToolBar：左边按钮文字字体，默认：[UIFont systemFontOfSize:14]
 @property(nonatomic, strong) UIFont *cancleTitleFont;
-/// ToolBar：右边按钮文字字体
+/// ToolBar：右边按钮文字字体，默认：[UIFont systemFontOfSize:14]
 @property(nonatomic, strong) UIFont *sureTitleFont;
 
 #pragma mark - temp

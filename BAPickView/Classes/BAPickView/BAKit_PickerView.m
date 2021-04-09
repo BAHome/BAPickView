@@ -719,7 +719,7 @@
     if (self.pickerViewType == BAKit_PickerViewTypeCity && self.provinceArray.count == 0) {
         NSString *msg = @"您的数据有误，请检查数据！";
         NSLog(@"%@", msg);
-        BAKit_ShowAlertWithMsg(msg);
+//        BAKit_ShowAlertWithMsg(msg);
     } else {
         [self.alertWindow addSubview:self];
         [self ba_layoutSubViews];

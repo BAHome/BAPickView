@@ -67,10 +67,13 @@
     self = [super init];
     if (self) {
         self.showResult = YES;
+        self.showBottomLine = YES;
         
         self.cancleTitleFont = [UIFont systemFontOfSize:14];
         self.sureTitleFont = [UIFont systemFontOfSize:14];
         self.titleFont = [UIFont boldSystemFontOfSize:16];
+        
+        self.lineColor = kColorWithHex(0xCCCCCC);
     }
     return self;
 }

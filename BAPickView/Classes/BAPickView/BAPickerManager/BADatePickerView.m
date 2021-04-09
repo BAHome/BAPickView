@@ -99,8 +99,16 @@
     
     NSString *resultString = [self.formatter stringFromDate:resultDate];
     self.resultString = resultString;
-    self.resultModel.resultString = resultString;
-    self.toolBarView.result = resultString;
+}
+
+- (void)setResultString:(NSString *)resultString {
+    _resultString = resultString;
+    
+    // 等 configModel 有值有再赋值
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.resultModel.resultString = resultString;
+        self.toolBarView.result = resultString;
+    });
 }
 
 - (void)setConfigModel:(BADatePickerModel *)configModel {
@@ -137,8 +145,17 @@
     {
         self.datePickerModel = configModel;
         self.toolBarView.toolBarModel = configModel.toolBarModel;
+        
         // 默认数据：
-        self.resultDate = NSDate.date;
+        self.resultModel.resultDate = NSDate.date;
+        NSString *resultString = [self.formatter stringFromDate:NSDate.date];
+        self.resultModel.resultString = resultString;
+        
+        // 是否显示默认选中结果
+        BOOL isShowDefaultResult = configModel.toolBarModel.temp_showDefaultResult;
+        if (isShowDefaultResult) {
+            self.resultDate = NSDate.date;
+        }
     }
 }
 

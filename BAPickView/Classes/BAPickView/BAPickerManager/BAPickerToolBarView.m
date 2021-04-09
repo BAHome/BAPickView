@@ -56,6 +56,13 @@
         make.left.mas_equalTo(self.cancleButton.mas_right).offset(10);
         make.right.mas_greaterThanOrEqualTo(self.sureButton.mas_left).offset(-10);
     }];
+    
+    [self addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.offset(0);
+        make.height.mas_equalTo(0.5);
+    }];
+    
     self.titleLabel.hidden = NO;
 }
 
@@ -92,6 +99,8 @@
         self.titleLabel.text = toolBarModel.title;
     }
     
+    self.lineView.hidden = !toolBarModel.showBottomLine;
+    
 #pragma mark - color
     {
         if (toolBarModel.backgroundColor) {
@@ -105,6 +114,9 @@
         }
         if (toolBarModel.sureTitleColor) {
             [self.sureButton setTitleColor:toolBarModel.sureTitleColor forState:UIControlStateNormal];
+        }
+        if (toolBarModel.lineColor) {
+            self.lineView.backgroundColor = toolBarModel.lineColor;
         }
     }
 #pragma mark - font

@@ -180,6 +180,25 @@ UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确 定" style:UIAl
 [self presentViewController:alert animated:YES completion:nil];
 
 #pragma mark - color
+
+// 十六进制创建颜色
+#define kColorWithHex(hexValue) [UIColor \
+colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((hexValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]
+
+#define kColorWithHexAlpha(hexValue,a) [UIColor \
+colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((hexValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(hexValue & 0xFF))/255.0 alpha:(a)]
+
+#define kColorWithRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+#define kColorWithRGBA(r, g, b, a) [UIColor colorWithRed:(float)r / 255.0f green:(float)g / 255.0f blue:(float)b / 255.0f alpha:a]
+
 CG_INLINE UIColor *
 BAKit_Color_RGBA_pod(u_char r,u_char g, u_char b, u_char a) {
     return [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a];
