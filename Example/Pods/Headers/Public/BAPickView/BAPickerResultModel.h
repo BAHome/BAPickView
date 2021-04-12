@@ -1,1 +1,1 @@
-../../../../../BAPickView/Classes/BAPickView/BAPickerManager/BAPickerResultModel.h
+../../../../../BAPickView/Classes/PickerView/BAPickerResultModel.h

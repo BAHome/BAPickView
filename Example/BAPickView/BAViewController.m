@@ -1,17 +1,14 @@
 //
 //  BAViewController.m
-//  BAPickView
+//  BAPickView_Example
 //
-//  Created by boai on 11/27/2018.
-//  Copyright (c) 2018 boai. All rights reserved.
+//  Created by 博爱 on 2021/4/1.
+//  Copyright © 2021 boai. All rights reserved.
 //
 
 #import "BAViewController.h"
 
 #import "BAPickView_OC.h"
-#import "BAKit_DatePicker.h"
-
-#import "BAViewController2.h"
 
 @interface BAViewController ()
 <
@@ -22,7 +19,6 @@ UITableViewDataSource
 @property(nonatomic, strong) UITableView *tableView;
 @property(strong, nonatomic) NSArray *dataArray;
 
-@property(nonatomic, strong) BAKit_PickerView *pickView;
 
 @end
 
@@ -33,39 +29,15 @@ UITableViewDataSource
     // Do any additional setup after loading the view, typically from a nib.
     
     [self initUI];
-    [self initNavi];
 }
 
 - (void)initUI {
-    self.title = @"BAPickView-Old";
-    self.tableView.hidden = NO;
-}
-
-- (void)initNavi {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"新版" style:UIBarButtonItemStylePlain target:self action:@selector(onRightBarButtonItem)];
-}
-
-- (void)onRightBarButtonItem {
-    BAViewController2 *vc = BAViewController2.new;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
+    self.title = @"BAPickView-New";
     
-    CGFloat min_x = 0;
-    CGFloat min_y = 0;
-    CGFloat min_w = 0;
-    CGFloat min_h = 0;
-    
-    CGFloat min_view_w = CGRectGetWidth(self.view.frame);
-    CGFloat min_view_h = CGRectGetHeight(self.view.frame);
-    
-    min_x = BAKit_ViewSafeAreaInsets(self.view).left;
-    min_h = min_view_h - min_y;
-    min_w = min_view_w - BAKit_ViewSafeAreaInsets(self.view).left - BAKit_ViewSafeAreaInsets(self.view).right;
-    
-    self.tableView.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.offset(0);
+    }];
     
 }
 
@@ -99,76 +71,58 @@ UITableViewDataSource
         switch ( indexPath.row ) {
             case 0: {
                 [self pickView1];
-            }
-                break;
+            } break;
             case 1: {
                 [self pickView2];
-            }
-                break;
+            } break;
             case 2: {
                 [self pickView3];
-            }
-                break;
+            } break;
             case 3: {
-                [self pickView4];
-            }
-                break;
+                [self datePickerViewWithType:BADatePickerTypeYM];
+            } break;
             case 4: {
-                [self pickView5];
-            }
-                break;
+                [self datePickerViewWithType:BADatePickerTypeYearWeek];
+            } break;
             case 5: {
                 [self pickView6];
-            }
-                break;
+            } break;
                 
             default:
                 break;
         }
     } else if (1 == indexPath.section) {
-        NSInteger type = 0;
+        BADatePickerType type = BADatePickerTypeYMD;
         switch (indexPath.row) {
             case 0: {
-                type = BAKit_CustomDatePickerDateTypeYMDHMS;
-            }
-                break;
+                type = BADatePickerTypeYMDHMS;
+            } break;
             case 1: {
-                type = BAKit_CustomDatePickerDateTypeYMDHM;
-            }
-                break;
+                type = BADatePickerTypeYMDHM;
+            } break;
             case 2: {
-                type = BAKit_CustomDatePickerDateTypeYMD;
-            }
-                break;
-                
+                type = BADatePickerTypeYMD;
+            } break;
             case 3: {
-                type = BAKit_CustomDatePickerDateTypeHMS;
-            }
-                break;
-                
+                type = BADatePickerTypeHMS;
+            } break;
             case 4: {
-                type = BAKit_CustomDatePickerDateTypeYM;
-            }
-                break;
-                
+                type = BADatePickerTypeYM;
+            } break;
             case 5: {
-                type = BAKit_CustomDatePickerDateTypeMD;
-            }
-                break;
+                type = BADatePickerTypeMD;
+            } break;
             case 6: {
-                type = BAKit_CustomDatePickerDateTypeHM;
-            }
-                break;
+                type = BADatePickerTypeHM;
+            } break;
             case 7: {
-                type = BAKit_CustomDatePickerDateTypeYY;
-            }
-                break;
+                type = BADatePickerTypeYY;
+            } break;
                 
             default:
                 break;
         }
-        
-        [self ba_creatDatePickerWithType:type];
+        [self datePickerViewWithType:type];
     }
 }
 
@@ -185,16 +139,13 @@ UITableViewDataSource
     switch (section) {
         case 0: {
             headerTitle.text = @"BAPickView 的几种日常用法！";
-        }
-            break;
+        } break;
         case 1: {
             headerTitle.text = @"自定义 DatePicker";
-        }
-            break;
+        } break;
         case 2: {
             headerTitle.text = @"BAPickView 的特点！";
-        }
-            break;
+        } break;
             
         default:
             break;
@@ -214,273 +165,101 @@ UITableViewDataSource
 #pragma mark - custom method
 
 - (void)pickView1 {
+    
+    // 请选择地区
     BAKit_WeakSelf
-    [BAKit_PickerView ba_creatCityPickerViewWithConfiguration:^(BAKit_PickerView *tempView) {
-        BAKit_StrongSelf
-        // 设置“取消“和”确定“ button 在 pickerView 的底部
-        tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
-        // 设置 pickerView 在屏幕中的位置
-        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
-        // 是否开启边缘触摸隐藏 默认：YES
-        tempView.isTouchEdgeHide = NO;
-        // 动画样式
-        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
-        /**
-         pickView 字体，默认：[UIFont boldSystemFontOfSize:17]
-         */
-        tempView.ba_pickViewFont = [UIFont systemFontOfSize:17];
-        /**
-         pickView 字体颜色，默认：[UIColor blackColor]
-         */
-        tempView.ba_pickViewTextColor = [UIColor orangeColor];
-        
-        /**
-         是否显示分割线，默认：NO，不显示，注意：iOS 10 开始，pickerView 默认没有分割线，这里是自己添加的分割线
-         */
-        tempView.isShowLineView = YES;
-        /**
-         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
-         */
-        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
-        
-        self.pickView = tempView;
-    } block:^(BAKit_CityModel *model) {
+    [BAPickerManger initCityPickerWithTitle:nil showResult:YES cb:^(BACityModel *model) {
         BAKit_StrongSelf
         // 返回 BAKit_CityModel，包含省市县 和 详细的经纬度
         NSString *msg = [NSString stringWithFormat:@"%@%@%@\n纬度：%f\n经度：%f", model.province, model.city, model.area, model.coordie.latitude, model.coordie.longitude];
-        NSLog(@"%@", msg);
         BAKit_ShowAlertWithMsg_ios8(msg);
     }];
 }
 
 - (void)pickView2 {
-    NSArray *array = @[@"男", @"女",@"我们的"];
-    
     BAKit_WeakSelf
-    [BAKit_PickerView ba_creatCustomPickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
+    [BAPickerManger initStringsPickerWithTitle:@"请选择结果" strings:@[@"性别", @"年龄", @"身高"] showResult:NO cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        // 可以自由定制 toolBar 和 pickView 的背景颜色
-        //        tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
-        //        tempView.ba_backgroundColor_pickView = [UIColor greenColor];
-        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
-        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeNormal;
-        /**
-         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
-         */
-        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
-        
-        self.pickView = tempView;
-    } block:^(NSString *resultString, NSInteger index) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 
 - (void)pickView3 {
     BAKit_WeakSelf
-    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDate configuration:^(BAKit_PickerView *tempView) {
+    [BAPickerManger initSystemDatePickerTitle:nil datePickerMode:UIDatePickerModeDateAndTime showResult:YES cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        
-        tempView.defaultTitle = @"请选择日期";
-        // 可以自由定制 NSDateFormatter
-        tempView.dateMode = BAKit_PickerViewDateModeDate;
-        tempView.dateType = BAKit_PickerViewDateTypeYMD;
-        
-        NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-        [format setDateFormat:@"yyyy年MM月dd日"];
-        
-        // 最小时间，当前时间
-        NSDate *minDate = [format dateFromString:@"1900年01月01日"];
-        tempView.ba_maxDate = BAKit_Current_Date();
-        tempView.ba_minDate = minDate;
-        //        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        //        formatter.dateFormat = @"yyyy年MM月dd日";
-        //        tempView.customDateFormatter = formatter;
-        // 可以自由定制按钮颜色
-        tempView.ba_buttonTitleColor_sure = [UIColor redColor];
-        tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
-        tempView.animationType = BAKit_PickerViewAnimationTypeLeft;
-        /**
-         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
-         */
-        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
-        
-        self.pickView = tempView;
-        
-    } block:^(NSString *resultString, NSInteger index) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 
-- (void)pickView4 {
+- (void)datePickerViewWithType:(BADatePickerType)type {
+    NSDate *maximumDate = nil;
+    NSDate *minimumDate = nil;
+    if (type == BADatePickerTypeYMD) {
+        maximumDate = [NSDate ba_dateAfterYears:1];
+        minimumDate = [NSDate ba_dateAfterYears:-5];
+    }
+    
     BAKit_WeakSelf
-    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateYM configuration:^(BAKit_PickerView *tempView) {
+    // DatePicker
+    BADatePickerModel *datePickerModel = BADatePickerModel.new;
+    datePickerModel.datePickerType = type;
+    datePickerModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.7];
+    datePickerModel.contentViewBackgroundColor = BAKit_Color_RandomRGB_pod();
+    datePickerModel.pickerViewBackgroundColor = BAKit_Color_RandomRGB_pod();
+    
+    if (maximumDate) {
+        datePickerModel.maximumDate = maximumDate;// [NSDate ba_dateAfterYears:1]
+    }
+    if (minimumDate) {
+        datePickerModel.minimumDate = minimumDate;
+    }
+    
+    // ToolBar
+    BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;
+    toolBarModel.title = @"请选择时间"; 
+    //    toolBarModel.titleFont = titleFont;
+    toolBarModel.cancleTitle = @"cancle888";
+    //    toolBarModel.cancleTitleFont = cancleTitleFont;
+    toolBarModel.cancleTitleColor = UIColor.greenColor;
+    toolBarModel.sureTitle = @"sure";
+    //    toolBarModel.sureTitleFont = sureTitleFont;
+    toolBarModel.sureTitleColor = UIColor.redColor;
+    toolBarModel.showResult = YES;
+    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
+    datePickerModel.toolBarModel = toolBarModel;
+    
+    [BAPickerManger initCustomDatePickerWithModel:datePickerModel cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyy-MM";
-        tempView.customDateFormatter = formatter;
-        tempView.animationType = BAKit_PickerViewAnimationTypeRight;
-        /**
-         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
-         */
-        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
-        
-        self.pickView = tempView;
-    } block:^(NSString *resultString, NSInteger index) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-    }];
-}
-
-- (void)pickView5 {
-    BAKit_WeakSelf
-    [BAKit_PickerView ba_creatPickerViewWithType:BAKit_PickerViewTypeDateWeek configuration:^(BAKit_PickerView *tempView) {
-        
-        BAKit_StrongSelf
-        /**
-         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
-         */
-        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
-        
-        self.pickView = tempView;
-    } block:^(NSString *resultString, NSInteger index) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
+        // 打印结果 看 resultModel
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 
 - (void)pickView6 {
-    NSArray *array = @[
+    
+    NSArray *multipleTitleArray = @[@"性别", @"年龄", @"身高"];
+    NSArray *multipleStringsArray =  @[
         @[@"男", @"女"],
-        @[@"18", @"22"],
-        @[@"163", @"168"]
+        @[@"18", @"22", @"25", @"30", @"36", @"42"],
+        @[@"145", @"150", @"160", @"168", @"175"]
     ];
-    NSArray *titleArray = @[@"性别", @"年龄", @"身高"];
     BAKit_WeakSelf
-    [BAKit_PickerView ba_creatCustomMultiplePickerViewWithDataArray:array configuration:^(BAKit_PickerView *tempView) {
-        
+    [BAPickerManger initMultipleStringsPickerWithTitle:@"请选择"
+                                             titleFont:nil
+                                  multipleStringsArray:multipleStringsArray
+                                    multipleTitleArray:multipleTitleArray
+                               maskViewBackgroundColor:[UIColor.blackColor colorWithAlphaComponent:0.6]
+                                           cancleTitle:@"cancle1111"
+                                      cancleTitleColor:UIColor.greenColor
+                                       cancleTitleFont:[UIFont systemFontOfSize:16]
+                                             sureTitle:@"sure"
+                                        sureTitleColor:UIColor.redColor
+                                         sureTitleFont:[UIFont systemFontOfSize:16]
+                                            showResult:YES
+                                                    cb:^(BAPickerResultModel *resultModel) {
         BAKit_StrongSelf
-        tempView.multipleTitleArray = titleArray;
-        // 是否显示 pickview title
-        //        tempView.isShowTitle = NO;
-        // 自定义 pickview title 的字体颜色
-        tempView.ba_pickViewTitleColor = BAKit_Color_Red_pod;
-        // 自定义 pickview title 的字体
-        tempView.ba_pickViewTitleFont = [UIFont boldSystemFontOfSize:15];
-        // 可以自由定制 toolBar 和 pickView 的背景颜色
-        tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
-        tempView.ba_backgroundColor_pickView = [UIColor greenColor];
-        tempView.animationType = BAKit_PickerViewAnimationTypeTop;
-        tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
-        /**
-         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
-         */
-        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
-        
-        self.pickView = tempView;
-    } block:^(NSString *resultString, NSInteger index) {
-        BAKit_StrongSelf
-        BAKit_ShowAlertWithMsg_ios8(resultString);
-        NSLog(@"%@", resultString);
-    }];
-}
-
-#pragma mark 自定义日期选择器
-- (void)ba_creatDatePickerWithType:(BAKit_CustomDatePickerDateType)type {
-    [BAKit_DatePicker ba_creatPickerViewWithType:type configuration:^(BAKit_DatePicker *tempView) {
-        
-        if (type != BAKit_CustomDatePickerDateTypeHMS) {
-            tempView.defaultTitle = @"请选择日期";
-        }
-        
-        
-        NSDate *maxDate;
-        NSDate *minDate;
-        /**
-         注意：如果两个日期都不设置，默认最大时间是当前系统时间，最小时间是 1970年
-         */
-        
-        minDate = [BAKit_Current_Date() ba_dateBySubtractingDays:11];
-        maxDate = [BAKit_Current_Date() ba_dateByAddingDays:61];
-        
-        // 自定义：最大最小日期格式
-        if (type == BAKit_CustomDatePickerDateTypeYMD) {
-            //            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-            //            maxDate = [format dateFromString:@"2018-08-09"];
-            //            minDate = [format dateFromString:@"2016-07-20"];
-            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYMD];
-            //            NSDate *today = [[NSDate alloc]init];
-            [format setDateFormat:@"yyyy-MM-dd"];
-            
-            // 最小时间，当前时间
-            //            minDate = [format dateFromString:[format stringFromDate:today]];
-            //            minDate = [BAKit_Current_Date() ba_dateBySubtractingDays:11];
-            //            maxDate = [BAKit_Current_Date() ba_dateByAddingDays:61];
-            
-            //            NSTimeInterval oneDay = 24 * 60 * 60;
-            //            // 最大时间，当前时间+180天
-            //            NSDate *theDay = [today initWithTimeIntervalSinceNow:oneDay * 180];
-            //            maxDate = [format dateFromString:[format stringFromDate:theDay]];
-            
-            
-        } else if (type == BAKit_CustomDatePickerDateTypeYM) {
-            NSDateFormatter *format = [NSDateFormatter ba_setupDateFormatterWithYM];
-            maxDate = [format dateFromString:@"2018-08"];
-            minDate = [format dateFromString:@"2016-07"];
-        }
-        
-        if (maxDate) {
-            // 自定义：最大日期
-            tempView.ba_maxDate = maxDate;
-        }
-        if (minDate) {
-            // 自定义：最小日期
-            tempView.ba_minDate = minDate;
-        }
-        
-        /**
-         是否显示背景年份水印，默认：NO
-         */
-        tempView.isShowBackgroundYearLabel = YES;
-        
-        // 是否显示 pickview title
-        //        tempView.isShowTitle = NO;
-        // 自定义 pickview title 的字体颜色
-        tempView.ba_pickViewTitleColor = BAKit_Color_Red_pod;
-        // 自定义 pickview title 的字体
-        tempView.ba_pickViewTitleFont = [UIFont boldSystemFontOfSize:15];
-        // 自定义 pickview背景 title 的字体颜色
-        //        tempView.ba_bgYearTitleColor = [UIColor orangeColor];
-        //        // 自定义 pickview背景 title 的字体
-        //        tempView.ba_bgYearTitleFont = [UIFont systemFontOfSize:50];
-        // 自定义：动画样式
-        tempView.animationType = BAKit_PickerViewAnimationTypeBottom;
-        // 自定义：pickView 位置
-        //                    tempView.pickerViewPositionType = BAKit_PickerViewPositionTypeCenter;
-        // 自定义：toolBar 位置
-        tempView.buttonPositionType = BAKit_PickerViewButtonPositionTypeBottom;
-        // 自定义：pickView 文字颜色
-        tempView.ba_pickViewTextColor = [UIColor redColor];
-        // 自定义：pickView 文字字体
-        tempView.ba_pickViewFont = [UIFont systemFontOfSize:13];
-        
-        // 可以自由定制按钮颜色
-        tempView.ba_buttonTitleColor_sure = [UIColor redColor];
-        tempView.ba_buttonTitleColor_cancle = [UIColor greenColor];
-        
-        /**
-         pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
-         */
-        tempView.tooBarBottomeLineColor = [[UIColor redColor] colorWithAlphaComponent:0.2];
-        
-        // 可以自由定制 toolBar 和 pickView 的背景颜色
-        //            tempView.ba_backgroundColor_toolBar = [UIColor cyanColor];
-        //            tempView.ba_backgroundColor_pickView = [UIColor greenColor];
-        
-    } block:^(NSString *resultString, NSInteger index) {
-        
-        BAKit_ShowAlertWithMsg_ios8(resultString);
+        BAKit_ShowAlertWithMsg_ios8(resultModel.resultString);
     }];
 }
 
@@ -490,13 +269,11 @@ UITableViewDataSource
     if (!_tableView) {
         _tableView = [UITableView new];
         self.tableView.delegate = self;
-        self.tableView.dataSource =  self;
+        self.tableView.dataSource = self;
         self.tableView.estimatedRowHeight = 44;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         
         self.tableView.backgroundColor = BAKit_Color_Gray_11_pod;
-        
-        [self.view addSubview:self.tableView];
     }
     return _tableView;
 }
@@ -517,6 +294,4 @@ UITableViewDataSource
     return _dataArray;
 }
 
-
 @end
-
