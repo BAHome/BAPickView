@@ -1,1 +1,1 @@
-../../../../../BAPickView/Classes/BAPickView/BAKit_PickerViewConfig.h
+../../../../../BAPickView/Classes/Tools/BAKit_PickerViewConfig.h

@@ -1,13 +1,17 @@
 //
 //  BAViewController.h
-//  BAPickView
+//  BAPickView_Example
 //
-//  Created by boai on 11/27/2018.
-//  Copyright (c) 2018 boai. All rights reserved.
+//  Created by 博爱 on 2021/4/1.
+//  Copyright © 2021 boai. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface BAViewController : UIViewController
 
 @end
+
+NS_ASSUME_NONNULL_END

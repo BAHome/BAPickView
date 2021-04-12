@@ -14,11 +14,10 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* BAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* BAAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* BAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* BAViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		9C06560A21AD1E5D00D25525 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C06560821AD1E5D00D25525 /* LaunchScreen.storyboard */; };
 		9C06560B21AD1E5D00D25525 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C06560921AD1E5D00D25525 /* Main.storyboard */; };
-		9C5D1E8026156E16003E23D4 /* BAViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5D1E7F26156E16003E23D4 /* BAViewController2.m */; };
+		9C5D1E8026156E16003E23D4 /* BAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5D1E7F26156E16003E23D4 /* BAViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,16 +35,14 @@
 		6003F59B195388D20070C39A /* BAPickView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BAPickView-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* BAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* BAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* BAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* BAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7E03A33070174A8C3EB7E709 /* Pods-BAPickView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAPickView_Example.release.xcconfig"; path = "Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		984E78DD695FA66F5333B1BE /* Pods-BAPickView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BAPickView_Example.debug.xcconfig"; path = "Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9C06560821AD1E5D00D25525 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C06560921AD1E5D00D25525 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		9C5D1E7E26156E16003E23D4 /* BAViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAViewController2.h; sourceTree = "<group>"; };
-		9C5D1E7F26156E16003E23D4 /* BAViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAViewController2.m; sourceTree = "<group>"; };
+		9C5D1E7E26156E16003E23D4 /* BAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAViewController.h; sourceTree = "<group>"; };
+		9C5D1E7F26156E16003E23D4 /* BAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAViewController.m; sourceTree = "<group>"; };
 		AC45869C5ED8D8C0168298FA /* BAPickView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BAPickView.podspec; path = ../BAPickView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B5D926A130DF41A7C4E387DE /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E727F516F4E8D0A0CAFE9687 /* libPods-BAPickView_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BAPickView_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,10 +111,8 @@
 			children = (
 				6003F59C195388D20070C39A /* BAAppDelegate.h */,
 				6003F59D195388D20070C39A /* BAAppDelegate.m */,
-				6003F5A5195388D20070C39A /* BAViewController.h */,
-				6003F5A6195388D20070C39A /* BAViewController.m */,
-				9C5D1E7E26156E16003E23D4 /* BAViewController2.h */,
-				9C5D1E7F26156E16003E23D4 /* BAViewController2.m */,
+				9C5D1E7E26156E16003E23D4 /* BAViewController.h */,
+				9C5D1E7F26156E16003E23D4 /* BAViewController.m */,
 				9C06560821AD1E5D00D25525 /* LaunchScreen.storyboard */,
 				9C06560921AD1E5D00D25525 /* Main.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
@@ -266,8 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* BAAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* BAViewController.m in Sources */,
-				9C5D1E8026156E16003E23D4 /* BAViewController2.m in Sources */,
+				9C5D1E8026156E16003E23D4 /* BAViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,13 +388,13 @@
 			baseConfigurationReference = 984E78DD695FA66F5333B1BE /* Pods-BAPickView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 121;
 				DEVELOPMENT_TEAM = 83U7J454XF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BAPickView/BAPickView-Prefix.pch";
 				INFOPLIST_FILE = "BAPickView/BAPickView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,13 +408,13 @@
 			baseConfigurationReference = 7E03A33070174A8C3EB7E709 /* Pods-BAPickView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 121;
 				DEVELOPMENT_TEAM = 83U7J454XF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BAPickView/BAPickView-Prefix.pch";
 				INFOPLIST_FILE = "BAPickView/BAPickView-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

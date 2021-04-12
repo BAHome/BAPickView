@@ -1,1 +1,1 @@
-../../../../../BAPickView/Classes/BAPickView/BAPickerManager/BAPickerManger.h
+../../../../../BAPickView/Classes/PickerView/BAPickerManger.h

@@ -22,6 +22,8 @@ it, simply add the following line to your Podfile:
 pod 'BAPickView'
 ```
 
+### `V1.2.1` 版本删除旧版本代码，注意：如需使用旧版本，请固定版本号为  `pod 'BAPickView', 1.2.0`
+
 ## Author
 
 boai, sunboyan@outlook.com
@@ -314,6 +316,11 @@ NS_ASSUME_NONNULL_END
 ## 5、更新记录：【倒叙】
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
+ 
+ 最新更新时间：2021-04-12 【倒叙】 <br>
+ 最新Version：【Version：1.2.1】 <br>
+ 更新内容： <br>
+ 1.2.1.1、此版本删除旧版本代码，注意：如需使用旧版本，请固定版本号为 V1.2.0<br>
  
  最新更新时间：2021-04-09 【倒叙】 <br>
  最新Version：【Version：1.2.0】 <br>

@@ -1,8 +1,12 @@
 PODS:
-  - BAPickView (1.2.0):
-    - BAPickView/BAPickerManager (= 1.2.0)
+  - BAPickView (1.2.1):
+    - BAPickView/PickerView (= 1.2.1)
+    - BAPickView/Tools (= 1.2.1)
     - Masonry
-  - BAPickView/BAPickerManager (1.2.0):
+  - BAPickView/PickerView (1.2.1):
+    - BAPickView/Tools
+    - Masonry
+  - BAPickView/Tools (1.2.1):
     - Masonry
   - Masonry (1.1.0)
 
@@ -18,7 +22,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BAPickView: 840c0bb99ab1b9fc54688cff881b9ecbed958cd9
+  BAPickView: 743a792b2536e3eb6b3515023050f48a34797842
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
 PODFILE CHECKSUM: 66ec998834369603c88bcac4f5c4bd5bc35661c1
