@@ -220,7 +220,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BAPickView_Example/Pods-BAPickView_Example-resources.sh",
-				"${PODS_ROOT}/../../BAPickView/Resources/BAPickView.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/BAPickView/BAPickView.bundle",
 			);
 			name = "[CP] Copy Pods Resources";

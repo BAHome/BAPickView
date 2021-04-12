@@ -35,14 +35,15 @@ Pod::Spec.new do |s|
     'BAPickView' => ['BAPickView/Resources/*.{bundle}']
   }
   
-  # PickerView
-  s.subspec 'PickerView' do |spicker|
-    spicker.source_files  = "BAPickView/Classes/PickerView/*.{h,m}"
-  end
-  
   # Tools
   s.subspec 'Tools' do |stools|
     stools.source_files  = "BAPickView/Classes/Tools/*.{h,m}"
+  end
+
+  # PickerView
+  s.subspec 'PickerView' do |spicker|
+    spicker.source_files  = "BAPickView/Classes/PickerView/*.{h,m}"
+    spicker.dependency "BAPickView/Tools"
   end
   
   s.dependency "Masonry"

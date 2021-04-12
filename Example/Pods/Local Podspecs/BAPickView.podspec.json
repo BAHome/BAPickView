@@ -19,7 +19,6 @@
     "ios": "9.0"
   },
   "source_files": "BAPickView/Classes/BAPickView_OC.h",
-  "resources": "BAPickView/Resources/*.{bundle}",
   "resource_bundles": {
     "BAPickView": [
       "BAPickView/Resources/*.{bundle}"
@@ -37,12 +36,17 @@
   "requires_arc": true,
   "subspecs": [
     {
-      "name": "PickerView",
-      "source_files": "BAPickView/Classes/PickerView/*.{h,m}"
-    },
-    {
       "name": "Tools",
       "source_files": "BAPickView/Classes/Tools/*.{h,m}"
+    },
+    {
+      "name": "PickerView",
+      "source_files": "BAPickView/Classes/PickerView/*.{h,m}",
+      "dependencies": {
+        "BAPickView/Tools": [
+
+        ]
+      }
     }
   ]
 }
