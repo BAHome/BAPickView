@@ -1,0 +1,277 @@
+
+/*!
+ *  @header BAKit.h
+ *          BABaseProject
+ *
+ *  @brief  BAKit
+ *
+ *  @author 博爱
+ *  @copyright    Copyright © 2016年 博爱. All rights reserved.
+ *  @version    V1.0
+ */
+
+//                            _ooOoo_
+//                           o8888888o
+//                           88" . "88
+//                           (| -_- |)
+//                            O\ = /O
+//                        ____/`---'\____
+//                      .   ' \\| |// `.
+//                       / \\||| : |||// \
+//                     / _||||| -:- |||||- \
+//                       | | \\\ - /// | |
+//                     | \_| ''\---/'' | |
+//                      \ .-\__ `-` ___/-. /
+//                   ___`. .' /--.--\ `. . __
+//                ."" '< `.___\_<|>_/___.' >'"".
+//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
+//                 \ \ `-. \_ __\ /__ _/ .-` / /
+//         ======`-.____`-.___\_____/___.-`____.-'======
+//                            `=---='
+//
+//         .............................................
+//                  佛祖镇楼                  BUG辟易
+//          佛曰:
+//                  写字楼里写字间，写字间里程序员；
+//                  程序人员写程序，又拿程序换酒钱。
+//                  酒醒只在网上坐，酒醉还来网下眠；
+//                  酒醉酒醒日复日，网上网下年复年。
+//                  但愿老死电脑间，不愿鞠躬老板前；
+//                  奔驰宝马贵者趣，公交自行程序员。
+//                  别人笑我忒疯癫，我笑自己命太贱；
+//                  不见满街漂亮妹，哪个归得程序员？
+
+/*
+ 
+ *********************************************************************************
+ *
+ * 在使用BAKit的过程中如果出现bug请及时以以下任意一种方式联系我，我会及时修复bug
+ *
+ * QQ     : 可以添加ios开发技术群 479663605 在这里找到我(博爱1616【137361770】)
+ * 微博    : 博爱1616
+ * Email  : 137361770@qq.com
+ * GitHub : https://github.com/boai
+ * 博客    : http://boaihome.com
+ 
+ *********************************************************************************
+ 
+ */
+
+
+#import <UIKit/UIKit.h>
+#import <CoreLocation/CLLocation.h>
+#import "BAKit_PickerViewConfig.h"
+
+@class BAKit_CityModel;
+
+/**
+ 城市选择器的返回值
+
+ @param model BAKit_CityModel
+ */
+typedef void (^BAKit_PickerViewBlock)(BAKit_CityModel *model);
+
+@interface BAKit_PickerView : UIView
+
+#pragma mark - 自定义属性
+@property (nonatomic, copy) BAKit_PickerViewBlock block;
+@property (nonatomic, copy) BAKit_PickerViewResultBlock resultBlock;
+
+/**
+ 动画样式
+ */
+@property(nonatomic, assign) BAKit_PickerViewAnimationType animationType;
+
+/**
+ 选择器样式，默认为城市选择器
+ */
+@property(nonatomic, assign) BAKit_PickerViewType pickerViewType;
+@property(nonatomic, assign) BAKit_PickerViewDateType dateType;
+@property(nonatomic, assign) BAKit_PickerViewDateMode dateMode;
+@property(nonatomic, assign) BAKit_PickerViewButtonPositionType buttonPositionType;
+@property(nonatomic, assign) BAKit_PickerViewPositionType pickerViewPositionType;
+
+/**
+ 自定义 NSDateFormatter，返回的日期格式，注意：如果同时设置 BAKit_PickerViewDateType 和 customDateFormatter，以 customDateFormatter 为主
+ */
+@property(nonatomic, strong) NSDateFormatter *customDateFormatter;
+
+/**
+ 自定义数据的数组，如：@[@"男", @"女"]
+ */
+@property(nonatomic, strong) NSArray *dataArray;
+
+/**
+ 自定义多列数据的数组，如：@[@[@"男", @"女"],@[@"21", @"22"],@[@"39", @"40"]]
+ */
+@property(nonatomic, strong) NSArray *multipleDataArray;
+
+/**
+ 自定义多列数据的标题,如  @[@"性别",@"名字",@"年龄"] 此属性配合multipleDataArray属性使用 , 此处 count 应与多列数据 count 一致否者不管用
+ */
+@property(nonatomic, strong) NSArray *multipleTitleArray;
+
+/**
+ toolBar 背景颜色，默认：白色
+ */
+@property(nonatomic, strong) UIColor *ba_backgroundColor_toolBar;
+
+/**
+ pickView 背景颜色，默认：白色
+ */
+@property(nonatomic, strong) UIColor *ba_backgroundColor_pickView;
+
+/**
+ cancleButton title颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_cancle;
+
+/**
+ sureButton title颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *ba_buttonTitleColor_sure;
+
+/**
+ title 颜色，默认：黑色
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTitleColor;
+
+/**
+ pickView 字体，默认：[UIFont boldSystemFontOfSize:17]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIFont *ba_pickViewFont;
+
+/**
+ pickView title 字体，默认：[UIFont boldSystemFontOfSize:15]
+ */
+@property(nonatomic, strong) UIFont *ba_pickViewTitleFont;
+
+/**
+ pickView 字体颜色，默认：[UIColor blackColor]，注意：日期选择器暂时不能修改字体，有可能被苹果审核不通过，如有特殊需求，可通过 runtime 修改
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewTextColor;
+
+/**
+ 是否显示分割线，默认：NO，不显示，注意：iOS 10 开始，pickerView 默认没有分割线，这里是自己添加的分割线
+ */
+@property(nonatomic, assign) BOOL isShowLineView;
+
+/**
+ 是否开启边缘触摸隐藏，默认：YES
+ */
+@property (nonatomic, assign) BOOL isTouchEdgeHide;
+
+/**
+ 是否关闭选择内容显示在工具栏，默认：YES
+ */
+@property (nonatomic, assign) BOOL isShowTitle;
+
+
+/**
+ pickView 分割线颜色，注意：请务必 打开 isShowLineView 开关！
+ */
+@property(nonatomic, strong) UIColor *ba_pickViewLineViewColor;
+
+#pragma mark - 2019-09-03 新增
+/**
+ pickView：toolbar 中间显示的默认标题，2019-09-03 新增
+ */
+@property(nonatomic, strong) NSString *defaultTitle;
+
+#pragma mark - BAKit_PickerViewDateModeDate
+/**
+ 日期选择器的最大日期，默认为: 1970年01月01日00时00分00秒;最大日期必须大于最小日期，2019-09-03 新增
+ */
+@property(nonatomic, strong) NSDate * ba_maxDate;
+
+/**
+ 日期选择器的最小日期，默认为: 当前时间;最大日期必须大于最小日期，2019-09-03 新增
+ */
+@property(nonatomic, strong) NSDate * ba_minDate;
+
+/**
+ 是否显示 TooBarBottomeLine，默认：不显示，2019-09-03 新增
+ */
+@property(nonatomic, assign) BOOL isShowTooBarBottomeLine;
+@property(nonatomic, strong) UIColor *tooBarBottomeLineColor;
+
+#pragma mark - custom method
+
+/**
+ 快速创建一个 pickerView
+ 
+ @param pickerViewType type 类型
+ @param configuration 可以设置 BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatPickerViewWithType:(BAKit_PickerViewType)pickerViewType
+                     configuration:(void (^)(BAKit_PickerView *tempView))configuration
+                             block:(BAKit_PickerViewResultBlock)block;
+
+/**
+ 快速创建一个 城市选择器
+
+ @param configuration 可以设置BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatCityPickerViewWithConfiguration:(void (^)(BAKit_PickerView *tempView)) configuration
+                                          block:(BAKit_PickerViewBlock)block;
+
+/**
+ 快速创建一个 自定义单列 pickerView
+
+ @param dataArray 数组
+ @param configuration 可以设置BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatCustomPickerViewWithDataArray:(NSArray *)dataArray
+                                configuration:(void (^)(BAKit_PickerView *tempView)) configuration
+                                        block:(BAKit_PickerViewResultBlock)block;
+
+/**
+ 快速创建一个 自定义多列 pickerView
+ 
+ @param dataArray 数组 @[@[@"男", @"女"],@[@"21", @"22"],@[@"39", @"40"]]
+ @param configuration 可以设置 BAKit_PickerView 的自定义内容
+ @param block 回调
+ */
++ (void)ba_creatCustomMultiplePickerViewWithDataArray:(NSArray *)dataArray
+                                        configuration:(void (^)(BAKit_PickerView *tempView)) configuration
+                                                block:(BAKit_PickerViewResultBlock)block;
+
+/**
+ 显示 pick
+ */
+- (void)ba_pickViewShow;
+
+/**
+ 隐藏 pick
+ */
+- (void)ba_pickViewHidden;
+
+@end
+
+@interface BAKit_CityModel : NSObject
+
+/**
+ 省
+ */
+@property (nonatomic, copy) NSString *province;
+
+/**
+ 市
+ */
+@property (nonatomic, copy) NSString *city;
+
+/**
+ 区
+ */
+@property (nonatomic, copy) NSString *area;
+
+/**
+ 经纬度
+ */
+@property (nonatomic, assign) CLLocationCoordinate2D coordie;
+
+@end
+
