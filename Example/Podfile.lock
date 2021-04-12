@@ -1,12 +1,12 @@
 PODS:
-  - BAPickView (1.2.1):
-    - BAPickView/PickerView (= 1.2.1)
-    - BAPickView/Tools (= 1.2.1)
+  - BAPickView (1.2.2):
+    - BAPickView/PickerView (= 1.2.2)
+    - BAPickView/Tools (= 1.2.2)
     - Masonry
-  - BAPickView/PickerView (1.2.1):
+  - BAPickView/PickerView (1.2.2):
     - BAPickView/Tools
     - Masonry
-  - BAPickView/Tools (1.2.1):
+  - BAPickView/Tools (1.2.2):
     - Masonry
   - Masonry (1.1.0)
 
@@ -22,9 +22,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BAPickView: 743a792b2536e3eb6b3515023050f48a34797842
+  BAPickView: adcf90dea514c1128c1cf5df78acddc95f07d7f0
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
 PODFILE CHECKSUM: 66ec998834369603c88bcac4f5c4bd5bc35661c1
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.3

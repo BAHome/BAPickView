@@ -28,8 +28,6 @@
 @property(nonatomic, copy) NSString *resultString;
 @property(nonatomic, strong) BAPickerResultModel *resultModel;
 
-@property(nonatomic, assign) NSInteger resultRow;
-@property(nonatomic, assign) NSInteger resultComponent;
 @property(nonatomic, strong) NSArray *resultArray;
 @property(nonatomic, strong) NSMutableArray *selectedArray;
 
@@ -447,8 +445,8 @@
                 NSString *resultString = self.pickerModel.stringsArray[row];
                 self.resultString = resultString;
             }
-            self.resultRow = row;
-            self.resultComponent = component;
+            self.resultModel.selectRow = row;
+            self.resultModel.selectComponent = component;
         };
         
         _basePickerView.onViewForRowAndComponent = ^(NSInteger row, NSInteger component, UIView * _Nonnull reusingView, UIPickerView * _Nonnull pickerView) {

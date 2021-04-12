@@ -240,6 +240,7 @@
 - (NSDate *)ba_dateBySubtractingMinutes:(NSInteger)dMinutes;
 - (NSDate *)ba_dateAtStartOfDay;
 - (NSDateComponents *)ba_dateComponentsWithOffsetFromDate:(NSDate *)aDate;
+- (NSDateComponents *)ba_dateComponentsWithOffsetToDate:(NSDate *)aDate;
 
 #pragma mark - 时间间隔
 - (NSInteger)ba_dateMinutesAfterDate:(NSDate *)aDate;

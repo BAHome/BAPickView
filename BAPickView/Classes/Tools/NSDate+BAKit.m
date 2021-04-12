@@ -666,6 +666,12 @@
     return dTime;
 }
 
+- (NSDateComponents *)ba_dateComponentsWithOffsetToDate:(NSDate *)aDate {
+    unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *dTime = [NSCalendar.currentCalendar components:unitFlags fromDate:self toDate:aDate options:0];
+    return dTime;
+}
+
 #pragma mark - 时间间隔
 - (NSInteger)ba_dateMinutesAfterDate:(NSDate *)aDate {
     NSTimeInterval ti = [self timeIntervalSinceDate:aDate];

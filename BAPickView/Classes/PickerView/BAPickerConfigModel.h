@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "BAKit_PickerViewConfig.h"
 #import "BAPickerDefine.h"
+#import "BAKit_ConfigurationDefine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

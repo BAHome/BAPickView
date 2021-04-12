@@ -523,6 +523,8 @@
             default:
                 break;
         }
+        self.resultModel.selectRow = row;
+        self.resultModel.selectComponent = component;
     };
     self.basePickerView.onViewForRowAndComponent = ^(NSInteger row, NSInteger component, UIView * _Nonnull reusingView, UIPickerView * _Nonnull pickerView) {
         BAKit_StrongSelf
