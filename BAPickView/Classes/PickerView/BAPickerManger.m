@@ -389,8 +389,6 @@
                                                           sureTitleColor:sureTitleColor
                                                            sureTitleFont:sureTitleFont
                                                               showResult:showResult];
-    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
-
     datePickerModel.toolBarModel = toolBarModel;
     
     [self initCustomDatePickerWithModel:datePickerModel cb:cb];
