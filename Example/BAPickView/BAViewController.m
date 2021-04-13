@@ -205,8 +205,8 @@ UITableViewDataSource
     BADatePickerModel *datePickerModel = BADatePickerModel.new;
     datePickerModel.datePickerType = type;
     datePickerModel.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.7];
-    datePickerModel.contentViewBackgroundColor = BAKit_Color_RandomRGB_pod();
-    datePickerModel.pickerViewBackgroundColor = BAKit_Color_RandomRGB_pod();
+//    datePickerModel.contentViewBackgroundColor = BAKit_Color_RandomRGB_pod();
+//    datePickerModel.pickerViewBackgroundColor = BAKit_Color_RandomRGB_pod();
     
     if (maximumDate) {
         datePickerModel.maximumDate = maximumDate;// [NSDate ba_dateAfterYears:1]
@@ -226,7 +226,7 @@ UITableViewDataSource
     //    toolBarModel.sureTitleFont = sureTitleFont;
     toolBarModel.sureTitleColor = UIColor.redColor;
     toolBarModel.showResult = YES;
-    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
+//    toolBarModel.backgroundColor = BAKit_Color_RandomRGB_pod();
     datePickerModel.toolBarModel = toolBarModel;
     
     [BAPickerManger initCustomDatePickerWithModel:datePickerModel cb:^(BAPickerResultModel *resultModel) {
