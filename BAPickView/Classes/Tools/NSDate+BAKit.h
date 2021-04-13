@@ -250,6 +250,9 @@
 - (NSInteger)ba_dateDaysAfterDate:(NSDate *)aDate;
 - (NSInteger)ba_dateDaysBeforeDate:(NSDate *)aDate;
 - (NSInteger)ba_dateDistanceInDaysToDate:(NSDate *)anotherDate;
+// 时间戳转 NSDate
++ (NSDate *)ba_dateTimestampToDateWith:(long long)timestamp;
+
 /**
  多少天之后
  */

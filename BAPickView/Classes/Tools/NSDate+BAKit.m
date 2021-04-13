@@ -709,6 +709,17 @@
     return components.day;
 }
 
+// 时间戳转 NSDate
++ (NSDate *)ba_dateTimestampToDateWith:(long long)timestamp {
+    NSTimeInterval s = (@(timestamp).stringValue.length == 13)?(timestamp / 1000):timestamp;
+    // timeIntervalSince1970确定的时区是GTM时区，会产生一个时区差。采用这个方法就可以消除时区差，获得本地时间。
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
+    NSInteger delta = [timeZone secondsFromGMT];
+    s += delta;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:s];
+    return date;
+}
+
 - (NSDate *)ba_dateGetAfterYear:(int)year OrMonth:(int)month OrDay:(int)day{
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *comps = nil;
