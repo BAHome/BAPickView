@@ -403,12 +403,12 @@
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%04ld年-%02ld月-%02ld日", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay];
+                self.resultString = [NSString stringWithFormat:@"%04ld-%02ld-%02ld", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay];
             } break;
                 // 2020
             case BADatePickerTypeYY : {
                 self.resultModel.selectedYear = [self.yearArray[row] intValue];
-                self.resultString = [NSString stringWithFormat:@"%04ld年", self.resultModel.selectedYear];
+                self.resultString = [NSString stringWithFormat:@"%04ld", self.resultModel.selectedYear];
             } break;
                 // 2020-08
             case BADatePickerTypeYM : {
@@ -423,7 +423,7 @@
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%04ld年-%02ld月", self.resultModel.selectedYear, self.resultModel.selectedMonth];
+                self.resultString = [NSString stringWithFormat:@"%04ld-%02ld", self.resultModel.selectedYear, self.resultModel.selectedMonth];
             } break;
                 // 08-28
             case BADatePickerTypeMD : {
@@ -438,7 +438,7 @@
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%02ld月-%02ld日", self.resultModel.selectedMonth, self.resultModel.selectedDay];
+                self.resultString = [NSString stringWithFormat:@"%02ld-%02ld", self.resultModel.selectedMonth, self.resultModel.selectedDay];
             } break;
                 // 2020-08-28 15:33
             case BADatePickerTypeYMDHM :
