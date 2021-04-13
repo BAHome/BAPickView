@@ -73,7 +73,7 @@
         self.sureTitleFont = [UIFont systemFontOfSize:14];
         self.titleFont = [UIFont boldSystemFontOfSize:16];
         
-        self.lineColor = kColorWithHex(0xCCCCCC);
+        self.lineColor = BAKit_Color_RGB_pod(204, 204, 204);
     }
     return self;
 }

@@ -28,7 +28,7 @@
 @property(nonatomic, assign) BOOL showSuffix;
 // 是否显示 年、月、日、时、分、秒
 @property(nonatomic, assign) BOOL showYear;
-@property(nonatomic, assign) BOOL showMounth;
+@property(nonatomic, assign) BOOL showMonth;
 @property(nonatomic, assign) BOOL showDay;
 @property(nonatomic, assign) BOOL showHours;
 @property(nonatomic, assign) BOOL showMinutes;
@@ -37,7 +37,7 @@
 
 // 数据源
 @property(nonatomic, strong) NSMutableArray *yearArray;
-@property(nonatomic, strong) NSMutableArray *mounthArray;
+@property(nonatomic, strong) NSMutableArray *monthArray;
 @property(nonatomic, strong) NSMutableArray *dayArray;
 @property(nonatomic, strong) NSMutableArray *hoursArray;
 @property(nonatomic, strong) NSMutableArray *minutesArray;
@@ -96,7 +96,7 @@
     self.showSuffix = YES;
     
     self.showYear = NO;
-    self.showMounth = NO;
+    self.showMonth = NO;
     self.showDay = NO;
     self.showHours = NO;
     self.showMinutes = NO;
@@ -180,7 +180,7 @@
                         num = self.yearArray.count;
                     } break;
                     case 1: {
-                        num = self.mounthArray.count;
+                        num = self.monthArray.count;
                     } break;
                     case 2: {
                         num = self.dayArray.count;
@@ -196,11 +196,11 @@
             } break;
                 // 2020-08
             case BADatePickerTypeYM : {
-                num = (component == 0) ? self.yearArray.count : self.mounthArray.count;
+                num = (component == 0) ? self.yearArray.count : self.monthArray.count;
             } break;
                 // 08-28
             case BADatePickerTypeMD : {
-                num = (component == 0) ? self.mounthArray.count : self.dayArray.count;
+                num = (component == 0) ? self.monthArray.count : self.dayArray.count;
             } break;
                 // 2020-08-28 15:33
             case BADatePickerTypeYMDHM :
@@ -211,7 +211,7 @@
                         num = self.yearArray.count;
                     } break;
                     case 1: {
-                        num = self.mounthArray.count;
+                        num = self.monthArray.count;
                     } break;
                     case 2: {
                         num = self.dayArray.count;
@@ -273,7 +273,7 @@
                         title = [self getTitleForYearWithRow:row];
                     } break;
                     case 1: {
-                        title = [self getTitleForMounthWithRow:row];
+                        title = [self getTitleForMonthWithRow:row];
                     } break;
                     case 2: {
                         title = [self getTitleForDayWithRow:row];
@@ -293,7 +293,7 @@
                         title = [self getTitleForYearWithRow:row];
                     } break;
                     case 1: {
-                        title = [self getTitleForMounthWithRow:row];
+                        title = [self getTitleForMonthWithRow:row];
                     } break;
                     default:
                         break;
@@ -303,7 +303,7 @@
             case BADatePickerTypeMD : {
                 switch (component) {
                     case 0: {
-                        title = [self getTitleForMounthWithRow:row];
+                        title = [self getTitleForMonthWithRow:row];
                     } break;
                     case 1: {
                         title = [self getTitleForDayWithRow:row];
@@ -321,7 +321,7 @@
                         title = [self getTitleForYearWithRow:row];
                     } break;
                     case 1: {
-                        title = [self getTitleForMounthWithRow:row];
+                        title = [self getTitleForMonthWithRow:row];
                     } break;
                     case 2: {
                         title = [self getTitleForDayWithRow:row];
@@ -381,59 +381,64 @@
     
     // 选中每一行的标题
     self.basePickerView.onDidSelectRowAndComponent = ^(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
-        BAKit_StrongSelf        
+        BAKit_StrongSelf
+        self.resultModel.selectRow = row;
+        self.resultModel.selectComponent = component;
+        
         switch (self.datePickerType) {
                 // 2020-08-28
             case BADatePickerTypeYMD : {
                 switch (component) {
                     case 0: {
-                        self.resultModel.selectedYear = self.yearArray[row];
+                        self.resultModel.selectedYear = [self.yearArray[row] intValue];
+                        [self refreshMonth];
                     } break;
                     case 1: {
-                        self.resultModel.selectedMounth = self.mounthArray[row];
+                        self.resultModel.selectedMonth = [self.monthArray[row] intValue];
                         [self refreshDay];
                     } break;
                     case 2: {
-                        self.resultModel.selectedDay = self.dayArray[row];
+                        self.resultModel.selectedDay = [self.dayArray[row] intValue];
                     } break;
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%@年-%@月-%@日", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay];
+                self.resultString = [NSString stringWithFormat:@"%04ld年-%02ld月-%02ld日", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay];
             } break;
                 // 2020
             case BADatePickerTypeYY : {
-                self.resultModel.selectedYear = self.yearArray[row];
-                self.resultString = [NSString stringWithFormat:@"%@年", self.resultModel.selectedYear];
+                self.resultModel.selectedYear = [self.yearArray[row] intValue];
+                self.resultString = [NSString stringWithFormat:@"%04ld年", self.resultModel.selectedYear];
             } break;
                 // 2020-08
             case BADatePickerTypeYM : {
                 switch (component) {
                     case 0: {
-                        self.resultModel.selectedYear = self.yearArray[row];
+                        self.resultModel.selectedYear = [self.yearArray[row] intValue];
+                        [self refreshMonth];
                     } break;
                     case 1: {
-                        self.resultModel.selectedMounth = self.mounthArray[row];
+                        self.resultModel.selectedMonth = [self.monthArray[row] intValue];
                     } break;
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%@年-%@月", self.resultModel.selectedYear, self.resultModel.selectedMounth];
+                self.resultString = [NSString stringWithFormat:@"%04ld年-%02ld月", self.resultModel.selectedYear, self.resultModel.selectedMonth];
             } break;
                 // 08-28
             case BADatePickerTypeMD : {
                 switch (component) {
                     case 0: {
-                        self.resultModel.selectedMounth = self.mounthArray[row];
-                        [self refreshDay];
+                        self.resultModel.selectedMonth = [self.monthArray[row] intValue];
+                        [self refreshMonth];
                     } break;
                     case 1: {
-                        self.resultModel.selectedDay = self.dayArray[row];
+                        self.resultModel.selectedDay = [self.dayArray[row] intValue];
                     } break;
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%@月-%@日", self.resultModel.selectedMounth, self.resultModel.selectedDay];
+                self.resultString = [NSString stringWithFormat:@"%02ld月-%02ld日", self.resultModel.selectedMonth, self.resultModel.selectedDay];
             } break;
                 // 2020-08-28 15:33
             case BADatePickerTypeYMDHM :
@@ -441,90 +446,88 @@
             case BADatePickerTypeYMDHMS : {
                 switch (component) {
                     case 0: {
-                        self.resultModel.selectedYear = self.yearArray[row];
+                        self.resultModel.selectedYear = [self.yearArray[row] intValue];
+                        [self refreshMonth];
                     } break;
                     case 1: {
-                        self.resultModel.selectedMounth = self.mounthArray[row];
+                        self.resultModel.selectedMonth = [self.monthArray[row] intValue];
                         [self refreshDay];
                     } break;
                     case 2: {
-                        self.resultModel.selectedDay = self.dayArray[row];
+                        self.resultModel.selectedDay = [self.dayArray[row] intValue];
                     } break;
                     case 3: {
-                        self.resultModel.selectedHours = self.hoursArray[row];
+                        self.resultModel.selectedHours = [self.hoursArray[row] intValue];
                     } break;
                     case 4: {
-                        self.resultModel.selectedMinutes = self.minutesArray[row];
+                        self.resultModel.selectedMinutes = [self.minutesArray[row] intValue];
                     } break;
                     case 5: {
-                        self.resultModel.selectedSeconds = self.secondsArray[row];
+                        self.resultModel.selectedSeconds = [self.secondsArray[row] intValue];
                     } break;
                     default:
                         break;
                 }
                 
-                self.resultString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
+                self.resultString = [NSString stringWithFormat:@"%04ld-%02ld-%02ld %02ld:%02ld", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
                 if (self.datePickerType == BADatePickerTypeYMDHMS) {
-                    self.resultString = [self.resultString stringByAppendingFormat:@":%@", self.resultModel.selectedSeconds];
+                    self.resultString = [self.resultString stringByAppendingFormat:@":%02ld", self.resultModel.selectedSeconds];
                 }
             } break;
                 // 15:33
             case BADatePickerTypeHM : {
                 switch (component) {
                     case 0: {
-                        self.resultModel.selectedHours = self.hoursArray[row];
+                        self.resultModel.selectedHours = [self.hoursArray[row] intValue];
                     } break;
                     case 1: {
-                        self.resultModel.selectedMinutes = self.minutesArray[row];
+                        self.resultModel.selectedMinutes = [self.minutesArray[row] intValue];
                     } break;
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
+                self.resultString = [NSString stringWithFormat:@"%02ld:%02ld", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
             } break;
                 // 15:33:58
             case BADatePickerTypeHMS : {
                 switch (component) {
                     case 0: {
-                        self.resultModel.selectedHours = self.hoursArray[row];
+                        self.resultModel.selectedHours = [self.hoursArray[row] intValue];
                     } break;
                     case 1: {
-                        self.resultModel.selectedMinutes = self.minutesArray[row];
+                        self.resultModel.selectedMinutes = [self.minutesArray[row] intValue];
                     } break;
                     case 2: {
-                        self.resultModel.selectedSeconds = self.secondsArray[row];
-                        [self refreshDay];
+                        self.resultModel.selectedSeconds = [self.secondsArray[row] intValue];
                     } break;
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%@:%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes, self.resultModel.selectedSeconds];
+                self.resultString = [NSString stringWithFormat:@"%02ld:%02ld:%ld02ld", self.resultModel.selectedHours, self.resultModel.selectedMinutes, (long)self.resultModel.selectedSeconds];
             } break;
                 // 2021年，第21周
             case BADatePickerTypeYearWeek : {
-                NSString *year = self.resultModel.selectedYear;
-                NSString *week = self.resultModel.selectedWeek;
+                NSInteger year = self.resultModel.selectedYear;
+                NSInteger week = self.resultModel.selectedWeek;
                 
                 if (component == 0) {
                     [self refreshWeeksByYear:year];
                     [pickerView reloadComponent:1];
                     //                    [pickerView selectRow:0 inComponent:1 animated:YES];
-                    year = self.yearArray[row];
+                    year = [self.yearArray[row] intValue];
                     
                 } else {
-                    week = self.weekArray[row];
+                    week = [self.weekArray[row] intValue];
                 }
                 self.resultModel.selectedYear = year;
                 self.resultModel.selectedWeek = week;
                 
-                self.resultString = [NSString stringWithFormat:@"%@年-第%@周",year, week];
+                self.resultString = [NSString stringWithFormat:@"%04ld年-第%02ld周",year, week];
             } break;
                 
             default:
                 break;
         }
-        self.resultModel.selectRow = row;
-        self.resultModel.selectComponent = component;
     };
     self.basePickerView.onViewForRowAndComponent = ^(NSInteger row, NSInteger component, UIView * _Nonnull reusingView, UIPickerView * _Nonnull pickerView) {
         BAKit_StrongSelf
@@ -548,6 +551,9 @@
 
 #pragma mark 获取 title
 - (NSString *)getTitleForYearWithRow:(NSInteger)row {
+    if (row >= self.yearArray.count) {
+        return nil;
+    }
     NSString *title = [NSString stringWithFormat:@"%@", self.yearArray[row]];
     if (self.showSuffix) {
         title = [title stringByAppendingString:@"年"];
@@ -555,8 +561,11 @@
     return title;
 }
 
-- (NSString *)getTitleForMounthWithRow:(NSInteger)row {
-    NSString *title = [NSString stringWithFormat:@"%@", self.mounthArray[row]];
+- (NSString *)getTitleForMonthWithRow:(NSInteger)row {
+    if (row >= self.monthArray.count) {
+        return nil;
+    }
+    NSString *title = [NSString stringWithFormat:@"%@", self.monthArray[row]];
     if (self.showSuffix) {
         title = [title stringByAppendingString:@"月"];
     }
@@ -564,6 +573,9 @@
 }
 
 - (NSString *)getTitleForDayWithRow:(NSInteger)row {
+    if (row >= self.dayArray.count) {
+        return nil;
+    }
     NSString *title = [NSString stringWithFormat:@"%@", self.dayArray[row]];
     if (self.showSuffix) {
         title = [title stringByAppendingString:@"日"];
@@ -572,6 +584,9 @@
 }
 
 - (NSString *)getTitleForHourWithRow:(NSInteger)row {
+    if (row >= self.hoursArray.count) {
+        return nil;
+    }
     NSString *title = [NSString stringWithFormat:@"%@", self.hoursArray[row]];
     if (self.showSuffix) {
         title = [title stringByAppendingString:@"时"];
@@ -580,6 +595,9 @@
 }
 
 - (NSString *)getTitleForMinutesWithRow:(NSInteger)row {
+    if (row >= self.minutesArray.count) {
+        return nil;
+    }
     NSString *title = [NSString stringWithFormat:@"%@", self.minutesArray[row]];
     if (self.showSuffix) {
         title = [title stringByAppendingString:@"分"];
@@ -588,6 +606,9 @@
 }
 
 - (NSString *)getTitleForSecondsWithRow:(NSInteger)row {
+    if (row >= self.secondsArray.count) {
+        return nil;
+    }
     NSString *title = [NSString stringWithFormat:@"%@", self.secondsArray[row]];
     if (self.showSuffix) {
         title = [title stringByAppendingString:@"秒"];
@@ -596,47 +617,92 @@
 }
 
 - (NSString *)getTitleForWeekWithRow:(NSInteger)row {
+    if (row >= self.weekArray.count) {
+        return nil;
+    }
     return [NSString stringWithFormat:@"第 %@ 周", self.weekArray[row]];
 }
 
+- (void)refreshMonth {
+    [self.monthArray removeAllObjects];
+    if (self.datePickerModel.maximumDate.year == self.resultModel.selectedYear) {
+        for (int i = 1; i <= self.datePickerModel.maximumDate.month; i++) {
+            NSString *str = [NSString stringWithFormat:@"%02i",i];
+            [self.monthArray addObject:str];
+        }
+    } else {
+        for (int i = 1; i <= 12; i++) {
+            NSString *str = [NSString stringWithFormat:@"%02i",i];
+            [self.monthArray addObject:str];
+        }
+    }
+    self.resultModel.selectedMonth = self.datePickerModel.maximumDate.month;
+    
+    NSString *month = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedMonth];
+    NSInteger monthIndex = [self.monthArray indexOfObject:month];
+    if (monthIndex < self.monthArray.count) {
+        NSInteger component = 1;
+        if (self.datePickerType == BADatePickerTypeMD) {
+            component = 0;
+        }
+        [self.pickerView reloadComponent:component];
+        [self.pickerView selectRow:monthIndex inComponent:component animated:NO];
+        if (self.datePickerType != BADatePickerTypeYM) {
+            [self refreshDay];
+        }
+    }
+}
+
 - (void)refreshDay {
-    [self.dayArray removeAllObjects];
-    
-    if (self.resultModel.selectedYear.length == 0) {
-        self.resultModel.selectedYear = [NSString stringWithFormat:@"%04li",(long)NSDate.date.year];
+    if (self.resultModel.selectedYear == 0) {
+        self.resultModel.selectedYear = [[NSString stringWithFormat:@"%04ld",(long)NSDate.date.year] intValue];
     }
-    if (self.resultModel.selectedDay.length == 0) {
-        self.resultModel.selectedDay = [NSString stringWithFormat:@"%02li",(long)NSDate.date.day];
+    NSString *dayString = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedDay];
+    if (self.resultModel.selectedDay == 0) {
+        self.resultModel.selectedDay = [[NSString stringWithFormat:@"%02ld",(long)NSDate.date.day] intValue];
+        dayString = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedDay];
     }
-    NSString *year = self.resultModel.selectedYear;
-    NSString *mounth = self.resultModel.selectedMounth;
-    NSString *day = self.resultModel.selectedDay;
+    NSInteger year = self.resultModel.selectedYear;
+    NSInteger month = self.resultModel.selectedMonth;
+//    NSString *day = self.resultModel.selectedDay;
     
-    NSString *dateStr = [NSString stringWithFormat:@"%@-%@-%@", year, mounth, day];
+    NSString *dateStr = [NSString stringWithFormat:@"%04ld-%02ld-10", year, month];
     self.formatter.dateFormat = @"yyyy-MM-dd";
     NSDate *date = [self.formatter dateFromString:dateStr];
     NSInteger count =  [NSDate ba_dateTotaldaysInMonth:date];
-    for (int i = 1; i < count + 1; ++i) {
-        NSString *str = [NSString stringWithFormat:@"%02i",i];
+    // 如果当月天数大于最大
+    if (self.resultModel.selectedYear == self.datePickerModel.maximumDate.year &&  month == self.datePickerModel.maximumDate.month) {
+        count = self.datePickerModel.maximumDate.day;
+        self.resultModel.selectedDay = count;
+    }
+    
+    if (self.resultModel.selectedDay >= count) {
+        self.resultModel.selectedDay = count;
+        dayString = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedDay];
+    }
+    
+    [self.dayArray removeAllObjects];
+    for (int i = 1; i <= count; ++i) {
+        NSString *str = [NSString stringWithFormat:@"%02i", i];
         [self.dayArray addObject:str];
     }
     
-    NSInteger dayIndex = [self.dayArray indexOfObject:self.resultModel.selectedDay];
+    NSInteger dayIndex = [self.dayArray indexOfObject:dayString];
     if (dayIndex < self.dayArray.count) {
         NSInteger component = 2;
         if (self.datePickerType == BADatePickerTypeMD) {
             component = 1;
         }
-        //        [self.pickerView reloadComponent:component];
-        [self.pickerView reloadAllComponents];
+        [self.pickerView reloadComponent:component];
+        [self.pickerView selectRow:dayIndex inComponent:component animated:NO];
     }
 }
 
 #pragma mark 刷新年份的最大周数
-- (void)refreshWeeksByYear:(NSString *)year {
+- (void)refreshWeeksByYear:(NSInteger)year {
     [self.weekArray removeAllObjects];
     
-    for (NSInteger i = 1; i < [NSDate ba_dateGetWeekNumbersOfYear:[year integerValue]]+1; i++) {
+    for (NSInteger i = 1; i < [NSDate ba_dateGetWeekNumbersOfYear:year]+1; i++) {
         [self.weekArray addObject:[NSString stringWithFormat:@"%ld", i]];
     }
 }
@@ -701,7 +767,7 @@
     if (maxYear > 0 && minYear > 0) {
         [self.yearArray removeAllObjects];
         for (NSInteger i = minYear; i <= maxYear; i++) {
-            NSString *str = [NSString stringWithFormat:@"%04li",(long)i];
+            NSString *str = [NSString stringWithFormat:@"%04ld",(long)i];
             [self.yearArray addObject:str];
         }
     }
@@ -727,63 +793,63 @@
             // 2020-08-28
         case BADatePickerTypeYMD : {
             self.showYear = YES;
-            self.showMounth = YES;
+            self.showMonth = YES;
             self.showDay = YES;
-            resultString = [NSString stringWithFormat:@"%@年-%@月-%@日", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay];
+            resultString = [NSString stringWithFormat:@"%04ld年-%02ld月-%02ld日", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay];
         } break;
             // 2020
         case BADatePickerTypeYY : {
             self.showYear = YES;
-            resultString = [NSString stringWithFormat:@"%@年", self.resultModel.selectedYear];
+            resultString = [NSString stringWithFormat:@"%04ld年", self.resultModel.selectedYear];
         } break;
             // 2020-08
         case BADatePickerTypeYM : {
             self.showYear = YES;
-            self.showMounth = YES;
-            resultString = [NSString stringWithFormat:@"%@年-%@月", self.resultModel.selectedYear, self.resultModel.selectedMounth];
+            self.showMonth = YES;
+            resultString = [NSString stringWithFormat:@"%04ld年-%02ld月", self.resultModel.selectedYear, (long)self.resultModel.selectedMonth];
         } break;
             // 08-28
         case BADatePickerTypeMD : {
-            self.showMounth = YES;
+            self.showMonth = YES;
             self.showDay = YES;
-            resultString = [NSString stringWithFormat:@"%@月-%@日", self.resultModel.selectedMounth, self.resultModel.selectedDay];
+            resultString = [NSString stringWithFormat:@"%02ld月-%02ld日", (long)self.resultModel.selectedMonth, (long)self.resultModel.selectedDay];
         } break;
             // 2020-08-28 15:33
         case BADatePickerTypeYMDHM :
             // 2020-08-28 15:33:58
         case BADatePickerTypeYMDHMS : {
             self.showYear = YES;
-            self.showMounth = YES;
+            self.showMonth = YES;
             self.showDay = YES;
             self.showHours = YES;
             self.showMinutes = YES;
             
-            resultString = [NSString stringWithFormat:@"%@-%@-%@ %@:%@", self.resultModel.selectedYear, self.resultModel.selectedMounth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
+            resultString = [NSString stringWithFormat:@"%04ld-%02ld-%02ld %02ld:%02ld", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay, self.resultModel.selectedHours, self.resultModel.selectedMinutes];
             // BADatePickerTypeYMDHMS 样式需要特殊处理默认数据
             if (self.datePickerType == BADatePickerTypeYMDHMS) {
                 // BADatePickerTypeYMDHMS 样式内容过长显示不全，因此省去后缀
                 self.showSeconds = YES;
-                resultString = [self.resultModel.resultString stringByAppendingFormat:@":%@", self.resultModel.selectedSeconds];
+                resultString = [self.resultModel.resultString stringByAppendingFormat:@":%02ld", self.resultModel.selectedSeconds];
             }
         } break;
             // 15:33
         case BADatePickerTypeHM : {
             self.showHours = YES;
             self.showMinutes = YES;
-            resultString = [NSString stringWithFormat:@"%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
+            resultString = [NSString stringWithFormat:@"%02ld:%02ld", self.resultModel.selectedHours, self.resultModel.selectedMinutes];
         } break;
             // 15:33:58
         case BADatePickerTypeHMS : {
             self.showHours = YES;
             self.showMinutes = YES;
             self.showSeconds = YES;
-            resultString = [NSString stringWithFormat:@"%@:%@:%@", self.resultModel.selectedHours, self.resultModel.selectedMinutes, self.resultModel.selectedSeconds];
+            resultString = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", self.resultModel.selectedHours, self.resultModel.selectedMinutes, self.resultModel.selectedSeconds];
         } break;
             // 2021年，第21周
         case BADatePickerTypeYearWeek : {
             self.showYear = YES;
             self.showWeek = YES;
-            resultString = [NSString stringWithFormat:@"%@年-第%@周", self.resultModel.selectedYear, self.resultModel.selectedWeek];
+            resultString = [NSString stringWithFormat:@"%04ld年-第%02ld周", self.resultModel.selectedYear, self.resultModel.selectedWeek];
         } break;
             
         default:
@@ -803,26 +869,30 @@
     _showYear = showYear;
     
     if (showYear) {
-        self.resultModel.selectedYear = [NSString stringWithFormat:@"%04li",(long)NSDate.date.year];
-        NSInteger yearIndex = [self.yearArray indexOfObject:self.resultModel.selectedYear];
-        if (yearIndex <self.yearArray.count) {
-            [self.pickerView selectRow:[self.yearArray indexOfObject:self.resultModel.selectedYear] inComponent:0 animated:NO];
+        NSString *year = [NSString stringWithFormat:@"%04ld",(long)NSDate.date.year];
+        self.resultModel.selectedYear = [year intValue];
+        NSInteger yearIndex = [self.yearArray indexOfObject:year];
+        if (yearIndex < self.yearArray.count) {
+            [self.pickerView selectRow:yearIndex inComponent:0 animated:NO];
         }
     }
 }
 
-- (void)setShowMounth:(BOOL)showMounth {
-    _showMounth = showMounth;
+- (void)setShowMonth:(BOOL)showMonth {
+    _showMonth = showMonth;
     
-    if (showMounth) {
-        self.resultModel.selectedMounth = [NSString stringWithFormat:@"%02li",(long)NSDate.date.month];
-        NSInteger mounthIndex = [self.mounthArray indexOfObject:self.resultModel.selectedMounth];
-        if (mounthIndex < self.mounthArray.count) {
+    if (showMonth) {
+        [self refreshMonth];
+        
+        NSString *month = [NSString stringWithFormat:@"%02ld",(long)NSDate.date.month];
+        self.resultModel.selectedMonth = [month intValue];
+        NSInteger monthIndex = [self.monthArray indexOfObject:month];
+        if (monthIndex < self.monthArray.count) {
             NSInteger component = 1;
             if (self.datePickerType == BADatePickerTypeMD) {
                 component = 0;
             }
-            [self.pickerView selectRow:[self.mounthArray indexOfObject:self.resultModel.selectedMounth] inComponent:component animated:NO];
+            [self.pickerView selectRow:monthIndex inComponent:component animated:NO];
             if (self.datePickerType != BADatePickerTypeYM) {
                 [self refreshDay];
             }
@@ -834,14 +904,15 @@
     _showDay = showDay;
     
     if (showDay) {
-        self.resultModel.selectedDay = [NSString stringWithFormat:@"%02li",(long)NSDate.date.day];
-        NSInteger dayIndex = [self.dayArray indexOfObject:self.resultModel.selectedDay];
+        NSString *day = [NSString stringWithFormat:@"%02ld",(long)NSDate.date.day];
+        self.resultModel.selectedDay = [day intValue];
+        NSInteger dayIndex = [self.dayArray indexOfObject:day];
         if (dayIndex < self.dayArray.count) {
             NSInteger component = 2;
             if (self.datePickerType == BADatePickerTypeMD) {
                 component = 1;
             }
-            [self.pickerView selectRow:[self.dayArray indexOfObject:self.resultModel.selectedDay] inComponent:component animated:NO];
+            [self.pickerView selectRow:dayIndex inComponent:component animated:NO];
         }
     }
 }
@@ -850,14 +921,15 @@
     _showHours = showHours;
     
     if (showHours) {
-        self.resultModel.selectedHours = [NSString stringWithFormat:@"%02li",(long)NSDate.date.hour];
-        NSInteger hourIndex = [self.hoursArray indexOfObject:self.resultModel.selectedHours];
+        NSString *hour = [NSString stringWithFormat:@"%02ld",(long)NSDate.date.hour];
+        self.resultModel.selectedHours = [hour intValue];
+        NSInteger hourIndex = [self.hoursArray indexOfObject:hour];
         if (hourIndex < self.hoursArray.count) {
             NSInteger component = 3;
             if (self.datePickerType == BADatePickerTypeHM || self.datePickerType == BADatePickerTypeHMS) {
                 component = 0;
             }
-            [self.pickerView selectRow:[self.hoursArray indexOfObject:self.resultModel.selectedHours] inComponent:component animated:NO];
+            [self.pickerView selectRow:hourIndex inComponent:component animated:NO];
         }
     }
 }
@@ -866,14 +938,15 @@
     _showMinutes = showMinutes;
     
     if (showMinutes) {
-        self.resultModel.selectedMinutes = [NSString stringWithFormat:@"%02li",(long)NSDate.date.minute];
-        NSInteger minutesIndex = [self.minutesArray indexOfObject:self.resultModel.selectedMinutes];
+        NSString *minute = [NSString stringWithFormat:@"%02ld",(long)NSDate.date.minute];
+        self.resultModel.selectedMinutes = [minute intValue];
+        NSInteger minutesIndex = [self.minutesArray indexOfObject:minute];
         if (minutesIndex < self.minutesArray.count) {
             NSInteger component = 4;
             if (self.datePickerType == BADatePickerTypeHM || self.datePickerType == BADatePickerTypeHMS) {
                 component = 1;
             }
-            [self.pickerView selectRow:[self.minutesArray indexOfObject:self.resultModel.selectedMinutes] inComponent:component animated:NO];
+            [self.pickerView selectRow:minutesIndex inComponent:component animated:NO];
         }
     }
 }
@@ -882,14 +955,15 @@
     _showSeconds = showSeconds;
     
     if (showSeconds) {
-        self.resultModel.selectedSeconds = [NSString stringWithFormat:@"%02li",(long)NSDate.date.second];
-        NSInteger secondsIndex = [self.secondsArray indexOfObject:self.resultModel.selectedSeconds];
+        NSString *second = [NSString stringWithFormat:@"%02ld",(long)NSDate.date.second];
+        self.resultModel.selectedSeconds = [second intValue];
+        NSInteger secondsIndex = [self.secondsArray indexOfObject:second];
         if (secondsIndex < self.secondsArray.count) {
             NSInteger component = 5;
             if (self.datePickerType == BADatePickerTypeHMS) {
                 component = 2;
             }
-            [self.pickerView selectRow:[self.secondsArray indexOfObject:self.resultModel.selectedSeconds] inComponent:component animated:NO];
+            [self.pickerView selectRow:secondsIndex inComponent:component animated:NO];
         }
     }
 }
@@ -898,11 +972,12 @@
     _showWeek = showWeek;
     
     if (showWeek) {
-        self.resultModel.selectedWeek = [NSString stringWithFormat:@"%ld", (long)NSDate.date.weekOfYear];
+        NSString *weekOfYear = [NSString stringWithFormat:@"%02ld",(long)NSDate.date.weekOfYear];
+        self.resultModel.selectedWeek = [weekOfYear intValue];
         [self refreshWeeksByYear:self.resultModel.selectedYear];
         [self.pickerView reloadAllComponents];
         
-        NSInteger index_week = [self.resultModel.selectedWeek integerValue];
+        NSInteger index_week = self.resultModel.selectedWeek;
         [self.pickerView selectRow:(index_week - 1) inComponent:1 animated:YES];
     }
 }
@@ -960,15 +1035,15 @@
     return _yearArray;
 }
 
-- (NSMutableArray *)mounthArray {
-    if (!_mounthArray) {
-        _mounthArray = @[].mutableCopy;
+- (NSMutableArray *)monthArray {
+    if (!_monthArray) {
+        _monthArray = @[].mutableCopy;
         for (int i = 1; i < 13; i++) {
             NSString *str = [NSString stringWithFormat:@"%02i",i];
-            [self.mounthArray addObject:str];
+            [self.monthArray addObject:str];
         }
     }
-    return _mounthArray;
+    return _monthArray;
 }
 
 - (NSMutableArray *)dayArray {
