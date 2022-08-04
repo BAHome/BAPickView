@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL enableTouchDismiss;
 /// picker 文本字体
 @property(nonatomic, strong) UIFont *titleFont;
+/// picker 文本颜色
+@property(nonatomic, strong) UIColor *titleColor;
 
 @end
 

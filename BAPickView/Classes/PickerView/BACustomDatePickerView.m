@@ -522,7 +522,7 @@
                 self.resultModel.selectedYear = year;
                 self.resultModel.selectedWeek = week;
                 
-                self.resultString = [NSString stringWithFormat:@"%04ld年-第%02ld周",year, week];
+                self.resultString = [NSString stringWithFormat:@"%04ld年第%02ld周",year, week];
             } break;
                 
             default:
@@ -537,11 +537,8 @@
             pickerLabel.adjustsFontSizeToFitWidth = YES;
             pickerLabel.textAlignment = NSTextAlignmentCenter;
             pickerLabel.backgroundColor = [UIColor clearColor];
-            UIFont *font = [UIFont boldSystemFontOfSize:15];
-            if (self.datePickerModel.titleFont) {
-                font = self.datePickerModel.titleFont;
-            }
-            pickerLabel.font = font;
+            pickerLabel.font = !self.datePickerModel.titleFont ? [UIFont boldSystemFontOfSize:15]:self.datePickerModel.titleFont;
+            pickerLabel.textColor = !self.datePickerModel.titleColor ? UIColor.blackColor:self.datePickerModel.titleColor;
         }
         pickerLabel.text = self.basePickerView.onTitleForRowAndComponent(row, component, pickerView);
         
@@ -795,7 +792,7 @@
             self.showYear = YES;
             self.showMonth = YES;
             self.showDay = YES;
-            resultString = [NSString stringWithFormat:@"%04ld年-%02ld月-%02ld日", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay];
+            resultString = [NSString stringWithFormat:@"%04ld年%02ld月%02ld日", self.resultModel.selectedYear, self.resultModel.selectedMonth, self.resultModel.selectedDay];
         } break;
             // 2020
         case BADatePickerTypeYY : {
@@ -806,13 +803,13 @@
         case BADatePickerTypeYM : {
             self.showYear = YES;
             self.showMonth = YES;
-            resultString = [NSString stringWithFormat:@"%04ld年-%02ld月", self.resultModel.selectedYear, (long)self.resultModel.selectedMonth];
+            resultString = [NSString stringWithFormat:@"%04ld年%02ld月", self.resultModel.selectedYear, (long)self.resultModel.selectedMonth];
         } break;
             // 08-28
         case BADatePickerTypeMD : {
             self.showMonth = YES;
             self.showDay = YES;
-            resultString = [NSString stringWithFormat:@"%02ld月-%02ld日", (long)self.resultModel.selectedMonth, (long)self.resultModel.selectedDay];
+            resultString = [NSString stringWithFormat:@"%02ld月%02ld日", (long)self.resultModel.selectedMonth, (long)self.resultModel.selectedDay];
         } break;
             // 2020-08-28 15:33
         case BADatePickerTypeYMDHM :
@@ -849,7 +846,7 @@
         case BADatePickerTypeYearWeek : {
             self.showYear = YES;
             self.showWeek = YES;
-            resultString = [NSString stringWithFormat:@"%04ld年-第%02ld周", self.resultModel.selectedYear, self.resultModel.selectedWeek];
+            resultString = [NSString stringWithFormat:@"%04ld年第%02ld周", self.resultModel.selectedYear, self.resultModel.selectedWeek];
         } break;
             
         default:

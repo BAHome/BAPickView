@@ -177,6 +177,7 @@
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = 83U7J454XF;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -388,6 +389,7 @@
 			baseConfigurationReference = 984E78DD695FA66F5333B1BE /* Pods-BAPickView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = 83U7J454XF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -398,6 +400,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = wbiaoLuxury_xing;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -408,6 +411,7 @@
 			baseConfigurationReference = 7E03A33070174A8C3EB7E709 /* Pods-BAPickView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = 83U7J454XF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -418,6 +422,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = wbiaoLuxury_xing;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

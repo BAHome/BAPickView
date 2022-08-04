@@ -214,6 +214,7 @@ UITableViewDataSource
     if (minimumDate) {
         datePickerModel.minimumDate = minimumDate;
     }
+    datePickerModel.titleColor = BAKit_Color_RandomRGB_pod();
     
     // ToolBar
     BAPickerToolBarModel *toolBarModel = BAPickerToolBarModel.new;

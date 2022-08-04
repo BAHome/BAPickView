@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BAPickView'
-  s.version          = '1.2.3'
+  s.version          = '1.2.4'
   s.summary          = 'BAPickView 精简高效的选择器！'
   
   # This description is used to generate tags and improve search results.

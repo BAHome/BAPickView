@@ -53,6 +53,7 @@ BAPickView is available under the MIT license. See the LICENSE file for more inf
 * 18、新增 选中结果直接显示在 工具栏的中间，且可以自定义颜色、字体 <br>
 * 19、日期选择器 新增背景年份水印显示 <br>
 * 20、完美适配 iOS 11 和 iPhone X <br>
+* 21、新增 自定义 `datePicker` 自定义字体颜色 <br>
 
 ## 2、图片示例
 ![BAPickView.gif](https://github.com/BAHome/BAPickView/blob/master/Images/BAPickView.gif)
@@ -317,6 +318,13 @@ NS_ASSUME_NONNULL_END
  欢迎使用 [【BAHome】](https://github.com/BAHome) 系列开源代码 ！
  如有更多需求，请前往：[【https://github.com/BAHome】](https://github.com/BAHome) 
  
+ 最新更新时间：2022-08-5 【倒叙】 <br>
+ 最新Version：【Version：1.2.4】 <br>
+ 更新内容： <br>
+ 1.2.4.1、此版本删除旧版本代码，注意：如需使用旧版本，请固定版本号为 V1.2.0<br>
+ 1.2.4.2、新增 `CustomDatePicker` 自定义字体颜色<br>
+ 1.2.4.2、修复一些已知问题<br>
+
  最新更新时间：2021-04-13 【倒叙】 <br>
  最新Version：【Version：1.2.3】 <br>
  更新内容： <br>
