@@ -392,10 +392,12 @@
                     case 0: {
                         self.resultModel.selectedYear = [self.yearArray[row] intValue];
                         [self refreshMonth];
+                        [self.pickerView reloadComponent:1];
                     } break;
                     case 1: {
                         self.resultModel.selectedMonth = [self.monthArray[row] intValue];
                         [self refreshDay];
+                        [self.pickerView reloadComponent:2];
                     } break;
                     case 2: {
                         self.resultModel.selectedDay = [self.dayArray[row] intValue];
@@ -620,33 +622,59 @@
     return [NSString stringWithFormat:@"第 %@ 周", self.weekArray[row]];
 }
 
+#pragma mark - refresh data
+
 - (void)refreshMonth {
+    if (self.resultModel.selectedMonth == 0) {
+        self.resultModel.selectedMonth = [[NSString stringWithFormat:@"%04ld",(long)NSDate.date.month] intValue];
+    }
+    
+    if (self.resultModel.selectedYear <= self.datePickerModel.maximumDate.year && self.resultModel.selectedMonth <= self.datePickerModel.minimumDate.month) {
+        self.resultModel.selectedMonth = self.datePickerModel.minimumDate.month;
+    } else if (self.resultModel.selectedYear >= self.datePickerModel.maximumDate.year && self.resultModel.selectedMonth >= self.datePickerModel.maximumDate.month) {
+        self.resultModel.selectedMonth = self.datePickerModel.maximumDate.month;
+    }
+    
     [self.monthArray removeAllObjects];
+    NSInteger minMonth = 1;
+    NSInteger maxMonth = 12;
     if (self.datePickerModel.maximumDate.year == self.resultModel.selectedYear) {
         for (int i = 1; i <= self.datePickerModel.maximumDate.month; i++) {
             NSString *str = [NSString stringWithFormat:@"%02i",i];
             [self.monthArray addObject:str];
         }
     } else {
-        for (int i = 1; i <= 12; i++) {
+        if (self.resultModel.selectedYear <= self.datePickerModel.minimumDate.year) {
+            minMonth = self.datePickerModel.minimumDate.month;
+            minMonth = MAX(1, minMonth);
+        }
+        if (self.resultModel.selectedYear == self.datePickerModel.maximumDate.year) {
+            maxMonth = self.datePickerModel.maximumDate.month;
+            maxMonth = MIN(12, minMonth);
+        }
+        
+        for (int i = minMonth; i <= maxMonth; i++) {
             NSString *str = [NSString stringWithFormat:@"%02i",i];
             [self.monthArray addObject:str];
         }
     }
-    self.resultModel.selectedMonth = self.datePickerModel.maximumDate.month;
     
     NSString *month = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedMonth];
     NSInteger monthIndex = [self.monthArray indexOfObject:month];
+    if (month.intValue <= minMonth) {
+        monthIndex = 0;
+    }
+    
+    NSInteger component = 1;
     if (monthIndex < self.monthArray.count) {
-        NSInteger component = 1;
         if (self.datePickerType == BADatePickerTypeMD) {
             component = 0;
         }
-        [self.pickerView reloadComponent:component];
-        [self.pickerView selectRow:monthIndex inComponent:component animated:NO];
-        if (self.datePickerType != BADatePickerTypeYM) {
-            [self refreshDay];
-        }
+    }
+    [self.pickerView reloadComponent:component];
+    [self.pickerView selectRow:monthIndex inComponent:component animated:NO];
+    if (self.datePickerType != BADatePickerTypeYM) {
+        [self refreshDay];
     }
 }
 
@@ -661,7 +689,8 @@
     }
     NSInteger year = self.resultModel.selectedYear;
     NSInteger month = self.resultModel.selectedMonth;
-//    NSString *day = self.resultModel.selectedDay;
+    //    NSString *day = self.resultModel.selectedDay;
+    NSInteger minDay = 1;
     
     NSString *dateStr = [NSString stringWithFormat:@"%04ld-%02ld-10", year, month];
     self.formatter.dateFormat = @"yyyy-MM-dd";
@@ -671,28 +700,39 @@
     if (self.resultModel.selectedYear == self.datePickerModel.maximumDate.year &&  month == self.datePickerModel.maximumDate.month) {
         count = self.datePickerModel.maximumDate.day;
         self.resultModel.selectedDay = count;
+    } else if (self.resultModel.selectedYear == self.datePickerModel.minimumDate.year &&  month == self.datePickerModel.minimumDate.month) {
+        //        count = count - self.datePickerModel.minimumDate.day;
+        if (self.resultModel.selectedDay <= self.datePickerModel.minimumDate.day) {
+            self.resultModel.selectedDay = self.datePickerModel.minimumDate.day;
+            minDay = self.resultModel.selectedDay;
+        }
     }
     
     if (self.resultModel.selectedDay >= count) {
         self.resultModel.selectedDay = count;
-        dayString = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedDay];
     }
+    dayString = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedDay];
     
     [self.dayArray removeAllObjects];
-    for (int i = 1; i <= count; ++i) {
+    
+    for (int i = minDay; i <= count; ++i) {
         NSString *str = [NSString stringWithFormat:@"%02i", i];
         [self.dayArray addObject:str];
     }
     
     NSInteger dayIndex = [self.dayArray indexOfObject:dayString];
+    NSInteger component = 2;
     if (dayIndex < self.dayArray.count) {
-        NSInteger component = 2;
         if (self.datePickerType == BADatePickerTypeMD) {
             component = 1;
         }
-        [self.pickerView reloadComponent:component];
-        [self.pickerView selectRow:dayIndex inComponent:component animated:NO];
     }
+    
+    
+    [self.pickerView reloadComponent:component];
+    //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [self.pickerView selectRow:dayIndex inComponent:component animated:NO];
+    //        });
 }
 
 #pragma mark 刷新年份的最大周数
@@ -710,7 +750,7 @@
     _resultString = resultString;
     
     // 等 configModel 有值有再赋值
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.resultModel.resultString = resultString;
         self.toolBarView.result = resultString;
     });
@@ -755,7 +795,7 @@
 - (void)setDatePickerModel:(BADatePickerModel *)datePickerModel {
     _datePickerModel = datePickerModel;
     
-    // 根据最大最小日期设置日期
+    // 根据最大最小日期设置年
     NSInteger maxYear = datePickerModel.maximumDate.year;
     maxYear = maxYear > 0 ? maxYear:NSDate.date.year + 60;
     NSInteger minYear = datePickerModel.minimumDate.year;
