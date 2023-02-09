@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *(^onTitleForRowAndComponent)(NSInteger row, NSInteger component, UIPickerView *pickerView);
 // 选中每一行的标题
 @property(nonatomic, copy) void (^onDidSelectRowAndComponent)(NSInteger row, NSInteger component, UIPickerView *pickerView);
+// 每一行的高度
+@property(nonatomic, copy) CGFloat (^onRowHeightForComponent)(NSInteger component, UIPickerView *pickerView);
 // 自定义文本
 @property(nonatomic, copy) UIView *(^onViewForRowAndComponent)(NSInteger row, NSInteger component, UIView *reusingView, UIPickerView *pickerView);
 

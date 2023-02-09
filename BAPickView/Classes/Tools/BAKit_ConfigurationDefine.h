@@ -387,5 +387,15 @@ BAKit_getColumnCountWithArrayAndRowCount_pod(NSArray *array, NSInteger rowCount)
     return i;
 }
 
+// 获取当前最顶部的 window
+CG_INLINE UIWindow *
+BAKit_GetAlertWindow() {
+    UIWindow *alertWindow = [UIApplication sharedApplication].keyWindow;
+    if (alertWindow.windowLevel != UIWindowLevelNormal) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"windowLevel == %ld AND hidden == 0 " , UIWindowLevelNormal];
+        alertWindow = [[UIApplication sharedApplication].windows filteredArrayUsingPredicate:predicate].firstObject;
+    }
+    return alertWindow;
+}
 
 #endif /* BAKit_ConfigurationDefine_h */

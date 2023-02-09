@@ -62,6 +62,10 @@
     return self.onViewForRowAndComponent ? self.onViewForRowAndComponent(row, component, view, pickerView):nil;
 }
 
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return !self.onRowHeightForComponent ? 44:self.onRowHeightForComponent(component, pickerView);
+}
+
 #pragma mark - setter, getter
 
 - (UIPickerView *)pickerView {

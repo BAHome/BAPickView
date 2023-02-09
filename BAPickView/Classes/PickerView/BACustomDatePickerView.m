@@ -62,29 +62,22 @@
 }
 
 - (void)initUI {
-    [self.contentView addSubview:self.bgView];
-    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.offset(0);
-        make.bottom.offset(0);
-        if (@available(iOS 11.0, *)) {
-            make.height.mas_equalTo(self.safeAreaInsets.bottom+240);
-        } else {
-            make.height.mas_equalTo(240);
-        }
-    }];
+    self.contentViewHeight = 270;
+    self.contentView.backgroundColor = UIColor.whiteColor;
+    self.maskViewBackgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.3];
     
-    [self.bgView addSubview:self.toolBarView];
+    [self.contentView addSubview:self.toolBarView];
     [self.toolBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.offset(0);
         make.height.mas_equalTo(44);
     }];
     
-    [self.bgView addSubview:self.basePickerView];
+    [self.contentView addSubview:self.basePickerView];
     [self.basePickerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.toolBarView.mas_bottom);
         make.left.right.offset(0);
         if (@available(iOS 11.0, *)) {
-            make.bottom.mas_equalTo(self.mas_safeAreaLayoutGuideBottom);
+            make.bottom.offset(-(BAKit_GetAlertWindow().safeAreaInsets.bottom));
         } else {
             make.bottom.offset(0);
         }
@@ -102,10 +95,10 @@
     self.showMinutes = NO;
     self.showSeconds = NO;
     self.showWeek = NO;
-    
-    BAKit_WeakSelf;
+
+    BAKit_WeakSelf
     self.toolBarView.onCancleButton = ^{
-        BAKit_StrongSelf;
+        BAKit_StrongSelf
         [self dismiss];
     };
     self.toolBarView.onSureButton = ^{
@@ -119,6 +112,11 @@
 - (void)initPickerData {
     
     BAKit_WeakSelf
+    
+    // 每一行的高度
+    self.basePickerView.onRowHeightForComponent = ^CGFloat(NSInteger component, UIPickerView * _Nonnull pickerView) {
+        return 50;
+    };
     // 返回需要展示的列（columns）的数目
     self.basePickerView.onNumberOfComponentsInPickerView = ^NSInteger(UIPickerView * _Nonnull pickerView) {
         BAKit_StrongSelf
@@ -382,6 +380,7 @@
     // 选中每一行的标题
     self.basePickerView.onDidSelectRowAndComponent = ^(NSInteger row, NSInteger component, UIPickerView * _Nonnull pickerView) {
         BAKit_StrongSelf
+        
         self.resultModel.selectRow = row;
         self.resultModel.selectComponent = component;
         
@@ -505,19 +504,18 @@
                     default:
                         break;
                 }
-                self.resultString = [NSString stringWithFormat:@"%02ld:%02ld:%ld02ld", self.resultModel.selectedHours, self.resultModel.selectedMinutes, (long)self.resultModel.selectedSeconds];
+                self.resultString = [NSString stringWithFormat:@"%02ld:%02ld:%02ld", self.resultModel.selectedHours, self.resultModel.selectedMinutes, (long)self.resultModel.selectedSeconds];
             } break;
                 // 2021年，第21周
             case BADatePickerTypeYearWeek : {
+                
                 NSInteger year = self.resultModel.selectedYear;
                 NSInteger week = self.resultModel.selectedWeek;
                 
                 if (component == 0) {
+                    year = [self.yearArray[row] intValue];
                     [self refreshWeeksByYear:year];
                     [pickerView reloadComponent:1];
-                    //                    [pickerView selectRow:0 inComponent:1 animated:YES];
-                    year = [self.yearArray[row] intValue];
-                    
                 } else {
                     week = [self.weekArray[row] intValue];
                 }
@@ -533,6 +531,7 @@
     };
     self.basePickerView.onViewForRowAndComponent = ^(NSInteger row, NSInteger component, UIView * _Nonnull reusingView, UIPickerView * _Nonnull pickerView) {
         BAKit_StrongSelf
+        
         UILabel *pickerLabel = (UILabel *)reusingView;
         if (!pickerLabel){
             pickerLabel = UILabel.new;
@@ -629,39 +628,51 @@
         self.resultModel.selectedMonth = [[NSString stringWithFormat:@"%04ld",(long)NSDate.date.month] intValue];
     }
     
-    if (self.resultModel.selectedYear <= self.datePickerModel.maximumDate.year && self.resultModel.selectedMonth <= self.datePickerModel.minimumDate.month) {
-        self.resultModel.selectedMonth = self.datePickerModel.minimumDate.month;
-    } else if (self.resultModel.selectedYear >= self.datePickerModel.maximumDate.year && self.resultModel.selectedMonth >= self.datePickerModel.maximumDate.month) {
-        self.resultModel.selectedMonth = self.datePickerModel.maximumDate.month;
+    NSInteger maxSetYear = self.datePickerModel.maximumDate.year;
+    NSInteger minSetYear = self.datePickerModel.minimumDate.year;
+    NSInteger maxSetMonth = self.datePickerModel.maximumDate.month;
+    NSInteger minSetMonth = self.datePickerModel.minimumDate.month;
+    
+    if (self.datePickerType != BADatePickerTypeMD) {
+
     }
     
-    [self.monthArray removeAllObjects];
+    /**
+     select = 2022-12-31;
+     max = 2029-12-31;
+     min = 2009-12-31;
+     */
+    
+    if (self.resultModel.selectedYear <= minSetYear &&
+        self.resultModel.selectedMonth <= minSetMonth) {
+        self.resultModel.selectedMonth = minSetMonth;
+    } else if (self.resultModel.selectedYear >= maxSetYear &&
+               self.resultModel.selectedMonth >= maxSetMonth) {
+        self.resultModel.selectedMonth = maxSetMonth;
+    }
+    
     NSInteger minMonth = 1;
     NSInteger maxMonth = 12;
-    if (self.datePickerModel.maximumDate.year == self.resultModel.selectedYear) {
-        for (int i = 1; i <= self.datePickerModel.maximumDate.month; i++) {
-            NSString *str = [NSString stringWithFormat:@"%02i",i];
-            [self.monthArray addObject:str];
-        }
+    if (self.resultModel.selectedYear == maxSetYear) {
+        maxMonth = maxSetMonth;
     } else {
-        if (self.resultModel.selectedYear <= self.datePickerModel.minimumDate.year) {
-            minMonth = self.datePickerModel.minimumDate.month;
+        if (self.resultModel.selectedYear <= minSetYear) {
+            minMonth = minSetMonth;
             minMonth = MAX(1, minMonth);
-        }
-        if (self.resultModel.selectedYear == self.datePickerModel.maximumDate.year) {
-            maxMonth = self.datePickerModel.maximumDate.month;
+        } else if (self.resultModel.selectedYear == maxSetYear) {
+            maxMonth = maxSetMonth;
             maxMonth = MIN(12, minMonth);
         }
-        
-        for (int i = minMonth; i <= maxMonth; i++) {
-            NSString *str = [NSString stringWithFormat:@"%02i",i];
-            [self.monthArray addObject:str];
-        }
+    }
+    [self.monthArray removeAllObjects];
+    for (NSInteger i = 1; i <= maxSetMonth; i++) {
+        NSString *str = [NSString stringWithFormat:@"%02ld",i];
+        [self.monthArray addObject:str];
     }
     
     NSString *month = [NSString stringWithFormat:@"%02ld", self.resultModel.selectedMonth];
-    NSInteger monthIndex = [self.monthArray indexOfObject:month];
-    if (month.intValue <= minMonth) {
+    NSUInteger monthIndex = [self.monthArray indexOfObject:month];
+    if (self.resultModel.selectedMonth <= minMonth) {
         monthIndex = 0;
     }
     
@@ -739,8 +750,9 @@
 - (void)refreshWeeksByYear:(NSInteger)year {
     [self.weekArray removeAllObjects];
     
-    for (NSInteger i = 1; i < [NSDate ba_dateGetWeekNumbersOfYear:year]+1; i++) {
-        [self.weekArray addObject:[NSString stringWithFormat:@"%ld", i]];
+    NSInteger maxNum = [NSDate ba_dateGetWeekNumbersOfYear:year];
+    for (NSInteger i = 0; i < maxNum; ++i) {
+        [self.weekArray addObject:[NSString stringWithFormat:@"%ld", i+1]];
     }
 }
 
@@ -762,23 +774,21 @@
     // 公共配置：configModel
     {
         self.enableTouchDismiss = configModel.enableTouchDismiss;
+        CGFloat min_h = configModel.pickerHeight;
+        if (@available(iOS 11.0, *)) {
+            min_h = self.safeAreaInsets.bottom + configModel.pickerHeight;
+        }
+        self.contentViewHeight = min_h;
         
         if (configModel.maskViewBackgroundColor) {
             self.maskViewBackgroundColor = configModel.maskViewBackgroundColor;
         }
         if (configModel.contentViewBackgroundColor) {
-            self.bgView.backgroundColor = configModel.contentViewBackgroundColor;
+            self.contentView.backgroundColor = configModel.contentViewBackgroundColor;
         }
         if (configModel.pickerViewBackgroundColor) {
             self.basePickerView.backgroundColor = configModel.pickerViewBackgroundColor;
         }
-        [self.bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            if (@available(iOS 11.0, *)) {
-                make.height.mas_equalTo(self.safeAreaInsets.bottom + configModel.pickerHeight);
-            } else {
-                make.height.mas_equalTo(configModel.pickerHeight);
-            }
-        }];
         
         [self.toolBarView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(configModel.toolBarHeight);
@@ -866,7 +876,8 @@
             if (self.datePickerType == BADatePickerTypeYMDHMS) {
                 // BADatePickerTypeYMDHMS 样式内容过长显示不全，因此省去后缀
                 self.showSeconds = YES;
-                resultString = [self.resultModel.resultString stringByAppendingFormat:@":%02ld", self.resultModel.selectedSeconds];
+                NSLog(@"self.resultString：%@", resultString);
+                resultString = [resultString stringByAppendingFormat:@":%02ld", self.resultModel.selectedSeconds];
             }
         } break;
             // 15:33
@@ -1017,14 +1028,6 @@
         NSInteger index_week = self.resultModel.selectedWeek;
         [self.pickerView selectRow:(index_week - 1) inComponent:1 animated:YES];
     }
-}
-
-- (UIView *)bgView {
-    if (!_bgView) {
-        _bgView = UIView.new;
-        _bgView.backgroundColor = UIColor.whiteColor;
-    }
-    return _bgView;
 }
 
 - (BAPickerToolBarView *)toolBarView {
