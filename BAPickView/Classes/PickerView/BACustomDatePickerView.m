@@ -653,19 +653,17 @@
     
     NSInteger minMonth = 1;
     NSInteger maxMonth = 12;
-    if (self.resultModel.selectedYear == maxSetYear) {
+    if (self.resultModel.selectedYear >= maxSetYear) {
         maxMonth = maxSetMonth;
+    } else if (self.resultModel.selectedYear <= minSetYear) {
+        minMonth = minSetMonth;
+        minMonth = MAX(1, minMonth);
     } else {
-        if (self.resultModel.selectedYear <= minSetYear) {
-            minMonth = minSetMonth;
-            minMonth = MAX(1, minMonth);
-        } else if (self.resultModel.selectedYear == maxSetYear) {
-            maxMonth = maxSetMonth;
-            maxMonth = MIN(12, minMonth);
-        }
+        maxMonth = 12;
     }
+    
     [self.monthArray removeAllObjects];
-    for (NSInteger i = 1; i <= maxSetMonth; i++) {
+    for (NSInteger i = minMonth; i <= maxMonth; i++) {
         NSString *str = [NSString stringWithFormat:@"%02ld",i];
         [self.monthArray addObject:str];
     }
@@ -674,6 +672,10 @@
     NSUInteger monthIndex = [self.monthArray indexOfObject:month];
     if (self.resultModel.selectedMonth <= minMonth) {
         monthIndex = 0;
+    }
+    
+    if (monthIndex > self.monthArray.count) {
+        monthIndex = self.monthArray.count-1;
     }
     
     NSInteger component = 1;
